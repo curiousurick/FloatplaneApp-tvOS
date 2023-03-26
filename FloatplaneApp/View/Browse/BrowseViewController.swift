@@ -8,7 +8,7 @@
 import UIKit
 import AVKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     private var feed: CreatorFeed?
     
     @IBOutlet var videoCollectionView: UICollectionView!
@@ -23,6 +23,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cellWidth: CGFloat = (view.bounds.width / 4) - 50
         let cellHeight: CGFloat = cellWidth
         let edgeInset: CGFloat = 10
+        
+        flowLayout.headerReferenceSize = CGSizeMake(view.bounds.width, 340)
         
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         flowLayout.sectionInset = UIEdgeInsets(top: edgeInset + 20, left: edgeInset + 20, bottom: edgeInset, right: edgeInset + 20)
@@ -124,6 +126,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader else {
+            fatalError("Unrecognized element of kind: \(kind)")
+        }
+        
+        let view: BrowseReusableHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "BrowseReusableHeaderView", for: indexPath) as! BrowseReusableHeaderView
+        if let feed = feed {
+            view.updateUI(item: feed.items[indexPath.row])
+        }
+        return view
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
