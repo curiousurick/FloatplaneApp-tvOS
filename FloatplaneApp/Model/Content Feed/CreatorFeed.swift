@@ -128,4 +128,11 @@ struct CreatorFeed: Codable {
     
     let items: [FeedItem]
     
+    func combine(with items: [FeedItem]) -> CreatorFeed {
+        var combined = self.items
+        combined += items
+        return CreatorFeed(items: combined)
+        
+    }
+    
 }

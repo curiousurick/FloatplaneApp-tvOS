@@ -13,6 +13,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet var videoCollectionView: UICollectionView!
     
+    var isLoading: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +34,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     private func getInitialFeed() {
-        let request = ContentFeedRequest(page: 0, limit: 20, creatorId: OperationConstants.lttCreatorID)
+        isLoading = true
+        let request = ContentFeedRequest(fetchAfter: 0, limit: 20, creatorId: OperationConstants.lttCreatorID)
         ContentFeedOperation().get(params: request) { feed, error in
             if let error = error {
                 print("Oh no. Error \(error)")
@@ -42,6 +45,29 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
             DispatchQueue.main.async {
                 self.videoCollectionView.reloadData()
+                self.isLoading = false
+            }
+        }
+    }
+    
+    private func getNextPage() {
+        isLoading = true
+        guard let feed = feed else {
+            print("Trying to get next page even though we don't have a feed")
+            return
+        }
+        let request = ContentFeedRequest(fetchAfter: feed.items.count, limit: 20, creatorId: OperationConstants.lttCreatorID)
+        ContentFeedOperation().get(params: request) { fetchedFeed, error in
+            if let error = error {
+                print("Oh no. Error \(error)")
+                return
+            }
+            if let fetchedFeed = fetchedFeed {
+                self.feed = self.feed?.combine(with: fetchedFeed.items)
+            }
+            DispatchQueue.main.async {
+                self.videoCollectionView.reloadData()
+                self.isLoading = false
             }
         }
     }
@@ -90,6 +116,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == feed!.items.count - 4 && !self.isLoading {
+            getNextPage()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

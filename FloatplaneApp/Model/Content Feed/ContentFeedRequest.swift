@@ -8,7 +8,7 @@
 import Foundation
 
 struct ContentFeedRequest {
-    let page: UInt64
+    let fetchAfter: Int
     let limit: UInt64
     let creatorId: String
 }

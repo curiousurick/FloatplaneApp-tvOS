@@ -17,6 +17,7 @@ class ContentFeedOperation: APIOperation {
     
     func get(params: ContentFeedRequest, completion: ((CreatorFeed?, Error?) -> Void)? = nil) {
         let params: [String: Any] = [
+            "fetchAfter" : params.fetchAfter,
             "id" : params.creatorId,
             "limit" : params.limit
         ]
@@ -29,5 +30,5 @@ class ContentFeedOperation: APIOperation {
             let feed = CreatorFeed(items: items)
             completion?(feed, nil)
         }
-    }
+    }    
 }
