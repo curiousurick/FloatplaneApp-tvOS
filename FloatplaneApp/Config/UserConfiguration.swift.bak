@@ -1,0 +1,13 @@
+//
+//  User Configuration.swift
+//  FloatplaneApp
+//
+//  Created by George Urick on 3/25/23.
+//
+
+import Foundation
+
+struct UserConfiguration {
+    static let cookieKey = "_cfuvid"
+    static let cookie = // Replace me
+}
