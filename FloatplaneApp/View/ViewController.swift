@@ -34,6 +34,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     private func getInitialFeed() {
+        if isLoading {
+            print("Trying to get initial feed while I am already loading")
+            return
+        }
         isLoading = true
         let request = ContentFeedRequest(fetchAfter: 0, limit: 20, creatorId: OperationConstants.lttCreatorID)
         ContentFeedOperation().get(params: request) { feed, error in
@@ -51,6 +55,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     private func getNextPage() {
+        if isLoading {
+            print("Trying to get next page in feed while I am already loading")
+            return
+        }
         isLoading = true
         guard let feed = feed else {
             print("Trying to get next page even though we don't have a feed")
