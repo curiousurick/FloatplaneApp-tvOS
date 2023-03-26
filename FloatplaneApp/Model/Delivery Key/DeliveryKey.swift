@@ -50,10 +50,9 @@ struct DeliveryKey: Decodable {
         let height: UInt64
         let label: String
         let mimeType: String
-        let name: String
+        let name: QualityLevelName
         let order: UInt64
         let width: UInt64
-        
     }
     struct ResourceData: Decodable {
         let qualityLevelParams: QualityLevelParams

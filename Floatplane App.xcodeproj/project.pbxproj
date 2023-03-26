@@ -36,6 +36,9 @@
 		5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76A29D0B56B00F9A83B /* SwiftDate */; };
 		5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */; };
 		5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */; };
+		5EAAE77329D0D17700F9A83B /* StreamUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77229D0D17700F9A83B /* StreamUrl.swift */; };
+		5EAAE77529D0D29C00F9A83B /* QualityLevelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77429D0D29C00F9A83B /* QualityLevelName.swift */; };
+		5EAAE77829D0D3D200F9A83B /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77729D0D3D200F9A83B /* UserSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		5EAAE76329D0B0C000F9A83B /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTabBarController.swift; sourceTree = "<group>"; };
 		5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseReusableHeaderView.swift; sourceTree = "<group>"; };
+		5EAAE77229D0D17700F9A83B /* StreamUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamUrl.swift; sourceTree = "<group>"; };
+		5EAAE77429D0D29C00F9A83B /* QualityLevelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityLevelName.swift; sourceTree = "<group>"; };
+		5EAAE77729D0D3D200F9A83B /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,7 @@
 		5E0C3D0A29CF792500C71A19 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5EAAE77129D0D16D00F9A83B /* Stream */,
 				5EAAE75A29CFD11C00F9A83B /* Delivery Key */,
 				5EAAE75329CFD05700F9A83B /* Content Feed */,
 			);
@@ -160,6 +167,7 @@
 		5E507BF729CFAD65006751F3 /* FloatplaneApp */ = {
 			isa = PBXGroup;
 			children = (
+				5EAAE77629D0D3C900F9A83B /* Settings */,
 				5E507BEA29CF79C3006751F3 /* Networking */,
 				5E0C3D0A29CF792500C71A19 /* Model */,
 				5E507C2729CFADAB006751F3 /* View */,
@@ -269,6 +277,23 @@
 				5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		5EAAE77129D0D16D00F9A83B /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE77229D0D17700F9A83B /* StreamUrl.swift */,
+				5EAAE77429D0D29C00F9A83B /* QualityLevelName.swift */,
+			);
+			path = Stream;
+			sourceTree = "<group>";
+		};
+		5EAAE77629D0D3C900F9A83B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE77729D0D3D200F9A83B /* UserSettings.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,15 +444,18 @@
 				5E507C3229CFB4C4006751F3 /* DeliveryKey.swift in Sources */,
 				5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */,
 				5E507C2A29CFB0EB006751F3 /* CreatorFeedDecoder.swift in Sources */,
+				5EAAE77829D0D3D200F9A83B /* UserSettings.swift in Sources */,
 				5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */,
 				5EAAE75C29CFD12A00F9A83B /* DeliveryKeyRequest.swift in Sources */,
 				5EAAE76429D0B0C000F9A83B /* PostType.swift in Sources */,
 				5E507C2929CFB0E9006751F3 /* ContentFeedOperation.swift in Sources */,
+				5EAAE77329D0D17700F9A83B /* StreamUrl.swift in Sources */,
 				5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */,
 				5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */,
 				5EAAE75229CFC9C100F9A83B /* APIOperation.swift in Sources */,
 				5EAAE75729CFD0A700F9A83B /* CookieManager.swift in Sources */,
 				5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */,
+				5EAAE77529D0D29C00F9A83B /* QualityLevelName.swift in Sources */,
 				5EAAE75529CFD06C00F9A83B /* ContentFeedRequest.swift in Sources */,
 				5E507C2B29CFB0ED006751F3 /* CreatorFeed.swift in Sources */,
 				5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */,

@@ -102,21 +102,7 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     private func startVideo(deliveryKey: DeliveryKey) {
         let playerViewController = AVPlayerViewController()
         
-        guard let qualityLevel = deliveryKey.resource.data.qualityLevelParams.params["360-avc1"] else {
-            print("We're fucked")
-            return
-        }
-        let fileName = qualityLevel.filename
-        let token = qualityLevel.accessToken
-        let cdn = deliveryKey.cdn
-        let fileNameKey = DeliveryKey.QualityLevelParams.Constants.FileNameKey
-        let accessTokenKey = DeliveryKey.QualityLevelParams.Constants.AccessTokenKey
-        let path = deliveryKey.resource.uri
-            .replacing(fileNameKey, with: fileName)
-            .replacing(accessTokenKey, with: token)
-        
-        let video = "\(cdn)\(path)"
-        let url = URL(string: video)!
+        let url = StreamUrl(deliveryKey: deliveryKey, qualityLevelName: UserSettings.instance.qualitySettings).url
         let player = AVPlayer(url: url)
         playerViewController.player = player
         self.present(playerViewController, animated: true) {
