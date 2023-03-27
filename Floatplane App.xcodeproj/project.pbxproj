@@ -48,6 +48,7 @@
 		5EAAE79629D14D3C00F9A83B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */; };
 		5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79829D158AF00F9A83B /* ProgressStore.swift */; };
 		5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */; };
+		5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5EAAE79829D158AF00F9A83B /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VODPlayerViewController.swift; sourceTree = "<group>"; };
+		5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemProgressBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,8 +217,8 @@
 		5E507C2729CFADAB006751F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5EAAE79A29D159E900F9A83B /* Playback */,
 				5E507BFC29CFAD65006751F3 /* Main.storyboard */,
+				5EAAE79A29D159E900F9A83B /* Playback */,
 				5EAAE76C29D0BF1E00F9A83B /* TabBar */,
 				5EAAE75D29CFD86400F9A83B /* Browse */,
 				5EAAE79029D13E2400F9A83B /* Settings */,
@@ -290,6 +292,7 @@
 				5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */,
 				5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */,
 				5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */,
+				5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */,
 				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
 				5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */,
+				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
 				5EAAE75929CFD0D300F9A83B /* OperationConstants.swift in Sources */,
 				5EAAE78329D1329200F9A83B /* Log4S.swift in Sources */,
 				5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */,

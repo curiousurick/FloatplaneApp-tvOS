@@ -31,6 +31,8 @@ protocol FeedViewItem {
     var typeLabel: String { get }
     var channelLabel: String { get }
     var timeSinceReleaseLabel: String { get }
+    var progress: TimeInterval? { get }
+    var duration: TimeInterval { get }
 }
 
 extension CreatorFeed.FeedItem: FeedViewItem {
@@ -62,6 +64,18 @@ extension CreatorFeed.FeedItem: FeedViewItem {
         releaseDate.toRelative(since: nil, dateTimeStyle: .numeric, unitsStyle: .full)
     }
     
+    var progress: TimeInterval? {
+        if videoAttachments.count > 0 {
+            let videoGuid = videoAttachments[0]
+            return ProgressStore.instance.getProgress(for: videoGuid)
+        }
+        return nil
+    }
+    
+    var duration: TimeInterval {
+        TimeInterval(self.metadata.videoDuration)
+    }
+    
 }
 
 class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
@@ -71,6 +85,7 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     @IBOutlet var type: UILabel!
     @IBOutlet var channel: UILabel!
     @IBOutlet var timeSinceRelease: UILabel!
+    @IBOutlet var progressBar: FeedItemProgressBarView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -88,5 +103,12 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
         type.text = item.typeLabel
         channel.text = item.channelLabel
         timeSinceRelease.text = item.timeSinceReleaseLabel
+        if let progress = item.progress {
+            progressBar.updateWidth(percentWidth: progress / item.duration)
+            progressBar.isHidden = false
+        }
+        else {
+            progressBar.isHidden = true
+        }
     }
 }

@@ -100,6 +100,7 @@ class VODPlayerViewController: AVPlayerViewController {
             })
         }
         player.play()
+        self.startObservingPlayer()
         logger.debug("Started playing video \(url)")
     }
 }

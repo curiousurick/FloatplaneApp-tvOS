@@ -79,6 +79,17 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0b-vc-z4W" userLabel="ProgressView" customClass="FeedItemProgressBarView" customModule="FloatplaneApp" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="99" width="270" height="7"/>
+                                                    <color key="backgroundColor" red="0.91764706370000004" green="0.20000001789999999" blue="0.13725490870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="7" id="2QQ-Ci-NFS"/>
+                                                        <constraint firstAttribute="width" constant="270" id="r7D-Js-PTa"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="widthConstraint" destination="r7D-Js-PTa" id="Te2-5H-rEw"/>
+                                                    </connections>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="oQg-FS-T8S" firstAttribute="leading" secondItem="9W4-q2-zPI" secondAttribute="leading" id="4z5-uE-jxy"/>
@@ -89,9 +100,11 @@
                                                 <constraint firstItem="wsZ-CL-Rio" firstAttribute="leading" secondItem="1iG-at-KGp" secondAttribute="leading" constant="8" id="N7m-58-op5"/>
                                                 <constraint firstItem="9W4-q2-zPI" firstAttribute="top" secondItem="wsZ-CL-Rio" secondAttribute="bottom" constant="8" symbolic="YES" id="Pts-Ed-aUp"/>
                                                 <constraint firstItem="9W4-q2-zPI" firstAttribute="leading" secondItem="wsZ-CL-Rio" secondAttribute="leading" id="RVV-7j-mj0"/>
+                                                <constraint firstItem="q0b-vc-z4W" firstAttribute="leading" secondItem="r8u-Xu-boz" secondAttribute="leading" id="VP1-Pl-lJV"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9W4-q2-zPI" secondAttribute="trailing" id="Wes-j7-EJ7"/>
                                                 <constraint firstItem="r8u-Xu-boz" firstAttribute="leading" secondItem="1iG-at-KGp" secondAttribute="leading" id="ZtX-AE-SMc"/>
                                                 <constraint firstAttribute="bottom" secondItem="r9A-q6-dWO" secondAttribute="bottom" id="hsJ-tl-GMJ"/>
+                                                <constraint firstItem="q0b-vc-z4W" firstAttribute="bottom" secondItem="r8u-Xu-boz" secondAttribute="bottom" id="kLa-NA-LOg"/>
                                                 <constraint firstItem="r9A-q6-dWO" firstAttribute="centerY" secondItem="oQg-FS-T8S" secondAttribute="centerY" id="pTN-aH-f0Z"/>
                                                 <constraint firstAttribute="bottom" secondItem="oQg-FS-T8S" secondAttribute="bottom" id="pX6-pq-EM1"/>
                                                 <constraint firstAttribute="trailing" secondItem="wsZ-CL-Rio" secondAttribute="trailing" constant="8" id="uVl-GQ-MMc"/>
@@ -102,6 +115,7 @@
                                         <connections>
                                             <outlet property="channel" destination="oQg-FS-T8S" id="qvr-iZ-B9Y"/>
                                             <outlet property="image" destination="r8u-Xu-boz" id="iQ5-8q-jl4"/>
+                                            <outlet property="progressBar" destination="q0b-vc-z4W" id="q3C-yB-wB0"/>
                                             <outlet property="timeSinceRelease" destination="r9A-q6-dWO" id="Q43-Ln-2pI"/>
                                             <outlet property="title" destination="wsZ-CL-Rio" id="507-5H-unw"/>
                                             <outlet property="type" destination="9W4-q2-zPI" id="qQ5-jh-y3r"/>
