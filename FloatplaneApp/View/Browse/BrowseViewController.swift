@@ -90,31 +90,10 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
-    private func startVideo(video: CreatorFeed.FeedItem) {
-        guard video.videoAttachments.count > 0 else {
-            return
-        }
-        let guid = video.videoAttachments[0]
-        let request = DeliveryKeyRequest(guid: guid, type: .vod)
-        DeliveryKeyOperation().get(request: request) { deliveryKey, error in
-            guard error == nil, let deliveryKey = deliveryKey else {
-                self.logger.error("Unable to get delivery key for video \(guid).")
-                return
-            }
-            DispatchQueue.main.async {
-                self.startVideo(deliveryKey: deliveryKey)
-            }
-        }
-    }
-    
-    private func startVideo(deliveryKey: DeliveryKey) {
-        let playerViewController = AVPlayerViewController()
-        let url = StreamUrl(deliveryKey: deliveryKey, qualityLevelName: UserSettings.instance.qualitySettings).url
-        let player = AVPlayer(url: url)
-        playerViewController.player = player
-        self.present(playerViewController, animated: true) {
-            playerViewController.player?.play()
-            self.logger.debug("Started playing video \(url)")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PlayVideoSegue" {
+            let playerViewController = segue.destination as! VODPlayerViewController
+            playerViewController.video = feed?.items[videoCollectionView.indexPathsForSelectedItems![0].row]
         }
     }
 }
@@ -166,9 +145,6 @@ extension BrowseViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let video = feed?.items[indexPath.row] else {
-            return
-        }
-        startVideo(video: video)
+        performSegue(withIdentifier: "PlayVideoSegue", sender: nil)
     }
 }

@@ -46,6 +46,8 @@
 		5EAAE79229D13E3A00F9A83B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */; };
 		5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79329D141D700F9A83B /* PickerViewController.swift */; };
 		5EAAE79629D14D3C00F9A83B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */; };
+		5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79829D158AF00F9A83B /* ProgressStore.swift */; };
+		5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5EAAE79329D141D700F9A83B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		5EAAE79829D158AF00F9A83B /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
+		5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VODPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +185,7 @@
 		5E507BF729CFAD65006751F3 /* FloatplaneApp */ = {
 			isa = PBXGroup;
 			children = (
-				5EAAE78129D1327400F9A83B /* Logging */,
+				5EAAE79729D1589500F9A83B /* Progress Store */,
 				5EAAE77629D0D3C900F9A83B /* Settings */,
 				5E507BEA29CF79C3006751F3 /* Networking */,
 				5E0C3D0A29CF792500C71A19 /* Model */,
@@ -211,6 +215,7 @@
 		5E507C2729CFADAB006751F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5EAAE79A29D159E900F9A83B /* Playback */,
 				5E507BFC29CFAD65006751F3 /* Main.storyboard */,
 				5EAAE76C29D0BF1E00F9A83B /* TabBar */,
 				5EAAE75D29CFD86400F9A83B /* Browse */,
@@ -224,6 +229,7 @@
 		5E507C2829CFADB5006751F3 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				5EAAE78129D1327400F9A83B /* Logging */,
 				5E507BF829CFAD65006751F3 /* AppDelegate.swift */,
 				5E507C0729CFAD66006751F3 /* Info.plist */,
 				5E507BFF29CFAD65006751F3 /* FloatplaneApp.xcdatamodeld */,
@@ -329,6 +335,22 @@
 				5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		5EAAE79729D1589500F9A83B /* Progress Store */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE79829D158AF00F9A83B /* ProgressStore.swift */,
+			);
+			path = "Progress Store";
+			sourceTree = "<group>";
+		};
+		5EAAE79A29D159E900F9A83B /* Playback */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */,
+			);
+			path = Playback;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,11 +518,13 @@
 				5EAAE77D29D12B8200F9A83B /* CacheableAPIOperation.swift in Sources */,
 				5EAAE75729CFD0A700F9A83B /* CookieManager.swift in Sources */,
 				5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */,
+				5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */,
 				5EAAE77529D0D29C00F9A83B /* QualityLevelName.swift in Sources */,
 				5EAAE75529CFD06C00F9A83B /* ContentFeedRequest.swift in Sources */,
 				5E507C2B29CFB0ED006751F3 /* CreatorFeed.swift in Sources */,
 				5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */,
 				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
+				5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */,
 				5EAAE75929CFD0D300F9A83B /* OperationConstants.swift in Sources */,
 				5EAAE78329D1329200F9A83B /* Log4S.swift in Sources */,
 				5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */,

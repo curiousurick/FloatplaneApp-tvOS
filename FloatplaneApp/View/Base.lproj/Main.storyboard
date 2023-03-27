@@ -148,11 +148,22 @@
                     <navigationItem key="navigationItem" id="7kW-zj-RQx"/>
                     <connections>
                         <outlet property="videoCollectionView" destination="N99-Bz-LBo" id="rxV-L4-krY"/>
+                        <segue destination="Ebc-lA-7Vf" kind="show" identifier="PlayVideoSegue" id="mki-kV-46P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4232" y="-73"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="RSX-ga-MiJ">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="Ebc-lA-7Vf" customClass="VODPlayerViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="dXz-xx-Ecb"/>
+                </avPlayerViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U8O-Ds-WbX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6445" y="-73"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7Vn-2w-GIR">
