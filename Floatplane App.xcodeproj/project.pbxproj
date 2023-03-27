@@ -39,6 +39,10 @@
 		5EAAE77329D0D17700F9A83B /* StreamUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77229D0D17700F9A83B /* StreamUrl.swift */; };
 		5EAAE77529D0D29C00F9A83B /* QualityLevelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77429D0D29C00F9A83B /* QualityLevelName.swift */; };
 		5EAAE77829D0D3D200F9A83B /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77729D0D3D200F9A83B /* UserSettings.swift */; };
+		5EAAE77B29D12B6300F9A83B /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE77A29D12B6300F9A83B /* Cache */; };
+		5EAAE77D29D12B8200F9A83B /* CacheableAPIOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77C29D12B8200F9A83B /* CacheableAPIOperation.swift */; };
+		5EAAE78029D131FD00F9A83B /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE77F29D131FD00F9A83B /* Logging */; };
+		5EAAE78329D1329200F9A83B /* Log4S.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE78229D1329200F9A83B /* Log4S.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +95,8 @@
 		5EAAE77229D0D17700F9A83B /* StreamUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamUrl.swift; sourceTree = "<group>"; };
 		5EAAE77429D0D29C00F9A83B /* QualityLevelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityLevelName.swift; sourceTree = "<group>"; };
 		5EAAE77729D0D3D200F9A83B /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		5EAAE77C29D12B8200F9A83B /* CacheableAPIOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableAPIOperation.swift; sourceTree = "<group>"; };
+		5EAAE78229D1329200F9A83B /* Log4S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4S.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +104,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EAAE78029D131FD00F9A83B /* Logging in Frameworks */,
 				5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */,
 				5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */,
 				5E507C2E29CFB0FE006751F3 /* Alamofire in Frameworks */,
 				5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */,
+				5EAAE77B29D12B6300F9A83B /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +175,7 @@
 		5E507BF729CFAD65006751F3 /* FloatplaneApp */ = {
 			isa = PBXGroup;
 			children = (
+				5EAAE78129D1327400F9A83B /* Logging */,
 				5EAAE77629D0D3C900F9A83B /* Settings */,
 				5E507BEA29CF79C3006751F3 /* Networking */,
 				5E0C3D0A29CF792500C71A19 /* Model */,
@@ -238,6 +247,7 @@
 				5E0C3D0829CF774000C71A19 /* ContentFeedOperation.swift */,
 				5E507C2F29CFB293006751F3 /* DeliveryKeyOperation.swift */,
 				5EAAE75129CFC9C100F9A83B /* APIOperation.swift */,
+				5EAAE77C29D12B8200F9A83B /* CacheableAPIOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -296,6 +306,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		5EAAE78129D1327400F9A83B /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE78229D1329200F9A83B /* Log4S.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -317,6 +335,8 @@
 				5EAAE76129D03A9A00F9A83B /* ParallaxView */,
 				5EAAE76729D0B34D00F9A83B /* AlamofireImage */,
 				5EAAE76A29D0B56B00F9A83B /* SwiftDate */,
+				5EAAE77A29D12B6300F9A83B /* Cache */,
+				5EAAE77F29D131FD00F9A83B /* Logging */,
 			);
 			productName = FloatplaneApp;
 			productReference = 5E507BF629CFAD65006751F3 /* FloatplaneApp.app */;
@@ -395,6 +415,8 @@
 				5EAAE76029D03A9A00F9A83B /* XCRemoteSwiftPackageReference "ParallaxView" */,
 				5EAAE76629D0B34D00F9A83B /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				5EAAE76929D0B56B00F9A83B /* XCRemoteSwiftPackageReference "SwiftDate" */,
+				5EAAE77929D12B6300F9A83B /* XCRemoteSwiftPackageReference "Cache" */,
+				5EAAE77E29D131FD00F9A83B /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 5E0C3CD329CF766700C71A19 /* Products */;
 			projectDirPath = "";
@@ -453,6 +475,7 @@
 				5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */,
 				5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */,
 				5EAAE75229CFC9C100F9A83B /* APIOperation.swift in Sources */,
+				5EAAE77D29D12B8200F9A83B /* CacheableAPIOperation.swift in Sources */,
 				5EAAE75729CFD0A700F9A83B /* CookieManager.swift in Sources */,
 				5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */,
 				5EAAE77529D0D29C00F9A83B /* QualityLevelName.swift in Sources */,
@@ -461,6 +484,7 @@
 				5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */,
 				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
 				5EAAE75929CFD0D300F9A83B /* OperationConstants.swift in Sources */,
+				5EAAE78329D1329200F9A83B /* Log4S.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = EM3SMK3DU7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -661,6 +686,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = EM3SMK3DU7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -824,6 +850,22 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		5EAAE77929D12B6300F9A83B /* XCRemoteSwiftPackageReference "Cache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hyperoslo/Cache.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		5EAAE77E29D131FD00F9A83B /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -846,6 +888,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5EAAE76929D0B56B00F9A83B /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
+		};
+		5EAAE77A29D12B6300F9A83B /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EAAE77929D12B6300F9A83B /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
+		};
+		5EAAE77F29D131FD00F9A83B /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EAAE77E29D131FD00F9A83B /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
 		};
 /* End XCSwiftPackageProductDependency section */
 

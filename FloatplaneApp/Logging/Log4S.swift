@@ -1,3 +1,10 @@
+//
+//  Logger+Quickstart.swift
+//  FloatplaneApp
+//
+//  Created by George Urick on 3/26/23.
+//
+
 //  Copyright © 2023 George Urick
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,8 +27,41 @@
 //
 
 import Foundation
+import Logging
 
-struct DeliveryKeyRequest: Hashable {
-    let guid: String
-    let type: PostType
+class Log4S {
+    private let logger: Logger
+    
+    init(file: String = #file) {
+        let label = URL(fileURLWithPath: file).deletingPathExtension().lastPathComponent
+        self.logger = Logger(label: label)
+    }
+    
+    func debug(_ message: Logger.Message) {
+        logger.log(level: .debug, message)
+    }
+    
+    func info(_ message: Logger.Message) {
+        logger.log(level: .info, message)
+    }
+    
+    func notice(_ message: Logger.Message) {
+        logger.log(level: .notice, message)
+    }
+    
+    func error(_ message: Logger.Message) {
+        logger.log(level: .error, message)
+    }
+    
+    func trace(_ message: Logger.Message) {
+        logger.log(level: .trace, message)
+    }
+    
+    func warn(_ message: Logger.Message) {
+        logger.log(level: .warning, message)
+    }
+    
+    func critical(_ message: Logger.Message) {
+        logger.log(level: .critical, message)
+    }
 }

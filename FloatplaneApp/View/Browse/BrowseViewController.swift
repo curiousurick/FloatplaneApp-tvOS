@@ -1,14 +1,32 @@
+//  Copyright © 2023 George Urick
 //
-//  ViewController.swift
-//  FloatplaneApp
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-//  Created by George Urick on 3/25/23.
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 import UIKit
 import AVKit
+import Logging
 
 class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    private let logger = Log4S()
+    private let pageLimit: UInt64 = 20
+    
     private var feed: CreatorFeed?
     
     @IBOutlet var videoCollectionView: UICollectionView!
@@ -36,44 +54,34 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     private func getInitialFeed() {
-        if isLoading {
-            print("Trying to get initial feed while I am already loading")
-            return
-        }
-        isLoading = true
-        let request = ContentFeedRequest(fetchAfter: 0, limit: 20, creatorId: OperationConstants.lttCreatorID)
-        ContentFeedOperation().get(params: request) { feed, error in
-            if let error = error {
-                print("Oh no. Error \(error)")
-            }
-            if let feed = feed {
-                self.feed = feed
-            }
-            DispatchQueue.main.async {
-                self.videoCollectionView.reloadData()
-                self.isLoading = false
-            }
-        }
+        self.feed = nil
+        getNextPage()
     }
     
     private func getNextPage() {
+        logger.debug("Fetching next page of content for feed")
         if isLoading {
-            print("Trying to get next page in feed while I am already loading")
+            logger.warn("Trying to get next page in feed while I am already loading")
             return
         }
         isLoading = true
-        guard let feed = feed else {
-            print("Trying to get next page even though we don't have a feed")
-            return
-        }
-        let request = ContentFeedRequest(fetchAfter: feed.items.count, limit: 20, creatorId: OperationConstants.lttCreatorID)
-        ContentFeedOperation().get(params: request) { fetchedFeed, error in
-            if let error = error {
-                print("Oh no. Error \(error)")
+        let fetchAfter = feed?.items.count ?? 0
+        let request = ContentFeedRequest(
+            fetchAfter: fetchAfter,
+            limit: pageLimit,
+            creatorId: OperationConstants.lttCreatorID
+        )
+        ContentFeedOperation().get(request: request) { fetchedFeed, error in
+            guard error == nil,
+                  let fetchedFeed = fetchedFeed else {
+                self.logger.error("Failed to retrieve next page of content from \(fetchAfter). Error \(error.debugDescription)")
                 return
             }
-            if let fetchedFeed = fetchedFeed {
-                self.feed = self.feed?.combine(with: fetchedFeed.items)
+            if let existingFeed = self.feed {
+                self.feed = existingFeed.combine(with: fetchedFeed.items)
+            }
+            else {
+                self.feed = fetchedFeed
             }
             DispatchQueue.main.async {
                 self.videoCollectionView.reloadData()
@@ -88,9 +96,9 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
         let guid = video.videoAttachments[0]
         let request = DeliveryKeyRequest(guid: guid, type: .vod)
-        DeliveryKeyOperation().get(params: request) { deliveryKey, error in
+        DeliveryKeyOperation().get(request: request) { deliveryKey, error in
             guard error == nil, let deliveryKey = deliveryKey else {
-                print("Oh shit. Error \(error!)")
+                self.logger.error("Unable to get delivery key for video \(guid).")
                 return
             }
             DispatchQueue.main.async {
@@ -101,15 +109,19 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private func startVideo(deliveryKey: DeliveryKey) {
         let playerViewController = AVPlayerViewController()
-        
         let url = StreamUrl(deliveryKey: deliveryKey, qualityLevelName: UserSettings.instance.qualitySettings).url
         let player = AVPlayer(url: url)
         playerViewController.player = player
         self.present(playerViewController, animated: true) {
             playerViewController.player?.play()
+            self.logger.debug("Started playing video \(url)")
         }
     }
-    
+}
+
+// MARK: CollectionView Delegate and DataSource
+
+extension BrowseViewController {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
     }
@@ -119,7 +131,12 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
             fatalError("Unrecognized element of kind: \(kind)")
         }
         
-        let view: BrowseReusableHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "BrowseReusableHeaderView", for: indexPath) as! BrowseReusableHeaderView
+        let view: BrowseReusableHeaderView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: BrowseReusableHeaderView.identifier,
+            for: indexPath
+        ) as! BrowseReusableHeaderView
+        
         if let feed = feed {
             view.updateUI(item: feed.items[indexPath.row])
         }

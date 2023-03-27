@@ -1,0 +1,66 @@
+//  Copyright © 2023 George Urick
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+
+import Foundation
+import Cache
+
+class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
+    
+    private let cacheExpiration: TimeInterval
+    private let storage: Storage<Request, Response>?
+    
+    typealias Request = I
+    typealias Response = O
+    
+    let baseUrl: URL
+    
+    init(
+        countLimit: UInt = 50,
+        // Default 30 minutes
+        cacheExpiration: TimeInterval = 10 * 60,
+        baseUrl: URL
+    ) {
+        self.cacheExpiration = cacheExpiration
+        self.baseUrl = baseUrl
+        
+        let expiry = Expiry.date(Date(timeIntervalSinceNow: cacheExpiration))
+        let diskConfig = DiskConfig(name: "org.georgie.\(baseUrl)", expiry: expiry)
+        let memoryConfig = MemoryConfig(expiry: expiry, countLimit: countLimit, totalCostLimit: 0)
+
+        self.storage = try? Storage(
+          diskConfig: diskConfig,
+          memoryConfig: memoryConfig,
+          transformer: TransformerFactory.forCodable(ofType: Response.self)
+        )
+    }
+    
+    func get(request: Request, completion: ((Response?, Error?) -> Void)?) {
+        fatalError("Do not use base CacheableAPIOperation")
+    }
+    
+    func getCache(request: Request) -> Response? {
+        return try? storage?.object(forKey: request)
+    }
+    
+    func setCache(request: Request, response: Response) {
+        try? storage?.setObject(response, forKey: request)
+    }
+}

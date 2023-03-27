@@ -1,8 +1,22 @@
+//  Copyright © 2023 George Urick
 //
-//  DeliveryKey.swift
-//  FloatplaneApp
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-//  Created by George Urick on 3/25/23.
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 import Foundation
@@ -45,7 +59,7 @@ struct DeliveryKey: Decodable {
             static let accessToken = ParamsKey(stringValue: "4")!
         }
     }
-    struct QualityLevel: Decodable {
+    class DecodedQualityLevel: Decodable {
         let codecs: String
         let height: UInt64
         let label: String
@@ -53,10 +67,96 @@ struct DeliveryKey: Decodable {
         let name: QualityLevelName
         let order: UInt64
         let width: UInt64
+        
+        init(
+            codecs: String,
+            height: UInt64,
+            label: String,
+            mimeType: String,
+            name: QualityLevelName,
+            order: UInt64,
+            width: UInt64
+        ) {
+            self.codecs = codecs
+            self.height = height
+            self.label = label
+            self.mimeType = mimeType
+            self.name = name
+            self.order = order
+            self.width = width
+        }
+        
+        init(original: DecodedQualityLevel) {
+            self.codecs = original.codecs
+            self.height = original.height
+            self.label = original.label
+            self.mimeType = original.mimeType
+            self.name = original.name
+            self.order = original.order
+            self.width = original.width
+        }
+    }
+    class QualityLevelResourceData: DecodedQualityLevel {
+        let fileName: String
+        let accessToken: String
+        
+        init(
+            decodedQualityLevel: DecodedQualityLevel,
+            fileName: String,
+            accessToken: String
+        ) {
+            self.fileName = fileName
+            self.accessToken = accessToken
+            super.init(original: decodedQualityLevel)
+        }
+        
+        required init(from decoder: Decoder) throws {
+            fatalError("init(from:) has not been implemented")
+        }
     }
     struct ResourceData: Decodable {
-        let qualityLevelParams: QualityLevelParams
-        let qualityLevels: [QualityLevel]
+        private var qualityLevels: [QualityLevelName : QualityLevelResourceData] = [:]
+        private var options: [QualityLevelName] = []
+        
+        enum CodingKeys: CodingKey {
+            case qualityLevelParams
+            case qualityLevels
+        }
+        
+        func getResource(qualitylevelName: QualityLevelName) -> QualityLevelResourceData? {
+            return qualityLevels[qualitylevelName]
+        }
+        
+        func highestQuality() -> QualityLevelResourceData {
+            guard let last = options.last,
+                  let lastLevel = qualityLevels[last] else {
+                fatalError("ResourceData cannot be implemented without at least one level of quality")
+            }
+            return lastLevel
+        }
+        
+        func lowestQuality() -> QualityLevelResourceData {
+            guard let first = options.first,
+                  let firstLevel = qualityLevels[first] else {
+                fatalError("ResourceData cannot be implemented without at least one level of quality")
+            }
+            return firstLevel
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container: KeyedDecodingContainer<DeliveryKey.ResourceData.CodingKeys> = try decoder.container(keyedBy: DeliveryKey.ResourceData.CodingKeys.self)
+            let qualityLevelParams = try container.decode(DeliveryKey.QualityLevelParams.self, forKey: DeliveryKey.ResourceData.CodingKeys.qualityLevelParams)
+            let qualityLevels = try container.decode([DeliveryKey.DecodedQualityLevel].self, forKey: DeliveryKey.ResourceData.CodingKeys.qualityLevels)
+            for level in qualityLevels {
+                options.append(level.name)
+                let param = qualityLevelParams.params[level.name.rawValue]!
+                self.qualityLevels[level.name] = QualityLevelResourceData(
+                    decodedQualityLevel: level,
+                    fileName: param.filename,
+                    accessToken: param.accessToken
+                )
+            }
+        }
     }
     struct Resource: Decodable {
         let data: ResourceData
