@@ -27,6 +27,8 @@ class FPTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        selectedViewController = viewControllers?[1]
+        
     }
     
 }
