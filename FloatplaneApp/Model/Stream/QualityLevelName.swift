@@ -21,11 +21,52 @@
 
 import Foundation
 
-enum QualityLevelName: String, Decodable, Hashable, Equatable {
+protocol Readable {
+    var readable: String { get }
+}
+
+enum QualityLevelName: String, Decodable, Readable {
     case ql360p = "360-avc1"
     case ql480p = "480-avc1"
     case ql720p = "720-avc1"
     case ql1080p = "1080-avc1"
     
     static let defaultLevel = ql720p
+    
+    static let allCases: [QualityLevelName] = [
+        .ql360p,
+        .ql480p,
+        .ql720p,
+        .ql1080p
+    ]
+    
+    var index: Int {
+        get {
+            switch self {
+            case .ql360p:
+                return 0
+            case .ql480p:
+                return 1
+            case .ql720p:
+                return 2
+            case .ql1080p:
+                return 3
+            }
+        }
+    }
+    
+    var readable: String {
+        get {
+            switch self {
+            case .ql360p:
+                return "360p"
+            case .ql480p:
+                return "480p"
+            case .ql720p:
+                return "720p"
+            case .ql1080p:
+                return "1080p"
+            }
+        }
+    }
 }

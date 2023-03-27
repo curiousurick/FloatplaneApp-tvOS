@@ -19,30 +19,21 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
-class UserSettings {
+class SettingsCell: UITableViewCell {
     
-    private let QualitySettingsKey = "com.georgie.floatplane.QualitySettings"
-    private let userDefaults = UserDefaults.standard
-    
-    static let instance = UserSettings()
-    
-    private init() { }
-    
-    var qualitySettings: QualityLevelName {
-        get {
-            if let savedValue = userDefaults.string(forKey: QualitySettingsKey),
-               let quality = QualityLevelName(rawValue: savedValue) {
-                return quality
-            }
-            // First time use default
-            return QualityLevelName.defaultLevel
-        }
-        set {
-            userDefaults.set(newValue.rawValue, forKey: QualitySettingsKey)
-        }
+    @IBOutlet var label: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
     }
-    
-    
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
 }

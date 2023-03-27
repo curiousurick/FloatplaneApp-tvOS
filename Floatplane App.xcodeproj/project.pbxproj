@@ -43,6 +43,9 @@
 		5EAAE77D29D12B8200F9A83B /* CacheableAPIOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77C29D12B8200F9A83B /* CacheableAPIOperation.swift */; };
 		5EAAE78029D131FD00F9A83B /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE77F29D131FD00F9A83B /* Logging */; };
 		5EAAE78329D1329200F9A83B /* Log4S.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE78229D1329200F9A83B /* Log4S.swift */; };
+		5EAAE79229D13E3A00F9A83B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */; };
+		5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79329D141D700F9A83B /* PickerViewController.swift */; };
+		5EAAE79629D14D3C00F9A83B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +100,9 @@
 		5EAAE77729D0D3D200F9A83B /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		5EAAE77C29D12B8200F9A83B /* CacheableAPIOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableAPIOperation.swift; sourceTree = "<group>"; };
 		5EAAE78229D1329200F9A83B /* Log4S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4S.swift; sourceTree = "<group>"; };
+		5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5EAAE79329D141D700F9A83B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +214,7 @@
 				5E507BFC29CFAD65006751F3 /* Main.storyboard */,
 				5EAAE76C29D0BF1E00F9A83B /* TabBar */,
 				5EAAE75D29CFD86400F9A83B /* Browse */,
+				5EAAE79029D13E2400F9A83B /* Settings */,
 				5E507C0229CFAD66006751F3 /* Assets.xcassets */,
 				5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */,
 			);
@@ -312,6 +319,16 @@
 				5EAAE78229D1329200F9A83B /* Log4S.swift */,
 			);
 			path = Logging;
+			sourceTree = "<group>";
+		};
+		5EAAE79029D13E2400F9A83B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */,
+				5EAAE79329D141D700F9A83B /* PickerViewController.swift */,
+				5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,6 +483,7 @@
 				5E507C3229CFB4C4006751F3 /* DeliveryKey.swift in Sources */,
 				5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */,
 				5E507C2A29CFB0EB006751F3 /* CreatorFeedDecoder.swift in Sources */,
+				5EAAE79629D14D3C00F9A83B /* SettingsCell.swift in Sources */,
 				5EAAE77829D0D3D200F9A83B /* UserSettings.swift in Sources */,
 				5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */,
 				5EAAE75C29CFD12A00F9A83B /* DeliveryKeyRequest.swift in Sources */,
@@ -485,6 +503,8 @@
 				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
 				5EAAE75929CFD0D300F9A83B /* OperationConstants.swift in Sources */,
 				5EAAE78329D1329200F9A83B /* Log4S.swift in Sources */,
+				5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */,
+				5EAAE79229D13E3A00F9A83B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
