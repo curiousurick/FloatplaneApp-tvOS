@@ -33,6 +33,20 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     var isLoading: Bool = false
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getInitialFeed),
+            name: .NSExtensionHostWillEnterForeground,
+            object: nil
+        )
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,7 +67,7 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
         getInitialFeed()
     }
     
-    private func getInitialFeed() {
+    @objc private func getInitialFeed() {
         self.feed = nil
         getNextPage()
     }

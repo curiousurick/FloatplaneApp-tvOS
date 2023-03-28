@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChangeResolutionCell", for: indexPath)
         if indexPath.row == changeResolutionRow {
-            cell.textLabel?.text = "Default Quality Level"
+            cell.textLabel?.text = "Default Quality Video Level"
         }
         return cell
     }
@@ -61,7 +61,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if segue.identifier == "ShowResolutionOptions" {
             let picker = segue.destination as! PickerViewController
             picker.delegate = self
-            picker.label = "Change Default Quality"
+            picker.label = "Change Default Video Quality"
             picker.options = QualityLevelName.allCases
             picker.selectedIndex = UserSettings.instance.qualitySettings.index
         }

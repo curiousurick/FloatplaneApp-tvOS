@@ -23,6 +23,7 @@ import Foundation
 import Cache
 
 class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
+    private let logger = Log4S()
     
     private let cacheExpiration: TimeInterval
     private let storage: Storage<Request, Response>?
@@ -41,7 +42,7 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
         self.cacheExpiration = cacheExpiration
         self.baseUrl = baseUrl
         
-        let expiry = Expiry.date(Date(timeIntervalSinceNow: cacheExpiration))
+        let expiry: Expiry = .date(Date().addingTimeInterval(cacheExpiration))
         let diskConfig = DiskConfig(name: "org.georgie.\(baseUrl)", expiry: expiry)
         let memoryConfig = MemoryConfig(expiry: expiry, countLimit: countLimit, totalCostLimit: 0)
 
@@ -57,7 +58,16 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
     }
     
     func getCache(request: Request) -> Response? {
-        return try? storage?.object(forKey: request)
+        do {
+            if let storage = storage,
+               try !storage.isExpiredObject(forKey: request) {
+                return try storage.object(forKey: request)
+            }
+        }
+        catch {
+            logger.error("Error checking storage while getting cache for baseUrl \(baseUrl)")
+        }
+        return nil
     }
     
     func setCache(request: Request, response: Response) {
