@@ -19,21 +19,16 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
 
-import UIKit
-import AlamofireImage
-
-class BrowseReusableHeaderView: UICollectionReusableView {
-    static let identifier = "BrowseReusableHeaderView"
+struct DeliveryKeyRequest: OperationRequest {
+    let guid: String
+    let type: PostType
     
-    @IBOutlet var imageView: UIImageView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    func updateUI(item: FeedItem) {
-        let coverUrl = item.creator.cover.path
-        imageView.af.setImage(withURL: coverUrl)
+    var params: [String : Any] {
+        return [
+            "type": type.rawValue,
+            "guid": guid
+        ]
     }
 }

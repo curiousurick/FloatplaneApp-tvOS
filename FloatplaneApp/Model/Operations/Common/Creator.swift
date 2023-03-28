@@ -19,21 +19,24 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
 
-import UIKit
-import AlamofireImage
-
-class BrowseReusableHeaderView: UICollectionReusableView {
-    static let identifier = "BrowseReusableHeaderView"
-    
-    @IBOutlet var imageView: UIImageView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    func updateUI(item: FeedItem) {
-        let coverUrl = item.creator.cover.path
-        imageView.af.setImage(withURL: coverUrl)
-    }
+struct Creator: Codable {
+    let about: String
+    let card: Icon
+    let category: Category
+    let channels: [String]
+    let cover: Icon
+    let defaultChannel: String
+    let description: String
+    let discoverable: Bool
+    let icon: Icon
+    let id: String
+    let incomeDisplay: Bool
+    let liveStream: LiveStream
+    let owner: Owner
+    let subscriberCountDisplay: String
+    let subscriptionPlans: [SubscriptionPlan]
+    let title: String
+    let urlname: String
 }

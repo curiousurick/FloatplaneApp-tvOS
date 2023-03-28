@@ -37,8 +37,8 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
     
     init(
         countLimit: UInt = 50,
-        // Default 30 minutes
-        cacheExpiration: TimeInterval = 60,
+        // Default 5 minutes
+        cacheExpiration: TimeInterval = 5 * 60,
         baseUrl: URL
     ) {
         self.cacheExpiration = cacheExpiration

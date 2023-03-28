@@ -34,14 +34,8 @@ class ContentFeedOperation: CacheableAPIOperation<ContentFeedRequest, CreatorFee
     }
     
     override func _get(request: ContentFeedRequest, completion: ((CreatorFeed?, Error?) -> Void)? = nil) {
-        let params: [String: Any] = [
-            "fetchAfter" : request.fetchAfter,
-            "id" : request.creatorId,
-            "limit" : request.limit
-        ]
-        
-        AF.request(baseUrl, parameters: params)
-            .responseDecodable(of: [CreatorFeed.FeedItem].self, decoder: CreatorFeedDecoder()) { response in
+        AF.request(baseUrl, parameters: request.params)
+            .responseDecodable(of: [FeedItem].self, decoder: CreatorFeedDecoder()) { response in
             let items = response.value!
             let creatorFeed = CreatorFeed(items: items)
             completion?(creatorFeed, nil)

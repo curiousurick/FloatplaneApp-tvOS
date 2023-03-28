@@ -19,21 +19,33 @@
 //  THE SOFTWARE.
 //
 
-
 import UIKit
-import AlamofireImage
 
-class BrowseReusableHeaderView: UICollectionReusableView {
-    static let identifier = "BrowseReusableHeaderView"
-    
-    @IBOutlet var imageView: UIImageView!
+enum SortOrder: String {
+    case descending = "DESC"
+    case ascending = "ASC"
+}
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+struct SearchRequest: OperationRequest {
+    let creatorId: String
+    let sort: SortOrder
+    let hasVideo: Bool = false
+    let hasAudio: Bool = false
+    let hasPicture: Bool = false
+    let hasText: Bool = false
+    let searchQuery: String
+    let fetchAfter: Int
     
-    func updateUI(item: FeedItem) {
-        let coverUrl = item.creator.cover.path
-        imageView.af.setImage(withURL: coverUrl)
+    var params: [String : Any] {
+        return [
+            "id" : creatorId,
+            "sort" : sort.rawValue,
+            "hasVideo" : hasVideo,
+            "hasAudio" : hasAudio,
+            "hasPicture" : hasPicture,
+            "hasText" : hasText,
+            "search" : searchQuery,
+            "fetchAfter" : fetchAfter
+        ]
     }
 }

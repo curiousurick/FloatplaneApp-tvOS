@@ -21,8 +21,27 @@
 
 import Foundation
 
-struct ContentFeedRequest: Hashable {
-    let fetchAfter: Int
-    let limit: UInt64
-    let creatorId: String
+struct FeedItem: Codable {
+    let attachmentOrder: [String]
+    let audioAttachments: [String]
+    let channel: Channel
+    let comments: UInt64
+    let creator: Creator
+    let dislikes: UInt64
+    let galleryAttachments: [String]
+    let guid: String
+    let id: String
+    var isAccessible: Bool = true
+    let likes: UInt64
+    let metadata: Metadata
+    let pictureAttachments: [String]
+    let releaseDate: Date
+    let score: UInt64
+    let tags: [String]
+    let text: String
+    let thumbnail: Icon
+    let title: String
+    let type: VideoType
+    let videoAttachments: [String]
+    let wasReleasedSilently: Bool
 }

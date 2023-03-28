@@ -21,7 +21,18 @@
 
 import Foundation
 
-struct DeliveryKeyRequest: Hashable {
-    let guid: String
-    let type: PostType
+struct LiveStream: Codable {
+    struct Offline: Codable {
+        let description: String
+        let thumbnail: Icon
+        let title: String
+    }
+    let channel: String
+    let description: String
+    let id: String
+    let offline: Offline
+    let owner: String
+    let streamPath: String
+    let thumbnail: Icon
+    let title: String
 }

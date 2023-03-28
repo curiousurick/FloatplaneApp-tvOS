@@ -27,7 +27,7 @@ class VODPlayerViewController: AVPlayerViewController {
     
     private var timeObserverToken: Any?
     
-    var video: CreatorFeed.FeedItem!
+    var video: FeedItem!
     
     var videoGuid: String {
         get {
@@ -73,7 +73,7 @@ class VODPlayerViewController: AVPlayerViewController {
         }
     }
     
-    private func startVideo(video: CreatorFeed.FeedItem) {
+    private func startVideo(video: FeedItem) {
         guard video.videoAttachments.count > 0 else {
             return
         }

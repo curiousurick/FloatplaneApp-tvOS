@@ -35,7 +35,7 @@ protocol FeedViewItem {
     var duration: TimeInterval { get }
 }
 
-extension CreatorFeed.FeedItem: FeedViewItem {
+extension FeedItem: FeedViewItem {
     var imageViewUrl: URL {
         get {
             self.thumbnail.path

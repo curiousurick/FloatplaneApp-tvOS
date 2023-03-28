@@ -30,11 +30,7 @@ class DeliveryKeyOperation: APIOperation {
     let baseUrl: URL = URL(string: "https://\(OperationConstants.domain)/api/v2/cdn/delivery")!
     
     func get(request: DeliveryKeyRequest, completion: ((DeliveryKey?, Error?) -> Void)? = nil) {
-        let params = [
-            "type": request.type.rawValue,
-            "guid": request.guid
-        ]
-        AF.request(baseUrl, parameters: params).responseDecodable(of: DeliveryKey.self) { response in
+        AF.request(baseUrl, parameters: request.params).responseDecodable(of: DeliveryKey.self) { response in
             completion?(response.value!, nil)
         }
     }

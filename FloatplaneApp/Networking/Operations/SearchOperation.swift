@@ -19,21 +19,34 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
+import Alamofire
 
-import UIKit
-import AlamofireImage
-
-class BrowseReusableHeaderView: UICollectionReusableView {
-    static let identifier = "BrowseReusableHeaderView"
+class SearchOperation: CacheableAPIOperation<SearchRequest, SearchResponse> {
     
-    @IBOutlet var imageView: UIImageView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    typealias Request = SearchRequest
+    typealias Response = SearchResponse
+    
+    static let base = URL(string: "https://\(OperationConstants.domain)/api/v3/content/creator")!
+    
+    init() {
+        super.init(
+            countLimit: 500,
+            // Default 30 minutes
+            cacheExpiration: 30 * 60,
+            baseUrl: SearchOperation.base
+        )
     }
     
-    func updateUI(item: FeedItem) {
-        let coverUrl = item.creator.cover.path
-        imageView.af.setImage(withURL: coverUrl)
+    override func _get(request: SearchRequest, completion: ((SearchResponse?, Error?) -> Void)? = nil) {
+        AF.request(baseUrl, parameters: request.params)
+            .responseDecodable(of: [FeedItem].self, decoder: CreatorFeedDecoder()) { response in
+            let items = response.value!
+            let searchResponse = SearchResponse(items: items)
+            completion?(searchResponse, nil)
+        }
     }
+    
+    
+
 }
