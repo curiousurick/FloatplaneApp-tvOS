@@ -24,9 +24,11 @@ import Cache
 
 class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
     private let logger = Log4S()
+    private let cacheQueueLabel = "com.georgie.cacheQueue"
     
     private let cacheExpiration: TimeInterval
-    private let storage: Storage<Request, Response>?
+    private let storage: Storage<Request, Response>
+    private let cacheQueue: DispatchQueue
     
     typealias Request = I
     typealias Response = O
@@ -36,7 +38,7 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
     init(
         countLimit: UInt = 50,
         // Default 30 minutes
-        cacheExpiration: TimeInterval = 10 * 60,
+        cacheExpiration: TimeInterval = 60,
         baseUrl: URL
     ) {
         self.cacheExpiration = cacheExpiration
@@ -46,31 +48,53 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
         let diskConfig = DiskConfig(name: "org.georgie.\(baseUrl)", expiry: expiry)
         let memoryConfig = MemoryConfig(expiry: expiry, countLimit: countLimit, totalCostLimit: 0)
 
-        self.storage = try? Storage(
+        self.storage = try! Storage(
           diskConfig: diskConfig,
           memoryConfig: memoryConfig,
           transformer: TransformerFactory.forCodable(ofType: Response.self)
         )
+        cacheQueue = DispatchQueue(label: cacheQueueLabel)
     }
     
-    func get(request: Request, completion: ((Response?, Error?) -> Void)?) {
-        fatalError("Do not use base CacheableAPIOperation")
-    }
-    
-    func getCache(request: Request) -> Response? {
-        do {
-            if let storage = storage,
-               try !storage.isExpiredObject(forKey: request) {
-                return try storage.object(forKey: request)
+    final func get(request: Request, completion: ((Response?, Error?) -> Void)?) {
+        cacheQueue.async {
+            do {
+                if try self.storage.isExpiredObject(forKey: request) {
+                    try self.storage.removeExpiredObjects()
+                }
+                else {
+                    let response = try self.storage.object(forKey: request) as Response
+                    completion?(response, nil)
+                    return
+                }
+            }
+            catch {
+                completion?(nil, error)
+                return
+            }
+            // No cache available.
+            self._get(request: request) { response, error in
+                if let response = response {
+                    self.setCache(request: request, response: response)
+                }
+                completion?(response, error)
             }
         }
-        catch {
-            logger.error("Error checking storage while getting cache for baseUrl \(baseUrl)")
-        }
-        return nil
+    }
+    
+    func _get(request: Request, completion: ((Response?, Error?) -> Void)?) {
+        fatalError("Not implemented. Do not use instance of CacheableAPIOperation")
     }
     
     func setCache(request: Request, response: Response) {
-        try? storage?.setObject(response, forKey: request)
+        cacheQueue.async {
+            do {
+                try self.storage.setObject(response, forKey: request)
+            }
+            catch {
+                self.logger.error("Error setting cache. Request type \(String.fromClass(request))) and Response type \(String.fromClass(response))")
+            }
+        }
+        
     }
 }

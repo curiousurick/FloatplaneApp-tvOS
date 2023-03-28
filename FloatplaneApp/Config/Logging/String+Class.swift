@@ -20,31 +20,14 @@
 //
 
 import Foundation
-import Alamofire
 
-class ContentFeedOperation: CacheableAPIOperation<ContentFeedRequest, CreatorFeed> {
+extension String {
     
-    typealias Request = ContentFeedRequest
-    typealias ResponseValue = CreatorFeed
-    
-    static let base = URL(string: "https://\(OperationConstants.domain)/api/v3/content/creator")!
-    
-    init() {
-        super.init(baseUrl: ContentFeedOperation.base)
+    static func fromClass(_ any: Any) -> String {
+        return String(describing: type(of: any))
     }
     
-    override func _get(request: ContentFeedRequest, completion: ((CreatorFeed?, Error?) -> Void)? = nil) {
-        let params: [String: Any] = [
-            "fetchAfter" : request.fetchAfter,
-            "id" : request.creatorId,
-            "limit" : request.limit
-        ]
-        
-        AF.request(baseUrl, parameters: params)
-            .responseDecodable(of: [CreatorFeed.FeedItem].self, decoder: CreatorFeedDecoder()) { response in
-            let items = response.value!
-            let creatorFeed = CreatorFeed(items: items)
-            completion?(creatorFeed, nil)
-        }
+    static func fromClass(_ type: Any.Type) -> String {
+        return String(describing: type)
     }
 }

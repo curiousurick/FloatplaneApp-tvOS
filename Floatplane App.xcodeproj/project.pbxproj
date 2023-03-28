@@ -49,6 +49,8 @@
 		5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79829D158AF00F9A83B /* ProgressStore.swift */; };
 		5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */; };
 		5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */; };
+		5EAAE7A029D2C5A900F9A83B /* String+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79F29D2C5A900F9A83B /* String+Class.swift */; };
+		5EAAE7A429D2C64D00F9A83B /* String+ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,8 @@
 		5EAAE79829D158AF00F9A83B /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VODPlayerViewController.swift; sourceTree = "<group>"; };
 		5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemProgressBarView.swift; sourceTree = "<group>"; };
+		5EAAE79F29D2C5A900F9A83B /* String+Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Class.swift"; sourceTree = "<group>"; };
+		5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ClassTest.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,7 @@
 		5E507C0F29CFAD66006751F3 /* FloatplaneAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				5EAAE7A129D2C63B00F9A83B /* Config */,
 				5E507C1029CFAD66006751F3 /* FloatplaneAppTests.swift */,
 			);
 			path = FloatplaneAppTests;
@@ -326,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				5EAAE78229D1329200F9A83B /* Log4S.swift */,
+				5EAAE79F29D2C5A900F9A83B /* String+Class.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
@@ -354,6 +360,22 @@
 				5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */,
 			);
 			path = Playback;
+			sourceTree = "<group>";
+		};
+		5EAAE7A129D2C63B00F9A83B /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE7A229D2C64100F9A83B /* Logging */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		5EAAE7A229D2C64100F9A83B /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */,
+			);
+			path = Logging;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -529,6 +551,7 @@
 				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
 				5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */,
 				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
+				5EAAE7A029D2C5A900F9A83B /* String+Class.swift in Sources */,
 				5EAAE75929CFD0D300F9A83B /* OperationConstants.swift in Sources */,
 				5EAAE78329D1329200F9A83B /* Log4S.swift in Sources */,
 				5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */,
@@ -541,6 +564,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E507C1129CFAD66006751F3 /* FloatplaneAppTests.swift in Sources */,
+				5EAAE7A429D2C64D00F9A83B /* String+ClassTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

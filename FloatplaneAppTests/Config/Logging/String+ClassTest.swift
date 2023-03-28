@@ -19,32 +19,28 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import Alamofire
+import XCTest
+@testable import FloatplaneApp
 
-class ContentFeedOperation: CacheableAPIOperation<ContentFeedRequest, CreatorFeed> {
-    
-    typealias Request = ContentFeedRequest
-    typealias ResponseValue = CreatorFeed
-    
-    static let base = URL(string: "https://\(OperationConstants.domain)/api/v3/content/creator")!
-    
-    init() {
-        super.init(baseUrl: ContentFeedOperation.base)
-    }
-    
-    override func _get(request: ContentFeedRequest, completion: ((CreatorFeed?, Error?) -> Void)? = nil) {
-        let params: [String: Any] = [
-            "fetchAfter" : request.fetchAfter,
-            "id" : request.creatorId,
-            "limit" : request.limit
-        ]
+final class String_ClassTest: XCTestCase {
+
+    func testStringForObject() {
+        // Arrange
+        let op = ContentFeedOperation()
         
-        AF.request(baseUrl, parameters: params)
-            .responseDecodable(of: [CreatorFeed.FeedItem].self, decoder: CreatorFeedDecoder()) { response in
-            let items = response.value!
-            let creatorFeed = CreatorFeed(items: items)
-            completion?(creatorFeed, nil)
-        }
+        // Act
+        let result = String.fromClass(op)
+        
+        // Assert
+        XCTAssertEqual(result, "ContentFeedOperation")
     }
+    
+    func testStringForClass() {
+        // Act
+        let result = String.fromClass(ContentFeedOperation.self)
+        
+        // Assert
+        XCTAssertEqual(result, "ContentFeedOperation")
+    }
+
 }
