@@ -98,6 +98,7 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     }
     
     func setFeedViewItem(item: FeedViewItem) {
+        image.image = nil
         image.af.setImage(withURL: item.imageViewUrl)
         title.text = item.titleLabel
         type.text = item.typeLabel

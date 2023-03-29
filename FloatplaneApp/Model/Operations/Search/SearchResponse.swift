@@ -21,10 +21,13 @@
 
 import Foundation
 
-class SearchResponse: Codable {
+struct SearchResponse: Codable {
     let items: [FeedItem]
     
-    init(items: [FeedItem]) {
-        self.items = items
+    func combine(with items: [FeedItem]) -> SearchResponse {
+        var combined = self.items
+        combined += items
+        return SearchResponse(items: combined)
+        
     }
 }

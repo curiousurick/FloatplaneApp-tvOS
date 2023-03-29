@@ -21,29 +21,24 @@
 
 import UIKit
 
-enum SortOrder: String {
-    case descending = "DESC"
-    case ascending = "ASC"
-}
-
 struct SearchRequest: OperationRequest {
     let creatorId: String
     let sort: SortOrder
-    let hasVideo: Bool = false
-    let hasAudio: Bool = false
-    let hasPicture: Bool = false
-    let hasText: Bool = false
     let searchQuery: String
     let fetchAfter: Int
+    private let hasVideo: Bool = true
+    private let hasAudio: Bool = false
+    private let hasPicture: Bool = false
+    private let hasText: Bool = false
     
     var params: [String : Any] {
         return [
             "id" : creatorId,
             "sort" : sort.rawValue,
-            "hasVideo" : hasVideo,
-            "hasAudio" : hasAudio,
-            "hasPicture" : hasPicture,
-            "hasText" : hasText,
+            "hasVideo" : hasVideo.stringValue,
+            "hasAudio" : hasAudio.stringValue,
+            "hasPicture" : hasPicture.stringValue,
+            "hasText" : hasText.stringValue,
             "search" : searchQuery,
             "fetchAfter" : fetchAfter
         ]

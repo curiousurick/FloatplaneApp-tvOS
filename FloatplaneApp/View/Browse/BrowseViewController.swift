@@ -22,8 +22,9 @@
 import UIKit
 import AVKit
 import Logging
+import Alamofire
 
-class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
     
@@ -62,6 +63,7 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
         flowLayout.sectionInset = UIEdgeInsets(top: edgeInset + 20, left: edgeInset + 20, bottom: edgeInset, right: edgeInset + 20)
         flowLayout.minimumInteritemSpacing = edgeInset
         
+        videoCollectionView.register(UINib(nibName: "FeedItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FeeditemCell")
         videoCollectionView.collectionViewLayout = flowLayout
         
         getInitialFeed()
@@ -121,7 +123,7 @@ extension BrowseViewController {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {
-            fatalError("Unrecognized element of kind: \(kind)")
+            return UICollectionReusableView()
         }
         
         let view: BrowseReusableHeaderView = collectionView.dequeueReusableSupplementaryView(
@@ -151,7 +153,7 @@ extension BrowseViewController {
             return UICollectionViewCell()
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedItemCell", for: indexPath) as! FeedItemCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeeditemCell", for: indexPath) as! FeedItemCollectionViewCell
         let item = feed.items[indexPath.row]
         cell.setFeedViewItem(item: item)
         
@@ -160,5 +162,15 @@ extension BrowseViewController {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "PlayVideoSegue", sender: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        // Begin asynchronously fetching data for the requested index paths.
+        guard let feed = feed else { return }
+        let imageRequests = indexPaths.map { $0.row }
+            .map { feed.items[$0] }
+            .map { $0.imageViewUrl }
+            .map { URLRequest(url: $0) }
+        UIImageView.af.sharedImageDownloader.download(imageRequests)
     }
 }

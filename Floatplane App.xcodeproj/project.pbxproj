@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E0E516A29D3F6B3006744E4 /* FeedItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */; };
 		5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BF829CFAD65006751F3 /* AppDelegate.swift */; };
 		5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */; };
 		5E507BFE29CFAD65006751F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507BFC29CFAD65006751F3 /* Main.storyboard */; };
@@ -33,6 +34,10 @@
 		5E692E0529D2D42600239196 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E692E0429D2D42600239196 /* Creator.swift */; };
 		5E692E0729D2D43A00239196 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E692E0629D2D43A00239196 /* FeedItem.swift */; };
 		5E692E0929D2D4B100239196 /* VideoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E692E0829D2D4B100239196 /* VideoType.swift */; };
+		5E692E1729D3DE2300239196 /* Bool+StringValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E692E1629D3DE2300239196 /* Bool+StringValue.swift */; };
+		5E692E1929D3DE3E00239196 /* SortOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E692E1829D3DE3E00239196 /* SortOrder.swift */; };
+		5E692E5329D3F57D00239196 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E692E5229D3F57D00239196 /* RxSwift */; };
+		5E692E5629D3F59E00239196 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 5E692E5529D3F59E00239196 /* RxDataSources */; };
 		5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE74B29CFC20900F9A83B /* UserConfiguration.swift */; };
 		5EAAE74E29CFC7A000F9A83B /* UserConfiguration.swift.bak in Resources */ = {isa = PBXBuildFile; fileRef = 5EAAE74D29CFC7A000F9A83B /* UserConfiguration.swift.bak */; };
 		5EAAE75229CFC9C100F9A83B /* APIOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE75129CFC9C100F9A83B /* APIOperation.swift */; };
@@ -66,6 +71,8 @@
 		5EAAE7A929D2CE0700F9A83B /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE7A829D2CE0700F9A83B /* SearchRequest.swift */; };
 		5EAAE7AB29D2CE0F00F9A83B /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE7AA29D2CE0F00F9A83B /* SearchResponse.swift */; };
 		5EAAE7AE29D2CF6500F9A83B /* OperationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE7AD29D2CF6500F9A83B /* OperationRequest.swift */; };
+		5EC0574B29D4085000D775EB /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5EC0574A29D4085000D775EB /* RxCocoa */; };
+		5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0574C29D4089C00D775EB /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +94,7 @@
 
 /* Begin PBXFileReference section */
 		5E0C3D0829CF774000C71A19 /* ContentFeedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFeedOperation.swift; sourceTree = "<group>"; };
+		5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		5E507BEB29CF7A87006751F3 /* CreatorFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorFeed.swift; sourceTree = "<group>"; };
 		5E507BEE29CF89E0006751F3 /* CreatorFeedDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorFeedDecoder.swift; sourceTree = "<group>"; };
 		5E507BF629CFAD65006751F3 /* FloatplaneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloatplaneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +123,8 @@
 		5E692E0429D2D42600239196 /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		5E692E0629D2D43A00239196 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		5E692E0829D2D4B100239196 /* VideoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoType.swift; sourceTree = "<group>"; };
+		5E692E1629D3DE2300239196 /* Bool+StringValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+StringValue.swift"; sourceTree = "<group>"; };
+		5E692E1829D3DE3E00239196 /* SortOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOrder.swift; sourceTree = "<group>"; };
 		5EAAE74B29CFC20900F9A83B /* UserConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfiguration.swift; sourceTree = "<group>"; };
 		5EAAE74D29CFC7A000F9A83B /* UserConfiguration.swift.bak */ = {isa = PBXFileReference; lastKnownFileType = text; path = UserConfiguration.swift.bak; sourceTree = "<group>"; };
 		5EAAE75129CFC9C100F9A83B /* APIOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIOperation.swift; sourceTree = "<group>"; };
@@ -143,6 +153,7 @@
 		5EAAE7A829D2CE0700F9A83B /* SearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequest.swift; sourceTree = "<group>"; };
 		5EAAE7AA29D2CE0F00F9A83B /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		5EAAE7AD29D2CF6500F9A83B /* OperationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationRequest.swift; sourceTree = "<group>"; };
+		5EC0574C29D4089C00D775EB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,12 +161,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EC0574B29D4085000D775EB /* RxCocoa in Frameworks */,
 				5EAAE78029D131FD00F9A83B /* Logging in Frameworks */,
 				5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */,
 				5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */,
 				5E507C2E29CFB0FE006751F3 /* Alamofire in Frameworks */,
 				5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */,
+				5E692E5629D3F59E00239196 /* RxDataSources in Frameworks */,
 				5EAAE77B29D12B6300F9A83B /* Cache in Frameworks */,
+				5E692E5329D3F57D00239196 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +220,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		5E0E516829D3F630006744E4 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
 		5E507BF729CFAD65006751F3 /* FloatplaneApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,10 +261,12 @@
 		5E507C2729CFADAB006751F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5E0E516829D3F630006744E4 /* Xibs */,
 				5E507BFC29CFAD65006751F3 /* Main.storyboard */,
 				5EAAE79A29D159E900F9A83B /* Playback */,
 				5EAAE76C29D0BF1E00F9A83B /* TabBar */,
 				5EAAE75D29CFD86400F9A83B /* Browse */,
+				5E692E0E29D2D93E00239196 /* Search */,
 				5EAAE79029D13E2400F9A83B /* Settings */,
 				5E507C0229CFAD66006751F3 /* Assets.xcassets */,
 				5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */,
@@ -253,6 +277,7 @@
 		5E507C2829CFADB5006751F3 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				5E692E1529D3DE1700239196 /* Utilities */,
 				5EAAE78129D1327400F9A83B /* Logging */,
 				5EAAE75629CFD0A700F9A83B /* CookieManager.swift */,
 				5EAAE75829CFD0D300F9A83B /* OperationConstants.swift */,
@@ -303,6 +328,23 @@
 				5EAAE77C29D12B8200F9A83B /* CacheableAPIOperation.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		5E692E0E29D2D93E00239196 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5EC0574C29D4089C00D775EB /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		5E692E1529D3DE1700239196 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE79F29D2C5A900F9A83B /* String+Class.swift */,
+				5E692E1629D3DE2300239196 /* Bool+StringValue.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		5EAAE74F29CFC9AA00F9A83B /* Decoders */ = {
@@ -385,7 +427,6 @@
 			isa = PBXGroup;
 			children = (
 				5EAAE78229D1329200F9A83B /* Log4S.swift */,
-				5EAAE79F29D2C5A900F9A83B /* String+Class.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
@@ -467,6 +508,7 @@
 				5E692E0229D2D41A00239196 /* SubscriptionPlan.swift */,
 				5E692E0429D2D42600239196 /* Creator.swift */,
 				5E692E0829D2D4B100239196 /* VideoType.swift */,
+				5E692E1829D3DE3E00239196 /* SortOrder.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -494,6 +536,9 @@
 				5EAAE76A29D0B56B00F9A83B /* SwiftDate */,
 				5EAAE77A29D12B6300F9A83B /* Cache */,
 				5EAAE77F29D131FD00F9A83B /* Logging */,
+				5E692E5229D3F57D00239196 /* RxSwift */,
+				5E692E5529D3F59E00239196 /* RxDataSources */,
+				5EC0574A29D4085000D775EB /* RxCocoa */,
 			);
 			productName = FloatplaneApp;
 			productReference = 5E507BF629CFAD65006751F3 /* FloatplaneApp.app */;
@@ -574,6 +619,8 @@
 				5EAAE76929D0B56B00F9A83B /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				5EAAE77929D12B6300F9A83B /* XCRemoteSwiftPackageReference "Cache" */,
 				5EAAE77E29D131FD00F9A83B /* XCRemoteSwiftPackageReference "swift-log" */,
+				5E692E5129D3F57D00239196 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				5E692E5429D3F59E00239196 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 5E0C3CD329CF766700C71A19 /* Products */;
 			projectDirPath = "";
@@ -591,6 +638,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E0E516A29D3F6B3006744E4 /* FeedItemCollectionViewCell.xib in Resources */,
 				5EAAE74E29CFC7A000F9A83B /* UserConfiguration.swift.bak in Resources */,
 				5E507C0629CFAD66006751F3 /* LaunchScreen.storyboard in Resources */,
 				5E507C0329CFAD66006751F3 /* Assets.xcassets in Resources */,
@@ -646,15 +694,18 @@
 				5E692E0729D2D43A00239196 /* FeedItem.swift in Sources */,
 				5EAAE75729CFD0A700F9A83B /* CookieManager.swift in Sources */,
 				5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */,
+				5E692E1729D3DE2300239196 /* Bool+StringValue.swift in Sources */,
 				5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */,
 				5EAAE77529D0D29C00F9A83B /* QualityLevelName.swift in Sources */,
 				5EAAE75529CFD06C00F9A83B /* ContentFeedRequest.swift in Sources */,
+				5E692E1929D3DE3E00239196 /* SortOrder.swift in Sources */,
 				5E507C2B29CFB0ED006751F3 /* CreatorFeed.swift in Sources */,
 				5E692DF729D2D3C300239196 /* Channel.swift in Sources */,
 				5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */,
 				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
 				5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */,
 				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
+				5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */,
 				5E692E0129D2D40D00239196 /* Owner.swift in Sources */,
 				5EAAE7A029D2C5A900F9A83B /* String+Class.swift in Sources */,
 				5EAAE7AE29D2CF6500F9A83B /* OperationRequest.swift in Sources */,
@@ -1006,6 +1057,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		5E692E5129D3F57D00239196 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		5E692E5429D3F59E00239196 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		5EAAE76029D03A9A00F9A83B /* XCRemoteSwiftPackageReference "ParallaxView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/PGSSoft/ParallaxView";
@@ -1054,6 +1121,16 @@
 			package = 5E0C3D0529CF772600C71A19 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
+		5E692E5229D3F57D00239196 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E692E5129D3F57D00239196 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		5E692E5529D3F59E00239196 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E692E5429D3F59E00239196 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
 		5EAAE76129D03A9A00F9A83B /* ParallaxView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5EAAE76029D03A9A00F9A83B /* XCRemoteSwiftPackageReference "ParallaxView" */;
@@ -1078,6 +1155,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5EAAE77E29D131FD00F9A83B /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
+		};
+		5EC0574A29D4085000D775EB /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E692E5129D3F57D00239196 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
 		};
 /* End XCSwiftPackageProductDependency section */
 

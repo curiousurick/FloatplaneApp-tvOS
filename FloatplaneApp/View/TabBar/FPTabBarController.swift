@@ -27,8 +27,19 @@ class FPTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selectedViewController = viewControllers?[1]
+        let searchController = SearchViewController.createEmbeddedInNavigationController()
+        viewControllers?.insert(searchController, at: 2)
         
+        selectedViewController = viewControllers?[1]
+        tabBar.items?[2].title = "Search"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewControllers?.forEach {
+            let _ = $0.view.layoutIfNeeded()
+            
+        }
     }
     
 }

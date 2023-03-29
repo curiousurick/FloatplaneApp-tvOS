@@ -26,8 +26,15 @@ class SearchOperation: CacheableAPIOperation<SearchRequest, SearchResponse> {
     
     typealias Request = SearchRequest
     typealias Response = SearchResponse
-    
     static let base = URL(string: "https://\(OperationConstants.domain)/api/v3/content/creator")!
+    
+    private var request: DataRequest?
+    
+    private let activeStates: [DataRequest.State] = [
+        .initialized,
+        .resumed,
+        .suspended
+    ]
     
     init() {
         super.init(
@@ -39,14 +46,27 @@ class SearchOperation: CacheableAPIOperation<SearchRequest, SearchResponse> {
     }
     
     override func _get(request: SearchRequest, completion: ((SearchResponse?, Error?) -> Void)? = nil) {
-        AF.request(baseUrl, parameters: request.params)
-            .responseDecodable(of: [FeedItem].self, decoder: CreatorFeedDecoder()) { response in
+        self.request = AF.request(SearchOperation.base, parameters: request.params)
+        self.request?.responseDecodable(of: [FeedItem].self, decoder: CreatorFeedDecoder()) { response in
+            if let error = response.error, error.isExplicitlyCancelledError {
+                return
+            }
             let items = response.value!
             let searchResponse = SearchResponse(items: items)
+            self.request = nil
             completion?(searchResponse, nil)
         }
     }
     
+    func isActive() -> Bool {
+        if let request = request {
+            return activeStates.contains(request.state)
+        }
+        return false
+    }
     
-
+    func cancel() {
+        request?.cancel()
+        request = nil
+    }
 }

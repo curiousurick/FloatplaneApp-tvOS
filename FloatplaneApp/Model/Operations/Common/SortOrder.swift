@@ -21,26 +21,7 @@
 
 import Foundation
 
-struct ContentFeedRequest: OperationRequest {
-    let fetchAfter: Int
-    let limit: UInt64
-    let creatorId: String
-    private let hasVideo: Bool = true
-    private let hasAudio: Bool = false
-    private let hasPicture: Bool = false
-    private let hasText: Bool = false
-    
-    var params: [String : Any] {
-        return [
-            "fetchAfter" : fetchAfter,
-            "id" : creatorId,
-            "limit" : limit,
-            "hasVideo" : hasVideo.stringValue,
-            "hasAudio" : hasAudio.stringValue,
-            "hasPicture" : hasPicture.stringValue,
-            "hasText" : hasText.stringValue
-        ]
-    }
-    
-    
+enum SortOrder: String {
+    case descending = "DESC"
+    case ascending = "ASC"
 }
