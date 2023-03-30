@@ -32,81 +32,103 @@ class FPTabBarController: UITabBarController {
     
     private var livePlayerViewController: LivePlayerViewController!
     private var liveStreamOfflineViewController: LiveStreamOfflineViewController!
+    private var browseViewController: BrowseViewController!
+    private var searchViewController: SearchViewController!
     
-    private var creator: NamedCreator!
+    private var creator: NamedCreator! {
+        didSet {
+            livePlayerViewController.creator = creator
+            liveStreamOfflineViewController.creator = creator
+            browseViewController.creator = creator
+            searchViewController.creator = creator
+            self.updateLiveTab()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        NotificationCenter.default.addObserver(
+            forName: FPNotifications.ActiveCreatorUpdated.name,
+            object: nil,
+            queue: updateLiveTabQueue
+        ) { notification in
+            guard let userInfo = notification.userInfo,
+                  let creator = userInfo[FPNotifications.ActiveCreatorUpdated.creatorKey] as? NamedCreator else {
+                self.logger.error("Received ActiveCreatorUpdated notification without a creator")
+                return
+            }
+            self.creator = creator
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        var viewControllers: [UIViewController] = []
-        
         // Setup Live Tab
         livePlayerViewController = storyboard
             .instantiateViewController(withIdentifier: LivePlayerViewStoryboardID) as? LivePlayerViewController
         liveStreamOfflineViewController = storyboard
             .instantiateViewController(withIdentifier: LiveStreamOfflineViewStoryboardID) as? LiveStreamOfflineViewController
-        viewControllers.append(liveStreamOfflineViewController)
         let liveTab = UITabBarItem(title: "Live", image: nil, tag: 0)
         liveStreamOfflineViewController.tabBarItem = liveTab
         livePlayerViewController.tabBarItem = liveTab
         
-        // Setup Browse ViewController
-        let browseController = storyboard.instantiateViewController(withIdentifier: BrowseViewControllerStoryboardID) as! BrowseViewController
-        viewControllers.append(browseController)
-        let browseTab = UITabBarItem(title: "Browse", image: nil, tag: 1)
-        browseController.tabBarItem = browseTab
         
+        // Setup Browse ViewController
+        self.browseViewController = storyboard.instantiateViewController(withIdentifier: BrowseViewControllerStoryboardID) as? BrowseViewController
+        let browseTab = UITabBarItem(title: "Browse", image: nil, tag: 1)
+        browseViewController.tabBarItem = browseTab
+
         // Setup Search ViewController
-        let searchController = SearchViewController.createEmbeddedInNavigationController()
-        viewControllers.append(searchController)
+        let searchControllers = SearchViewController.createEmbeddedInNavigationController()
+        self.searchViewController = searchControllers.1
+        let searchViewNavController = searchControllers.0
+        
         let searchTab = UITabBarItem(title: "Search", image: nil, tag: 2)
-        searchController.tabBarItem = searchTab
+        searchViewNavController.tabBarItem = searchTab
         
         // Setup Settings ViewController
         let settingsController = storyboard.instantiateViewController(withIdentifier: SettingsViewControllerStoryboardID) as! SettingsViewController
-        viewControllers.append(settingsController)
+        
         let settingsTab = UITabBarItem(title: "Settings", image: nil, tag: 3)
         settingsController.tabBarItem = settingsTab
+
+        self.viewControllers = [
+            liveStreamOfflineViewController,
+            browseViewController,
+            searchViewNavController,
+            settingsController
+        ]
+        selectedViewController = viewControllers?[1]
         
-        self.viewControllers = viewControllers
-        
-        NotificationCenter.default.addObserver(
-            forName: FPNotifications.ActiveCreatorUpdated.name,
-            object: nil,
-            queue: updateLiveTabQueue
-        ) { notification in
-            self.updateLiveTab(userInfo: notification.userInfo)
-        }
+        let navigationController = self.navigationController as! TopNavigationController
+        navigationController.tabBarReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        selectedViewController = viewControllers?[1]
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    @objc func updateLiveTab(userInfo: [AnyHashable : Any]?) {
-        guard let userInfo = userInfo,
-              var viewControllers = viewControllers else {
+    @objc func updateLiveTab() {
+        guard var viewControllers = viewControllers,
+              let creator = creator else {
             return
         }
-        guard let creator = userInfo[FPNotifications.ActiveCreatorUpdated.creatorKey] as? NamedCreator else {
-            logger.warn("ActiveCreatorUpdated notification received without creator")
-            return
-        }
-        self.creator = creator
         DispatchQueue.main.async {
             if let offline = creator.liveStream.offline {
-                self.liveStreamOfflineViewController.offline = offline
                 viewControllers[0] = self.liveStreamOfflineViewController
             }
             else {
-                self.livePlayerViewController.video = creator.liveStream
                 viewControllers[0] = self.livePlayerViewController
             }
         }

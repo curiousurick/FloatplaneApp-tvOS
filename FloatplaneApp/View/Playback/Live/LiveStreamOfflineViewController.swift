@@ -24,7 +24,7 @@ import AlamofireImage
 
 class LiveStreamOfflineViewController: UIViewController {
     
-    var offline: LiveStream.Offline? {
+    var creator: NamedCreator? {
         didSet {
             self.updateThumbnailView()
         }
@@ -43,9 +43,10 @@ class LiveStreamOfflineViewController: UIViewController {
     
     
     func updateThumbnailView() {
-        if let offlineThumbnailView = self.offlineThumbnailView {
+        if let offlineThumbnailView = self.offlineThumbnailView,
+           let creator = creator {
             DispatchQueue.main.async {
-                if let url = self.offline?.thumbnail.path {
+                if let url = creator.liveStream.offline?.thumbnail.path {
                     offlineThumbnailView.af.setImage(withURL: url)
                 }
                 else {

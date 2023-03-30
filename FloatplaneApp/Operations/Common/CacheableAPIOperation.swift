@@ -21,6 +21,7 @@
 
 import Foundation
 import Cache
+import Alamofire
 
 class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
     private let logger = Log4S()
@@ -29,6 +30,13 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
     private let cacheExpiration: TimeInterval
     private let storage: Storage<Request, Response>
     private let cacheQueue: DispatchQueue
+    private var request: DataRequest?
+    
+    private let activeStates: [DataRequest.State] = [
+        .initialized,
+        .resumed,
+        .suspended
+    ]
     
     typealias Request = I
     typealias Response = O
@@ -77,17 +85,30 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
                 return
             }
             // No cache available.
-            self._get(request: request) { response, error in
+            self.request = self._get(request: request) { response, error in
                 if let response = response {
                     self.setCache(request: request, response: response)
                 }
+                self.request = nil
                 completion?(response, error)
             }
         }
     }
     
-    func _get(request: Request, completion: ((Response?, Error?) -> Void)?) {
+    func _get(request: Request, completion: ((Response?, Error?) -> Void)?) -> DataRequest {
         fatalError("Not implemented. Do not use instance of CacheableAPIOperation")
+    }
+    
+    func isActive() -> Bool {
+        if let request = request {
+            return activeStates.contains(request.state)
+        }
+        return false
+    }
+    
+    func cancel() {
+        request?.cancel()
+        request = nil
     }
     
     func setCache(request: Request, response: Response) {

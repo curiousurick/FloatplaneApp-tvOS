@@ -22,13 +22,13 @@
 import UIKit
 
 extension SearchViewController {
-    static func createEmbeddedInNavigationController() -> UINavigationController {
+    static func createEmbeddedInNavigationController() -> (UINavigationController, SearchViewController) {
         let searchViewController = SearchViewController()
         let searchController = UISearchController(searchResultsController: searchViewController)
         searchViewController.searchController = searchController
         let searchContainerController = UISearchContainerViewController(searchController: searchController)
         searchController.searchResultsUpdater = searchViewController
-        return UINavigationController(rootViewController: searchContainerController)
+        return (UINavigationController(rootViewController: searchContainerController), searchViewController)
     }
 }
 
@@ -38,6 +38,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     fileprivate var searchController: UISearchController!
     private let searchOperation = SearchOperation()
     
+    var creator: NamedCreator?
     private var searchString: String?
     private var results: SearchResponse?
 
@@ -93,12 +94,16 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     
     private func getNextPage(searchString: String) {
         logger.debug("Fetching next page of content for feed")
+        guard let creator = creator else {
+            logger.error("Trying to search with no active creator")
+            return
+        }
         if searchOperation.isActive() {
             searchOperation.cancel()
         }
         let fetchAfter = results?.items.count ?? 0
         let request = SearchRequest(
-            creatorId: OperationConstants.lttCreatorID,
+            creatorId: creator.id,
             sort: .descending,
             searchQuery: searchString,
             fetchAfter: fetchAfter

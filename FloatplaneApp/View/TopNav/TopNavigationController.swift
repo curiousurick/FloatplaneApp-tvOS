@@ -22,6 +22,9 @@
 import UIKit
 
 class TopNavigationController: UINavigationController {
+    // 30 minutes
+    private let CreatorRefreshInternal: TimeInterval = 30 * 60
+    private let creatorOperation = CreatorOperation()
     
     private var timer: Timer?
     
@@ -40,11 +43,14 @@ class TopNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func tabBarReady() {
         scheduleCreatorUpdate()
     }
     
     private func scheduleCreatorUpdate() {
-        timer = Timer.scheduledTimer(withTimeInterval: 30 * 60, repeats: true) { timer in
+        timer = Timer.scheduledTimer(withTimeInterval: CreatorRefreshInternal, repeats: true) { timer in
             self.getActiveCreator()
         }
         timer?.fire()
@@ -55,7 +61,7 @@ class TopNavigationController: UINavigationController {
             return
         }
         let request = CreatorRequest(named: activeCreatorUrlName)
-        CreatorOperation().get(request: request) { response, error in
+        creatorOperation.get(request: request) { response, error in
             if let creator = response {
                 let userInfo: [String : Any] = [
                     FPNotifications.ActiveCreatorUpdated.creatorKey : creator

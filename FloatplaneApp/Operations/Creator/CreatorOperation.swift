@@ -33,8 +33,8 @@ class CreatorOperation: CacheableAPIOperation<CreatorRequest, NamedCreator> {
         super.init(baseUrl: CreatorOperation.base)
     }
     
-    override func _get(request: CreatorRequest, completion: ((NamedCreator?, Error?) -> Void)? = nil) {
-        AF.request(baseUrl, parameters: request.params)
+    override func _get(request: CreatorRequest, completion: ((NamedCreator?, Error?) -> Void)? = nil) -> DataRequest {
+        return AF.request(baseUrl, parameters: request.params)
             .responseDecodable(of: [NamedCreator].self) { response in
                 if let creators = response.value,
                    creators.count == 1 {

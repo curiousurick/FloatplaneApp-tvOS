@@ -27,12 +27,16 @@ import Alamofire
 class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
+    private let contentFeedOperation = ContentFeedOperation()
     
+    var creator: NamedCreator? {
+        didSet {
+            getInitialFeed()
+        }
+    }
     var feed: CreatorFeed?
     
     @IBOutlet var videoCollectionView: UICollectionView!
-    
-    var isLoading: Bool = false
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -62,8 +66,6 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
         videoCollectionView.register(UINib(nibName: "FeedItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FeeditemCell")
         videoCollectionView.collectionViewLayout = flowLayout
         videoCollectionView.contentInset = .init(top: 10, left:  50, bottom: 10, right: 50)
-        
-        getInitialFeed()
     }
     
     @objc private func getInitialFeed() {
@@ -73,18 +75,17 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private func getNextPage() {
         logger.debug("Fetching next page of content for feed")
-        if isLoading {
+        guard let creator = creator, !contentFeedOperation.isActive() else {
             logger.warn("Trying to get next page in feed while I am already loading")
             return
         }
-        isLoading = true
         let fetchAfter = feed?.items.count ?? 0
         let request = ContentFeedRequest(
             fetchAfter: fetchAfter,
             limit: pageLimit,
-            creatorId: OperationConstants.lttCreatorID
+            creatorId: creator.id
         )
-        ContentFeedOperation().get(request: request) { fetchedFeed, error in
+        contentFeedOperation.get(request: request) { fetchedFeed, error in
             guard error == nil,
                   let fetchedFeed = fetchedFeed else {
                 self.logger.error("Failed to retrieve next page of content from \(fetchAfter). Error \(error.debugDescription)")
@@ -98,7 +99,6 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
             }
             DispatchQueue.main.async {
                 self.videoCollectionView.reloadData()
-                self.isLoading = false
             }
         }
     }
@@ -136,7 +136,7 @@ extension BrowseViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == feed!.items.count - 4 && !self.isLoading {
+        if indexPath.row == feed!.items.count - 4 && !self.contentFeedOperation.isActive() {
             getNextPage()
         }
     }

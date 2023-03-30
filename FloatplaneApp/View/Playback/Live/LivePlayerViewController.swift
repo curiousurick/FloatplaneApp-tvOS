@@ -28,7 +28,7 @@ class LivePlayerViewController: AVPlayerViewController {
     
     private var timeObserverToken: Any?
     
-    var video: LiveStream!
+    var creator: NamedCreator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,10 +94,14 @@ class LivePlayerViewController: AVPlayerViewController {
     }
     
     private func startVideo() {
+        guard let video = creator?.liveStream else {
+            logger.error("Cannot start live stream because liveSream is nil")
+            return
+        }
         let request = LiveDeliveryKeyRequest(creator: video.owner, type: .live)
         LiveDeliveryKeyOperation().get(request: request) { deliveryKey, error in
             guard error == nil, let deliveryKey = deliveryKey else {
-                self.logger.error("Unable to get live delivery key for owner \(self.video.owner).")
+                self.logger.error("Unable to get live delivery key for owner \(video.owner).")
                 return
             }
             DispatchQueue.main.async {
