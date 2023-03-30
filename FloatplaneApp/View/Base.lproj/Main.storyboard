@@ -82,6 +82,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="collectionView" destination="c5t-Cq-ETX" id="dGg-E6-h79"/>
+                                    <outlet property="widthConstraint" destination="5th-YH-ars" id="VeH-fe-TCI"/>
                                 </connections>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N99-Bz-LBo" userLabel="Feed">

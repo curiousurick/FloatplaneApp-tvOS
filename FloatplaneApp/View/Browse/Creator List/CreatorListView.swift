@@ -25,6 +25,7 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     var creators: [BaseCreator] = []
     
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var widthConstraint: NSLayoutConstraint!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -61,7 +62,6 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
-        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
