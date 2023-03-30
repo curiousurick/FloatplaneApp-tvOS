@@ -28,7 +28,7 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
     
-    private var feed: CreatorFeed?
+    var feed: CreatorFeed?
     
     @IBOutlet var videoCollectionView: UICollectionView!
     
@@ -53,18 +53,15 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let flowLayout = UICollectionViewFlowLayout()
         // 4 cells per row with edge inset of 10 between cells (3 spaces) + each side of screen (left and right) = 50
-        let cellWidth: CGFloat = (view.bounds.width / 4) - 50
-        let cellHeight: CGFloat = cellWidth
-        let edgeInset: CGFloat = 10
+        let width = view.bounds.width / 4 - 80
+        let height = view.bounds.width / 4 - 80
         
         flowLayout.headerReferenceSize = CGSizeMake(view.bounds.width, 340)
-        
-        flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-        flowLayout.sectionInset = UIEdgeInsets(top: edgeInset + 20, left: edgeInset + 20, bottom: edgeInset, right: edgeInset + 20)
-        flowLayout.minimumInteritemSpacing = edgeInset
+        flowLayout.itemSize = CGSize(width: width, height: height)
         
         videoCollectionView.register(UINib(nibName: "FeedItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FeeditemCell")
         videoCollectionView.collectionViewLayout = flowLayout
+        videoCollectionView.contentInset = .init(top: 10, left:  50, bottom: 10, right: 50)
         
         getInitialFeed()
     }
@@ -161,7 +158,7 @@ extension BrowseViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "PlayVideoSegue", sender: nil)
+        performSegue(withIdentifier: "BrowseViewcontroller.PlayVideoSegue", sender: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {

@@ -25,7 +25,7 @@ protocol Readable {
     var readable: String { get }
 }
 
-enum QualityLevelName: String, Decodable, Readable {
+enum VodQualityLevelName: String, Decodable, Readable {
     case ql360p = "360-avc1"
     case ql480p = "480-avc1"
     case ql720p = "720-avc1"
@@ -33,7 +33,7 @@ enum QualityLevelName: String, Decodable, Readable {
     
     static let defaultLevel = ql720p
     
-    static let allCases: [QualityLevelName] = [
+    static let allCases: [VodQualityLevelName] = [
         .ql360p,
         .ql480p,
         .ql720p,
@@ -66,6 +66,33 @@ enum QualityLevelName: String, Decodable, Readable {
                 return "720p"
             case .ql1080p:
                 return "1080p"
+            }
+        }
+    }
+}
+
+enum LiveQualityLevelName: String, Decodable, Readable {
+    // Used for live streams
+    case liveAbr = "live-abr"
+    
+    static let allCases: [LiveQualityLevelName] = [
+        .liveAbr
+    ]
+    
+    var index: Int {
+        get {
+            switch self {
+            case .liveAbr:
+                return 0
+            }
+        }
+    }
+    
+    var readable: String {
+        get {
+            switch self {
+            case .liveAbr:
+                return "Live Stream"
             }
         }
     }

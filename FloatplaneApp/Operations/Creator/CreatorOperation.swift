@@ -20,19 +20,29 @@
 //
 
 import Foundation
+import Alamofire
 
-struct LiveStream: Codable {
-    struct Offline: Codable {
-        let description: String
-        let thumbnail: Icon
-        let title: String
+class CreatorOperation: CacheableAPIOperation<CreatorRequest, NamedCreator> {
+    
+    typealias Request = CreatorRequest
+    typealias ResponseValue = NamedCreator
+    
+    static let base = URL(string: "https://\(OperationConstants.domain)/api/v2/creator/named")!
+    
+    init() {
+        super.init(baseUrl: CreatorOperation.base)
     }
-    let channel: String
-    let description: String
-    let id: String
-    let offline: Offline?
-    let owner: String
-    let streamPath: String
-    let thumbnail: Icon
-    let title: String
+    
+    override func _get(request: CreatorRequest, completion: ((NamedCreator?, Error?) -> Void)? = nil) {
+        AF.request(baseUrl, parameters: request.params)
+            .responseDecodable(of: [NamedCreator].self) { response in
+                if let creators = response.value,
+                   creators.count == 1 {
+                    completion?(creators[0], nil)
+                }
+                else {
+                    completion?(nil, response.error)
+                }
+        }
+    }
 }

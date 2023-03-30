@@ -21,7 +21,7 @@
 
 import Foundation
 
-struct DeliveryKey: Decodable {
+struct VodDeliveryKey: Decodable {
     struct QualityLevelParams: Decodable {
         struct Constants {
             static let FileNameKey = "{qualityLevelParams.2}"
@@ -59,12 +59,12 @@ struct DeliveryKey: Decodable {
             static let accessToken = ParamsKey(stringValue: "4")!
         }
     }
-    class DecodedQualityLevel: Decodable {
+    class VodDecodedQualityLevel: Decodable {
         let codecs: String
         let height: UInt64
-        let label: String
+        let label: String?
         let mimeType: String
-        let name: QualityLevelName
+        let name: VodQualityLevelName
         let order: UInt64
         let width: UInt64
         
@@ -73,7 +73,7 @@ struct DeliveryKey: Decodable {
             height: UInt64,
             label: String,
             mimeType: String,
-            name: QualityLevelName,
+            name: VodQualityLevelName,
             order: UInt64,
             width: UInt64
         ) {
@@ -86,7 +86,7 @@ struct DeliveryKey: Decodable {
             self.width = width
         }
         
-        init(original: DecodedQualityLevel) {
+        init(original: VodDecodedQualityLevel) {
             self.codecs = original.codecs
             self.height = original.height
             self.label = original.label
@@ -96,12 +96,12 @@ struct DeliveryKey: Decodable {
             self.width = original.width
         }
     }
-    class QualityLevelResourceData: DecodedQualityLevel {
+    class VodQualityLevelResourceData: VodDecodedQualityLevel {
         let fileName: String
         let accessToken: String
         
         init(
-            decodedQualityLevel: DecodedQualityLevel,
+            decodedQualityLevel: VodDecodedQualityLevel,
             fileName: String,
             accessToken: String
         ) {
@@ -114,20 +114,21 @@ struct DeliveryKey: Decodable {
             fatalError("init(from:) has not been implemented")
         }
     }
+    
     struct ResourceData: Decodable {
-        private var qualityLevels: [QualityLevelName : QualityLevelResourceData] = [:]
-        private var options: [QualityLevelName] = []
+        private var qualityLevels: [VodQualityLevelName : VodQualityLevelResourceData] = [:]
+        private var options: [VodQualityLevelName] = []
         
         enum CodingKeys: CodingKey {
             case qualityLevelParams
             case qualityLevels
         }
         
-        func getResource(qualitylevelName: QualityLevelName) -> QualityLevelResourceData? {
+        func getResource(qualitylevelName: VodQualityLevelName) -> VodQualityLevelResourceData? {
             return qualityLevels[qualitylevelName]
         }
         
-        func highestQuality() -> QualityLevelResourceData {
+        func highestQuality() -> VodQualityLevelResourceData {
             guard let last = options.last,
                   let lastLevel = qualityLevels[last] else {
                 fatalError("ResourceData cannot be implemented without at least one level of quality")
@@ -135,7 +136,7 @@ struct DeliveryKey: Decodable {
             return lastLevel
         }
         
-        func lowestQuality() -> QualityLevelResourceData {
+        func lowestQuality() -> VodQualityLevelResourceData {
             guard let first = options.first,
                   let firstLevel = qualityLevels[first] else {
                 fatalError("ResourceData cannot be implemented without at least one level of quality")
@@ -144,17 +145,20 @@ struct DeliveryKey: Decodable {
         }
         
         init(from decoder: Decoder) throws {
-            let container: KeyedDecodingContainer<DeliveryKey.ResourceData.CodingKeys> = try decoder.container(keyedBy: DeliveryKey.ResourceData.CodingKeys.self)
-            let qualityLevelParams = try container.decode(DeliveryKey.QualityLevelParams.self, forKey: DeliveryKey.ResourceData.CodingKeys.qualityLevelParams)
-            let qualityLevels = try container.decode([DeliveryKey.DecodedQualityLevel].self, forKey: DeliveryKey.ResourceData.CodingKeys.qualityLevels)
+            let container: KeyedDecodingContainer<VodDeliveryKey.ResourceData.CodingKeys> = try decoder.container(keyedBy: VodDeliveryKey.ResourceData.CodingKeys.self)
+            let qualityLevelParams = try container.decode(VodDeliveryKey.QualityLevelParams.self, forKey: VodDeliveryKey.ResourceData.CodingKeys.qualityLevelParams)
+            let qualityLevels = try container.decode([VodDeliveryKey.VodDecodedQualityLevel].self, forKey: VodDeliveryKey.ResourceData.CodingKeys.qualityLevels)
             for level in qualityLevels {
                 options.append(level.name)
-                let param = qualityLevelParams.params[level.name.rawValue]!
-                self.qualityLevels[level.name] = QualityLevelResourceData(
-                    decodedQualityLevel: level,
-                    fileName: param.filename,
-                    accessToken: param.accessToken
-                )
+                // There are some cases where qualityLevelParams are empty because there's one option
+                // Like live streams
+                if let param = qualityLevelParams.params[level.name.rawValue] {
+                    self.qualityLevels[level.name] = VodQualityLevelResourceData(
+                        decodedQualityLevel: level,
+                        fileName: param.filename,
+                        accessToken: param.accessToken
+                    )
+                }
             }
         }
     }

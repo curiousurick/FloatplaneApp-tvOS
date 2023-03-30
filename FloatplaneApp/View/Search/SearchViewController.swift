@@ -58,7 +58,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(UINib(nibName: "FeedItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FeeditemCell")
-        collectionView?.contentInset = .init(top: 10, left:  50, bottom: 50, right: 50)
+        collectionView?.contentInset = .init(top: 10, left:  50, bottom: 10, right: 50)
         collectionView.alwaysBounceVertical = true
         collectionView.remembersLastFocusedIndexPath = true
         collectionView.bounces = true
@@ -143,6 +143,16 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
         cell.setFeedViewItem(item: results!.items[indexPath.row])
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let items = self.results?.items else {
+            logger.error("Clicked on result item while there are no results")
+            return
+        }
+        let vodPlayerViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VODPlayerViewController") as! VODPlayerViewController
+        vodPlayerViewController.video = items[indexPath.row]
+        present(vodPlayerViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {

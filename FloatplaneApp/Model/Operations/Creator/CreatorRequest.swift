@@ -21,18 +21,14 @@
 
 import Foundation
 
-struct LiveStream: Codable {
-    struct Offline: Codable {
-        let description: String
-        let thumbnail: Icon
-        let title: String
+struct CreatorRequest: OperationRequest {
+    let named: String
+    
+    var params: [String : Any] {
+        return [
+            "creatorURL[0]" : named
+        ]
     }
-    let channel: String
-    let description: String
-    let id: String
-    let offline: Offline?
-    let owner: String
-    let streamPath: String
-    let thumbnail: Icon
-    let title: String
+    
+    
 }

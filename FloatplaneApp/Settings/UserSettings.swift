@@ -30,14 +30,14 @@ class UserSettings {
     
     private init() { }
     
-    var qualitySettings: QualityLevelName {
+    var qualitySettings: VodQualityLevelName {
         get {
             if let savedValue = userDefaults.string(forKey: QualitySettingsKey),
-               let quality = QualityLevelName(rawValue: savedValue) {
+               let quality = VodQualityLevelName(rawValue: savedValue) {
                 return quality
             }
             // First time use default
-            return QualityLevelName.defaultLevel
+            return VodQualityLevelName.defaultLevel
         }
         set {
             userDefaults.set(newValue.rawValue, forKey: QualitySettingsKey)

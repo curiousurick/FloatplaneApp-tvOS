@@ -19,20 +19,41 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
+import AlamofireImage
 
-struct LiveStream: Codable {
-    struct Offline: Codable {
-        let description: String
-        let thumbnail: Icon
-        let title: String
+class LiveStreamOfflineViewController: UIViewController {
+    
+    var offline: LiveStream.Offline? {
+        didSet {
+            self.updateThumbnailView()
+        }
     }
-    let channel: String
-    let description: String
-    let id: String
-    let offline: Offline?
-    let owner: String
-    let streamPath: String
-    let thumbnail: Icon
-    let title: String
+    
+    @IBOutlet var offlineThumbnailView: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateThumbnailView()
+    }
+    
+    
+    func updateThumbnailView() {
+        if let offlineThumbnailView = self.offlineThumbnailView {
+            DispatchQueue.main.async {
+                if let url = self.offline?.thumbnail.path {
+                    offlineThumbnailView.af.setImage(withURL: url)
+                }
+                else {
+                    offlineThumbnailView.image = nil
+                }
+            }
+        }
+    }
+    
+    
 }

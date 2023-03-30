@@ -57,9 +57,13 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
     }
     
     final func get(request: Request, completion: ((Response?, Error?) -> Void)?) {
+        get(request: request, invalidateCache: false, completion: completion)
+    }
+    
+    final func get(request: Request, invalidateCache: Bool = false, completion: ((Response?, Error?) -> Void)?) {
         cacheQueue.async {
             do {
-                if try self.storage.isExpiredObject(forKey: request) {
+                if try self.storage.isExpiredObject(forKey: request) || invalidateCache {
                     try self.storage.removeExpiredObjects()
                 }
                 else {

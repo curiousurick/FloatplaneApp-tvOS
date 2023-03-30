@@ -90,9 +90,9 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.cornerRadius = 10
-        layer.masksToBounds = true
-        image.layer.masksToBounds = true
+        image.clipsToBounds = true
+        layer.cornerRadius = 20
+        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         type.layer.cornerRadius = 5
         type.layer.masksToBounds = true
     }

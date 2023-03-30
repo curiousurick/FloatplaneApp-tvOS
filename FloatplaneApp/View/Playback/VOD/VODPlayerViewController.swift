@@ -77,8 +77,8 @@ class VODPlayerViewController: AVPlayerViewController {
         guard video.videoAttachments.count > 0 else {
             return
         }
-        let request = DeliveryKeyRequest(guid: videoGuid, type: .vod)
-        DeliveryKeyOperation().get(request: request) { deliveryKey, error in
+        let request = VodDeliveryKeyRequest(guid: videoGuid, type: .vod)
+        VodDeliveryKeyOperation().get(request: request) { deliveryKey, error in
             guard error == nil, let deliveryKey = deliveryKey else {
                 self.logger.error("Unable to get delivery key for video \(self.videoGuid).")
                 return
@@ -89,7 +89,7 @@ class VODPlayerViewController: AVPlayerViewController {
         }
     }
     
-    private func startVideo(deliveryKey: DeliveryKey) {
+    private func startVideo(deliveryKey: VodDeliveryKey) {
         let url = StreamUrl(deliveryKey: deliveryKey, qualityLevelName: UserSettings.instance.qualitySettings).url
         let player = AVPlayer(url: url)
         self.player = player

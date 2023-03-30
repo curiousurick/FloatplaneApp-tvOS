@@ -21,18 +21,12 @@
 
 import Foundation
 
-struct LiveStream: Codable {
-    struct Offline: Codable {
-        let description: String
-        let thumbnail: Icon
-        let title: String
+struct FPNotifications {
+    private init() { }
+    struct ActiveCreatorUpdated {
+        private init() { }
+        static let name = Notification.Name("FP.ActiveCreatorUpdated")
+        static let creatorKey = "creator"
     }
-    let channel: String
-    let description: String
-    let id: String
-    let offline: Offline?
-    let owner: String
-    let streamPath: String
-    let thumbnail: Icon
-    let title: String
+    
 }

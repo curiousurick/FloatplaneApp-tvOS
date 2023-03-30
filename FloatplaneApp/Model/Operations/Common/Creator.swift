@@ -21,11 +21,32 @@
 
 import Foundation
 
-struct Creator: Codable {
+extension FeedItem {
+    struct Creator: Codable {
+        let about: String
+        let card: Icon
+        let category: Category?
+        let channels: [String]
+        let cover: Icon
+        let defaultChannel: String
+        let description: String
+        let discoverable: Bool
+        let icon: Icon
+        let id: String
+        let incomeDisplay: Bool
+        let liveStream: LiveStream
+        let owner: Owner
+        let subscriberCountDisplay: String
+        let subscriptionPlans: [SubscriptionPlan]
+        let title: String
+        let urlname: String
+    }
+}
+
+struct NamedCreator: Codable {
     let about: String
-    let card: Icon
-    let category: Category
-    let channels: [String]
+    // Note: This looks to be a bug in v2 API.
+    let category: String
     let cover: Icon
     let defaultChannel: String
     let description: String
@@ -34,9 +55,9 @@ struct Creator: Codable {
     let id: String
     let incomeDisplay: Bool
     let liveStream: LiveStream
-    let owner: Owner
+    let owner: String
     let subscriberCountDisplay: String
-    let subscriptionPlans: [SubscriptionPlan]
+    var subscriptionPlans: [SubscriptionPlan]? = []
     let title: String
     let urlname: String
 }

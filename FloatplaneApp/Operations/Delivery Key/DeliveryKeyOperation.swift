@@ -22,15 +22,27 @@
 import Foundation
 import Alamofire
 
-class DeliveryKeyOperation: APIOperation {
-    
-    typealias Request = DeliveryKeyRequest
-    typealias Response = DeliveryKey
+class VodDeliveryKeyOperation: APIOperation {
+    typealias Request = VodDeliveryKeyRequest
+    typealias Response = VodDeliveryKey
     
     let baseUrl: URL = URL(string: "https://\(OperationConstants.domain)/api/v2/cdn/delivery")!
     
-    func get(request: DeliveryKeyRequest, completion: ((DeliveryKey?, Error?) -> Void)? = nil) {
-        AF.request(baseUrl, parameters: request.params).responseDecodable(of: DeliveryKey.self) { response in
+    func get(request: VodDeliveryKeyRequest, completion: ((VodDeliveryKey?, Error?) -> Void)? = nil) {
+        AF.request(baseUrl, parameters: request.params).responseDecodable(of: VodDeliveryKey.self) { response in
+            completion?(response.value!, nil)
+        }
+    }
+}
+
+class LiveDeliveryKeyOperation: APIOperation {
+    typealias Request = LiveDeliveryKeyRequest
+    typealias Response = LiveDeliveryKey
+    
+    let baseUrl: URL = URL(string: "https://\(OperationConstants.domain)/api/v2/cdn/delivery")!
+    
+    func get(request: LiveDeliveryKeyRequest, completion: ((LiveDeliveryKey?, Error?) -> Void)? = nil) {
+        AF.request(baseUrl, parameters: request.params).responseDecodable(of: LiveDeliveryKey.self) { response in
             completion?(response.value!, nil)
         }
     }

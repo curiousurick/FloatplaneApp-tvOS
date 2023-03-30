@@ -24,7 +24,7 @@ import Foundation
 struct StreamUrl {
     let url: URL
     
-    init(deliveryKey: DeliveryKey, qualityLevelName: QualityLevelName) {
+    init(deliveryKey: VodDeliveryKey, qualityLevelName: VodQualityLevelName) {
         // If none provided, use the last (highest quality)
         let resourceData = deliveryKey.resource.data
         let qualityLevel = resourceData.getResource(qualitylevelName: qualityLevelName) ?? resourceData.lowestQuality()
@@ -32,8 +32,8 @@ struct StreamUrl {
         let fileName = qualityLevel.fileName
         let token = qualityLevel.accessToken
         let cdn = deliveryKey.cdn
-        let fileNameKey = DeliveryKey.QualityLevelParams.Constants.FileNameKey
-        let accessTokenKey = DeliveryKey.QualityLevelParams.Constants.AccessTokenKey
+        let fileNameKey = VodDeliveryKey.QualityLevelParams.Constants.FileNameKey
+        let accessTokenKey = VodDeliveryKey.QualityLevelParams.Constants.AccessTokenKey
         let path = deliveryKey.resource.uri
             .replacing(fileNameKey, with: fileName)
             .replacing(accessTokenKey, with: token)
@@ -42,5 +42,10 @@ struct StreamUrl {
         url = URL(string: video)!
     }
     
-    
+    init(deliveryKey: LiveDeliveryKey) {
+        let cdn = deliveryKey.cdn
+        let path = deliveryKey.resource.uri
+        let video = "\(cdn)\(path)"
+        url = URL(string: video)!
+    }
 }
