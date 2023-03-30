@@ -38,7 +38,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     fileprivate var searchController: UISearchController!
     private let searchOperation = SearchOperation()
     
-    var creator: NamedCreator?
+    var creator: Creator?
     private var searchString: String?
     private var results: SearchResponse?
 

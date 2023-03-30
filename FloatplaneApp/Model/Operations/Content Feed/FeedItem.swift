@@ -26,7 +26,7 @@ struct FeedItem: Codable {
     let audioAttachments: [String]
     let channel: Channel
     let comments: UInt64
-    let creator: Creator
+    let creator: ContentCreator
     let dislikes: UInt64
     let galleryAttachments: [String]
     let guid: String

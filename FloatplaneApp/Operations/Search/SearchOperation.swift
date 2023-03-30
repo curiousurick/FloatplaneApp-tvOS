@@ -39,7 +39,7 @@ class SearchOperation: CacheableAPIOperation<SearchRequest, SearchResponse> {
     
     override func _get(request: SearchRequest, completion: ((SearchResponse?, Error?) -> Void)? = nil) -> DataRequest {
         return AF.request(SearchOperation.base, parameters: request.params)
-            .responseDecodable(of: [FeedItem].self, decoder: CreatorFeedDecoder()) { response in
+            .responseDecodable(of: [FeedItem].self, decoder: FloatplaneDecoder()) { response in
             if let error = response.error, error.isExplicitlyCancelledError {
                 return
             }

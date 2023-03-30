@@ -20,13 +20,30 @@
 //
 
 import Foundation
+import Alamofire
 
-class CreatorFeedDecoder: JSONDecoder {
+class CreatorListOperation: CacheableAPIOperation<CreatorListRequest, CreatorListResponse> {
     
-    override init() {
-        super.init()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        dateDecodingStrategy = .formatted(dateFormatter)
+    typealias Request = CreatorListRequest
+    typealias Response = CreatorListResponse
+    
+    static let baseUrl = URL(string: "https://\(OperationConstants.domain)/api/v3/user/notification/list")!
+    
+    init() {
+        super.init(baseUrl: CreatorListOperation.baseUrl)
     }
+    
+    override func _get(request: CreatorListRequest, completion: ((CreatorListResponse?, Error?) -> Void)?) -> DataRequest {
+        return AF.request(baseUrl).responseDecodable(of: [CreatorListResponse.CreatorResponseObject].self, decoder: FloatplaneDecoder()) { response in
+            if let value = response.value {
+                let creatorListResponse = CreatorListResponse(responseObjects: value)
+                completion?(creatorListResponse, nil)
+            }
+            else {
+                completion?(nil, response.error)
+            }
+        }
+    }
+    
+    
 }

@@ -29,7 +29,7 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     private let pageLimit: UInt64 = 20
     private let contentFeedOperation = ContentFeedOperation()
     
-    var creator: NamedCreator? {
+    var creator: Creator? {
         didSet {
             getInitialFeed()
         }
@@ -37,6 +37,7 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     var feed: CreatorFeed?
     
     @IBOutlet var videoCollectionView: UICollectionView!
+    @IBOutlet var creatorListView: CreatorListView!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -57,11 +58,12 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let flowLayout = UICollectionViewFlowLayout()
         // 4 cells per row with edge inset of 10 between cells (3 spaces) + each side of screen (left and right) = 50
-        let width = view.bounds.width / 4 - 80
-        let height = view.bounds.width / 4 - 80
+        let width = view.bounds.width / 4 - 100
+        let height = view.bounds.width / 4 - 100
         
         flowLayout.headerReferenceSize = CGSizeMake(view.bounds.width, 340)
         flowLayout.itemSize = CGSize(width: width, height: height)
+        flowLayout.sectionInset = .init(top: 40, left: 0, bottom: 0, right: 0)
         
         videoCollectionView.register(UINib(nibName: "FeedItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FeeditemCell")
         videoCollectionView.collectionViewLayout = flowLayout

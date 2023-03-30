@@ -21,18 +21,21 @@
 
 import Foundation
 
-struct FPNotifications {
-    private init() { }
-    struct CreatorListUpdated {
-        private init() { }
-        static let name = Notification.Name("FP.CreatorListUpdated")
-        static let creatorsKey = "creators"
-        static func create(creators: [BaseCreator]) -> Notification {
-            let userInfo = [
-                creatorsKey : creators
-            ]
-            return Notification(name: name, object: nil, userInfo: userInfo)
-        }
-    }
-    
+struct Creator: Codable {
+    let about: String
+    // Note: This looks to be a bug in v2 API.
+    let category: String
+    let cover: Icon
+    let defaultChannel: String
+    let description: String
+    let discoverable: Bool
+    let icon: Icon
+    let id: String
+    let incomeDisplay: Bool
+    let liveStream: LiveStream
+    let owner: String
+    let subscriberCountDisplay: String
+    var subscriptionPlans: [SubscriptionPlan]?
+    let title: String
+    let urlname: String
 }

@@ -24,7 +24,7 @@ import AlamofireImage
 
 class LiveStreamOfflineViewController: UIViewController {
     
-    var creator: NamedCreator? {
+    var creator: Creator? {
         didSet {
             self.updateThumbnailView()
         }

@@ -53,6 +53,15 @@
         "revision" : "5d943224c3bb173e6ecf27295611615eba90c80e",
         "version" : "7.0.0"
       }
+    },
+    {
+      "identity" : "uickeychainstore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/UICKeyChainStore.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "db869212bc69b6198a62efe03e2f5fc8e19c6b65"
+      }
     }
   ],
   "version" : 2

@@ -20,44 +20,24 @@
 //
 
 import Foundation
+import Alamofire
 
-extension FeedItem {
-    struct Creator: Codable {
-        let about: String
-        let card: Icon
-        let category: Category?
-        let channels: [String]
-        let cover: Icon
-        let defaultChannel: String
-        let description: String
-        let discoverable: Bool
-        let icon: Icon
-        let id: String
-        let incomeDisplay: Bool
-        let liveStream: LiveStream
-        let owner: Owner
-        let subscriberCountDisplay: String
-        let subscriptionPlans: [SubscriptionPlan]
-        let title: String
-        let urlname: String
+class SubscriptionOperation: CacheableAPIOperation<SubscriptionRequest, SubscriptionResponse> {
+    
+    typealias Request = SubscriptionRequest
+    typealias Response = SubscriptionResponse
+    
+    static let baseUrl = URL(string: "https://\(OperationConstants.domain)/api/v3/user/subscriptions")!
+    
+    init() {
+        super.init(baseUrl: SubscriptionOperation.baseUrl)
     }
-}
-
-struct NamedCreator: Codable {
-    let about: String
-    // Note: This looks to be a bug in v2 API.
-    let category: String
-    let cover: Icon
-    let defaultChannel: String
-    let description: String
-    let discoverable: Bool
-    let icon: Icon
-    let id: String
-    let incomeDisplay: Bool
-    let liveStream: LiveStream
-    let owner: String
-    let subscriberCountDisplay: String
-    var subscriptionPlans: [SubscriptionPlan]? = []
-    let title: String
-    let urlname: String
+    
+    override func _get(request: SubscriptionRequest, completion: ((SubscriptionResponse?, Error?) -> Void)?) -> DataRequest {
+        return AF.request(baseUrl).responseDecodable(of: SubscriptionResponse.self) { response in
+            print(response.value!)
+        }
+    }
+    
+    
 }

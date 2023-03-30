@@ -21,18 +21,10 @@
 
 import Foundation
 
-struct FPNotifications {
-    private init() { }
-    struct CreatorListUpdated {
-        private init() { }
-        static let name = Notification.Name("FP.CreatorListUpdated")
-        static let creatorsKey = "creators"
-        static func create(creators: [BaseCreator]) -> Notification {
-            let userInfo = [
-                creatorsKey : creators
-            ]
-            return Notification(name: name, object: nil, userInfo: userInfo)
+struct SubscriptionRequest: OperationRequest {
+    var params: [String : Any] {
+        get {
+            [:]
         }
     }
-    
 }

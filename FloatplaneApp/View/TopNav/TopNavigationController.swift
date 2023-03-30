@@ -25,20 +25,35 @@ class TopNavigationController: UINavigationController {
     // 30 minutes
     private let CreatorRefreshInternal: TimeInterval = 30 * 60
     private let creatorOperation = CreatorOperation()
+    private let creatorListOperation = CreatorListOperation()
+    private let logger = Log4S()
     
     private var timer: Timer?
     
-    private var tabBarViewController: FPTabBarController? {
-        get {
-            return tabBarController as? FPTabBarController
+    var activeBaseCreator: BaseCreator? {
+        didSet {
+            self.getActiveCreator()
+        }
+    }
+    private var activeCreator: Creator? {
+        didSet {
+            if let activeCreator = activeCreator {
+                scheduleCreatorUpdate()
+                DispatchQueue.main.async {
+                    let tabBarController = self.viewControllers[0] as? FPTabBarController
+                    tabBarController?.creator = activeCreator
+                }
+            }
+            else {
+                timer?.invalidate()
+                timer = nil
+            }
         }
     }
     
-    private var activeCreatorUrlName: String? = "linustechtips" {
-        didSet {
-            timer?.invalidate()
-            timer = nil
-        }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        AppDelegate.instance.topNavigationController = self
     }
     
     override func viewDidLoad() {
@@ -46,27 +61,34 @@ class TopNavigationController: UINavigationController {
     }
     
     func tabBarReady() {
-        scheduleCreatorUpdate()
+        getCreators()
+    }
+    
+    private func getCreators() {
+        creatorListOperation.get(request: CreatorListRequest()) { response, error in
+            if let response = response, response.creators.count > 0 {
+                BaseCreatorStore.instance.setCreators(creators: response.creators)
+                self.activeBaseCreator = response.creators[0]
+            }
+        }
     }
     
     private func scheduleCreatorUpdate() {
+        timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: CreatorRefreshInternal, repeats: true) { timer in
             self.getActiveCreator()
         }
-        timer?.fire()
     }
     
     private func getActiveCreator() {
-        guard let activeCreatorUrlName = activeCreatorUrlName else {
+        guard let urlName = activeBaseCreator?.urlname else {
+            logger.error("getActiveCreator called when there is no active creator.")
             return
         }
-        let request = CreatorRequest(named: activeCreatorUrlName)
+        let request = CreatorRequest(named: urlName)
         creatorOperation.get(request: request) { response, error in
             if let creator = response {
-                let userInfo: [String : Any] = [
-                    FPNotifications.ActiveCreatorUpdated.creatorKey : creator
-                ]
-                NotificationCenter.default.post(name: FPNotifications.ActiveCreatorUpdated.name, object: nil, userInfo: userInfo)
+                self.activeCreator = creator
             }
         }
     }

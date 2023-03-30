@@ -35,34 +35,33 @@ class FPTabBarController: UITabBarController {
     private var browseViewController: BrowseViewController!
     private var searchViewController: SearchViewController!
     
-    private var creator: NamedCreator! {
+    var creator: Creator! {
         didSet {
             livePlayerViewController.creator = creator
             liveStreamOfflineViewController.creator = creator
             browseViewController.creator = creator
             searchViewController.creator = creator
             self.updateLiveTab()
+            viewToFocus = tabBar
         }
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        NotificationCenter.default.addObserver(
-            forName: FPNotifications.ActiveCreatorUpdated.name,
-            object: nil,
-            queue: updateLiveTabQueue
-        ) { notification in
-            guard let userInfo = notification.userInfo,
-                  let creator = userInfo[FPNotifications.ActiveCreatorUpdated.creatorKey] as? NamedCreator else {
-                self.logger.error("Received ActiveCreatorUpdated notification without a creator")
-                return
+    var viewToFocus: UIFocusEnvironment? = nil {
+        didSet {
+            if viewToFocus != nil {
+                self.setNeedsFocusUpdate();
+                self.updateFocusIfNeeded();
             }
-            self.creator = creator
         }
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        if let viewToFocus = viewToFocus {
+            self.viewToFocus = nil
+            return [viewToFocus]
+        } else {
+            return super.preferredFocusEnvironments;
+        }
     }
     
     override func viewDidLoad() {
@@ -119,20 +118,19 @@ class FPTabBarController: UITabBarController {
         super.viewDidAppear(animated)
     }
     
-    @objc func updateLiveTab() {
-        guard var viewControllers = viewControllers,
-              let creator = creator else {
-            return
-        }
+    private func updateLiveTab() {
         DispatchQueue.main.async {
-            if let offline = creator.liveStream.offline {
+            guard var viewControllers = self.viewControllers,
+                  let creator = self.creator else {
+                return
+            }
+            if creator.liveStream.offline != nil {
                 viewControllers[0] = self.liveStreamOfflineViewController
             }
             else {
                 viewControllers[0] = self.livePlayerViewController
             }
         }
-        
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -144,11 +142,8 @@ class FPTabBarController: UITabBarController {
     func updateCreatorInfo() {
         let request = CreatorRequest(named: "linustechtips")
         CreatorOperation().get(request: request, invalidateCache: true) { response, error in
-            if let creator = response {
-                let userInfo: [String : Any] = [
-                    FPNotifications.ActiveCreatorUpdated.creatorKey : creator
-                ]
-                NotificationCenter.default.post(name: FPNotifications.ActiveCreatorUpdated.name, object: nil, userInfo: userInfo)
+            if let response = response {
+                self.creator = response
             }
         }
     }

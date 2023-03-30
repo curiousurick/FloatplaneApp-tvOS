@@ -21,17 +21,18 @@
 
 import Foundation
 
-struct FPNotifications {
-    private init() { }
-    struct CreatorListUpdated {
-        private init() { }
-        static let name = Notification.Name("FP.CreatorListUpdated")
-        static let creatorsKey = "creators"
-        static func create(creators: [BaseCreator]) -> Notification {
-            let userInfo = [
-                creatorsKey : creators
-            ]
-            return Notification(name: name, object: nil, userInfo: userInfo)
+struct CreatorListResponse: Codable {
+    
+    struct CreatorResponseObject: Codable {
+        let creator: BaseCreator
+        let userNotificationSetting: UserNotificationSetting
+    }
+    
+    let responseObjects: [CreatorResponseObject]
+    
+    var creators: [BaseCreator] {
+        get {
+            return responseObjects.map { $0.creator }
         }
     }
     

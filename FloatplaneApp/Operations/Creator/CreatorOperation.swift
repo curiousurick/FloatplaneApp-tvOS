@@ -22,10 +22,10 @@
 import Foundation
 import Alamofire
 
-class CreatorOperation: CacheableAPIOperation<CreatorRequest, NamedCreator> {
+class CreatorOperation: CacheableAPIOperation<CreatorRequest, Creator> {
     
     typealias Request = CreatorRequest
-    typealias ResponseValue = NamedCreator
+    typealias ResponseValue = Creator
     
     static let base = URL(string: "https://\(OperationConstants.domain)/api/v2/creator/named")!
     
@@ -33,16 +33,15 @@ class CreatorOperation: CacheableAPIOperation<CreatorRequest, NamedCreator> {
         super.init(baseUrl: CreatorOperation.base)
     }
     
-    override func _get(request: CreatorRequest, completion: ((NamedCreator?, Error?) -> Void)? = nil) -> DataRequest {
-        return AF.request(baseUrl, parameters: request.params)
-            .responseDecodable(of: [NamedCreator].self) { response in
-                if let creators = response.value,
-                   creators.count == 1 {
-                    completion?(creators[0], nil)
-                }
-                else {
-                    completion?(nil, response.error)
-                }
+    override func _get(request: CreatorRequest, completion: ((Creator?, Error?) -> Void)? = nil) -> DataRequest {
+        return AF.request(baseUrl, parameters: request.params).responseDecodable(of: [Creator].self) { response in
+            if let creators = response.value,
+               creators.count == 1 {
+                completion?(creators[0], nil)
+            }
+            else {
+                completion?(nil, response.error)
+            }
         }
     }
 }

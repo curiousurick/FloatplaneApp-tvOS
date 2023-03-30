@@ -28,7 +28,7 @@ class LivePlayerViewController: AVPlayerViewController {
     
     private var timeObserverToken: Any?
     
-    var creator: NamedCreator?
+    var creator: Creator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
