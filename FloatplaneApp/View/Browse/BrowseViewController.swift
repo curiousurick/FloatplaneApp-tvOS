@@ -25,6 +25,18 @@ import Logging
 import Alamofire
 
 class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+    
+    struct CollectionConstants {
+        static let rowCount: CGFloat = 4
+        static let totalSpacing: CGFloat = 100
+        
+        static let headerHeight: CGFloat = 340
+        
+        static let sectionTopInset: CGFloat = 40
+        static let contentVerticalInset: CGFloat = 10
+        static let contentHorizontalInset: CGFloat = 50
+    }
+    
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
     private let contentFeedOperation = OperationManager.instance.contentFeedOperation
@@ -59,17 +71,24 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         let flowLayout = UICollectionViewFlowLayout()
-        // 4 cells per row with edge inset of 10 between cells (3 spaces) + each side of screen (left and right) = 50
-        let width = view.bounds.width / 4 - 100
-        let height = view.bounds.width / 4 - 100
+
+        let viewWidth = view.bounds.width
+        let width = viewWidth / CollectionConstants.rowCount - CollectionConstants.totalSpacing
+        let height = width
         
-        flowLayout.headerReferenceSize = CGSizeMake(view.bounds.width, 340)
+        flowLayout.headerReferenceSize = CGSizeMake(viewWidth, CollectionConstants.headerHeight)
         flowLayout.itemSize = CGSize(width: width, height: height)
-        flowLayout.sectionInset = .init(top: 40, left: 0, bottom: 0, right: 0)
+        let noInset: CGFloat = 0
+        flowLayout.sectionInset = .init(top: CollectionConstants.sectionTopInset, left: noInset, bottom: noInset, right: noInset)
         
-        videoCollectionView.register(UINib(nibName: "FeedItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FeeditemCell")
+        videoCollectionView.register(
+            UINib(nibName: FeedItemCollectionViewCell.nibName, bundle: nil),
+            forCellWithReuseIdentifier: FeedItemCollectionViewCell.identifier
+        )
         videoCollectionView.collectionViewLayout = flowLayout
-        videoCollectionView.contentInset = .init(top: 10, left:  50, bottom: 10, right: 50)
+        let vertInset = CollectionConstants.contentVerticalInset
+        let horizInset = CollectionConstants.contentHorizontalInset
+        videoCollectionView.contentInset = .init(top: vertInset, left:  horizInset, bottom: vertInset, right: horizInset)
     }
     
     @objc private func getInitialFeed() {
@@ -104,13 +123,6 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
             DispatchQueue.main.async {
                 self.videoCollectionView.reloadData()
             }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PlayVideoSegue" {
-            let playerViewController = segue.destination as! VODPlayerViewController
-            playerViewController.video = feed?.items[videoCollectionView.indexPathsForSelectedItems![0].row]
         }
     }
 }
@@ -154,7 +166,7 @@ extension BrowseViewController {
             return UICollectionViewCell()
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeeditemCell", for: indexPath) as! FeedItemCollectionViewCell
+        let cell = FeedItemCollectionViewCell.dequeueFromCollectionView(collectionView: collectionView, indexPath: indexPath)
         let item = feed.items[indexPath.row]
         cell.setFeedViewItem(item: item)
         
@@ -162,7 +174,13 @@ extension BrowseViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "BrowseViewcontroller.PlayVideoSegue", sender: nil)
+        guard let feed = feed else {
+            logger.error("Selected item while feed was nil")
+            return
+        }
+        let vodPlayerViewController = UIStoryboard.main.getVodPlayerViewController()
+        vodPlayerViewController.video = feed.items[indexPath.row]
+        present(vodPlayerViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {

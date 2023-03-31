@@ -25,6 +25,7 @@ import Cache
 class ProgressStore {
     
     static let instance = ProgressStore()
+    static let updateInterval: TimeInterval = 10
     
     private let storage: Storage<String, TimeInterval>
     

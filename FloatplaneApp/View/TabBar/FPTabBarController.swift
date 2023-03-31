@@ -25,11 +25,18 @@ import UIKit
 class FPTabBarController: UITabBarController {
     private let logger = Log4S()
     private let updateLiveTabQueue = OperationQueue()
-    private let LivePlayerViewStoryboardID = "LivePlayerViewController"
-    private let LiveStreamOfflineViewStoryboardID = "LiveStreamOfflineViewController"
-    private let BrowseViewControllerStoryboardID = "BrowseViewController"
-    private let SettingsViewControllerStoryboardID = "SettingsViewController"
     private let creatorOperation = OperationManager.instance.creatorOperation
+    
+    private struct Tab {
+        static let liveName = "Live"
+        static let liveId = 0
+        static let browseName = "Browse"
+        static let browseId = 1
+        static let searchName = "Search"
+        static let searchId = 2
+        static let settingsName = "Settings"
+        static let settingsId = 3
+    }
     
     private var livePlayerViewController: LivePlayerViewController!
     private var liveStreamOfflineViewController: LiveStreamOfflineViewController!
@@ -68,41 +75,38 @@ class FPTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard.main
         
         // Setup Live Tab
-        livePlayerViewController = storyboard
-            .instantiateViewController(withIdentifier: LivePlayerViewStoryboardID) as? LivePlayerViewController
-        liveStreamOfflineViewController = storyboard
-            .instantiateViewController(withIdentifier: LiveStreamOfflineViewStoryboardID) as? LiveStreamOfflineViewController
-        let liveTab = UITabBarItem(title: "Live", image: nil, tag: 0)
+        livePlayerViewController = storyboard.getLivePlayerViewController()
+        liveStreamOfflineViewController = storyboard.getLiveStreamOfflineViewController()
+        let liveTab = UITabBarItem(title: Tab.liveName, image: nil, tag: Tab.liveId)
         liveStreamOfflineViewController.tabBarItem = liveTab
         livePlayerViewController.tabBarItem = liveTab
         
         
         // Setup Browse ViewController
-        self.browseViewController = storyboard.instantiateViewController(withIdentifier: BrowseViewControllerStoryboardID) as? BrowseViewController
-        let browseTab = UITabBarItem(title: "Browse", image: nil, tag: 1)
+        self.browseViewController = storyboard.getBrowseViewController()
+        let browseTab = UITabBarItem(title: Tab.browseName, image: nil, tag: Tab.browseId)
         browseViewController.tabBarItem = browseTab
 
         // Setup Search ViewController
-        let searchControllers = SearchViewController.createEmbeddedInNavigationController()
-        self.searchViewController = searchControllers.1
-        let searchViewNavController = searchControllers.0
+        let searchNavController = SearchViewController.createEmbeddedInNavigationController()
+        self.searchViewController = searchNavController.viewControllers[0] as? SearchViewController
         
-        let searchTab = UITabBarItem(title: "Search", image: nil, tag: 2)
-        searchViewNavController.tabBarItem = searchTab
+        let searchTab = UITabBarItem(title: Tab.searchName, image: nil, tag: Tab.searchId)
+        searchNavController.tabBarItem = searchTab
         
         // Setup Settings ViewController
-        let settingsController = storyboard.instantiateViewController(withIdentifier: SettingsViewControllerStoryboardID) as! SettingsViewController
+        let settingsController = storyboard.getSettingsViewController()
         
-        let settingsTab = UITabBarItem(title: "Settings", image: nil, tag: 3)
+        let settingsTab = UITabBarItem(title: Tab.settingsName, image: nil, tag: Tab.settingsId)
         settingsController.tabBarItem = settingsTab
 
         self.viewControllers = [
             liveStreamOfflineViewController,
             browseViewController,
-            searchViewNavController,
+            searchNavController,
             settingsController
         ]
         self.selectedViewController = self.viewControllers?[1]
@@ -141,13 +145,13 @@ class FPTabBarController: UITabBarController {
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item == tabBar.items?[0] {
+        if item == tabBar.items?.first {
             updateCreatorInfo()
         }
     }
     
     func updateCreatorInfo() {
-        let request = CreatorRequest(named: "linustechtips")
+        let request = CreatorRequest(named: creator.urlname)
         creatorOperation.get(request: request, invalidateCache: true) { response, error in
             if let response = response {
                 self.creator = response

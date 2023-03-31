@@ -26,28 +26,30 @@ class LoginImageTextView: UIView {
     @IBOutlet var textField: UITextField!
     @IBOutlet var iconImage: UIImageView!
     
-    let focusedColor = UIColor(red: 0x4E / 255, green: 0xAC / 255, blue: 0xE6 / 255, alpha: 1.0)
-    let unfocusedColor = UIColor(red: 0x60 / 255, green: 0x95 / 255, blue: 0xAE / 255, alpha: 1.0)
+    private let focusedScale: CGFloat = 1.05
+    private let unfocusedScale: CGFloat = 1.0
+    private let focusAnimationDuration = 0.1
+    private let slightViewCornerRadius: CGFloat = 2
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        iconImage.layer.cornerRadius = 2
+        iconImage.layer.cornerRadius = slightViewCornerRadius
         iconImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         iconImage.layer.masksToBounds = true
         
-        textField.layer.cornerRadius = 2
+        textField.layer.cornerRadius = slightViewCornerRadius
         textField.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         textField.layer.masksToBounds = true
         
-        self.iconImage.backgroundColor = isFocused ? focusedColor : unfocusedColor
+        self.iconImage.backgroundColor = isFocused ? UIColor.focusedTextImageColor : UIColor.unfocusedTextImageColor
     }
     
     func focusAnimation(focused: Bool) {
-        UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            let scale = focused ? 1.05 : 1.0
+        UIView.animate(withDuration: focusAnimationDuration, animations: { () -> Void in
+            let scale = focused ? self.focusedScale : self.unfocusedScale
             let transform = CGAffineTransformMakeScale(scale, scale)
             self.transform = transform
-            self.iconImage.backgroundColor = focused ? self.focusedColor : self.unfocusedColor
+            self.iconImage.backgroundColor = focused ? UIColor.focusedTextImageColor : UIColor.unfocusedTextImageColor
         })
     }
     

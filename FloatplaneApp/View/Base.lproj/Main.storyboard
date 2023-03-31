@@ -227,9 +227,6 @@
                                                 <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="delegate" destination="dXg-QQ-Wap" id="Jgb-97-W8x"/>
-                                        </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_icon" highlightedImage="account_icon" translatesAutoresizingMaskIntoConstraints="NO" id="DKe-m4-Tyd">
                                         <rect key="frame" x="20" y="0.0" width="60" height="60"/>
@@ -293,9 +290,6 @@
                                                 <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="delegate" destination="dXg-QQ-Wap" id="IeM-iu-wdo"/>
-                                        </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Lah-Ub-Exp">
                                         <rect key="frame" x="20" y="0.0" width="60" height="60"/>
@@ -547,7 +541,7 @@
                                 <rect key="frame" x="0.0" y="-97" width="1268" height="1177"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChangeResolutionCell" textLabel="QVM-Ac-4jT" style="IBUITableViewCellStyleDefault" id="UkS-6O-Mme">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingRowCell" textLabel="QVM-Ac-4jT" style="IBUITableViewCellStyleDefault" id="UkS-6O-Mme">
                                         <rect key="frame" x="80" y="79.5" width="1188" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UkS-6O-Mme" id="YpP-bz-6vD">

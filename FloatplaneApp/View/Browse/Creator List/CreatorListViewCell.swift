@@ -26,6 +26,8 @@ import ParallaxView
 class CreatorListViewCell: ParallaxCollectionViewCell {
     
     @IBOutlet var creatorIconView: UIImageView!
+    
+    static let identifier = "CreatorListViewCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -53,7 +53,7 @@ class VODPlayerViewController: AVPlayerViewController {
     private func startObservingPlayer() {
         // Notify every half second
         let timeScale = CMTimeScale(NSEC_PER_SEC)
-        let updateInterval = CMTime(seconds: 10, preferredTimescale: timeScale)
+        let updateInterval = CMTime(seconds: ProgressStore.updateInterval, preferredTimescale: timeScale)
 
         timeObserverToken = player?.addPeriodicTimeObserver(
             forInterval: updateInterval,

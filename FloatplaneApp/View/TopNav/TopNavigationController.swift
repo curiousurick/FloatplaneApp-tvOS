@@ -26,6 +26,8 @@ class TopNavigationController: UINavigationController {
     private let CreatorRefreshInternal: TimeInterval = 30 * 60
     private let creatorOperation = OperationManager.instance.creatorOperation
     private let creatorListOperation = OperationManager.instance.creatorListOperation
+    private let unwindFromLoginSegue = "UnwindFromLogin"
+    private let loginViewControllerSegue = "LoginViewController"
     private let logger = Log4S()
     
     private var timer: Timer?
@@ -74,7 +76,7 @@ class TopNavigationController: UINavigationController {
     
     func goToLoginView() {
         DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "LoginViewController", sender: self)
+            self.performSegue(withIdentifier: self.loginViewControllerSegue, sender: self)
         }
     }
     
@@ -86,7 +88,7 @@ class TopNavigationController: UINavigationController {
     }
     
     @IBAction func unwindToTopNavController(segue: UIStoryboardSegue) {
-        if segue.identifier == "UnwindFromLogin" {
+        if segue.identifier == unwindFromLoginSegue {
             logger.info("Successfully logged in")
             getCreators()
         }

@@ -28,6 +28,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     private let changeResolutionRow = 0
     private let logoutRow = 1
     
+    private let totalSettingRows = 2
+    private let cellIdentifier = "SettingRowCell"
+    
     @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -35,7 +38,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChangeResolutionCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if indexPath.row == changeResolutionRow {
             cell.textLabel?.text = "Default Quality Video Level"
         }
@@ -51,7 +54,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return totalSettingRows
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

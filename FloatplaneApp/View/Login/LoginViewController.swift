@@ -83,7 +83,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func ensurePlaceholderColor() {
         DispatchQueue.main.async {
-            let textColor = UIColor(red: 0x0c / 255, green: 0x10 / 255, blue: 0x12 / 255, alpha: 1.0)
+            let textColor = UIColor.loginTextColor
             self.usernameField.textColor = textColor
             self.usernameField.attributedPlaceholder = NSAttributedString(
                 string: "Username",

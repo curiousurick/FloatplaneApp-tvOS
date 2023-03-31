@@ -80,6 +80,12 @@ extension FeedItem: FeedViewItem {
 
 class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     
+    static let identifier = "FeeditemCell"
+    static let nibName = "FeedItemCollectionViewCell"
+    
+    let imageCornerRadiusValue: CGFloat = 20
+    let typeLabelCornerRadiusValue: CGFloat = 5
+    
     @IBOutlet var image: UIImageView!
     @IBOutlet var title: UILabel!
     @IBOutlet var type: UILabel!
@@ -87,13 +93,17 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     @IBOutlet var timeSinceRelease: UILabel!
     @IBOutlet var progressBar: FeedItemProgressBarView!
     
+    static func dequeueFromCollectionView(collectionView: UICollectionView, indexPath: IndexPath) -> FeedItemCollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: FeedItemCollectionViewCell.identifier, for: indexPath) as! FeedItemCollectionViewCell
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         image.clipsToBounds = true
-        layer.cornerRadius = 20
+        layer.cornerRadius = imageCornerRadiusValue
         layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        type.layer.cornerRadius = 5
+        type.layer.cornerRadius = typeLabelCornerRadiusValue
         type.layer.masksToBounds = true
     }
     

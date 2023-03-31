@@ -27,6 +27,13 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
     
+    private let backgroundAlpha: CGFloat = 0.20
+    
+    private struct CollectionConstants {
+        static let totalSpacing: CGFloat = 10
+        static let minimumLineSpacing: CGFloat = 20
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         NotificationCenter.default.addObserver(
@@ -39,15 +46,14 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = UIColor.darkGray.withAlphaComponent(0.20)
+        backgroundColor = UIColor.darkGray.withAlphaComponent(backgroundAlpha)
         
         let flowLayout = UICollectionViewFlowLayout()
-        // 4 cells per row with edge inset of 10 between cells (3 spaces) + each side of screen (left and right) = 50
-        let width = bounds.width - 10
+        let width = bounds.width - CollectionConstants.totalSpacing
         let height = width
         
         flowLayout.itemSize = CGSize(width: width, height: height)
-        flowLayout.minimumLineSpacing = 20
+        flowLayout.minimumLineSpacing = CollectionConstants.minimumLineSpacing
         collectionView.remembersLastFocusedIndexPath = true
         
         collectionView.collectionViewLayout = flowLayout
@@ -73,7 +79,7 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreatorListViewCell", for: indexPath) as! CreatorListViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatorListViewCell.identifier, for: indexPath) as! CreatorListViewCell
         cell.updateImage(creator: creators[indexPath.row])
         return cell
     }

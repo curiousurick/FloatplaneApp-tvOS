@@ -21,19 +21,18 @@
 
 import UIKit
 
-class SettingsCell: UITableViewCell {
+extension UIColor {
     
-    @IBOutlet var label: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static var loginTextColor: UIColor {
+        return UIColor(red: 0x0c / 255, green: 0x10 / 255, blue: 0x12 / 255, alpha: 1.0)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    static var focusedTextImageColor: UIColor {
+        return UIColor(red: 0x4E / 255, green: 0xAC / 255, blue: 0xE6 / 255, alpha: 1.0)
     }
-
+    
+    static var unfocusedTextImageColor: UIColor {
+        return UIColor(red: 0x60 / 255, green: 0x95 / 255, blue: 0xAE / 255, alpha: 1.0)
+    }
+    
 }

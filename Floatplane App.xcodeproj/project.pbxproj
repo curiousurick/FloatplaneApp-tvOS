@@ -24,6 +24,8 @@
 		5E389A3E29D6ABE600FC8B4B /* LoginImageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */; };
 		5E389A4029D6BD5A00FC8B4B /* UIFont+Roboto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3F29D6BD5A00FC8B4B /* UIFont+Roboto.swift */; };
 		5E389A4229D6C31A00FC8B4B /* LoginFailedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4129D6C31A00FC8B4B /* LoginFailedResponse.swift */; };
+		5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */; };
+		5E389A4629D6CFC000FC8B4B /* UIColor+TextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */; };
 		5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BF829CFAD65006751F3 /* AppDelegate.swift */; };
 		5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */; };
 		5E507BFE29CFAD65006751F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507BFC29CFAD65006751F3 /* Main.storyboard */; };
@@ -73,7 +75,6 @@
 		5EAAE78329D1329200F9A83B /* Log4S.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE78229D1329200F9A83B /* Log4S.swift */; };
 		5EAAE79229D13E3A00F9A83B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */; };
 		5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79329D141D700F9A83B /* PickerViewController.swift */; };
-		5EAAE79629D14D3C00F9A83B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */; };
 		5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79829D158AF00F9A83B /* ProgressStore.swift */; };
 		5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */; };
 		5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */; };
@@ -143,6 +144,8 @@
 		5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginImageTextView.swift; sourceTree = "<group>"; };
 		5E389A3F29D6BD5A00FC8B4B /* UIFont+Roboto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Roboto.swift"; sourceTree = "<group>"; };
 		5E389A4129D6C31A00FC8B4B /* LoginFailedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFailedResponse.swift; sourceTree = "<group>"; };
+		5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Main.swift"; sourceTree = "<group>"; };
+		5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+TextColor.swift"; sourceTree = "<group>"; };
 		5E507BEB29CF7A87006751F3 /* CreatorFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorFeed.swift; sourceTree = "<group>"; };
 		5E507BEE29CF89E0006751F3 /* FloatplaneDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneDecoder.swift; sourceTree = "<group>"; };
 		5E507BF629CFAD65006751F3 /* FloatplaneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloatplaneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,7 +192,6 @@
 		5EAAE78229D1329200F9A83B /* Log4S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4S.swift; sourceTree = "<group>"; };
 		5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5EAAE79329D141D700F9A83B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
-		5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5EAAE79829D158AF00F9A83B /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VODPlayerViewController.swift; sourceTree = "<group>"; };
 		5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemProgressBarView.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				5E692E1529D3DE1700239196 /* Utilities */,
 				5EAAE78129D1327400F9A83B /* Logging */,
 				5EAAE75829CFD0D300F9A83B /* OperationConstants.swift */,
+				5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */,
 				5E507BF829CFAD65006751F3 /* AppDelegate.swift */,
 				5E507C0729CFAD66006751F3 /* Info.plist */,
 				5E507BFF29CFAD65006751F3 /* FloatplaneApp.xcdatamodeld */,
@@ -536,7 +539,6 @@
 			children = (
 				5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */,
 				5EAAE79329D141D700F9A83B /* PickerViewController.swift */,
-				5EAAE79529D14D3C00F9A83B /* SettingsCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -764,6 +766,7 @@
 				5EC057B729D689E700D775EB /* LoginButton.swift */,
 				5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */,
 				5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */,
+				5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -969,7 +972,6 @@
 				5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */,
 				5E507C2A29CFB0EB006751F3 /* FloatplaneDecoder.swift in Sources */,
 				5EC0576829D54ED400D775EB /* CreatorListView.swift in Sources */,
-				5EAAE79629D14D3C00F9A83B /* SettingsCell.swift in Sources */,
 				5EC0577E29D5578200D775EB /* BaseCreatorStore.swift in Sources */,
 				5EC0578B29D5684F00D775EB /* UIImage+Transparency.swift in Sources */,
 				5EC057A329D6028900D775EB /* KeychainManager.swift in Sources */,
@@ -986,6 +988,7 @@
 				5E389A3E29D6ABE600FC8B4B /* LoginImageTextView.swift in Sources */,
 				5E507C2929CFB0E9006751F3 /* ContentFeedOperation.swift in Sources */,
 				5EAAE77329D0D17700F9A83B /* StreamUrl.swift in Sources */,
+				5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */,
 				5EC0578229D5589B00D775EB /* ContentCreator.swift in Sources */,
 				5E692DFB29D2D3DD00239196 /* Image.swift in Sources */,
 				5E692DF929D2D3D300239196 /* Icon.swift in Sources */,
@@ -998,6 +1001,7 @@
 				5EC0575D29D528D400D775EB /* CreatorRequest.swift in Sources */,
 				5EAAE77D29D12B8200F9A83B /* CacheableAPIOperation.swift in Sources */,
 				5EC0579129D57CD200D775EB /* LoginRequest.swift in Sources */,
+				5E389A4629D6CFC000FC8B4B /* UIColor+TextColor.swift in Sources */,
 				5E692E0529D2D42600239196 /* Creator.swift in Sources */,
 				5EAAE7AB29D2CE0F00F9A83B /* SearchResponse.swift in Sources */,
 				5EC0577129D5536E00D775EB /* SubscriptionRequest.swift in Sources */,

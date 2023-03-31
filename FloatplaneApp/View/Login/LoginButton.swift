@@ -23,18 +23,13 @@ import UIKit
 
 class LoginButton: UIButton {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    let unfocusedBorderWidth: CGFloat = 1
+    let focusedBorderWidth: CGFloat = 0
+    let focusAnimationDuration: TimeInterval = 0.5
     
     func focusAnimation(focused: Bool) {
-        UIView.animate(withDuration: 0.5, animations: { () -> Void in
-            if !focused {
-                self.borderWidth = 1
-            }
-            else {
-                self.borderWidth = 0
-            }
+        UIView.animate(withDuration: focusAnimationDuration, animations: { () -> Void in
+            self.borderWidth = focused ? self.focusedBorderWidth : self.unfocusedBorderWidth
         })
     }
     

@@ -21,22 +21,20 @@
 
 import UIKit
 
-extension SearchViewController {
-    static func createEmbeddedInNavigationController() -> (UINavigationController, SearchViewController) {
-        let searchViewController = SearchViewController()
-        let searchController = UISearchController(searchResultsController: searchViewController)
-        searchViewController.searchController = searchController
-        let searchContainerController = UISearchContainerViewController(searchController: searchController)
-        searchController.searchResultsUpdater = searchViewController
-        return (UINavigationController(rootViewController: searchContainerController), searchViewController)
+final class SearchViewController: UICollectionViewController, UISearchResultsUpdating {
+    struct CollectionConstants {
+        static let rowCount: CGFloat = 4
+        static let totalSpacing: CGFloat = 80
+        
+        static let contentVerticalInset: CGFloat = 10
+        static let contentHorizontalInset: CGFloat = 50
     }
-}
-
-final class SearchViewController: UICollectionViewController, UISearchResultsUpdating, UICollectionViewDataSourcePrefetching {
+    
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
-    fileprivate var searchController: UISearchController!
+    private var searchController: UISearchController!
     private let searchOperation = OperationManager.instance.searchOperation
+    private let minimumQueryLength = 3
     
     var creator: Creator?
     private var searchString: String?
@@ -47,8 +45,8 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
         flowLayout.scrollDirection = .vertical
         flowLayout.invalidateLayout()
         super.init(collectionViewLayout: flowLayout)
-        let width = view.bounds.width / 4 - 80
-        let height = view.bounds.width / 4 - 80
+        let width = view.bounds.width / CollectionConstants.rowCount - CollectionConstants.totalSpacing
+        let height = width
         flowLayout.itemSize = CGSize(width: width, height: height)
     }
 
@@ -58,14 +56,16 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.register(UINib(nibName: "FeedItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FeeditemCell")
-        collectionView?.contentInset = .init(top: 10, left:  50, bottom: 10, right: 50)
+        collectionView?.register(
+            UINib(nibName: FeedItemCollectionViewCell.nibName, bundle: nil),
+            forCellWithReuseIdentifier: FeedItemCollectionViewCell.identifier
+        )
+        let vertInset = CollectionConstants.contentVerticalInset
+        let horizInset = CollectionConstants.contentHorizontalInset
+        collectionView?.contentInset = .init(top: vertInset, left:  horizInset, bottom: vertInset, right: horizInset)
         collectionView.alwaysBounceVertical = true
         collectionView.remembersLastFocusedIndexPath = true
         collectionView.bounces = true
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.prefetchDataSource = self
         collectionView.isPrefetchingEnabled = true
     }
     
@@ -78,7 +78,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
             return
         }
         self.searchString = newSearchString
-        if newSearchString.count > 2 {
+        if newSearchString.count >= minimumQueryLength {
             getInitialFeed(searchString: newSearchString)
         }
         else {
@@ -125,7 +125,9 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
             }
         }
     }
-    
+}
+
+extension SearchViewController: UICollectionViewDataSourcePrefetching {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return results?.items.count ?? 0
     }
@@ -142,7 +144,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeeditemCell", for: indexPath) as! FeedItemCollectionViewCell
+        let cell = FeedItemCollectionViewCell.dequeueFromCollectionView(collectionView: collectionView, indexPath: indexPath)
         cell.setFeedViewItem(item: results!.items[indexPath.row])
         
         return cell
@@ -153,7 +155,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
             logger.error("Clicked on result item while there are no results")
             return
         }
-        let vodPlayerViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VODPlayerViewController") as! VODPlayerViewController
+        let vodPlayerViewController = UIStoryboard.main.getVodPlayerViewController()
         vodPlayerViewController.video = items[indexPath.row]
         present(vodPlayerViewController, animated: true)
     }
@@ -166,5 +168,16 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
             .map { $0.imageViewUrl }
             .map { URLRequest(url: $0) }
         UIImageView.af.sharedImageDownloader.download(imageRequests)
+    }
+}
+
+extension SearchViewController {
+    static func createEmbeddedInNavigationController() -> UINavigationController {
+        let searchViewController = SearchViewController()
+        let searchController = UISearchController(searchResultsController: searchViewController)
+        searchViewController.searchController = searchController
+        let searchContainerController = UISearchContainerViewController(searchController: searchController)
+        searchController.searchResultsUpdater = searchViewController
+        return UINavigationController(rootViewController: searchContainerController)
     }
 }

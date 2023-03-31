@@ -27,6 +27,8 @@ protocol PickerDelegate {
 
 class PickerViewController: UIViewController, PickerDelegate {
     
+    private let optionsContainerSegueId = "OptionsContainer"
+    
     var delegate: PickerDelegate?
     var options: [Readable] = []
     var label: String? {
@@ -47,7 +49,7 @@ class PickerViewController: UIViewController, PickerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "OptionsContainer" {
+        if segue.identifier == optionsContainerSegueId {
             internalPicker = segue.destination as? InternalPickerViewController
             internalPicker.options = options
             internalPicker.delegate = self
@@ -63,6 +65,8 @@ class PickerViewController: UIViewController, PickerDelegate {
 }
 
 class InternalPickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    private let optionCellIdentifier = "OptionCell"
+    
     var delegate: PickerDelegate?
     
     @IBOutlet var tableView: UITableView!
@@ -89,7 +93,7 @@ class InternalPickerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: optionCellIdentifier, for: indexPath)
         cell.textLabel?.text = options[indexPath.row].readable
         return cell
     }
