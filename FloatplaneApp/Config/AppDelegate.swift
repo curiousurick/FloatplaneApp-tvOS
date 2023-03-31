@@ -39,14 +39,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        CookieManager().setup()
-        
+        setupFonts()
         setupImageCache()
         
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(true)
         
         return true
+    }
+    
+    func setupFonts() {
+        let fonts = Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: nil)
+        fonts?.forEach({ url in
+            CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+        })
     }
     
     func setupImageCache(diskSpaceMB: Int = 150) {

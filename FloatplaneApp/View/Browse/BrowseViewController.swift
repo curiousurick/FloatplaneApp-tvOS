@@ -27,11 +27,13 @@ import Alamofire
 class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
-    private let contentFeedOperation = ContentFeedOperation()
+    private let contentFeedOperation = OperationManager.instance.contentFeedOperation
     
     var creator: Creator? {
         didSet {
-            getInitialFeed()
+            if creator != nil {
+                getInitialFeed()
+            }
         }
     }
     var feed: CreatorFeed?

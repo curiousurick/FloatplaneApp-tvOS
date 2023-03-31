@@ -25,6 +25,7 @@ import AVKit
 class LivePlayerViewController: AVPlayerViewController {
     private let logger = Log4S()
     private var menuPressRecognizer: UITapGestureRecognizer?
+    private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     
     private var timeObserverToken: Any?
     
@@ -99,7 +100,7 @@ class LivePlayerViewController: AVPlayerViewController {
             return
         }
         let request = LiveDeliveryKeyRequest(creator: video.owner, type: .live)
-        LiveDeliveryKeyOperation().get(request: request) { deliveryKey, error in
+        liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
             guard error == nil, let deliveryKey = deliveryKey else {
                 self.logger.error("Unable to get live delivery key for owner \(video.owner).")
                 return

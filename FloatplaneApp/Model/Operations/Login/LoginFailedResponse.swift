@@ -21,17 +21,13 @@
 
 import Foundation
 
-struct SubscriptionPlan: Codable {
-    let allowGrandfatheredAccess: Bool
-    let currency: String
-    let description: String
-    let discordRoles: [String]
-    let discordServers: [String]
-    let featured: Bool
-    let id: String
-    let interval: String
-    let logo: String?
-    let price: String
-    let priceYearly: String
-    let title: String
+struct LoginFailedResponse: Codable {
+    struct LoginError: Codable {
+        let id: String
+        let message: String
+        let name: String
+    }
+    
+    let errors: [LoginError]
+    let message: String
 }

@@ -31,14 +31,14 @@ class BaseCreatorStore {
     
     static let instance = BaseCreatorStore()
     
-    private let keychainAccess: UICKeyChainStore
+    private let keychain: UICKeyChainStore
     
     private init() {
-        keychainAccess = UICKeyChainStore(service: "org.georgie.Floatplane.Keychain")
+        keychain = KeychainManager.instance.keychain
     }
     
     func getCreators() -> [BaseCreator]? {
-        guard let data = keychainAccess.data(forKey: CreatorStoreKey) else {
+        guard let data = keychain.data(forKey: CreatorStoreKey) else {
             logger.error("Failed to retrieve creators from keychain")
             return nil
         }
@@ -54,7 +54,7 @@ class BaseCreatorStore {
     func setCreators(creators: [BaseCreator]) {
         do {
             let data = try encoder.encode(creators)
-            keychainAccess.setData(data, forKey: CreatorStoreKey)
+            keychain.setData(data, forKey: CreatorStoreKey)
             NotificationCenter.default.post(FPNotifications.CreatorListUpdated.create(creators: creators))
         }
         catch {

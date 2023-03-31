@@ -21,6 +21,39 @@
 
 import Foundation
 
+struct Subscription: Codable {
+    struct Plan: Codable {
+        let allowGrandfatheredAccess: Bool
+        let currency: String
+        let description: String
+        let discordRoles: [String]
+        let discordServers: [String]
+        let featured: Bool
+        let id: String
+        let interval: Interval
+        let logo: Icon?
+        let price: String
+        let priceYearly: String
+        let title: String
+    }
+    
+    enum Interval: String, Codable {
+        case month
+        case year
+    }
+    
+    let creator: String
+    let endDate: Date
+    let interval: Interval
+    let paymentCancelled: Bool
+    let paymentID: Int
+    let plan: Plan
+    let startDate: Date
+    
+}
+
 struct SubscriptionResponse: Codable {
+    
+    let subscriptions: [Subscription]
     
 }

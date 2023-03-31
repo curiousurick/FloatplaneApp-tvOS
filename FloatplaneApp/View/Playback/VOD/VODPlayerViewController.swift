@@ -24,6 +24,7 @@ import AVKit
 class VODPlayerViewController: AVPlayerViewController {
     private let logger = Log4S()
     private let progressStore = ProgressStore.instance
+    private let vodDeliveryKeyOperation = OperationManager.instance.vodDeliveryKeyOperation
     
     private var timeObserverToken: Any?
     
@@ -78,7 +79,7 @@ class VODPlayerViewController: AVPlayerViewController {
             return
         }
         let request = VodDeliveryKeyRequest(guid: videoGuid, type: .vod)
-        VodDeliveryKeyOperation().get(request: request) { deliveryKey, error in
+        vodDeliveryKeyOperation.get(request: request) { deliveryKey, error in
             guard error == nil, let deliveryKey = deliveryKey else {
                 self.logger.error("Unable to get delivery key for video \(self.videoGuid).")
                 return

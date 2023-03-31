@@ -36,7 +36,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
     fileprivate var searchController: UISearchController!
-    private let searchOperation = SearchOperation()
+    private let searchOperation = OperationManager.instance.searchOperation
     
     var creator: Creator?
     private var searchString: String?
@@ -135,10 +135,8 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("Will display cell at \(indexPath)")
         if let results = results, let searchString = searchString,
            indexPath.row == results.items.count - 4 && !searchOperation.isActive() {
-            print("going to get next page of results")
             getNextPage(searchString: searchString)
         }
     }

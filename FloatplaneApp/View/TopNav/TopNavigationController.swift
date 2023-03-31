@@ -24,11 +24,15 @@ import UIKit
 class TopNavigationController: UINavigationController {
     // 30 minutes
     private let CreatorRefreshInternal: TimeInterval = 30 * 60
-    private let creatorOperation = CreatorOperation()
-    private let creatorListOperation = CreatorListOperation()
+    private let creatorOperation = OperationManager.instance.creatorOperation
+    private let creatorListOperation = OperationManager.instance.creatorListOperation
     private let logger = Log4S()
     
     private var timer: Timer?
+    
+    private var fpTabBarController: FPTabBarController? {
+        return self.viewControllers[0] as? FPTabBarController
+    }
     
     var activeBaseCreator: BaseCreator? {
         didSet {
@@ -40,8 +44,7 @@ class TopNavigationController: UINavigationController {
             if let activeCreator = activeCreator {
                 scheduleCreatorUpdate()
                 DispatchQueue.main.async {
-                    let tabBarController = self.viewControllers[0] as? FPTabBarController
-                    tabBarController?.creator = activeCreator
+                    self.fpTabBarController?.creator = activeCreator
                 }
             }
             else {
@@ -61,7 +64,32 @@ class TopNavigationController: UINavigationController {
     }
     
     func tabBarReady() {
-        getCreators()
+        if UserStore.instance.getUser() != nil {
+            getCreators()
+        }
+        else {
+            goToLoginView()
+        }
+    }
+    
+    func goToLoginView() {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "LoginViewController", sender: self)
+        }
+    }
+    
+    func clearAndGoToLoginView() {
+        self.activeBaseCreator = nil
+        self.activeCreator = nil
+        self.fpTabBarController?.resetView()
+        goToLoginView()
+    }
+    
+    @IBAction func unwindToTopNavController(segue: UIStoryboardSegue) {
+        if segue.identifier == "UnwindFromLogin" {
+            logger.info("Successfully logged in")
+            getCreators()
+        }
     }
     
     private func getCreators() {

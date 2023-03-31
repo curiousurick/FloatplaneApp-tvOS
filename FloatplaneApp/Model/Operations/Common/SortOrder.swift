@@ -21,7 +21,7 @@
 
 import Foundation
 
-enum SortOrder: String {
+enum SortOrder: String, Codable {
     case descending = "DESC"
     case ascending = "ASC"
 }

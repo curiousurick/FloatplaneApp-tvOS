@@ -111,13 +111,24 @@ class CacheableAPIOperation<I: Hashable, O: Codable>: APIOperation {
         request = nil
     }
     
+    func clearCache() {
+        cacheQueue.sync {
+            do {
+                try self.storage.removeAll()
+            }
+            catch {
+                self.logger.error("Error clearing cache. \(error)")
+            }
+        }
+    }
+    
     func setCache(request: Request, response: Response) {
         cacheQueue.async {
             do {
                 try self.storage.setObject(response, forKey: request)
             }
             catch {
-                self.logger.error("Error setting cache. Request type \(String.fromClass(request))) and Response type \(String.fromClass(response))")
+                self.logger.error("Error setting cache. \(error) Request type \(String.fromClass(request))) and Response type \(String.fromClass(response))")
             }
         }
         

@@ -19,10 +19,28 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case download
+class LoginTextField: UITextField {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if let previousView = context.previouslyFocusedView,
+           self == previousView {
+            let superView = self.superview as! LoginImageTextView
+            superView.focusAnimation(focused: false)
+        }
+        
+        if let nextView = context.nextFocusedView,
+           self == nextView {
+            let superView = self.superview as! LoginImageTextView
+            superView.focusAnimation(focused: true)
+            
+        }
+    }
+    
+    
 }

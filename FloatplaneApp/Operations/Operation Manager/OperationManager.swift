@@ -20,28 +20,48 @@
 //
 
 import Foundation
-import Alamofire
 
-class ContentFeedOperation: CacheableAPIOperation<ContentFeedRequest, CreatorFeed> {
+protocol CacheableOperation {
+    func cancel()
+    func clearCache()
+}
+
+extension CacheableAPIOperation: CacheableOperation {
     
-    typealias Request = ContentFeedRequest
-    typealias ResponseValue = CreatorFeed
+}
+
+class OperationManager {
+    static let instance = OperationManager()
+
+    // Cacheable Operations
+    let contentFeedOperation = ContentFeedOperation()
+    let subscriptionOperation = SubscriptionOperation()
+    let searchOperation = SearchOperation()
+    let creatorListOperation = CreatorListOperation()
+    let creatorOperation = CreatorOperation()
     
-    static let base = URL(string: "https://\(OperationConstants.domain)/api/v3/content/creator")!
+    let allCacheableOperations: [CacheableOperation]
     
-    init() {
-        super.init(baseUrl: ContentFeedOperation.base)
+    // Non-cached Operations
+    let vodDeliveryKeyOperation = VodDeliveryKeyOperation()
+    let liveDeliveryKeyOperation = LiveDeliveryKeyOperation()
+    let loginOperation = LoginOperation()
+    let logoutOperation = LogoutOperation()
+    
+    private init() {
+        allCacheableOperations = [
+            contentFeedOperation,
+            subscriptionOperation,
+            searchOperation,
+            creatorListOperation,
+            creatorOperation
+        ]
     }
     
-    override func _get(request: ContentFeedRequest, completion: ((CreatorFeed?, Error?) -> Void)? = nil) -> DataRequest {
-        return AF.request(baseUrl, parameters: request.params).responseDecodable(of: [FeedItem].self, decoder: FloatplaneDecoder()) { response in
-            if let items = response.value {
-                let creatorFeed = CreatorFeed(items: items)
-                completion?(creatorFeed, nil)
-            }
-            else {
-                completion?(nil, response.error)
-            }
+    func clearCache() {
+        allCacheableOperations.forEach {
+            $0.cancel()
+            $0.clearCache()
         }
     }
 }

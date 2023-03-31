@@ -35,7 +35,7 @@ struct Creator: Codable {
     let liveStream: LiveStream
     let owner: String
     let subscriberCountDisplay: String
-    var subscriptionPlans: [SubscriptionPlan]?
+    var subscriptionPlans: [Subscription.Plan]?
     let title: String
     let urlname: String
 }

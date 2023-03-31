@@ -21,7 +21,7 @@
 
 import Foundation
 
-protocol OperationRequest: Equatable, Hashable {
+protocol OperationRequest: Encodable, Equatable, Hashable {
     
     var params: [String : Any] { get }
 

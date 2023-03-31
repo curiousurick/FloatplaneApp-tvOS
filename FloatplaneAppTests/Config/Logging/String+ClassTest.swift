@@ -26,10 +26,10 @@ final class String_ClassTest: XCTestCase {
 
     func testStringForObject() {
         // Arrange
-        let op = ContentFeedOperation()
+        let request = ContentFeedRequest()
         
         // Act
-        let result = String.fromClass(op)
+        let result = String.fromClass(request)
         
         // Assert
         XCTAssertEqual(result, "ContentFeedOperation")

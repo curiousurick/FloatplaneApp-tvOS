@@ -34,10 +34,13 @@ class SubscriptionOperation: CacheableAPIOperation<SubscriptionRequest, Subscrip
     }
     
     override func _get(request: SubscriptionRequest, completion: ((SubscriptionResponse?, Error?) -> Void)?) -> DataRequest {
-        return AF.request(baseUrl).responseDecodable(of: SubscriptionResponse.self) { response in
-            print(response.value!)
+        return AF.request(baseUrl).responseDecodable(of: [Subscription].self) { response in
+            if let subscriptions = response.value {
+                completion?(SubscriptionResponse(subscriptions: subscriptions), nil)
+            }
+            else {
+                completion?(nil, response.error)
+            }
         }
     }
-    
-    
 }

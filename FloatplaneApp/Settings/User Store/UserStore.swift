@@ -19,30 +19,49 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import Alamofire
+import UIKit
+import UICKeyChainStore
 
-class CookieManager {
+class UserStore {
     
-    func setup() {
-        let cfuvidCookieProps = [
-            HTTPCookiePropertyKey.domain: OperationConstants.domain,
-            HTTPCookiePropertyKey.path: OperationConstants.basePath,
-            HTTPCookiePropertyKey.name: UserConfiguration.cfuvidCookieKey,
-            HTTPCookiePropertyKey.value: UserConfiguration.cfuvidCookie
-        ]
-        let sailsSidCookieProps = [
-            HTTPCookiePropertyKey.domain: OperationConstants.domain,
-            HTTPCookiePropertyKey.path: OperationConstants.basePath,
-            HTTPCookiePropertyKey.name: UserConfiguration.sailsSidCookieKey,
-            HTTPCookiePropertyKey.value: UserConfiguration.sailsSidCookie
-        ]
-        
-        if let cfuvidCookie = HTTPCookie(properties: cfuvidCookieProps),
-        let sailsCookie = HTTPCookie(properties: sailsSidCookieProps) {
-            AF.session.configuration.httpCookieStorage?.setCookie(cfuvidCookie)
-            AF.session.configuration.httpCookieStorage?.setCookie(sailsCookie)
+    private let logger = Log4S()
+    private let UserStoreKey = "UserStoreKey"
+    private let encoder = JSONEncoder()
+    private let decoder = JSONDecoder()
+    private let keychain: UICKeyChainStore
+    
+    static let instance = UserStore()
+    
+    private init() {
+        keychain = KeychainManager.instance.keychain
+    }
+    
+    func getUser() -> User? {
+        guard let data = keychain.data(forKey: UserStoreKey) else {
+            logger.info("User is not logged in")
+            return nil
+        }
+        do {
+            return try decoder.decode(User.self, from: data)
+        }
+        catch {
+            logger.error("Failed to decode creators from keychain")
+        }
+        return nil
+    }
+    
+    func setUser(user: User) {
+        do {
+            let data = try encoder.encode(user)
+            keychain.setData(data, forKey: UserStoreKey)
+        }
+        catch {
+            logger.error("Failed to save creators to keychain")
         }
     }
     
+    func removeUser() {
+        keychain.removeItem(forKey: UserStoreKey)
+    }
+
 }

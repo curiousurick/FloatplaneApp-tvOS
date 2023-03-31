@@ -19,10 +19,36 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case download
+class LoginButton: UIButton {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    func focusAnimation(focused: Bool) {
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+            if !focused {
+                self.borderWidth = 1
+            }
+            else {
+                self.borderWidth = 0
+            }
+        })
+    }
+    
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if let previousView = context.previouslyFocusedView,
+           self == previousView {
+            self.focusAnimation(focused: false)
+        }
+        
+        if let nextView = context.nextFocusedView,
+           self == nextView {
+            self.focusAnimation(focused: true)
+            
+        }
+    }
+    
 }

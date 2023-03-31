@@ -23,7 +23,10 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    private let logoutOperation = OperationManager.instance.logoutOperation
+    
     private let changeResolutionRow = 0
+    private let logoutRow = 1
     
     @IBOutlet var tableView: UITableView!
 
@@ -36,6 +39,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.row == changeResolutionRow {
             cell.textLabel?.text = "Default Quality Video Level"
         }
+        else if indexPath.row == logoutRow {
+            cell.textLabel?.text = "Logout"
+        }
+        
         return cell
     }
     
@@ -44,17 +51,31 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == changeResolutionRow {
             changeResolution()
         }
+        else if indexPath.row == logoutRow {
+            logout()
+        }
     }
     
     private func changeResolution() {
         performSegue(withIdentifier: "ShowResolutionOptions", sender: nil)
+    }
+    
+    private func logout() {
+        logoutOperation.get { error in
+            if error == nil {
+                UserStore.instance.removeUser()
+                OperationManager.instance.clearCache()
+                URLCache.shared.removeAllCachedResponses()
+                AppDelegate.instance.topNavigationController.clearAndGoToLoginView()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

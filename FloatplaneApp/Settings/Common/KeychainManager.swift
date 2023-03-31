@@ -20,9 +20,14 @@
 //
 
 import Foundation
+import UICKeyChainStore
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case download
+class KeychainManager {
+    static let instance = KeychainManager()
+    
+    let keychain: UICKeyChainStore
+    
+    private init() {
+        keychain = UICKeyChainStore(service: "org.georgie.Floatplane.Keychain")
+    }
 }

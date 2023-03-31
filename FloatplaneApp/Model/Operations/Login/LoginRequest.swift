@@ -21,8 +21,15 @@
 
 import Foundation
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case download
+struct LoginRequest: OperationRequest {
+    
+    let username: String
+    let password: String
+    
+    var params: [String : Any] {
+        return [
+            "username" : username,
+            "password" : password
+        ]
+    }
 }

@@ -21,8 +21,7 @@
 
 import Foundation
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case download
+struct LoginResponse: Codable {
+    let user: User
+    let needs2FA: Bool
 }

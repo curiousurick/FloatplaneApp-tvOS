@@ -31,7 +31,7 @@ struct FeedItem: Codable {
     let galleryAttachments: [String]
     let guid: String
     let id: String
-    var isAccessible: Bool = true
+    var isAccessible: Bool? = true
     let likes: UInt64
     let metadata: Metadata
     let pictureAttachments: [String]

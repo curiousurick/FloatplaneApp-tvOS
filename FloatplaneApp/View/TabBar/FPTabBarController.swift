@@ -29,6 +29,7 @@ class FPTabBarController: UITabBarController {
     private let LiveStreamOfflineViewStoryboardID = "LiveStreamOfflineViewController"
     private let BrowseViewControllerStoryboardID = "BrowseViewController"
     private let SettingsViewControllerStoryboardID = "SettingsViewController"
+    private let creatorOperation = OperationManager.instance.creatorOperation
     
     private var livePlayerViewController: LivePlayerViewController!
     private var liveStreamOfflineViewController: LiveStreamOfflineViewController!
@@ -104,10 +105,16 @@ class FPTabBarController: UITabBarController {
             searchViewNavController,
             settingsController
         ]
-        selectedViewController = viewControllers?[1]
+        self.selectedViewController = self.viewControllers?[1]
         
         let navigationController = self.navigationController as! TopNavigationController
         navigationController.tabBarReady()
+    }
+    
+    func resetView() {
+        DispatchQueue.main.async {
+            self.selectedViewController = self.viewControllers?[1]
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +148,7 @@ class FPTabBarController: UITabBarController {
     
     func updateCreatorInfo() {
         let request = CreatorRequest(named: "linustechtips")
-        CreatorOperation().get(request: request, invalidateCache: true) { response, error in
+        creatorOperation.get(request: request, invalidateCache: true) { response, error in
             if let response = response {
                 self.creator = response
             }

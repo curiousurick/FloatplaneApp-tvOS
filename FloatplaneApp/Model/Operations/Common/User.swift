@@ -21,8 +21,8 @@
 
 import Foundation
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case download
+struct User: Codable {
+    let id: String
+    let username: String
+    let profileImage: Icon
 }
