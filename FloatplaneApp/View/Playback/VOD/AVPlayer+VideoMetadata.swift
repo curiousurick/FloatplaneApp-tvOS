@@ -20,30 +20,35 @@
 //
 
 import AVKit
+import AlamofireImage
 
 extension AVPlayer {
     
     func updateItemMetadata(video: VideoMetadata) {
+        let channelArt = video.channel.icon.path
         let channelName = video.channel.title
         // Small optimization to avoid channel name sitting just above title prefix.
         let title = video.title.replacing("\(channelName): ", with: "")
         let description = video.description.html2String
-        let channelArt = video.channel.icon.path
-        // Synchronous call because we are collecting metadata in asynchronous block
-        let image = try? Data(contentsOf: channelArt)
-            
-        let mapping: [AVMetadataIdentifier: Any] = [
+        var mapping: [AVMetadataIdentifier: Any] = [
             .commonIdentifierTitle: title,
             .iTunesMetadataTrackSubTitle: channelName,
             .commonIdentifierDescription: description,
-            .commonIdentifierArtwork: image as Any
         ]
-        let metadata = mapping.compactMap { createMetadataItem(for:$0, value:$1) }
+        let metadata = mapping.compactMap { self.createMetadataItem(for:$0, value:$1) }
         DispatchQueue.main.async {
             self.currentItem?.externalMetadata = metadata
         }
+        let _ = try? ImageDownloader.default.download(URLRequest(url: channelArt, method: .get), completion: { response in
+            let image = response.data
+            mapping[.commonIdentifierArtwork] = image as Any
+            let metadata = mapping.compactMap { self.createMetadataItem(for:$0, value:$1) }
+            DispatchQueue.main.async {
+                self.currentItem?.externalMetadata = metadata
+            }
+        })
     }
-
+    
     private func createMetadataItem(for identifier: AVMetadataIdentifier,
                                     value: Any) -> AVMetadataItem {
         let item = AVMutableMetadataItem()

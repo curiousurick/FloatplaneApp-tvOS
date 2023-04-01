@@ -48,7 +48,7 @@ struct VideoMetadata {
         self.title = contentVideoResponse.title
         self.type = contentVideoResponse.type
         self.channel = feedItem.channel
-        self.description = contentVideoResponse.description
+        self.description = feedItem.text
         self.releaseDate = feedItem.releaseDate
         self.duration = contentVideoResponse.duration
         self.creator = feedItem.creator

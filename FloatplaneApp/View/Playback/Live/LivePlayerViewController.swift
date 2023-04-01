@@ -28,9 +28,9 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
     
     private var timeObserverToken: Any?
     
-    private var fpTabBarController: FPTabBarController {
+    private var fpTabBarController: FPTabBarController? {
         get {
-            return tabBarController as! FPTabBarController
+            return tabBarController as? FPTabBarController
         }
     }
     
@@ -88,7 +88,7 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
             }
             else {
                 self.logger.error("Unable to get live delivery key for owner \(video.owner).")
-                self.fpTabBarController.updateLiveTab(online: false)
+                self.fpTabBarController?.updateLiveTab(online: false)
             }
         }
     }
@@ -118,7 +118,7 @@ extension LivePlayerViewController {
     }
     
     @objc func menuButtonAction(recognizer: UITapGestureRecognizer) {
-        fpTabBarController.selectedIndex = 1
+        fpTabBarController?.selectedIndex = 1
     }
 }
 
@@ -145,6 +145,6 @@ extension LivePlayerViewController {
         registeredForLiveStreamEndNotification = false
         self.player = nil
         NotificationCenter.default.removeObserver(self, name: liveStreamEndNotification, object: nil)
-        fpTabBarController.updateLiveTab(online: false)
+        fpTabBarController?.updateLiveTab(online: false)
     }
 }

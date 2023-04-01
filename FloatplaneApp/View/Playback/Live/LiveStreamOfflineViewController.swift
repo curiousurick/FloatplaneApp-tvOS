@@ -32,9 +32,9 @@ class LiveStreamOfflineViewController: UIViewController {
         }
     }
     
-    private var fpTabBarController: FPTabBarController {
+    private var fpTabBarController: FPTabBarController? {
         get {
-            return tabBarController as! FPTabBarController
+            return tabBarController as? FPTabBarController
         }
     }
     
@@ -63,7 +63,7 @@ class LiveStreamOfflineViewController: UIViewController {
         liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
             if let deliveryKey = deliveryKey {
                 self.logger.error("Unable to get live delivery key for owner \(video.owner).")
-                self.fpTabBarController.updateLiveTab(online: true, deliverKey: deliveryKey)
+                self.fpTabBarController?.updateLiveTab(online: true, deliverKey: deliveryKey)
                 return
             }
         }
