@@ -157,6 +157,7 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
         }
         let vodPlayerViewController = UIStoryboard.main.getVodPlayerViewController()
         vodPlayerViewController.feedItem = items[indexPath.row]
+        vodPlayerViewController.vodDelegate = self
         present(vodPlayerViewController, animated: true)
     }
     
@@ -180,4 +181,19 @@ extension SearchViewController {
         searchController.searchResultsUpdater = searchViewController
         return UINavigationController(rootViewController: searchContainerController)
     }
+}
+
+extension SearchViewController: VODPlayerViewDelegate {
+    
+    func videoDidEnd(guid: String) {
+        guard let progress = ProgressStore.instance.getProgress(for: guid) else {
+            logger.warn("No progress found for video on return from ending")
+            return
+        }
+        collectionView.indexPathsForSelectedItems?.forEach {
+            let cell = collectionView.cellForItem(at: $0) as! FeedItemCollectionViewCell
+            cell.setProgress(progress: progress)
+        }
+    }
+    
 }

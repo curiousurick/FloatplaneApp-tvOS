@@ -29,11 +29,7 @@ class FeedItemProgressBarView: UIView {
         super.awakeFromNib()
     }
     
-    func updateWidth(percentWidth: CGFloat) {
-        guard let superview = superview else {
-            return
-        }
-        let width = percentWidth * superview.bounds.width
+    func updateWidth(width: CGFloat) {
         widthConstraint.constant = width
         layoutIfNeeded()
     }

@@ -23,9 +23,18 @@ import AVKit
 import AlamofireImage
 import SwiftDate
 
+protocol VODPlayerViewDelegate {
+    
+    func videoDidEnd(guid: String)
+    
+}
+
 class VODPlayerViewController: BaseVideoPlayerViewController {
     private let progressStore = ProgressStore.instance
     private let videoMetadataOperation = OperationManager.instance.videoMetadataOperation
+    private let closeEnoughToFinishToRestart = 0.95
+    
+    var vodDelegate: VODPlayerViewDelegate?
     
     var customMenu: UIMenu?
     var feedItem: FeedItem!
@@ -58,11 +67,18 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
             let seconds = player.currentTime().seconds
             progressStore.setProgress(for: guid, progress: seconds)
         }
+        vodDelegate?.videoDidEnd(guid: guid)
     }
     
     override func progressUpdate(time: CMTime) {
         let seconds = time.seconds
         self.progressStore.setProgress(for: self.guid, progress: seconds)
+    }
+    
+    @objc func videoEnded() {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true)
+        }
     }
     
     private func getVideoMetadata() async -> VideoMetadata? {
@@ -78,10 +94,11 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
         let url = StreamUrl(deliveryKey: videoMetadata.deliveryKey, qualityLevel: selectedQualityLevel).url
         let playerItem = AVPlayerItem(url: url)
         
-        let progress = getStartTime()
+        let progress = getStartTime(videoMetadata: videoMetadata)
         let player = getOrCreatePlayer(playerItem: playerItem)
         playerItem.seek(to: progress, completionHandler: { success in
             self.player!.play()
+            NotificationCenter.default.addObserver(self, selector: #selector(self.videoEnded), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
             if success {
                 self.logger.debug("Started at position \(progress)")
             }
@@ -106,14 +123,18 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
         }
     }
     
-    private func getStartTime() -> CMTime {
+    private func getStartTime(videoMetadata: VideoMetadata) -> CMTime {
         // Replacing video in progress with new stream.
         if let player = self.player {
             return player.currentTime()
         }
         // Starting video that was watched before and we have its progress
         else if let savedProgress = progressStore.getProgress(for: guid) {
-            return CMTime(seconds: savedProgress, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+            let percent = savedProgress / Double(videoMetadata.duration)
+            // Only continue from last position if you're not close enough to restart the video.
+            if percent < closeEnoughToFinishToRestart {
+                return CMTime(seconds: savedProgress, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+            }
         }
         // Start from the beginning
         return .zero

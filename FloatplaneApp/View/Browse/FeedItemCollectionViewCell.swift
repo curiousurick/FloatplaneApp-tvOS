@@ -93,6 +93,8 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     @IBOutlet var timeSinceRelease: UILabel!
     @IBOutlet var progressBar: FeedItemProgressBarView!
     
+    var feedItem: FeedViewItem!
+    
     static func dequeueFromCollectionView(collectionView: UICollectionView, indexPath: IndexPath) -> FeedItemCollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: FeedItemCollectionViewCell.identifier, for: indexPath) as! FeedItemCollectionViewCell
     }
@@ -107,19 +109,29 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
         type.layer.masksToBounds = true
     }
     
+    func setProgress(progress: TimeInterval) {
+        if progress != 0 && feedItem.duration != 0 {
+            let percent = (progress / feedItem.duration)
+            // Sometimes progress goes just over duration.
+            // Bar width becomes progress proportion of
+            // Cell width.
+            let width = bounds.width * min(percent, 1)
+            progressBar.updateWidth(width: width)
+            progressBar.isHidden = false
+        }
+        else {
+            progressBar.isHidden = true
+        }
+    }
+    
     func setFeedViewItem(item: FeedViewItem) {
+        self.feedItem = item
         image.image = nil
         image.af.setImage(withURL: item.imageViewUrl)
         title.text = item.titleLabel
         type.text = item.typeLabel
         channel.text = item.channelLabel
         timeSinceRelease.text = item.timeSinceReleaseLabel
-        if let progress = item.progress, item.duration != 0 {
-            progressBar.updateWidth(percentWidth: progress / item.duration)
-            progressBar.isHidden = false
-        }
-        else {
-            progressBar.isHidden = true
-        }
+        setProgress(progress: item.progress ?? 0)
     }
 }

@@ -180,6 +180,7 @@ extension BrowseViewController {
         }
         let vodPlayerViewController = UIStoryboard.main.getVodPlayerViewController()
         vodPlayerViewController.feedItem = feed.items[indexPath.row]
+        vodPlayerViewController.vodDelegate = self
         present(vodPlayerViewController, animated: true)
     }
     
@@ -192,4 +193,19 @@ extension BrowseViewController {
             .map { URLRequest(url: $0) }
         UIImageView.af.sharedImageDownloader.download(imageRequests)
     }
+}
+
+extension BrowseViewController: VODPlayerViewDelegate {
+    
+    func videoDidEnd(guid: String) {
+        guard let progress = ProgressStore.instance.getProgress(for: guid) else {
+            logger.warn("No progress found for video on return from ending")
+            return
+        }
+        videoCollectionView.indexPathsForSelectedItems?.forEach {
+            let cell = videoCollectionView.cellForItem(at: $0) as! FeedItemCollectionViewCell
+            cell.setProgress(progress: progress)
+        }
+    }
+    
 }
