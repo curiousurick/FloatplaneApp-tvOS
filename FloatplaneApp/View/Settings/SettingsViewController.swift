@@ -86,7 +86,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let picker = segue.destination as! PickerViewController
             picker.delegate = self
             picker.label = "Change Default Video Quality"
-            picker.options = VodQualityLevelName.allCases
+            picker.options = VodDeliveryKeyQualityLevel.allCases
             picker.selectedIndex = UserSettings.instance.qualitySettings.index
         }
     }
@@ -95,7 +95,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 extension SettingsViewController: PickerDelegate {
     
     func picker(didSelect row: Int) {
-        UserSettings.instance.qualitySettings = VodQualityLevelName.allCases[row]
+        UserSettings.instance.qualitySettings = VodDeliveryKeyQualityLevel.allCases[row]
     }
     
 }

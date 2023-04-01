@@ -156,7 +156,7 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
             return
         }
         let vodPlayerViewController = UIStoryboard.main.getVodPlayerViewController()
-        vodPlayerViewController.video = items[indexPath.row]
+        vodPlayerViewController.feedItem = items[indexPath.row]
         present(vodPlayerViewController, animated: true)
     }
     

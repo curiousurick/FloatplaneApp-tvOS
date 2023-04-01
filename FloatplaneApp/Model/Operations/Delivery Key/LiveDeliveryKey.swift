@@ -62,13 +62,13 @@ struct LiveDeliveryKey: Decodable {
     class LiveDecodedQualityLevel: Decodable {
         let label: String?
         let mimeType: String
-        let name: LiveQualityLevelName
+        let name: LiveDeliveryKeyQualityLevel
         let order: UInt64
         
         init(
             label: String,
             mimeType: String,
-            name: LiveQualityLevelName,
+            name: LiveDeliveryKeyQualityLevel,
             order: UInt64
         ) {
             self.label = label
@@ -104,15 +104,15 @@ struct LiveDeliveryKey: Decodable {
     }
     
     struct ResourceData: Decodable {
-        private var qualityLevels: [LiveQualityLevelName : LiveQualityLevelResourceData] = [:]
-        private var options: [LiveQualityLevelName] = []
+        private var qualityLevels: [LiveDeliveryKeyQualityLevel : LiveQualityLevelResourceData] = [:]
+        private var options: [LiveDeliveryKeyQualityLevel] = []
         
         enum CodingKeys: CodingKey {
             case qualityLevelParams
             case qualityLevels
         }
         
-        func getResource(qualitylevelName: LiveQualityLevelName) -> LiveQualityLevelResourceData? {
+        func getResource(qualitylevelName: LiveDeliveryKeyQualityLevel) -> LiveQualityLevelResourceData? {
             return qualityLevels[qualitylevelName]
         }
         

@@ -21,9 +21,29 @@
 
 import Foundation
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case video
-    case download
+enum LiveDeliveryKeyQualityLevel: String, Decodable, Readable {
+    // Used for live streams
+    case liveAbr = "live-abr"
+    
+    static let allCases: [LiveDeliveryKeyQualityLevel] = [
+        .liveAbr
+    ]
+    
+    var index: Int {
+        get {
+            switch self {
+            case .liveAbr:
+                return 0
+            }
+        }
+    }
+    
+    var readable: String {
+        get {
+            switch self {
+            case .liveAbr:
+                return "Live Stream"
+            }
+        }
+    }
 }

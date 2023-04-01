@@ -49,14 +49,14 @@ struct VodDeliveryKey: Decodable {
         
         struct ParamsKey: CodingKey {
             var stringValue: String
-            init?(stringValue: String) {
+            init(stringValue: String) {
                 self.stringValue = stringValue
             }
             var intValue: Int? { return nil }
             init?(intValue: Int) { return nil }
             
-            static let fileName = ParamsKey(stringValue: "2")!
-            static let accessToken = ParamsKey(stringValue: "4")!
+            static let fileName = ParamsKey(stringValue: "2")
+            static let accessToken = ParamsKey(stringValue: "4")
         }
     }
     class VodDecodedQualityLevel: Decodable {
@@ -64,7 +64,7 @@ struct VodDeliveryKey: Decodable {
         let height: UInt64
         let label: String?
         let mimeType: String
-        let name: VodQualityLevelName
+        let name: VodDeliveryKeyQualityLevel
         let order: UInt64
         let width: UInt64
         
@@ -73,7 +73,7 @@ struct VodDeliveryKey: Decodable {
             height: UInt64,
             label: String,
             mimeType: String,
-            name: VodQualityLevelName,
+            name: VodDeliveryKeyQualityLevel,
             order: UInt64,
             width: UInt64
         ) {
@@ -116,15 +116,18 @@ struct VodDeliveryKey: Decodable {
     }
     
     struct ResourceData: Decodable {
-        private var qualityLevels: [VodQualityLevelName : VodQualityLevelResourceData] = [:]
-        private var options: [VodQualityLevelName] = []
+        private var qualityLevels: [VodDeliveryKeyQualityLevel : VodQualityLevelResourceData] = [:]
+        var options: [VodDeliveryKeyQualityLevel] = []
         
         enum CodingKeys: CodingKey {
             case qualityLevelParams
             case qualityLevels
         }
         
-        func getResource(qualitylevelName: VodQualityLevelName) -> VodQualityLevelResourceData? {
+        func getResource(qualitylevelName: VodDeliveryKeyQualityLevel?) -> VodQualityLevelResourceData? {
+            guard let qualitylevelName = qualitylevelName else {
+                return nil
+            }
             return qualityLevels[qualitylevelName]
         }
         
@@ -145,7 +148,7 @@ struct VodDeliveryKey: Decodable {
         }
         
         init(from decoder: Decoder) throws {
-            let container: KeyedDecodingContainer<VodDeliveryKey.ResourceData.CodingKeys> = try decoder.container(keyedBy: VodDeliveryKey.ResourceData.CodingKeys.self)
+            let container = try decoder.container(keyedBy: VodDeliveryKey.ResourceData.CodingKeys.self)
             let qualityLevelParams = try container.decode(VodDeliveryKey.QualityLevelParams.self, forKey: VodDeliveryKey.ResourceData.CodingKeys.qualityLevelParams)
             let qualityLevels = try container.decode([VodDeliveryKey.VodDecodedQualityLevel].self, forKey: VodDeliveryKey.ResourceData.CodingKeys.qualityLevels)
             for level in qualityLevels {

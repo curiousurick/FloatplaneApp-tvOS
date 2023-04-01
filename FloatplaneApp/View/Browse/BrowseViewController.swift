@@ -179,7 +179,7 @@ extension BrowseViewController {
             return
         }
         let vodPlayerViewController = UIStoryboard.main.getVodPlayerViewController()
-        vodPlayerViewController.video = feed.items[indexPath.row]
+        vodPlayerViewController.feedItem = feed.items[indexPath.row]
         present(vodPlayerViewController, animated: true)
     }
     

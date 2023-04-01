@@ -21,9 +21,14 @@
 
 import Foundation
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case video
-    case download
+struct ContentVideoRequest: OperationRequest {
+    
+    let id: String
+    
+    var params: [String : Any] {
+        return [
+            "id" : id
+        ]
+    }
+    
 }

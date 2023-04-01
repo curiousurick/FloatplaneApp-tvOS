@@ -25,7 +25,7 @@ protocol Readable {
     var readable: String { get }
 }
 
-enum VodQualityLevelName: String, Decodable, Readable {
+enum VodDeliveryKeyQualityLevel: String, Decodable, Readable {
     case ql360p = "360-avc1"
     case ql480p = "480-avc1"
     case ql720p = "720-avc1"
@@ -33,12 +33,27 @@ enum VodQualityLevelName: String, Decodable, Readable {
     
     static let defaultLevel = ql720p
     
-    static let allCases: [VodQualityLevelName] = [
+    static let allCases: [VodDeliveryKeyQualityLevel] = [
         .ql360p,
         .ql480p,
         .ql720p,
         .ql1080p
     ]
+    
+    var toQualityLevel: QualityLevel {
+        get {
+            switch self {
+            case .ql360p:
+                return QualityLevel.Standard.ql360p
+            case .ql480p:
+                return QualityLevel.Standard.ql480p
+            case .ql720p:
+                return QualityLevel.Standard.ql720p
+            case .ql1080p:
+                return QualityLevel.Standard.ql1080p
+            }
+        }
+    }
     
     var index: Int {
         get {
@@ -55,6 +70,12 @@ enum VodQualityLevelName: String, Decodable, Readable {
         }
     }
     
+    static func fromReadable(readable: String) -> VodDeliveryKeyQualityLevel? {
+        allCases.filter {
+            $0.readable == readable
+        }.first
+    }
+    
     var readable: String {
         get {
             switch self {
@@ -66,33 +87,6 @@ enum VodQualityLevelName: String, Decodable, Readable {
                 return "720p"
             case .ql1080p:
                 return "1080p"
-            }
-        }
-    }
-}
-
-enum LiveQualityLevelName: String, Decodable, Readable {
-    // Used for live streams
-    case liveAbr = "live-abr"
-    
-    static let allCases: [LiveQualityLevelName] = [
-        .liveAbr
-    ]
-    
-    var index: Int {
-        get {
-            switch self {
-            case .liveAbr:
-                return 0
-            }
-        }
-    }
-    
-    var readable: String {
-        get {
-            switch self {
-            case .liveAbr:
-                return "Live Stream"
             }
         }
     }

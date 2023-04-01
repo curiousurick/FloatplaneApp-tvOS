@@ -19,11 +19,32 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case video
-    case download
+extension String {
+    
+    /// Generates a `UIImage` instance from this string using a specified
+    /// attributes and size.
+    ///
+    /// - Parameters:
+    ///     - attributes: to draw this string with. Default is `nil`.
+    ///     - size: of the image to return.
+    /// - Returns: a `UIImage` instance from this string using a specified
+    /// attributes and size, or `nil` if the operation fails.
+    func image(
+        attributes: [NSAttributedString.Key: Any]? = nil,
+        size: CGSize? = nil
+    ) -> UIImage? {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .backgroundColor: UIColor.clear,
+            // Randomly high size because the image will be resized
+            .font: UIFont.boldSystemFont(ofSize: 50.0)
+        ]
+        let size = size ?? (self as NSString).size(withAttributes: attributes)
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            (self as NSString).draw(in: CGRect(origin: .zero, size: size),
+                                    withAttributes: attributes)
+        }
+    }
+    
 }

@@ -24,9 +24,10 @@ import Foundation
 struct StreamUrl {
     let url: URL
     
-    init(deliveryKey: VodDeliveryKey, qualityLevelName: VodQualityLevelName) {
+    init(deliveryKey: VodDeliveryKey, qualityLevel: QualityLevel) {
         // If none provided, use the last (highest quality)
         let resourceData = deliveryKey.resource.data
+        let qualityLevelName = VodDeliveryKeyQualityLevel.fromReadable(readable: qualityLevel.label)
         let qualityLevel = resourceData.getResource(qualitylevelName: qualityLevelName) ?? resourceData.lowestQuality()
 
         let fileName = qualityLevel.fileName

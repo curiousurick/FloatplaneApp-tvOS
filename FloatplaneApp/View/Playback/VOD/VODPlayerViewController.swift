@@ -26,38 +26,104 @@ import SwiftDate
 class VODPlayerViewController: AVPlayerViewController {
     private let logger = Log4S()
     private let progressStore = ProgressStore.instance
-    private let vodDeliveryKeyOperation = OperationManager.instance.vodDeliveryKeyOperation
+    private let videoMetadataOperation = OperationManager.instance.videoMetadataOperation
     
     private var timeObserverToken: Any?
     
-    var video: FeedItem!
-    
-    var videoGuid: String {
+    var customMenu: UIMenu?
+    var feedItem: FeedItem!
+    var guid: String {
         get {
-            return video.videoAttachments[0]
+            return feedItem.videoAttachments[0]
+        }
+    }
+    var videoMetadata: VideoMetadata?
+    // Initialize with default quality level
+    var selectedQualityLevel: QualityLevel = UserSettings.instance.qualitySettings.toQualityLevel
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Task {
+            if let videoMetadata = await getVideoMetadata() {
+                self.videoMetadata = videoMetadata
+                self.setupMenu(videoMetadata: videoMetadata)
+                self.startVideo(videoMetadata: videoMetadata)
+            }
+            else {
+                showPlaybackError()
+            }
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        startVideo(video: video)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopObservingPlayer()
         if let player = player {
             let seconds = player.currentTime().seconds
-            progressStore.setProgress(for: videoGuid, progress: seconds)
+            progressStore.setProgress(for: guid, progress: seconds)
         }
     }
     
+    private func getVideoMetadata() async -> VideoMetadata? {
+        await withCheckedContinuation { continuation in
+            let request = VideoMetadataRequest(feedItem: feedItem, id: guid)
+            videoMetadataOperation.get(request: request) { response, error in
+                continuation.resume(returning: response)
+            }
+        }
+    }
+    
+    private func startVideo(videoMetadata: VideoMetadata) {
+        let url = StreamUrl(deliveryKey: videoMetadata.deliveryKey, qualityLevel: selectedQualityLevel).url
+        let playerItem = AVPlayerItem(url: url)
+        
+        let progress = getTime()
+        let player = getOrCreatePlayer(playerItem: playerItem)
+        playerItem.seek(to: progress, completionHandler: { success in
+            self.player!.play()
+            if success {
+                self.logger.debug("Started at position \(progress)")
+            }
+            else {
+                self.logger.error("Tried to seek to position \(progress) but it failed. Will start from zero")
+            }
+        })
+        
+        player.updateItemMetadata(video: videoMetadata)
+        self.startObservingPlayer()
+        self.logger.debug("Started playing video \(url)")
+    }
+    
+    private func getOrCreatePlayer(playerItem: AVPlayerItem) -> AVPlayer {
+        if let player = self.player {
+            player.replaceCurrentItem(with: playerItem)
+            return player
+        }
+        else {
+            let player = AVPlayer(playerItem: playerItem)
+            self.player = player
+            return player
+        }
+    }
+    
+    private func getTime() -> CMTime {
+        // Replacing video in progress with new stream.
+        if let player = self.player {
+            return player.currentTime()
+        }
+        // Starting video that was watched before and we have its progress
+        else if let savedProgress = progressStore.getProgress(for: guid) {
+            return CMTime(seconds: savedProgress, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        }
+        // Start from the beginning
+        return .zero
+    }
+}
+
+// MARK: Observation of playback
+
+extension VODPlayerViewController {
     private func startObservingPlayer() {
-        // Notify every half second
         let timeScale = CMTimeScale(NSEC_PER_SEC)
         let updateInterval = CMTime(seconds: ProgressStore.updateInterval, preferredTimescale: timeScale)
 
@@ -67,7 +133,7 @@ class VODPlayerViewController: AVPlayerViewController {
         ) { [weak self] time in
             if let self = self {
                 let seconds = time.seconds
-                self.progressStore.setProgress(for: self.videoGuid, progress: seconds)
+                self.progressStore.setProgress(for: self.guid, progress: seconds)
             }
         }
     }
@@ -78,66 +144,41 @@ class VODPlayerViewController: AVPlayerViewController {
             self.timeObserverToken = nil
         }
     }
-    
-    private func startVideo(video: FeedItem) {
-        guard video.videoAttachments.count > 0 else {
-            return
-        }
-        let request = VodDeliveryKeyRequest(guid: videoGuid, type: .vod)
-        vodDeliveryKeyOperation.get(request: request) { deliveryKey, error in
-            guard error == nil, let deliveryKey = deliveryKey else {
-                self.logger.error("Unable to get delivery key for video \(self.videoGuid).")
+}
+
+extension VODPlayerViewController {
+    private func setupMenu(videoMetadata: VideoMetadata) {
+        let qualityMenu = UIMenu.getQualityMenu(
+            selectedQualityLevel: selectedQualityLevel,
+            videoMetadata: videoMetadata
+        ) { option in
+            guard self.selectedQualityLevel != option else {
+                self.logger.debug("User selected same option as current. Returning early")
                 return
             }
             DispatchQueue.main.async {
-                self.startVideo(deliveryKey: deliveryKey)
+                self.selectedQualityLevel = option
+                self.setupMenu(videoMetadata: videoMetadata)
+                self.startVideo(videoMetadata: videoMetadata)
             }
         }
-    }
-    
-    private func startVideo(deliveryKey: VodDeliveryKey) {
-        let url = StreamUrl(deliveryKey: deliveryKey, qualityLevelName: UserSettings.instance.qualitySettings).url
-        let player = AVPlayer(url: url)
-        self.player = player
-        if let progress = progressStore.getProgress(for: videoGuid) {
-            let seekPosition = CMTime(seconds: progress, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-            player.currentItem?.seek(to: seekPosition, completionHandler: { success in
-                self.logger.debug("Started at position \(player.currentTime())")
-            })
-        }
+        self.customMenu = UIMenu(children: [qualityMenu])
         DispatchQueue.main.async {
-            player.currentItem?.externalMetadata = self.createMetadataItems()
-            player.play()
-            self.startObservingPlayer()
-            self.logger.debug("Started playing video \(url)")
+            self.transportBarCustomMenuItems = self.customMenu?.children ?? []
+            self.showsPlaybackControls = true
         }
     }
-    
-    func createMetadataItems() -> [AVMetadataItem] {
-        let channelName = video.channel.title
-        // Small optimization to avoid channel name sitting just above title prefix.
-        let title = video.title.replacing("\(channelName): ", with: "")
-        let description = video.text.html2String
-        let channelArt = video.channel.icon.path
-        let image = try? Data(contentsOf: channelArt)
-            
-        let mapping: [AVMetadataIdentifier: Any] = [
-            .commonIdentifierTitle: title,
-            .iTunesMetadataTrackSubTitle: channelName,
-            .commonIdentifierDescription: description,
-            .commonIdentifierArtwork: image as Any
-        ]
-        return mapping.compactMap { createMetadataItem(for:$0, value:$1) }
-    }
+}
 
-
-    private func createMetadataItem(for identifier: AVMetadataIdentifier,
-                                    value: Any) -> AVMetadataItem {
-        let item = AVMutableMetadataItem()
-        item.identifier = identifier
-        item.value = value as? NSCopying & NSObjectProtocol
-        // Specify "und" to indicate an undefined language.
-        item.extendedLanguageTag = "und"
-        return item.copy() as! AVMetadataItem
+extension VODPlayerViewController {
+    private func showPlaybackError() {
+        let action = UIAlertAction(title: "OK", style: .default) { action in
+            self.dismiss(animated: true)
+        }
+        let alert = UIAlertController(title: "Unable to start playback", message: "Something went wrong while trying to get the video. Please try again later", preferredStyle: .alert)
+        alert.addAction(action)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
     }
 }

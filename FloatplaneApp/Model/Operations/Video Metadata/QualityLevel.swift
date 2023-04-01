@@ -21,9 +21,24 @@
 
 import Foundation
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case video
-    case download
+struct QualityLevel: Codable, Equatable {
+    let name: String
+    let width: UInt
+    let height: UInt
+    let label: String
+    let order: UInt
+    
+    var resolution: CGSize {
+        get {
+            return CGSize(width: CGFloat(width), height: CGFloat(height))
+        }
+    }
+    
+    struct Standard {
+        private init() { }
+        static let ql360p = QualityLevel(name: "360", width: 640, height: 360, label: "360p", order: 0)
+        static let ql480p = QualityLevel(name: "480", width: 848, height: 478, label: "480p", order: 1)
+        static let ql720p = QualityLevel(name: "720", width: 1280, height: 720, label: "720p", order: 2)
+        static let ql1080p = QualityLevel(name: "1080", width: 1920, height: 1080, label: "1080p", order: 3)
+    }
 }

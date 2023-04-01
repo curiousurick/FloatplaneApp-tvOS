@@ -21,9 +21,15 @@
 
 import Foundation
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case video
-    case download
+struct VideoMetadataRequest {
+    
+    let feedItem: FeedItem
+    let id: String
+    
+    var params: [String : Any] {
+        return [
+            "id" : id
+        ]
+    }
+    
 }

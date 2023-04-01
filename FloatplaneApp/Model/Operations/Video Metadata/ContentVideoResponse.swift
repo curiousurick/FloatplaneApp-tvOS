@@ -21,9 +21,25 @@
 
 import Foundation
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case video
-    case download
+struct ContentVideoResponse: Codable {
+    let id: String
+    let guid: String
+    let title: String
+    let type: PostType
+    let description: String
+    let releaseDate: Date?
+    let duration: UInt64
+    let creator: String
+    let likes: UInt64
+    let dislikes: UInt64
+    let score: UInt64
+    let isProcessing: Bool
+    let primaryBlogPost: String
+    let thumbnail: Icon
+    let isAccessible: Bool
+    let blogPosts: [String]
+    let timelineSprite: Icon?
+    let userInteraction: [String]
+    let levels: [QualityLevel]
+    
 }

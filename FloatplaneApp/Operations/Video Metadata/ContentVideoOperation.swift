@@ -20,10 +20,27 @@
 //
 
 import Foundation
+import Alamofire
 
-enum PostType: String, Codable {
-    case live
-    case vod
-    case video
-    case download
+class ContentVideoOperation: CacheableAPIOperation<ContentVideoRequest, ContentVideoResponse> {
+    
+    typealias Request = ContentVideoRequest
+    typealias Response = ContentVideoResponse
+    
+    static let baseUrl = URL(string: "https://\(OperationConstants.domain)/api/v3/content/video")!
+    
+    init() {
+        super.init(baseUrl: ContentVideoOperation.baseUrl)
+    }
+    
+    override func _get(request: ContentVideoRequest, completion: ((ContentVideoResponse?, Error?) -> Void)?) -> DataRequest {
+        return AF.request(baseUrl, parameters: request.params).responseDecodable(of: ContentVideoResponse.self) { response in
+            if let response = response.value {
+                completion?(response, nil)
+            }
+            else {
+                completion?(nil, response.error)
+            }
+        }
+    }
 }

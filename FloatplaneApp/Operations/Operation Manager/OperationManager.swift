@@ -39,6 +39,7 @@ class OperationManager {
     let searchOperation = SearchOperation()
     let creatorListOperation = CreatorListOperation()
     let creatorOperation = CreatorOperation()
+    let contentVideoOperation = ContentVideoOperation()
     
     let allCacheableOperations: [CacheableOperation]
     
@@ -47,6 +48,7 @@ class OperationManager {
     let liveDeliveryKeyOperation = LiveDeliveryKeyOperation()
     let loginOperation = LoginOperation()
     let logoutOperation = LogoutOperation()
+    let videoMetadataOperation = VideoMetadataOperation()
     
     private init() {
         allCacheableOperations = [
@@ -54,7 +56,8 @@ class OperationManager {
             subscriptionOperation,
             searchOperation,
             creatorListOperation,
-            creatorOperation
+            creatorOperation,
+            contentVideoOperation
         ]
     }
     
