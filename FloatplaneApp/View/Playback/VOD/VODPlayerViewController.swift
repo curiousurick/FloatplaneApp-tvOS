@@ -20,6 +20,8 @@
 //
 
 import AVKit
+import AlamofireImage
+import SwiftDate
 
 class VODPlayerViewController: AVPlayerViewController {
     private let logger = Log4S()
@@ -38,6 +40,10 @@ class VODPlayerViewController: AVPlayerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         startVideo(video: video)
     }
     
@@ -65,7 +71,6 @@ class VODPlayerViewController: AVPlayerViewController {
             }
         }
     }
-
 
     private func stopObservingPlayer() {
         if let timeObserverToken = timeObserverToken {
@@ -100,8 +105,39 @@ class VODPlayerViewController: AVPlayerViewController {
                 self.logger.debug("Started at position \(player.currentTime())")
             })
         }
-        player.play()
-        self.startObservingPlayer()
-        logger.debug("Started playing video \(url)")
+        DispatchQueue.main.async {
+            player.currentItem?.externalMetadata = self.createMetadataItems()
+            player.play()
+            self.startObservingPlayer()
+            self.logger.debug("Started playing video \(url)")
+        }
+    }
+    
+    func createMetadataItems() -> [AVMetadataItem] {
+        let channelName = video.channel.title
+        // Small optimization to avoid channel name sitting just above title prefix.
+        let title = video.title.replacing("\(channelName): ", with: "")
+        let description = video.text.html2String
+        let channelArt = video.channel.icon.path
+        let image = try? Data(contentsOf: channelArt)
+            
+        let mapping: [AVMetadataIdentifier: Any] = [
+            .commonIdentifierTitle: title,
+            .iTunesMetadataTrackSubTitle: channelName,
+            .commonIdentifierDescription: description,
+            .commonIdentifierArtwork: image as Any
+        ]
+        return mapping.compactMap { createMetadataItem(for:$0, value:$1) }
+    }
+
+
+    private func createMetadataItem(for identifier: AVMetadataIdentifier,
+                                    value: Any) -> AVMetadataItem {
+        let item = AVMutableMetadataItem()
+        item.identifier = identifier
+        item.value = value as? NSCopying & NSObjectProtocol
+        // Specify "und" to indicate an undefined language.
+        item.extendedLanguageTag = "und"
+        return item.copy() as! AVMetadataItem
     }
 }

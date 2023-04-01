@@ -26,6 +26,7 @@
 		5E389A4229D6C31A00FC8B4B /* LoginFailedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4129D6C31A00FC8B4B /* LoginFailedResponse.swift */; };
 		5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */; };
 		5E389A4629D6CFC000FC8B4B /* UIColor+TextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */; };
+		5E389A4829D7C68F00FC8B4B /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4729D7C68F00FC8B4B /* String+HTML.swift */; };
 		5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BF829CFAD65006751F3 /* AppDelegate.swift */; };
 		5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */; };
 		5E507BFE29CFAD65006751F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507BFC29CFAD65006751F3 /* Main.storyboard */; };
@@ -146,6 +147,7 @@
 		5E389A4129D6C31A00FC8B4B /* LoginFailedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFailedResponse.swift; sourceTree = "<group>"; };
 		5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Main.swift"; sourceTree = "<group>"; };
 		5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+TextColor.swift"; sourceTree = "<group>"; };
+		5E389A4729D7C68F00FC8B4B /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		5E507BEB29CF7A87006751F3 /* CreatorFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorFeed.swift; sourceTree = "<group>"; };
 		5E507BEE29CF89E0006751F3 /* FloatplaneDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneDecoder.swift; sourceTree = "<group>"; };
 		5E507BF629CFAD65006751F3 /* FloatplaneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloatplaneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -436,6 +438,7 @@
 				5EAAE79F29D2C5A900F9A83B /* String+Class.swift */,
 				5E692E1629D3DE2300239196 /* Bool+StringValue.swift */,
 				5EC0578A29D5684F00D775EB /* UIImage+Transparency.swift */,
+				5E389A4729D7C68F00FC8B4B /* String+HTML.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1015,6 +1018,7 @@
 				5EC0575429D4985F00D775EB /* Notifications.swift in Sources */,
 				5EAAE77529D0D29C00F9A83B /* QualityLevelName.swift in Sources */,
 				5EAAE75529CFD06C00F9A83B /* ContentFeedRequest.swift in Sources */,
+				5E389A4829D7C68F00FC8B4B /* String+HTML.swift in Sources */,
 				5E389A4029D6BD5A00FC8B4B /* UIFont+Roboto.swift in Sources */,
 				5EC0574F29D41C9A00D775EB /* LivePlayerViewController.swift in Sources */,
 				5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */,

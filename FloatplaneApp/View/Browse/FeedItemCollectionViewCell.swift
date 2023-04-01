@@ -114,7 +114,7 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
         type.text = item.typeLabel
         channel.text = item.channelLabel
         timeSinceRelease.text = item.timeSinceReleaseLabel
-        if let progress = item.progress {
+        if let progress = item.progress, item.duration != 0 {
             progressBar.updateWidth(percentWidth: progress / item.duration)
             progressBar.isHidden = false
         }
