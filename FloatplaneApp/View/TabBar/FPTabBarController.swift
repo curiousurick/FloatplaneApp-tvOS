@@ -49,7 +49,8 @@ class FPTabBarController: UITabBarController {
             liveStreamOfflineViewController.creator = creator
             browseViewController.creator = creator
             searchViewController.creator = creator
-            self.updateLiveTab()
+            livePlayerViewController.creator = creator
+            liveStreamOfflineViewController.creator = creator
             viewToFocus = tabBar
         }
     }
@@ -92,7 +93,8 @@ class FPTabBarController: UITabBarController {
 
         // Setup Search ViewController
         let searchNavController = SearchViewController.createEmbeddedInNavigationController()
-        self.searchViewController = searchNavController.viewControllers[0] as? SearchViewController
+        let searchContainer = searchNavController.viewControllers[0] as? UISearchContainerViewController
+        self.searchViewController = searchContainer?.searchController.searchResultsController as? SearchViewController
         
         let searchTab = UITabBarItem(title: Tab.searchName, image: nil, tag: Tab.searchId)
         searchNavController.tabBarItem = searchTab
@@ -104,7 +106,7 @@ class FPTabBarController: UITabBarController {
         settingsController.tabBarItem = settingsTab
 
         self.viewControllers = [
-            liveStreamOfflineViewController,
+            livePlayerViewController,
             browseViewController,
             searchNavController,
             settingsController
@@ -129,18 +131,24 @@ class FPTabBarController: UITabBarController {
         super.viewDidAppear(animated)
     }
     
-    private func updateLiveTab() {
+    func updateLiveTab(online: Bool, deliverKey: LiveDeliveryKey? = nil) {
         DispatchQueue.main.async {
-            guard var viewControllers = self.viewControllers,
-                  let creator = self.creator else {
+            guard let viewControllers = self.viewControllers else {
                 return
             }
-            if creator.liveStream.offline != nil {
-                viewControllers[0] = self.liveStreamOfflineViewController
+            var selectedViewController: UIViewController!
+            if online {
+                self.livePlayerViewController.deliveryKey = deliverKey
+                selectedViewController = self.livePlayerViewController
             }
             else {
-                viewControllers[0] = self.livePlayerViewController
+                selectedViewController = self.liveStreamOfflineViewController
             }
+            var allVCs = viewControllers
+            allVCs[0] = selectedViewController
+            self.setViewControllers(allVCs, animated: false)
+            self.selectedIndex = 1
+            self.selectedIndex = 0
         }
     }
     

@@ -23,10 +23,18 @@ import UIKit
 import AlamofireImage
 
 class LiveStreamOfflineViewController: UIViewController {
+    private let logger = Log4S()
+    private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     
     var creator: Creator? {
         didSet {
             self.updateThumbnailView()
+        }
+    }
+    
+    private var fpTabBarController: FPTabBarController {
+        get {
+            return tabBarController as! FPTabBarController
         }
     }
     
@@ -38,9 +46,25 @@ class LiveStreamOfflineViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
         updateThumbnailView()
+        checkIfVideoOnline()
     }
     
+    private func checkIfVideoOnline() {
+        guard let video = creator?.liveStream else {
+            logger.error("Cannot start live stream because liveSream is nil")
+            return
+        }
+        let request = LiveDeliveryKeyRequest(creator: video.owner, type: .live)
+        liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
+            if let deliveryKey = deliveryKey {
+                self.logger.error("Unable to get live delivery key for owner \(video.owner).")
+                self.fpTabBarController.updateLiveTab(online: true, deliverKey: deliveryKey)
+                return
+            }
+        }
+    }
     
     func updateThumbnailView() {
         if let offlineThumbnailView = self.offlineThumbnailView,

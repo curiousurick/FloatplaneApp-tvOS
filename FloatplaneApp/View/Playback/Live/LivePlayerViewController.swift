@@ -22,17 +22,25 @@
 import UIKit
 import AVKit
 
-class LivePlayerViewController: AVPlayerViewController {
+class LivePlayerViewController: AVPlayerViewController, AVPlayerViewControllerDelegate {
     private let logger = Log4S()
     private var menuPressRecognizer: UITapGestureRecognizer?
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     
     private var timeObserverToken: Any?
     
+    private var fpTabBarController: FPTabBarController {
+        get {
+            return tabBarController as! FPTabBarController
+        }
+    }
+    
     var creator: Creator?
+    var deliveryKey: LiveDeliveryKey?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,21 +53,25 @@ class LivePlayerViewController: AVPlayerViewController {
             self.parent?.view.addGestureRecognizer(menuPressRecognizer)
         }
         
-    }
-
-    @objc func menuButtonAction(recognizer: UITapGestureRecognizer) {
-        let tabBarController = parent as! FPTabBarController
-        tabBarController.selectedIndex = 1
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        // You're being presented when you already have an active stream going.
         if let player = player {
             player.play()
         }
+        // You're being presented to replace the offline screen
+        else if let deliveryKey = deliveryKey {
+            startVideo(deliveryKey: deliveryKey)
+        }
+        // You're being presented without knowledge of livestream availability.
         else {
             startVideo()
         }
+    }
+
+    @objc func menuButtonAction(recognizer: UITapGestureRecognizer) {
+        guard let tabBarController = parent as? FPTabBarController else {
+            return
+        }
+        tabBarController.selectedIndex = 1
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,8 +115,10 @@ class LivePlayerViewController: AVPlayerViewController {
         liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
             guard error == nil, let deliveryKey = deliveryKey else {
                 self.logger.error("Unable to get live delivery key for owner \(video.owner).")
+                self.fpTabBarController.updateLiveTab(online: false)
                 return
             }
+            self.deliveryKey = deliveryKey
             DispatchQueue.main.async {
                 self.startVideo(deliveryKey: deliveryKey)
             }
@@ -118,5 +132,6 @@ class LivePlayerViewController: AVPlayerViewController {
         player.play()
         self.startObservingPlayer()
         logger.debug("Started playing video \(url)")
+        self.deliveryKey = nil
     }
 }
