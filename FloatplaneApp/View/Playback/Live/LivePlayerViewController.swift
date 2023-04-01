@@ -22,8 +22,7 @@
 import UIKit
 import AVKit
 
-class LivePlayerViewController: AVPlayerViewController, AVPlayerViewControllerDelegate {
-    private let logger = Log4S()
+class LivePlayerViewController: BaseVideoPlayerViewController {
     private var menuPressRecognizer: UITapGestureRecognizer?
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     
@@ -35,43 +34,20 @@ class LivePlayerViewController: AVPlayerViewController, AVPlayerViewControllerDe
         }
     }
     
-    var creator: Creator?
+    let liveStreamEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
+    var registeredForLiveStreamEndNotification: Bool = false
+    var creator: Creator!
     var deliveryKey: LiveDeliveryKey?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-        menuPressRecognizer = UITapGestureRecognizer()
-        if let menuPressRecognizer = menuPressRecognizer {
-            menuPressRecognizer.addTarget(self, action: #selector(menuButtonAction(recognizer:)))
-            menuPressRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.menu.rawValue)]
-            self.parent?.view.addGestureRecognizer(menuPressRecognizer)
-        }
-        
-        // You're being presented when you already have an active stream going.
-        if let player = player {
-            player.play()
-        }
-        // You're being presented to replace the offline screen
-        else if let deliveryKey = deliveryKey {
-            startVideo(deliveryKey: deliveryKey)
-        }
-        // You're being presented without knowledge of livestream availability.
-        else {
-            startVideo()
-        }
-    }
-
-    @objc func menuButtonAction(recognizer: UITapGestureRecognizer) {
-        guard let tabBarController = parent as? FPTabBarController else {
-            return
-        }
-        tabBarController.selectedIndex = 1
+        setupMenuButtonPress()
+        startVideo()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,47 +56,38 @@ class LivePlayerViewController: AVPlayerViewController, AVPlayerViewControllerDe
             self.parent?.view.removeGestureRecognizer(menuPressRecognizer)
         }
         self.tabBarController?.tabBar.isHidden = false
-        stopObservingPlayer()
         if let player = player {
             player.pause()
         }
     }
     
-    private func startObservingPlayer() {
-        // Notify every half second
-        let timeScale = CMTimeScale(NSEC_PER_SEC)
-        let updateInterval = CMTime(seconds: ProgressStore.updateInterval, preferredTimescale: timeScale)
-
-        timeObserverToken = player?.addPeriodicTimeObserver(
-            forInterval: updateInterval,
-            queue: .main
-        ) { time in
-        }
-    }
-
-
-    private func stopObservingPlayer() {
-        if let timeObserverToken = timeObserverToken {
-            player?.removeTimeObserver(timeObserverToken)
-            self.timeObserverToken = nil
-        }
+    override func playbackFailed() {
+        cleanupAndExit()
     }
     
     private func startVideo() {
-        guard let video = creator?.liveStream else {
-            logger.error("Cannot start live stream because liveSream is nil")
+        // You're being presented when you already have an active stream going.
+        if let player = player {
+            player.play()
             return
         }
-        let request = LiveDeliveryKeyRequest(creator: video.owner, type: .live)
-        liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
-            guard error == nil, let deliveryKey = deliveryKey else {
+        // You're being presented to replace the offline screen
+        else if let deliveryKey = deliveryKey {
+            startVideo(deliveryKey: deliveryKey)
+            return
+        }
+        // You're being presented without knowledge of livestream availability.
+        let video = creator.liveStream
+        Task {
+            if let deliveryKey = await getDeliveryKey(video: video) {
+                self.deliveryKey = deliveryKey
+                DispatchQueue.main.async {
+                    self.startVideo(deliveryKey: deliveryKey)
+                }
+            }
+            else {
                 self.logger.error("Unable to get live delivery key for owner \(video.owner).")
                 self.fpTabBarController.updateLiveTab(online: false)
-                return
-            }
-            self.deliveryKey = deliveryKey
-            DispatchQueue.main.async {
-                self.startVideo(deliveryKey: deliveryKey)
             }
         }
     }
@@ -130,8 +97,53 @@ class LivePlayerViewController: AVPlayerViewController, AVPlayerViewControllerDe
         let player = AVPlayer(url: url)
         self.player = player
         player.play()
-        self.startObservingPlayer()
+        if !registeredForLiveStreamEndNotification {
+            NotificationCenter.default.addObserver(self, selector: #selector(liveStreamEnded(notification:)), name: liveStreamEndNotification, object: nil)
+            registeredForLiveStreamEndNotification = true
+        }
         logger.debug("Started playing video \(url)")
-        self.deliveryKey = nil
+    }
+}
+
+// MARK: Menu Button Press Behavior
+extension LivePlayerViewController {
+    private func setupMenuButtonPress() {
+        menuPressRecognizer = UITapGestureRecognizer()
+        if let menuPressRecognizer = menuPressRecognizer {
+            menuPressRecognizer.addTarget(self, action: #selector(menuButtonAction(recognizer:)))
+            menuPressRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.menu.rawValue)]
+            self.parent?.view.addGestureRecognizer(menuPressRecognizer)
+        }
+    }
+    
+    @objc func menuButtonAction(recognizer: UITapGestureRecognizer) {
+        fpTabBarController.selectedIndex = 1
+    }
+}
+
+// MARK: Get Delivery Key
+extension LivePlayerViewController {
+    
+    func getDeliveryKey(video: LiveStream) async -> LiveDeliveryKey? {
+        await withCheckedContinuation({ continuation in
+            let request = LiveDeliveryKeyRequest(creator: video.owner)
+            self.liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
+                continuation.resume(returning: deliveryKey)
+            }
+        })
+    }
+}
+
+// MARK: End of stream behavior
+extension LivePlayerViewController {
+    @objc private func liveStreamEnded(notification: Notification) {
+        cleanupAndExit()
+    }
+    
+    private func cleanupAndExit() {
+        registeredForLiveStreamEndNotification = false
+        self.player = nil
+        NotificationCenter.default.removeObserver(self, name: liveStreamEndNotification, object: nil)
+        fpTabBarController.updateLiveTab(online: false)
     }
 }

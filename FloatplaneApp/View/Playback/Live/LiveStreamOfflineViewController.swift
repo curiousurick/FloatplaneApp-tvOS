@@ -46,17 +46,20 @@ class LiveStreamOfflineViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
         updateThumbnailView()
         checkIfVideoOnline()
     }
     
-    private func checkIfVideoOnline() {
+    func checkIfVideoOnline() {
         guard let video = creator?.liveStream else {
             logger.error("Cannot start live stream because liveSream is nil")
             return
         }
-        let request = LiveDeliveryKeyRequest(creator: video.owner, type: .live)
+        let request = LiveDeliveryKeyRequest(creator: video.owner)
+        guard liveDeliveryKeyOperation.isAllowedToCheckForLiveStream(request: request) else {
+            logger.info("Cannot check if live because not allowed to check.")
+            return
+        }
         liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
             if let deliveryKey = deliveryKey {
                 self.logger.error("Unable to get live delivery key for owner \(video.owner).")

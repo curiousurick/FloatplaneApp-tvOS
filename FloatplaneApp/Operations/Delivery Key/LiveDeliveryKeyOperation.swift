@@ -22,30 +22,39 @@
 import Foundation
 import Alamofire
 
-class VodDeliveryKeyOperation: APIOperation {
-    typealias Request = VodDeliveryKeyRequest
-    typealias Response = VodDeliveryKey
-    
-    let baseUrl: URL = URL(string: "https://\(OperationConstants.domain)/api/v2/cdn/delivery")!
-    
-    func get(request: VodDeliveryKeyRequest, completion: ((VodDeliveryKey?, Error?) -> Void)? = nil) {
-        AF.request(baseUrl, parameters: request.params).responseDecodable(of: VodDeliveryKey.self) { response in
-            completion?(response.value!, nil)
-        }
-    }
-}
-
+/// This operation retrieves a delivery key for the active creator's live stream.
+/// The delivery key contains a set of streams, parameterized by quality level.
+/// However, the delivery key looks different for VOD and Live so the responses are different.
+/// The result of this operation is not cached.
 class LiveDeliveryKeyOperation: APIOperation {
     typealias Request = LiveDeliveryKeyRequest
     typealias Response = LiveDeliveryKey
     
-    let baseUrl: URL = URL(string: "https://\(OperationConstants.domain)/api/v2/cdn/delivery")!
+    let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
+    
+    // 1 minute
+    let timeBetweenLiveStreamChecks: TimeInterval = 60 * 1
+    var lastCheck: [LiveDeliveryKeyRequest : Date] = [:]
+    
+    /// If this request has been made in the last minute, it's not allowed.
+    /// This is because the LiveStream View and Offline View both check
+    /// if the stream is happening. If the status changes, the view will switch
+    /// to the other. However, sometimes, livestreams end and the deliveryKey
+    /// remains available. Because of this, the offline view may think it's online
+    /// and switch back. As of now, there's no signal that 100% proves it's offline
+    /// until an AVPlayer attempts to play.
+    /// TODO: Find a better solution that just stopping the request from being made again.
+    func isAllowedToCheckForLiveStream(request: LiveDeliveryKeyRequest) -> Bool {
+        if let lastCheck = lastCheck[request] {
+            return Date().timeIntervalSince(lastCheck) > timeBetweenLiveStreamChecks
+        }
+        return true
+    }
     
     func get(request: LiveDeliveryKeyRequest, completion: ((LiveDeliveryKey?, Error?) -> Void)? = nil) {
         AF.request(baseUrl, parameters: request.params).responseDecodable(of: LiveDeliveryKey.self) { response in
             completion?(response.value!, nil)
+            self.lastCheck[request] = Date()
         }
     }
-    
-    
 }

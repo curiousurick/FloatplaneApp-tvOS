@@ -20,28 +20,19 @@
 //
 
 import Foundation
-import Alamofire
 
-class CreatorOperation: CacheableAPIOperation<CreatorRequest, Creator> {
+struct LiveDeliveryKeyRequest: OperationRequest {
+    let creator: String
+    let type: PostType = .live
     
-    typealias Request = CreatorRequest
-    typealias ResponseValue = Creator
-    
-    static let base = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
-    
-    init() {
-        super.init(baseUrl: CreatorOperation.base)
+    init(creator: String) {
+        self.creator = creator
     }
     
-    override func _get(request: CreatorRequest, completion: ((Creator?, Error?) -> Void)? = nil) -> DataRequest {
-        return AF.request(baseUrl, parameters: request.params).responseDecodable(of: [Creator].self) { response in
-            if let creators = response.value,
-               creators.count == 1 {
-                completion?(creators[0], nil)
-            }
-            else {
-                completion?(nil, response.error)
-            }
-        }
+    var params: [String : Any] {
+        return [
+            "type": type.rawValue,
+            "creator": creator,
+        ]
     }
 }

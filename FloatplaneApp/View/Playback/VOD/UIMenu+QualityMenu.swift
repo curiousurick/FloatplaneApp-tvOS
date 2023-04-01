@@ -32,20 +32,14 @@ extension UIMenu {
         videoMetadata: VideoMetadata,
         optionSelected: @escaping ((QualityLevel) -> Void)
     ) -> UIMenu {
-        let options = [
-            QualityLevel.Standard.ql360p,
-            QualityLevel.Standard.ql480p,
-            QualityLevel.Standard.ql720p,
-            QualityLevel.Standard.ql1080p
-        ]
-        let optionActions = options.enumerated().map { (index, option) in
-            let isSelected = selectedQualityLevel == option
+        let optionActions = videoMetadata.levels.enumerated().map { (index, level) in
+            let isSelected = selectedQualityLevel == level
             let state: UIAction.State = isSelected ? .on : .off
             return UIAction(
-                title: option.label,
+                title: level.label,
                 state: state,
                 handler: { action in
-                    optionSelected(option)
+                    optionSelected(level)
                 }
             )
         }

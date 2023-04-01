@@ -27,7 +27,7 @@ class ContentVideoOperation: CacheableAPIOperation<ContentVideoRequest, ContentV
     typealias Request = ContentVideoRequest
     typealias Response = ContentVideoResponse
     
-    static let baseUrl = URL(string: "https://\(OperationConstants.domain)/api/v3/content/video")!
+    static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
     
     init() {
         super.init(baseUrl: ContentVideoOperation.baseUrl)

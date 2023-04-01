@@ -27,7 +27,7 @@ class SubscriptionOperation: CacheableAPIOperation<SubscriptionRequest, Subscrip
     typealias Request = SubscriptionRequest
     typealias Response = SubscriptionResponse
     
-    static let baseUrl = URL(string: "https://\(OperationConstants.domain)/api/v3/user/subscriptions")!
+    static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
     
     init() {
         super.init(baseUrl: SubscriptionOperation.baseUrl)

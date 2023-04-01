@@ -21,40 +21,18 @@
 
 import Foundation
 
-protocol DeliveryKeyRequest: OperationRequest {
-    var type: PostType { get }
-}
-
-struct VodDeliveryKeyRequest: DeliveryKeyRequest {
+struct VodDeliveryKeyRequest: OperationRequest {
     let guid: String
-    let type: PostType
+    let type: PostType = .vod
     
-    init(guid: String, type: PostType) {
+    init(guid: String) {
         self.guid = guid
-        self.type = type
     }
     
     var params: [String : Any] {
         return [
             "type": type.rawValue,
             "guid": guid,
-        ]
-    }
-}
-
-struct LiveDeliveryKeyRequest: DeliveryKeyRequest {
-    let creator: String
-    let type: PostType
-    
-    init(creator: String, type: PostType) {
-        self.creator = creator
-        self.type = type
-    }
-    
-    var params: [String : Any] {
-        return [
-            "type": type.rawValue,
-            "creator": creator,
         ]
     }
 }

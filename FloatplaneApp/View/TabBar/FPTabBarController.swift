@@ -22,7 +22,7 @@
 import Foundation
 import UIKit
 
-class FPTabBarController: UITabBarController {
+class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
     private let logger = Log4S()
     private let updateLiveTabQueue = OperationQueue()
     private let creatorOperation = OperationManager.instance.creatorOperation
@@ -75,6 +75,7 @@ class FPTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         
         let storyboard = UIStoryboard.main
         
@@ -149,12 +150,16 @@ class FPTabBarController: UITabBarController {
             self.setViewControllers(allVCs, animated: false)
             self.selectedIndex = 1
             self.selectedIndex = 0
+            self.toggleHidden(selectedViewController: selectedViewController)
         }
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item == tabBar.items?.first {
-            updateCreatorInfo()
+    func toggleHidden(selectedViewController: UIViewController) {
+        if selectedViewController == livePlayerViewController {
+            self.tabBar.isHidden = true
+        }
+        else {
+            self.tabBar.isHidden = false
         }
     }
     

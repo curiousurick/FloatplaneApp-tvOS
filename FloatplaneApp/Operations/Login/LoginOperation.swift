@@ -24,7 +24,7 @@ import Alamofire
 
 class LoginOperation {
     
-    var baseUrl: URL = URL(string: "https://\(OperationConstants.domain)/api/v2/auth/login")!
+    var baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
     // Used to simulate iOS so we don't need captcha
     private let userAgent = "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"
     private let headers: HTTPHeaders

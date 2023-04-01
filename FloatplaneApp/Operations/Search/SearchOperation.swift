@@ -26,7 +26,7 @@ class SearchOperation: CacheableAPIOperation<SearchRequest, SearchResponse> {
     
     typealias Request = SearchRequest
     typealias Response = SearchResponse
-    static let base = URL(string: "https://\(OperationConstants.domain)/api/v3/content/creator")!
+    static let base = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
     
     init() {
         super.init(

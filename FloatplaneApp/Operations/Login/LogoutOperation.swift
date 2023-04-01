@@ -28,7 +28,7 @@ class LogoutOperation {
     typealias Request = LoginRequest
     typealias ResponseValue = LoginResponse
     
-    var baseUrl: URL = URL(string: "https://\(OperationConstants.domain)/api/v2/auth/logout")!
+    var baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
     // Used to simulate iOS so we don't need captcha
     private let userAgent = "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"
     private let headers: HTTPHeaders

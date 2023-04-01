@@ -53,7 +53,7 @@ class VideoMetadataOperation {
     
     private func getDeliveryKey(id: String) async -> (VodDeliveryKey?, Error?) {
         await withCheckedContinuation({ continuation in
-            let request = VodDeliveryKeyRequest(guid: id, type: .vod)
+            let request = VodDeliveryKeyRequest(guid: id)
             VodDeliveryKeyOperation().get(request: request) { deliveryKey, error in
                 continuation.resume(returning: (deliveryKey, error))
             }

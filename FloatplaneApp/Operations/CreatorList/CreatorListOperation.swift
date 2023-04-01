@@ -27,7 +27,7 @@ class CreatorListOperation: CacheableAPIOperation<CreatorListRequest, CreatorLis
     typealias Request = CreatorListRequest
     typealias Response = CreatorListResponse
     
-    static let baseUrl = URL(string: "https://\(OperationConstants.domain)/api/v3/user/notification/list")!
+    static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
     
     init() {
         super.init(baseUrl: CreatorListOperation.baseUrl)

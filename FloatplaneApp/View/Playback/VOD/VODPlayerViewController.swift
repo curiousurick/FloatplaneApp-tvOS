@@ -23,12 +23,9 @@ import AVKit
 import AlamofireImage
 import SwiftDate
 
-class VODPlayerViewController: AVPlayerViewController {
-    private let logger = Log4S()
+class VODPlayerViewController: BaseVideoPlayerViewController {
     private let progressStore = ProgressStore.instance
     private let videoMetadataOperation = OperationManager.instance.videoMetadataOperation
-    
-    private var timeObserverToken: Any?
     
     var customMenu: UIMenu?
     var feedItem: FeedItem!
@@ -57,11 +54,15 @@ class VODPlayerViewController: AVPlayerViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        stopObservingPlayer()
         if let player = player {
             let seconds = player.currentTime().seconds
             progressStore.setProgress(for: guid, progress: seconds)
         }
+    }
+    
+    override func progressUpdate(time: CMTime) {
+        let seconds = time.seconds
+        self.progressStore.setProgress(for: self.guid, progress: seconds)
     }
     
     private func getVideoMetadata() async -> VideoMetadata? {
@@ -77,7 +78,7 @@ class VODPlayerViewController: AVPlayerViewController {
         let url = StreamUrl(deliveryKey: videoMetadata.deliveryKey, qualityLevel: selectedQualityLevel).url
         let playerItem = AVPlayerItem(url: url)
         
-        let progress = getTime()
+        let progress = getStartTime()
         let player = getOrCreatePlayer(playerItem: playerItem)
         playerItem.seek(to: progress, completionHandler: { success in
             self.player!.play()
@@ -90,7 +91,6 @@ class VODPlayerViewController: AVPlayerViewController {
         })
         
         player.updateItemMetadata(video: videoMetadata)
-        self.startObservingPlayer()
         self.logger.debug("Started playing video \(url)")
     }
     
@@ -106,7 +106,7 @@ class VODPlayerViewController: AVPlayerViewController {
         }
     }
     
-    private func getTime() -> CMTime {
+    private func getStartTime() -> CMTime {
         // Replacing video in progress with new stream.
         if let player = self.player {
             return player.currentTime()
@@ -117,32 +117,6 @@ class VODPlayerViewController: AVPlayerViewController {
         }
         // Start from the beginning
         return .zero
-    }
-}
-
-// MARK: Observation of playback
-
-extension VODPlayerViewController {
-    private func startObservingPlayer() {
-        let timeScale = CMTimeScale(NSEC_PER_SEC)
-        let updateInterval = CMTime(seconds: ProgressStore.updateInterval, preferredTimescale: timeScale)
-
-        timeObserverToken = player?.addPeriodicTimeObserver(
-            forInterval: updateInterval,
-            queue: .main
-        ) { [weak self] time in
-            if let self = self {
-                let seconds = time.seconds
-                self.progressStore.setProgress(for: self.guid, progress: seconds)
-            }
-        }
-    }
-
-    private func stopObservingPlayer() {
-        if let timeObserverToken = timeObserverToken {
-            player?.removeTimeObserver(timeObserverToken)
-            self.timeObserverToken = nil
-        }
     }
 }
 
