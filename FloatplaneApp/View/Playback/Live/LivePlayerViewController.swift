@@ -53,8 +53,9 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if let menuPressRecognizer = menuPressRecognizer {
-            self.parent?.view.removeGestureRecognizer(menuPressRecognizer)
+            self.view.removeGestureRecognizer(menuPressRecognizer)
         }
+        menuPressRecognizer = nil
         self.tabBarController?.tabBar.isHidden = false
         if let player = player {
             player.pause()
@@ -112,7 +113,7 @@ extension LivePlayerViewController {
         if let menuPressRecognizer = menuPressRecognizer {
             menuPressRecognizer.addTarget(self, action: #selector(menuButtonAction(recognizer:)))
             menuPressRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.menu.rawValue)]
-            self.parent?.view.addGestureRecognizer(menuPressRecognizer)
+            self.view.addGestureRecognizer(menuPressRecognizer)
         }
     }
     
