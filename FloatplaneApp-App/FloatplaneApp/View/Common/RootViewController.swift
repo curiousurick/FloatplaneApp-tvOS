@@ -124,9 +124,6 @@ class RootViewController: UIViewController {
     ) {
         if let registerViewController = self.children.first(where: { $0 is LaunchScreenViewController }),
            let topNavigationController = topNavigationController {
-            topNavigationController.firstPage = firstPage
-            topNavigationController.activeCreator = activeCreator
-            topNavigationController.baseCreators = baseCreators
             topNavigationController.updateChildViewData(
                 baseCreators: baseCreators,
                 activeCreator: activeCreator,

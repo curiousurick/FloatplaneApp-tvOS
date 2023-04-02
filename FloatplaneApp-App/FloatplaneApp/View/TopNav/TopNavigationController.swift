@@ -54,39 +54,18 @@ class TopNavigationController: UINavigationController {
         super.viewWillAppear(animated)
     }
     
-    func tabBarReady() {
-        
-    }
-    
-    func goToLoginView() {
-        AppDelegate.instance.rootViewController.goToLogin()
-    }
-    
     func clearAndGoToLoginView() {
         self.activeCreator = nil
         self.baseCreators = nil
         self.firstPage = nil
         self.fpTabBarController?.resetView()
-        goToLoginView()
-    }
-    
-    private func getCreators() {
-        Task {
-            let getFirstPageResponse = await getFirstPageOperation.get()
-            if let result = getFirstPageResponse.0 {
-                self.updateChildViewData(
-                    baseCreators: result.baseCreators,
-                    activeCreator: result.activeCreator,
-                    firstPage: result.firstPage
-                )
-            }
-            else {
-                // TODO Add error message
-            }
-        }
+        AppDelegate.instance.rootViewController.goToLogin()
     }
     
     func updateChildViewData(baseCreators: [BaseCreator], activeCreator: Creator, firstPage: [FeedItem]) {
+        self.firstPage = firstPage
+        self.activeCreator = activeCreator
+        self.baseCreators = baseCreators
         self.fpTabBarController?.baseCreators = baseCreators
         self.fpTabBarController?.firstPage = firstPage
         self.fpTabBarController?.activeCreator = activeCreator

@@ -117,8 +117,6 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
             searchViewController
         ]
         self.resetView()
-        let navigationController = self.navigationController as! TopNavigationController
-        navigationController.tabBarReady()
     }
     
     func resetView() {
@@ -135,14 +133,6 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
         DispatchQueue.main.async {
             self.viewToFocus = self.tabBar
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     func updateLiveTab(online: Bool, deliverKey: DeliveryKey? = nil) {
@@ -187,5 +177,4 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
         }
     }
-    
 }
