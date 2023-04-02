@@ -24,7 +24,11 @@ import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 
 class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
-    var creators: [BaseCreator] = []
+    var creators: [BaseCreator]? {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
@@ -38,12 +42,6 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updatedCreators(notification:)),
-            name: FPNotifications.CreatorListUpdated.name,
-            object: nil
-        )
     }
     
     override func awakeFromNib() {
@@ -77,18 +75,18 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return creators.count
+        return creators?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatorListViewCell.identifier, for: indexPath) as! CreatorListViewCell
-        cell.updateImage(creator: creators[indexPath.row])
+        cell.updateImage(creator: creators![indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedBaseCreator = creators[indexPath.row]
+        let selectedBaseCreator = creators![indexPath.row]
         let navController = AppDelegate.instance.topNavigationController
-        navController?.activeBaseCreator = selectedBaseCreator
+        navController?.changeSelectedCreator(baseCreator: selectedBaseCreator)
     }
 }

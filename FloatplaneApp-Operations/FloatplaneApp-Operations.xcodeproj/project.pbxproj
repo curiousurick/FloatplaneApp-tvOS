@@ -29,6 +29,7 @@
 		5E389C4529D8BA1D00FC8B4B /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 5E389C4429D8BA1D00FC8B4B /* Cache */; };
 		5E389C4D29D8BE0D00FC8B4B /* OperationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C4C29D8BE0D00FC8B4B /* OperationConstants.swift */; };
 		5E389C5129D8C01D00FC8B4B /* FloatplaneDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C4E29D8BF3E00FC8B4B /* FloatplaneDecoder.swift */; };
+		5E4CE96929DA0B7F0029110E /* GetFirstPageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE96829DA0B7F0029110E /* GetFirstPageOperation.swift */; };
 		5EFD928329D8C883007E8374 /* FloatplaneApp_Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD927F29D8C766007E8374 /* FloatplaneApp_Models.framework */; };
 		5EFD928729D8C8BA007E8374 /* FloatplaneApp_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD928629D8C8BA007E8374 /* FloatplaneApp_Utilities.framework */; };
 		5EFD929929D90D30007E8374 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD929829D90D2F007E8374 /* AVKit.framework */; };
@@ -66,6 +67,7 @@
 		5E389B9929D8B55400FC8B4B /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389C4C29D8BE0D00FC8B4B /* OperationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationConstants.swift; sourceTree = "<group>"; };
 		5E389C4E29D8BF3E00FC8B4B /* FloatplaneDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatplaneDecoder.swift; sourceTree = "<group>"; };
+		5E4CE96829DA0B7F0029110E /* GetFirstPageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFirstPageOperation.swift; sourceTree = "<group>"; };
 		5EFD927F29D8C766007E8374 /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EFD928629D8C8BA007E8374 /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EFD929829D90D2F007E8374 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS16.1.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -118,6 +120,7 @@
 		5E389B2C29D8B29800FC8B4B /* FloatplaneApp-Operations */ = {
 			isa = PBXGroup;
 			children = (
+				5E4CE96729DA0B6C0029110E /* Get First Page */,
 				5E389C4C29D8BE0D00FC8B4B /* OperationConstants.swift */,
 				5E389B9029D8B42E00FC8B4B /* ImageGrabber */,
 				5E389B5529D8B34B00FC8B4B /* Creator */,
@@ -254,6 +257,14 @@
 			path = Decoders;
 			sourceTree = "<group>";
 		};
+		5E4CE96729DA0B6C0029110E /* Get First Page */ = {
+			isa = PBXGroup;
+			children = (
+				5E4CE96829DA0B7F0029110E /* GetFirstPageOperation.swift */,
+			);
+			path = "Get First Page";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -379,6 +390,7 @@
 				5E389B7029D8B34B00FC8B4B /* CreatorOperation.swift in Sources */,
 				5E389B7929D8B34B00FC8B4B /* SearchOperation.swift in Sources */,
 				5E389B7529D8B34B00FC8B4B /* CreatorListOperation.swift in Sources */,
+				5E4CE96929DA0B7F0029110E /* GetFirstPageOperation.swift in Sources */,
 				5E389B7329D8B34B00FC8B4B /* VideoMetadataOperation.swift in Sources */,
 				5E389B7429D8B34B00FC8B4B /* ContentVideoOperation.swift in Sources */,
 				5E389B7E29D8B34B00FC8B4B /* LoginOperation.swift in Sources */,

@@ -35,7 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    var topNavigationController: TopNavigationController!
+    var rootViewController: RootViewController!
+    var topNavigationController: TopNavigationController? {
+        get {
+            return rootViewController.topNavigationController
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -44,6 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(true)
+        
+        self.rootViewController = UIStoryboard.main.instantiateInitialViewController()
+        self.window?.rootViewController = self.rootViewController
+        self.window?.makeKeyAndVisible()
         
         return true
     }

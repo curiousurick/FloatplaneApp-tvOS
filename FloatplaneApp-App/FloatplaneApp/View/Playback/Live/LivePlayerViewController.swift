@@ -24,7 +24,7 @@ import AVKit
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class LivePlayerViewController: BaseVideoPlayerViewController {
+class LivePlayerViewController: BaseVideoPlayerViewController, CreatorViewControllerProtocol {
     private var menuPressRecognizer: UITapGestureRecognizer?
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     
@@ -38,7 +38,8 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
     
     let liveStreamEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
     var registeredForLiveStreamEndNotification: Bool = false
-    var creator: Creator!
+    var activeCreator: Creator!
+    var baseCreators: [BaseCreator]!
     var deliveryKey: DeliveryKey?
     
     override func viewDidLoad() {
@@ -80,7 +81,7 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
             return
         }
         // You're being presented without knowledge of livestream availability.
-        let video = creator.liveStream
+        let video = activeCreator.liveStream
         Task {
             if let deliveryKey = await getDeliveryKey(video: video) {
                 self.deliveryKey = deliveryKey

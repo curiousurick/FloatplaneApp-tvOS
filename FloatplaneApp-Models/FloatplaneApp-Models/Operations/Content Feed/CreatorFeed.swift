@@ -27,12 +27,4 @@ public struct CreatorFeed: Codable {
     public init(items: [FeedItem]) {
         self.items = items
     }
-    
-    public func combine(with items: [FeedItem]) -> CreatorFeed {
-        var combined = self.items
-        combined += items
-        return CreatorFeed(items: combined)
-        
-    }
-    
 }

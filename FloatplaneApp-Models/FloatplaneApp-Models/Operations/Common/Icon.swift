@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct Icon: Codable {
+public struct Icon: Codable, Equatable {
     public let childImages: [Image]
     public let height: UInt64
     public let path: URL

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="21507" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8Zo-Az-4J3">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="21507" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3iP-WL-3DF">
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -17,10 +17,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Item-->
+        <!--Live Player View Controller-->
         <scene sceneID="N1C-C3-2c3">
             <objects>
-                <avPlayerViewController storyboardIdentifier="LivePlayerViewController" videoGravity="AVLayerVideoGravityResizeAspect" id="xM2-xA-8OX" customClass="LivePlayerViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
+                <avPlayerViewController storyboardIdentifier="LivePlayerViewController" videoGravity="AVLayerVideoGravityResizeAspect" id="xM2-xA-8OX" userLabel="Live Player View Controller" customClass="LivePlayerViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="bAe-wv-7Kg"/>
                 </avPlayerViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QSC-Ga-Yyd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -183,10 +183,10 @@
             </objects>
             <point key="canvasLocation" x="6445" y="-1470"/>
         </scene>
-        <!--AV Player View Controller-->
+        <!--VOD Player View Controller-->
         <scene sceneID="RSX-ga-MiJ">
             <objects>
-                <avPlayerViewController storyboardIdentifier="VODPlayerViewController" videoGravity="AVLayerVideoGravityResizeAspect" id="Ebc-lA-7Vf" customClass="VODPlayerViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
+                <avPlayerViewController storyboardIdentifier="VODPlayerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" videoGravity="AVLayerVideoGravityResizeAspect" id="Ebc-lA-7Vf" userLabel="VOD Player View Controller" customClass="VODPlayerViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="dXz-xx-Ecb"/>
                 </avPlayerViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8O-Ds-WbX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -196,7 +196,7 @@
         <!--Login-->
         <scene sceneID="AJU-aZ-zax">
             <objects>
-                <viewController id="dXg-QQ-Wap" userLabel="Login" customClass="LoginViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dXg-QQ-Wap" userLabel="Login" customClass="LoginViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9bE-Rm-oCo"/>
                         <viewControllerLayoutGuide type="bottom" id="Ua5-ti-f5R"/>
@@ -383,7 +383,7 @@
                         <outlet property="loginButton" destination="Yfw-5U-6Gy" id="Xq3-f0-khd"/>
                         <outlet property="passwordField" destination="POz-7b-wKn" id="3Q2-yN-SGv"/>
                         <outlet property="usernameField" destination="ltE-wG-F5y" id="2rB-MN-EIR"/>
-                        <segue destination="Nh4-99-Sds" kind="unwind" identifier="UnwindFromLogin" unwindAction="unwindToTopNavControllerWithSegue:" id="qc8-ol-loZ"/>
+                        <segue destination="Nh4-99-Sds" kind="unwind" identifier="UnwindFromLogin" unwindAction="unwindToRootViewController:" id="qc8-ol-loZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WXK-hn-3wi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -394,13 +394,16 @@
         <!--Top Navigation Controller-->
         <scene sceneID="EoT-Q3-zA2">
             <objects>
-                <navigationController navigationBarHidden="YES" id="8Zo-Az-4J3" customClass="TopNavigationController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TopNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="8Zo-Az-4J3" customClass="TopNavigationController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="1aj-b0-r1F"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="79G-pD-9Uc">
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="8Zo-Az-4J3" id="t0i-57-0Ok"/>
+                        </connections>
                     </navigationBar>
                     <connections>
                         <segue destination="gcH-5t-U6g" kind="relationship" relationship="rootViewController" id="i65-6m-le5"/>
-                        <segue destination="dXg-QQ-Wap" kind="presentation" identifier="LoginViewController" id="ent-UY-1Id"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oM-Go-CEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -583,6 +586,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PIZ-K3-yx2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4232" y="1565"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="n6F-w4-7TE">
+            <objects>
+                <viewController storyboardIdentifier="RootViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3iP-WL-3DF" customClass="RootViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Foj-jF-hxp"/>
+                        <viewControllerLayoutGuide type="bottom" id="xJ5-jC-Gry"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="F7l-8j-7NV">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EvX-8K-xX4">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <connections>
+                                    <segue destination="pEP-sw-CnH" kind="embed" id="7Rc-qy-cmW"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LOd-3f-weW"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EvX-8K-xX4" secondAttribute="trailing" id="5ne-Yy-LO7"/>
+                            <constraint firstItem="EvX-8K-xX4" firstAttribute="top" secondItem="F7l-8j-7NV" secondAttribute="top" id="Bg0-6A-ZeQ"/>
+                            <constraint firstAttribute="bottom" secondItem="EvX-8K-xX4" secondAttribute="bottom" id="VXK-3M-XPb"/>
+                            <constraint firstItem="EvX-8K-xX4" firstAttribute="leading" secondItem="F7l-8j-7NV" secondAttribute="leading" id="dfn-z3-tbu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="dXg-QQ-Wap" kind="presentation" identifier="ShowLoginScreen" id="KhE-qO-Pal"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1RI-1o-uwh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5233" y="-1470"/>
+        </scene>
+        <!--Launch Screen View Controller-->
+        <scene sceneID="Kee-34-q7v">
+            <objects>
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="pEP-sw-CnH" customClass="LaunchScreenViewController" customModule="FloatplaneApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="STG-V0-qLI"/>
+                        <viewControllerLayoutGuide type="bottom" id="2hE-nQ-6Bu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NuC-Pp-taA">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FLOATPLANE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OX-7W-8IF" customClass="FloatplaneTitleLabel" customModule="FloatplaneApp" customModuleProvider="target">
+                                <rect key="frame" x="575.5" y="331" width="769" height="144"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="120"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ziL-hA-TLf">
+                                <rect key="frame" x="928" y="508" width="64" height="64"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mMX-zU-89D"/>
+                        <color key="backgroundColor" red="0.062745101750000004" green="0.13725490870000001" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="ziL-hA-TLf" firstAttribute="centerY" secondItem="mMX-zU-89D" secondAttribute="centerY" id="7Pd-eq-1Kv"/>
+                            <constraint firstItem="ziL-hA-TLf" firstAttribute="centerX" secondItem="mMX-zU-89D" secondAttribute="centerX" id="MXw-TI-xF1"/>
+                            <constraint firstItem="7OX-7W-8IF" firstAttribute="centerX" secondItem="mMX-zU-89D" secondAttribute="centerX" id="c07-Rl-Q6E"/>
+                            <constraint firstItem="ziL-hA-TLf" firstAttribute="top" secondItem="7OX-7W-8IF" secondAttribute="bottom" constant="33" id="v9U-SP-y0D"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="ziL-hA-TLf" id="AYe-Iw-CT7"/>
+                        <outlet property="floatPlaneLabel" destination="7OX-7W-8IF" id="dPH-Xe-55p"/>
+                        <segue destination="FHu-XL-Qdh" kind="unwind" identifier="ShowMainScreen" unwindAction="unwindToRootViewController:" id="mAX-0l-T4z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0jh-Oa-vtm" sceneMemberID="firstResponder"/>
+                <exit id="FHu-XL-Qdh" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-2989" y="-1470"/>
         </scene>
     </scenes>
     <resources>

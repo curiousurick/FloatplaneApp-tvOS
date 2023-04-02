@@ -19,45 +19,45 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
+import FloatplaneApp_DataStores
+import FloatplaneApp_Operations
+import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 
-public struct Subscription: Codable, Equatable {
-    public struct Plan: Codable, Equatable {
-        public let allowGrandfatheredAccess: Bool
-        public let currency: String
-        public let description: String
-        public let discordRoles: [String]
-        public let discordServers: [String]
-        public let featured: Bool
-        public let id: String
-        public let interval: Interval
-        public let logo: Icon?
-        public let price: String
-        public let priceYearly: String
-        public let title: String
+class LaunchScreenViewController: UIViewController {
+    private let logger = Log4S()
+    
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var floatPlaneLabel: UILabel!
+    
+    private let getFirstPageOperation = OperationManager.instance.getFirstPageOperation
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupAndDisplayFirstView()
     }
     
-    public enum Interval: String, Codable, Equatable {
-        case month
-        case year
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
-    public let creator: String
-    public let endDate: Date
-    public let interval: Interval
-    public let paymentCancelled: Bool
-    public let paymentID: Int
-    public let plan: Plan
-    public let startDate: Date
-    
-}
-
-public struct SubscriptionResponse: Codable {
-    
-    public let subscriptions: [Subscription]
-    
-    public init(subscriptions: [Subscription]) {
-        self.subscriptions = subscriptions
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
+    private func setupAndDisplayFirstView() {
+        Task {
+            if UserStore.instance.getUser() == nil {
+                AppDelegate.instance.rootViewController.goToLogin()
+            }
+            else {
+                AppDelegate.instance.rootViewController.getFirstPageAndLoadMainView()
+            }
+        }
+    }
 }

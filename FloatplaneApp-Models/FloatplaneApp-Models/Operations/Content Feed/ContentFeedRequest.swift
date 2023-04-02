@@ -31,6 +31,10 @@ public struct ContentFeedRequest: OperationRequest {
     private let hasPicture: Bool = false
     private let hasText: Bool = false
     
+    public static func firstPage(for creatorId: String) -> ContentFeedRequest {
+        return ContentFeedRequest(fetchAfter: 0, limit: 20, creatorId: creatorId)
+    }
+    
     public init(fetchAfter: Int, limit: UInt64, creatorId: String) {
         self.fetchAfter = fetchAfter
         self.limit = limit

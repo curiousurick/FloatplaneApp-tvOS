@@ -21,43 +21,15 @@
 
 import Foundation
 
-public struct Subscription: Codable, Equatable {
-    public struct Plan: Codable, Equatable {
-        public let allowGrandfatheredAccess: Bool
-        public let currency: String
-        public let description: String
-        public let discordRoles: [String]
-        public let discordServers: [String]
-        public let featured: Bool
-        public let id: String
-        public let interval: Interval
-        public let logo: Icon?
-        public let price: String
-        public let priceYearly: String
-        public let title: String
+struct SegueIdentifier {
+    struct LaunchScreenViewController {
+        static let showLoginScreen = "ShowLoginScreen"
+        static let showMainScreen = "ShowMainScreen"
     }
-    
-    public enum Interval: String, Codable, Equatable {
-        case month
-        case year
+    struct TopNavigationController {
+        static let loginViewControllerSegue = "LoginViewController"
     }
-    
-    public let creator: String
-    public let endDate: Date
-    public let interval: Interval
-    public let paymentCancelled: Bool
-    public let paymentID: Int
-    public let plan: Plan
-    public let startDate: Date
-    
-}
-
-public struct SubscriptionResponse: Codable {
-    
-    public let subscriptions: [Subscription]
-    
-    public init(subscriptions: [Subscription]) {
-        self.subscriptions = subscriptions
+    struct LoginViewController {
+        static let unwindFromLoginSegue = "UnwindFromLogin"
     }
-    
 }

@@ -24,15 +24,16 @@ import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_DataStores
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreatorViewControllerProtocol {
     
     private let logoutOperation = OperationManager.instance.logoutOperation
-    
     private let changeResolutionRow = 0
     private let logoutRow = 1
-    
     private let totalSettingRows = 2
     private let cellIdentifier = "SettingRowCell"
+    
+    var baseCreators: [BaseCreator]!
+    var activeCreator: Creator!
     
     @IBOutlet var tableView: UITableView!
 
@@ -79,7 +80,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 UserStore.instance.removeUser()
                 OperationManager.instance.clearCache()
                 URLCache.shared.removeAllCachedResponses()
-                AppDelegate.instance.topNavigationController.clearAndGoToLoginView()
+                AppDelegate.instance.topNavigationController?.clearAndGoToLoginView()
             }
         }
     }

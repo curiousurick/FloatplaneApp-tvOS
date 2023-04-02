@@ -25,7 +25,7 @@ import FloatplaneApp_Utilities
 import FloatplaneApp_Models
 import FloatplaneApp_DataStores
 
-final class SearchViewController: UICollectionViewController, UISearchResultsUpdating {
+final class SearchViewController: UICollectionViewController, UISearchResultsUpdating, CreatorViewControllerProtocol {
     struct CollectionConstants {
         static let rowCount: CGFloat = 4
         static let totalSpacing: CGFloat = 80
@@ -40,9 +40,11 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     private let searchOperation = OperationManager.instance.searchOperation
     private let minimumQueryLength = 3
     
-    var creator: Creator?
     private var searchString: String?
     private var results: SearchResponse?
+    
+    var activeCreator: Creator!
+    var baseCreators: [BaseCreator]!
 
     init() {
         let flowLayout = UICollectionViewFlowLayout()
@@ -98,7 +100,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     
     private func getNextPage(searchString: String) {
         logger.debug("Fetching next page of content for feed")
-        guard let creator = creator else {
+        guard let creator = activeCreator else {
             logger.error("Trying to search with no active creator")
             return
         }
@@ -183,7 +185,8 @@ extension SearchViewController {
         searchViewController.searchController = searchController
         let searchContainerController = UISearchContainerViewController(searchController: searchController)
         searchController.searchResultsUpdater = searchViewController
-        return UINavigationController(rootViewController: searchContainerController)
+        let searchNavController = UINavigationController(rootViewController: searchContainerController)
+        return searchNavController
     }
 }
 

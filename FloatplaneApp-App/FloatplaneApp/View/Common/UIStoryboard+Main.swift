@@ -26,11 +26,21 @@ fileprivate let LiveStreamOfflineViewStoryboardID = "LiveStreamOfflineViewContro
 fileprivate let BrowseViewControllerStoryboardID = "BrowseViewController"
 fileprivate let SettingsViewControllerStoryboardID = "SettingsViewController"
 fileprivate let VodPlayerViewControllerStoryboardID = "VODPlayerViewController"
+fileprivate let TopNavigationControllerStoryboardID = "TopNavigationController"
+fileprivate let RootViewControllerStoryboardID = "RootViewController"
 
 extension UIStoryboard {
     private static let mainID = "Main"
     
     static var main: UIStoryboard = .init(name: UIStoryboard.mainID, bundle: nil)
+    
+    func getRootViewController() -> RootViewController {
+        return self.instantiateViewController(withIdentifier: RootViewControllerStoryboardID) as! RootViewController
+    }
+    
+    func getTopNavigationController() -> TopNavigationController {
+        return self.instantiateViewController(withIdentifier: TopNavigationControllerStoryboardID) as! TopNavigationController
+    }
     
     func getBrowseViewController() -> BrowseViewController {
         return self.instantiateViewController(withIdentifier: BrowseViewControllerStoryboardID) as! BrowseViewController

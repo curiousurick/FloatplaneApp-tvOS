@@ -37,31 +37,128 @@ public class Log4S {
         self.logger = Logger(label: label)
     }
     
-    public func debug(_ message: Logger.Message) {
-        logger.log(level: .debug, message)
+    public func debug(
+        _ message: @autoclosure () -> Logger.Message,
+        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line) {
+            logger.log(
+                level: .debug,
+                message(),
+                metadata: metadata(),
+                source: nil,
+                file: file,
+                function: function,
+                line: line
+            )
     }
     
-    public func info(_ message: Logger.Message) {
-        logger.log(level: .info, message)
+    public func info(
+        _ message: @autoclosure () -> Logger.Message,
+        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        logger.log(
+            level: .info,
+            message(),
+            metadata: metadata(),
+            source: nil,
+            file: file,
+            function: function,
+            line: line
+        )
     }
     
-    public func notice(_ message: Logger.Message) {
-        logger.log(level: .notice, message)
+    public func notice(
+        _ message: @autoclosure () -> Logger.Message,
+        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        logger.log(
+            level: .notice,
+            message(),
+            metadata: metadata(),
+            source: nil,
+            file: file,
+            function: function,
+            line: line
+        )
     }
     
-    public func error(_ message: Logger.Message) {
-        logger.log(level: .error, message)
+    public func error(
+        _ message: @autoclosure () -> Logger.Message,
+        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        logger.log(
+            level: .error,
+            message(),
+            metadata: metadata(),
+            source: nil,
+            file: file,
+            function: function,
+            line: line
+        )
     }
     
-    public func trace(_ message: Logger.Message) {
-        logger.log(level: .trace, message)
+    public func trace(
+        _ message: @autoclosure () -> Logger.Message,
+        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        logger.log(
+            level: .trace,
+            message(),
+            metadata: metadata(),
+            source: nil,
+            file: file,
+            function: function,
+            line: line
+        )
     }
     
-    public func warn(_ message: Logger.Message) {
-        logger.log(level: .warning, message)
+    public func warn(
+        _ message: @autoclosure () -> Logger.Message,
+        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        logger.log(
+            level: .warning,
+            message(),
+            metadata: metadata(),
+            source: nil,
+            file: file,
+            function: function,
+            line: line
+        )
     }
     
-    public func critical(_ message: Logger.Message) {
-        logger.log(level: .critical, message)
+    public func critical(
+        _ message: @autoclosure () -> Logger.Message,
+        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        logger.log(
+            level: .critical,
+            message(),
+            metadata: metadata(),
+            source: nil,
+            file: file,
+            function: function,
+            line: line
+        )
     }
 }

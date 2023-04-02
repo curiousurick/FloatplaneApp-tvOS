@@ -47,11 +47,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         ensurePlaceholderColor()
         
         let robotoFont: UIFont = .roboto(size: 48, weight: .black)
         floatPlaneLabel.font = UIFontMetrics.default.scaledFont(for: robotoFont)
         floatPlaneLabel.adjustsFontForContentSizeCategory = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+//        let navController = UIStoryboard.main.getTopNavigationController()
+//        AppDelegate.instance.replaceRootController(viewController: navController)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
@@ -75,7 +82,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let user = response?.user {
                 UserStore.instance.setUser(user: user)
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "UnwindFromLogin", sender: nil)
+                    self.performSegue(
+                        withIdentifier: SegueIdentifier.LoginViewController.unwindFromLoginSegue,
+                        sender: self
+                    )
                 }
             }
             else {

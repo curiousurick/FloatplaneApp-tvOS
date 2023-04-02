@@ -28,101 +28,113 @@ import FloatplaneApp_DataStores
 class TopNavigationController: UINavigationController {
     // 30 minutes
     private let CreatorRefreshInternal: TimeInterval = 30 * 60
+    private let getFirstPageOperation = OperationManager.instance.getFirstPageOperation
     private let creatorOperation = OperationManager.instance.creatorOperation
     private let creatorListOperation = OperationManager.instance.creatorListOperation
-    private let unwindFromLoginSegue = "UnwindFromLogin"
-    private let loginViewControllerSegue = "LoginViewController"
     private let logger = Log4S()
-    
-    private var timer: Timer?
-    
+
     private var fpTabBarController: FPTabBarController? {
         return self.viewControllers[0] as? FPTabBarController
     }
     
-    var activeBaseCreator: BaseCreator? {
-        didSet {
-            self.getActiveCreator()
-        }
-    }
-    private var activeCreator: Creator? {
-        didSet {
-            if let activeCreator = activeCreator {
-                scheduleCreatorUpdate()
-                DispatchQueue.main.async {
-                    self.fpTabBarController?.creator = activeCreator
-                }
-            }
-            else {
-                timer?.invalidate()
-                timer = nil
-            }
-        }
-    }
+    // Main data for viewing
+    var baseCreators: [BaseCreator]?
+    var activeCreator: Creator?
+    var firstPage: [FeedItem]?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        AppDelegate.instance.topNavigationController = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func tabBarReady() {
-        if UserStore.instance.getUser() != nil {
-            getCreators()
-        }
-        else {
-            goToLoginView()
-        }
+        
     }
     
     func goToLoginView() {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: self.loginViewControllerSegue, sender: self)
-        }
+        AppDelegate.instance.rootViewController.goToLogin()
     }
     
     func clearAndGoToLoginView() {
-        self.activeBaseCreator = nil
         self.activeCreator = nil
+        self.baseCreators = nil
+        self.firstPage = nil
         self.fpTabBarController?.resetView()
         goToLoginView()
     }
     
-    @IBAction func unwindToTopNavController(segue: UIStoryboardSegue) {
-        if segue.identifier == unwindFromLoginSegue {
-            logger.info("Successfully logged in")
-            getCreators()
-        }
-    }
-    
     private func getCreators() {
-        creatorListOperation.get(request: CreatorListRequest()) { response, error in
-            if let response = response, response.creators.count > 0 {
-                BaseCreatorStore.instance.setCreators(creators: response.creators)
-                self.activeBaseCreator = response.creators[0]
+        Task {
+            let getFirstPageResponse = await getFirstPageOperation.get()
+            if let result = getFirstPageResponse.0 {
+                self.updateChildViewData(
+                    baseCreators: result.baseCreators,
+                    activeCreator: result.activeCreator,
+                    firstPage: result.firstPage
+                )
+            }
+            else {
+                // TODO Add error message
             }
         }
     }
     
-    private func scheduleCreatorUpdate() {
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: CreatorRefreshInternal, repeats: true) { timer in
-            self.getActiveCreator()
+    func updateChildViewData(baseCreators: [BaseCreator], activeCreator: Creator, firstPage: [FeedItem]) {
+        self.fpTabBarController?.baseCreators = baseCreators
+        self.fpTabBarController?.firstPage = firstPage
+        self.fpTabBarController?.activeCreator = activeCreator
+        self.fpTabBarController?.resetView()
+    }
+    
+    func changeSelectedCreator(baseCreator: BaseCreator) {
+        guard let baseCreators = baseCreators,
+              baseCreators.contains(where: { $0 == baseCreator }) else {
+            logger.error("Switching to creator which is not known")
+            return
+        }
+        if let activeCreator = activeCreator,
+           let firstPage = firstPage,
+           baseCreator.id == activeCreator.id {
+            logger.debug("Asked to change to already active creator.")
+            self.updateChildViewData(baseCreators: baseCreators, activeCreator: activeCreator, firstPage: firstPage)
+            return
+        }
+        let urlName = baseCreator.urlname
+        let creatorId = baseCreator.id
+        Task {
+            async let activeCreatorAsync = getActiveCreator(urlName: urlName)
+            async let getFirstPageAsync = getFirstPage(creatorId: creatorId)
+            guard let activeCreator = await activeCreatorAsync.0,
+                  let firstPage = await getFirstPageAsync.0 else {
+                // TODO: Give error page
+                return
+            }
+            self.updateChildViewData(baseCreators: baseCreators, activeCreator: activeCreator, firstPage: firstPage)
         }
     }
     
-    private func getActiveCreator() {
-        guard let urlName = activeBaseCreator?.urlname else {
-            logger.error("getActiveCreator called when there is no active creator.")
-            return
-        }
+    private func getActiveCreator(urlName: String) async -> (Creator?, Error?) {
         let request = CreatorRequest(named: urlName)
-        creatorOperation.get(request: request) { response, error in
-            if let creator = response {
-                self.activeCreator = creator
+        return await withCheckedContinuation { continutation in
+            OperationManager.instance.creatorOperation.get(request: request) { response, error in
+                continutation.resume(returning: (response, error))
+            }
+        }
+    }
+    
+    private func getFirstPage(creatorId: String) async -> ([FeedItem]?, Error?) {
+        logger.debug("Fetching next page of content for feed")
+        let request = ContentFeedRequest.firstPage(for: creatorId)
+        return await withCheckedContinuation { continuation in
+            OperationManager.instance.contentFeedOperation.get(request: request) { fetchedFeed, error in
+                continuation.resume(returning: (fetchedFeed?.items, error))
             }
         }
     }

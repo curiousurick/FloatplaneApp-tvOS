@@ -25,15 +25,16 @@ import FloatplaneApp_Utilities
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class LiveStreamOfflineViewController: UIViewController {
+class LiveStreamOfflineViewController: UIViewController, CreatorViewControllerProtocol {
     private let logger = Log4S()
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     
-    var creator: Creator? {
+    var activeCreator: Creator! {
         didSet {
             self.updateThumbnailView()
         }
     }
+    var baseCreators: [BaseCreator]!
     
     private var fpTabBarController: FPTabBarController? {
         get {
@@ -54,7 +55,7 @@ class LiveStreamOfflineViewController: UIViewController {
     }
     
     func checkIfVideoOnline() {
-        guard let video = creator?.liveStream else {
+        guard let video = activeCreator?.liveStream else {
             logger.error("Cannot start live stream because liveSream is nil")
             return
         }
@@ -74,7 +75,7 @@ class LiveStreamOfflineViewController: UIViewController {
     
     func updateThumbnailView() {
         if let offlineThumbnailView = self.offlineThumbnailView,
-           let creator = creator {
+           let creator = activeCreator {
             DispatchQueue.main.async {
                 if let url = creator.liveStream.offline?.thumbnail.path {
                     offlineThumbnailView.af.setImage(withURL: url)

@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct BaseCreator: Codable {
+public struct BaseCreator: Codable, Equatable {
     public let about: String
     // Note: This looks to be a bug in v2 API.
     public let category: String

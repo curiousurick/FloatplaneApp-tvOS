@@ -47,6 +47,7 @@ public class OperationManager {
     public let loginOperation = LoginOperation()
     public let logoutOperation = LogoutOperation()
     public let videoMetadataOperation = VideoMetadataOperation()
+    public let getFirstPageOperation = GetFirstPageOperation()
     
     private let allCacheableOperations: [CacheableOperation]
     

@@ -27,7 +27,9 @@ import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
 
-class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+class BrowseViewController: UIViewController, UICollectionViewDelegate,
+                            UICollectionViewDataSource, UICollectionViewDataSourcePrefetching,
+                            CreatorViewControllerProtocol {
     
     struct CollectionConstants {
         static let rowCount: CGFloat = 4
@@ -44,14 +46,17 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     private let pageLimit: UInt64 = 20
     private let contentFeedOperation = OperationManager.instance.contentFeedOperation
     
-    var creator: Creator? {
+    var baseCreators: [BaseCreator]! {
         didSet {
-            if creator != nil {
-                getInitialFeed()
-            }
+            creatorListView.creators = baseCreators
         }
     }
-    var feed: CreatorFeed?
+    var activeCreator: Creator!
+    var feed: [FeedItem]? {
+        didSet {
+            videoCollectionView?.reloadData()
+        }
+    }
     
     @IBOutlet var videoCollectionView: UICollectionView!
     @IBOutlet var creatorListView: CreatorListView!
@@ -101,11 +106,11 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     private func getNextPage() {
         logger.debug("Fetching next page of content for feed")
-        guard let creator = creator, !contentFeedOperation.isActive() else {
+        guard let creator = activeCreator, !contentFeedOperation.isActive() else {
             logger.warn("Trying to get next page in feed while I am already loading")
             return
         }
-        let fetchAfter = feed?.items.count ?? 0
+        let fetchAfter = feed?.count ?? 0
         let request = ContentFeedRequest(
             fetchAfter: fetchAfter,
             limit: pageLimit,
@@ -118,10 +123,10 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollec
                 return
             }
             if let existingFeed = self.feed {
-                self.feed = existingFeed.combine(with: fetchedFeed.items)
+                self.feed = existingFeed + fetchedFeed.items
             }
             else {
-                self.feed = fetchedFeed
+                self.feed = fetchedFeed.items
             }
             DispatchQueue.main.async {
                 self.videoCollectionView.reloadData()
@@ -149,19 +154,19 @@ extension BrowseViewController {
         ) as! BrowseReusableHeaderView
         
         if let feed = feed {
-            view.updateUI(item: feed.items[indexPath.row])
+            view.updateUI(item: feed[indexPath.row])
         }
         return view
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == feed!.items.count - 4 && !self.contentFeedOperation.isActive() {
+        if indexPath.row == feed!.count - 4 && !self.contentFeedOperation.isActive() {
             getNextPage()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return feed?.items.count ?? 0
+        return feed?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -170,7 +175,7 @@ extension BrowseViewController {
         }
         
         let cell = FeedItemCollectionViewCell.dequeueFromCollectionView(collectionView: collectionView, indexPath: indexPath)
-        let item = feed.items[indexPath.row]
+        let item = feed[indexPath.row]
         cell.setFeedViewItem(item: item)
         
         return cell
@@ -182,7 +187,7 @@ extension BrowseViewController {
             return
         }
         let vodPlayerViewController = UIStoryboard.main.getVodPlayerViewController()
-        vodPlayerViewController.feedItem = feed.items[indexPath.row]
+        vodPlayerViewController.feedItem = feed[indexPath.row]
         vodPlayerViewController.vodDelegate = self
         present(vodPlayerViewController, animated: true)
     }
@@ -191,7 +196,7 @@ extension BrowseViewController {
         // Begin asynchronously fetching data for the requested index paths.
         guard let feed = feed else { return }
         let imageRequests = indexPaths.map { $0.row }
-            .map { feed.items[$0] }
+            .map { feed[$0] }
             .map { $0.imageViewUrl }
             .map { URLRequest(url: $0) }
         UIImageView.af.sharedImageDownloader.download(imageRequests)
