@@ -96,6 +96,7 @@ class InternalPickerViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: optionCellIdentifier, for: indexPath)
         cell.textLabel?.text = options[indexPath.row].readable
+        cell.accessoryType = indexPath.row == selectedIndex ? .checkmark : .none
         return cell
     }
     
