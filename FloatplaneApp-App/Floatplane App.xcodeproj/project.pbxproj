@@ -41,8 +41,6 @@
 		5E507C1B29CFAD66006751F3 /* FloatplaneAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1A29CFAD66006751F3 /* FloatplaneAppUITests.swift */; };
 		5E507C1D29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1C29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift */; };
 		5E507C2E29CFB0FE006751F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5E507C2D29CFB0FE006751F3 /* Alamofire */; };
-		5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE74B29CFC20900F9A83B /* UserConfiguration.swift */; };
-		5EAAE74E29CFC7A000F9A83B /* UserConfiguration.swift.bak in Resources */ = {isa = PBXBuildFile; fileRef = 5EAAE74D29CFC7A000F9A83B /* UserConfiguration.swift.bak */; };
 		5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */; };
 		5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76129D03A9A00F9A83B /* ParallaxView */; };
 		5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76729D0B34D00F9A83B /* AlamofireImage */; };
@@ -194,8 +192,6 @@
 		5E507C1629CFAD66006751F3 /* FloatplaneAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloatplaneAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E507C1A29CFAD66006751F3 /* FloatplaneAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneAppUITests.swift; sourceTree = "<group>"; };
 		5E507C1C29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		5EAAE74B29CFC20900F9A83B /* UserConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfiguration.swift; sourceTree = "<group>"; };
-		5EAAE74D29CFC7A000F9A83B /* UserConfiguration.swift.bak */ = {isa = PBXFileReference; lastKnownFileType = text; path = UserConfiguration.swift.bak; sourceTree = "<group>"; };
 		5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTabBarController.swift; sourceTree = "<group>"; };
 		5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseReusableHeaderView.swift; sourceTree = "<group>"; };
@@ -392,8 +388,6 @@
 				5E507BF829CFAD65006751F3 /* AppDelegate.swift */,
 				5E507C0729CFAD66006751F3 /* Info.plist */,
 				5E507BFF29CFAD65006751F3 /* FloatplaneApp.xcdatamodeld */,
-				5EAAE74B29CFC20900F9A83B /* UserConfiguration.swift */,
-				5EAAE74D29CFC7A000F9A83B /* UserConfiguration.swift.bak */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -756,7 +750,6 @@
 				5E389A3429D6A12000FC8B4B /* Roboto-Light.ttf in Resources */,
 				5E389A2E29D6A12000FC8B4B /* Roboto-BlackItalic.ttf in Resources */,
 				5E389A3029D6A12000FC8B4B /* Roboto-Black.ttf in Resources */,
-				5EAAE74E29CFC7A000F9A83B /* UserConfiguration.swift.bak in Resources */,
 				5E507C0629CFAD66006751F3 /* LaunchScreen.storyboard in Resources */,
 				5E389A3229D6A12000FC8B4B /* Roboto-Italic.ttf in Resources */,
 				5E507C0329CFAD66006751F3 /* Assets.xcassets in Resources */,
@@ -806,7 +799,6 @@
 				5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */,
 				5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */,
 				5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */,
-				5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */,
 				5EC0575729D49A7700D775EB /* LiveStreamOfflineViewController.swift in Sources */,
 				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
 				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
