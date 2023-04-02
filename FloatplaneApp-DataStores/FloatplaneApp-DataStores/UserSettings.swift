@@ -22,7 +22,7 @@
 import Foundation
 import FloatplaneApp_Models
 
-class UserSettings {
+public class UserSettings {
     
     private let QualitySettingsKey = "com.georgie.floatplane.QualitySettings"
     private let userDefaults = UserDefaults.standard

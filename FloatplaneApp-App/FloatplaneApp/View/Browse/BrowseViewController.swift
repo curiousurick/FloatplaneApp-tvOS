@@ -25,6 +25,7 @@ import Alamofire
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
+import FloatplaneApp_DataStores
 
 class BrowseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     

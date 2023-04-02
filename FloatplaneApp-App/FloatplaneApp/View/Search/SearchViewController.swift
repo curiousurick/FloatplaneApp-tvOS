@@ -23,6 +23,7 @@ import UIKit
 import FloatplaneApp_Operations
 import FloatplaneApp_Utilities
 import FloatplaneApp_Models
+import FloatplaneApp_DataStores
 
 final class SearchViewController: UICollectionViewController, UISearchResultsUpdating {
     struct CollectionConstants {

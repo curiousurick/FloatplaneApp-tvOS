@@ -29,6 +29,8 @@
 		5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A5629D7FEA700FC8B4B /* String+UIImage.swift */; };
 		5E389A5929D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A5829D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift */; };
 		5E389A6529D8216D00FC8B4B /* BaseVideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A6429D8216D00FC8B4B /* BaseVideoPlayerController.swift */; };
+		5E4CE95B29D911670029110E /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */; };
+		5E4CE95C29D911670029110E /* FloatplaneApp_DataStores.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BF829CFAD65006751F3 /* AppDelegate.swift */; };
 		5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */; };
 		5E507BFE29CFAD65006751F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507BFC29CFAD65006751F3 /* Main.storyboard */; };
@@ -47,25 +49,19 @@
 		5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76A29D0B56B00F9A83B /* SwiftDate */; };
 		5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */; };
 		5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */; };
-		5EAAE77829D0D3D200F9A83B /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE77729D0D3D200F9A83B /* UserSettings.swift */; };
 		5EAAE77B29D12B6300F9A83B /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE77A29D12B6300F9A83B /* Cache */; };
 		5EAAE79229D13E3A00F9A83B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */; };
 		5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79329D141D700F9A83B /* PickerViewController.swift */; };
-		5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79829D158AF00F9A83B /* ProgressStore.swift */; };
 		5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */; };
 		5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */; };
 		5EAAE7A429D2C64D00F9A83B /* String+ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */; };
 		5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0574C29D4089C00D775EB /* SearchViewController.swift */; };
 		5EC0574F29D41C9A00D775EB /* LivePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0574E29D41C9A00D775EB /* LivePlayerViewController.swift */; };
-		5EC0575429D4985F00D775EB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0575329D4985F00D775EB /* Notifications.swift */; };
 		5EC0575729D49A7700D775EB /* LiveStreamOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0575629D49A7700D775EB /* LiveStreamOfflineViewController.swift */; };
 		5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0575E29D53DC400D775EB /* TopNavigationController.swift */; };
 		5EC0576829D54ED400D775EB /* CreatorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0576729D54ED400D775EB /* CreatorListView.swift */; };
 		5EC0576B29D551DD00D775EB /* CreatorListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0576A29D551DD00D775EB /* CreatorListViewCell.swift */; };
-		5EC0577E29D5578200D775EB /* BaseCreatorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0577D29D5578200D775EB /* BaseCreatorStore.swift */; };
 		5EC0578729D559CF00D775EB /* UICKeyChainStore in Frameworks */ = {isa = PBXBuildFile; productRef = 5EC0578629D559CF00D775EB /* UICKeyChainStore */; };
-		5EC0579E29D601CB00D775EB /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0579D29D601CB00D775EB /* UserStore.swift */; };
-		5EC057A329D6028900D775EB /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057A229D6028900D775EB /* KeychainManager.swift */; };
 		5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057A529D603D400D775EB /* LoginViewController.swift */; };
 		5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B529D6848E00D775EB /* ViewController+Border.swift */; };
 		5EC057B829D689E700D775EB /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B729D689E700D775EB /* LoginButton.swift */; };
@@ -107,6 +103,20 @@
 			remoteGlobalIDString = 5E389B3429D8B29900FC8B4B;
 			remoteInfo = "FloatplaneApp-OperationsTests";
 		};
+		5E4CE93929D90F3C0029110E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E4CE91A29D90F330029110E;
+			remoteInfo = "FloatplaneApp-DataStores";
+		};
+		5E4CE93B29D90F3C0029110E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E4CE92429D90F330029110E;
+			remoteInfo = "FloatplaneApp-DataStoresTests";
+		};
 		5E507C0D29CFAD66006751F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E0C3CCA29CF766700C71A19 /* Project object */;
@@ -146,6 +156,7 @@
 			files = (
 				5EFD927B29D8C746007E8374 /* FloatplaneApp_Operations.framework in Embed Frameworks */,
 				5EFD927929D8C746007E8374 /* FloatplaneApp_Models.framework in Embed Frameworks */,
+				5E4CE95C29D911670029110E /* FloatplaneApp_DataStores.framework in Embed Frameworks */,
 				5EFD927D29D8C746007E8374 /* FloatplaneApp_Utilities.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -169,6 +180,7 @@
 		5E389B8429D8B3D600FC8B4B /* FloatplaneApp-Operations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Operations.xcodeproj"; path = "../../FloatplaneApp-Operations/FloatplaneApp-Operations.xcodeproj"; sourceTree = "<group>"; };
 		5E389C2329D8B67900FC8B4B /* FloatplaneApp-Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Utilities.xcodeproj"; path = "../../FloatplaneAppUtilities/FloatplaneApp-Utilities.xcodeproj"; sourceTree = "<group>"; };
 		5E389C5429D8C23B00FC8B4B /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-DataStores.xcodeproj"; path = "../../FloatplaneApp-DataStores/FloatplaneApp-DataStores.xcodeproj"; sourceTree = "<group>"; };
 		5E507BF629CFAD65006751F3 /* FloatplaneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloatplaneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E507BF829CFAD65006751F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
@@ -187,23 +199,17 @@
 		5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTabBarController.swift; sourceTree = "<group>"; };
 		5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseReusableHeaderView.swift; sourceTree = "<group>"; };
-		5EAAE77729D0D3D200F9A83B /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5EAAE79329D141D700F9A83B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
-		5EAAE79829D158AF00F9A83B /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VODPlayerViewController.swift; sourceTree = "<group>"; };
 		5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemProgressBarView.swift; sourceTree = "<group>"; };
 		5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ClassTest.swift"; sourceTree = "<group>"; };
 		5EC0574C29D4089C00D775EB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5EC0574E29D41C9A00D775EB /* LivePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlayerViewController.swift; sourceTree = "<group>"; };
-		5EC0575329D4985F00D775EB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		5EC0575629D49A7700D775EB /* LiveStreamOfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamOfflineViewController.swift; sourceTree = "<group>"; };
 		5EC0575E29D53DC400D775EB /* TopNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationController.swift; sourceTree = "<group>"; };
 		5EC0576729D54ED400D775EB /* CreatorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorListView.swift; sourceTree = "<group>"; };
 		5EC0576A29D551DD00D775EB /* CreatorListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorListViewCell.swift; sourceTree = "<group>"; };
-		5EC0577D29D5578200D775EB /* BaseCreatorStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCreatorStore.swift; sourceTree = "<group>"; };
-		5EC0579D29D601CB00D775EB /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
-		5EC057A229D6028900D775EB /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		5EC057A529D603D400D775EB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5EC057B529D6848E00D775EB /* ViewController+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Border.swift"; sourceTree = "<group>"; };
 		5EC057B729D689E700D775EB /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
@@ -236,6 +242,7 @@
 				5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */,
 				5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */,
 				5EAAE77B29D12B6300F9A83B /* Cache in Frameworks */,
+				5E4CE95B29D911670029110E /* FloatplaneApp_DataStores.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +296,7 @@
 		5E389B1229D8B25700FC8B4B /* Internal Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */,
 				5E389C2329D8B67900FC8B4B /* FloatplaneApp-Utilities.xcodeproj */,
 				5E389B8429D8B3D600FC8B4B /* FloatplaneApp-Operations.xcodeproj */,
 				5E389B1329D8B26800FC8B4B /* FloatplaneApp-Models.xcodeproj */,
@@ -314,11 +322,31 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5E4CE93529D90F3C0029110E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */,
+				5E4CE93C29D90F3C0029110E /* FloatplaneApp-DataStoresTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E4CE95D29D9128B0029110E /* UI Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				5E507BFC29CFAD65006751F3 /* Main.storyboard */,
+				5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */,
+				5E507C0229CFAD66006751F3 /* Assets.xcassets */,
+				5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */,
+			);
+			path = "UI Configuration";
+			sourceTree = "<group>";
+		};
 		5E507BF729CFAD65006751F3 /* FloatplaneApp */ = {
 			isa = PBXGroup;
 			children = (
 				5E507C2829CFADB5006751F3 /* Config */,
-				5EAAE77629D0D3C900F9A83B /* Settings */,
+				5E4CE95D29D9128B0029110E /* UI Configuration */,
 				5E507C2729CFADAB006751F3 /* View */,
 			);
 			path = FloatplaneApp;
@@ -347,7 +375,6 @@
 			children = (
 				5EC057B929D68E6A00D775EB /* Fonts */,
 				5E0E516829D3F630006744E4 /* Xibs */,
-				5E507BFC29CFAD65006751F3 /* Main.storyboard */,
 				5EC0576029D53DCA00D775EB /* TopNav */,
 				5EAAE76C29D0BF1E00F9A83B /* TabBar */,
 				5EC057A429D603C900D775EB /* Login */,
@@ -355,8 +382,6 @@
 				5EAAE75D29CFD86400F9A83B /* Browse */,
 				5E692E0E29D2D93E00239196 /* Search */,
 				5EAAE79029D13E2400F9A83B /* Settings */,
-				5E507C0229CFAD66006751F3 /* Assets.xcassets */,
-				5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -364,8 +389,6 @@
 		5E507C2829CFADB5006751F3 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				5EC0575229D4985700D775EB /* Notifications */,
-				5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */,
 				5E507BF829CFAD65006751F3 /* AppDelegate.swift */,
 				5E507C0729CFAD66006751F3 /* Info.plist */,
 				5E507BFF29CFAD65006751F3 /* FloatplaneApp.xcdatamodeld */,
@@ -412,18 +435,6 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		5EAAE77629D0D3C900F9A83B /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				5EC057A129D6028000D775EB /* Common */,
-				5EC0579C29D601C200D775EB /* User Store */,
-				5EC0577C29D5577100D775EB /* Creator Store */,
-				5EAAE79729D1589500F9A83B /* Progress Store */,
-				5EAAE77729D0D3D200F9A83B /* UserSettings.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		5EAAE79029D13E2400F9A83B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,14 +442,6 @@
 				5EAAE79329D141D700F9A83B /* PickerViewController.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		5EAAE79729D1589500F9A83B /* Progress Store */ = {
-			isa = PBXGroup;
-			children = (
-				5EAAE79829D158AF00F9A83B /* ProgressStore.swift */,
-			);
-			path = "Progress Store";
 			sourceTree = "<group>";
 		};
 		5EAAE79A29D159E900F9A83B /* Playback */ = {
@@ -465,14 +468,6 @@
 				5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */,
 			);
 			path = Logging;
-			sourceTree = "<group>";
-		};
-		5EC0575229D4985700D775EB /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				5EC0575329D4985F00D775EB /* Notifications.swift */,
-			);
-			path = Notifications;
 			sourceTree = "<group>";
 		};
 		5EC0575529D49A6800D775EB /* Live */ = {
@@ -510,30 +505,6 @@
 				5EC0576A29D551DD00D775EB /* CreatorListViewCell.swift */,
 			);
 			path = "Creator List";
-			sourceTree = "<group>";
-		};
-		5EC0577C29D5577100D775EB /* Creator Store */ = {
-			isa = PBXGroup;
-			children = (
-				5EC0577D29D5578200D775EB /* BaseCreatorStore.swift */,
-			);
-			path = "Creator Store";
-			sourceTree = "<group>";
-		};
-		5EC0579C29D601C200D775EB /* User Store */ = {
-			isa = PBXGroup;
-			children = (
-				5EC0579D29D601CB00D775EB /* UserStore.swift */,
-			);
-			path = "User Store";
-			sourceTree = "<group>";
-		};
-		5EC057A129D6028000D775EB /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				5EC057A229D6028900D775EB /* KeychainManager.swift */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		5EC057A429D603C900D775EB /* Login */ = {
@@ -687,6 +658,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 5E4CE93529D90F3C0029110E /* Products */;
+					ProjectRef = 5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */;
+				},
+				{
 					ProductGroup = 5E389B1429D8B26800FC8B4B /* Products */;
 					ProjectRef = 5E389B1329D8B26800FC8B4B /* FloatplaneApp-Models.xcodeproj */;
 				},
@@ -735,6 +710,20 @@
 			fileType = wrapper.cfbundle;
 			path = "FloatplaneApp-OperationsTests.xctest";
 			remoteRef = 5E389B8B29D8B3D600FC8B4B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FloatplaneApp_DataStores.framework;
+			remoteRef = 5E4CE93929D90F3C0029110E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5E4CE93C29D90F3C0029110E /* FloatplaneApp-DataStoresTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FloatplaneApp-DataStoresTests.xctest";
+			remoteRef = 5E4CE93B29D90F3C0029110E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5EFD927529D8C662007E8374 /* FloatplaneApp_Utilities.framework */ = {
@@ -802,9 +791,6 @@
 				5E389A3C29D6A52800FC8B4B /* LoginTextField.swift in Sources */,
 				5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */,
 				5EC0576829D54ED400D775EB /* CreatorListView.swift in Sources */,
-				5EC0577E29D5578200D775EB /* BaseCreatorStore.swift in Sources */,
-				5EC057A329D6028900D775EB /* KeychainManager.swift in Sources */,
-				5EAAE77829D0D3D200F9A83B /* UserSettings.swift in Sources */,
 				5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */,
 				5E389A3E29D6ABE600FC8B4B /* LoginImageTextView.swift in Sources */,
 				5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */,
@@ -815,7 +801,6 @@
 				5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */,
 				5EC057B829D689E700D775EB /* LoginButton.swift in Sources */,
 				5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */,
-				5EC0575429D4985F00D775EB /* Notifications.swift in Sources */,
 				5E389A4029D6BD5A00FC8B4B /* UIFont+Roboto.swift in Sources */,
 				5EC0574F29D41C9A00D775EB /* LivePlayerViewController.swift in Sources */,
 				5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */,
@@ -823,9 +808,7 @@
 				5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */,
 				5EAAE74C29CFC20900F9A83B /* UserConfiguration.swift in Sources */,
 				5EC0575729D49A7700D775EB /* LiveStreamOfflineViewController.swift in Sources */,
-				5EC0579E29D601CB00D775EB /* UserStore.swift in Sources */,
 				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
-				5EAAE79929D158AF00F9A83B /* ProgressStore.swift in Sources */,
 				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
 				5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */,
 				5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */,

@@ -16,6 +16,7 @@
 		5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2C29D8B68A00FC8B4B /* String+Class.swift */; };
 		5E389C3429D8B6AB00FC8B4B /* UIImage+Transparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */; };
 		5E389C3B29D8B6D800FC8B4B /* Log4S.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C3A29D8B6D800FC8B4B /* Log4S.swift */; };
+		5E4CE95A29D9100B0029110E /* FPNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE95929D9100B0029110E /* FPNotifications.swift */; };
 		5EFD929529D90CA0007E8374 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 5EFD929429D90CA0007E8374 /* Logging */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Transparency.swift"; sourceTree = "<group>"; };
 		5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		5E389C3A29D8B6D800FC8B4B /* Log4S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4S.swift; sourceTree = "<group>"; };
+		5E4CE95929D9100B0029110E /* FPNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		5E389C0B29D8B67900FC8B4B /* FloatplaneApp-Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5E4CE95929D9100B0029110E /* FPNotifications.swift */,
 				5E389C3A29D8B6D800FC8B4B /* Log4S.swift */,
 				5E389C2C29D8B68A00FC8B4B /* String+Class.swift */,
 				5E389C2D29D8B68A00FC8B4B /* Bool+StringValue.swift */,
@@ -226,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E4CE95A29D9100B0029110E /* FPNotifications.swift in Sources */,
 				5E389C3229D8B6AB00FC8B4B /* String+HTML.swift in Sources */,
 				5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */,
 				5E389C3429D8B6AB00FC8B4B /* UIImage+Transparency.swift in Sources */,

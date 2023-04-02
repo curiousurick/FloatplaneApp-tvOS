@@ -20,20 +20,12 @@
 //
 
 import Foundation
-import FloatplaneApp_Models
 
-struct FPNotifications {
+public struct FPNotifications {
     private init() { }
-    struct CreatorListUpdated {
+    public struct CreatorListUpdated {
         private init() { }
-        static let name = Notification.Name("FP.CreatorListUpdated")
-        static let creatorsKey = "creators"
-        static func create(creators: [BaseCreator]) -> Notification {
-            let userInfo = [
-                creatorsKey : creators
-            ]
-            return Notification(name: name, object: nil, userInfo: userInfo)
-        }
+        public static let name = Notification.Name("FP.CreatorListUpdated")
+        public static let creatorsKey = "creators"
     }
-    
 }

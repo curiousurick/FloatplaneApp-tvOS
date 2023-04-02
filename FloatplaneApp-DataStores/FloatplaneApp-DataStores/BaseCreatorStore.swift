@@ -19,19 +19,19 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
 import UICKeyChainStore
 import FloatplaneApp_Utilities
 import FloatplaneApp_Models
 
-class BaseCreatorStore {
+public class BaseCreatorStore {
     
     private let logger = Log4S()
     private let CreatorStoreKey = "CreatorStoreKey"
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     
-    static let instance = BaseCreatorStore()
+    public static let instance = BaseCreatorStore()
     
     private let keychain: UICKeyChainStore
     
@@ -39,7 +39,7 @@ class BaseCreatorStore {
         keychain = KeychainManager.instance.keychain
     }
     
-    func getCreators() -> [BaseCreator]? {
+    public func getCreators() -> [BaseCreator]? {
         guard let data = keychain.data(forKey: CreatorStoreKey) else {
             logger.error("Failed to retrieve creators from keychain")
             return nil
@@ -53,11 +53,16 @@ class BaseCreatorStore {
         return nil
     }
     
-    func setCreators(creators: [BaseCreator]) {
+    public func setCreators(creators: [BaseCreator]) {
         do {
             let data = try encoder.encode(creators)
             keychain.setData(data, forKey: CreatorStoreKey)
-            NotificationCenter.default.post(FPNotifications.CreatorListUpdated.create(creators: creators))
+            let userInfo = [
+                FPNotifications.CreatorListUpdated.creatorsKey : creators
+            ]
+            let name = FPNotifications.CreatorListUpdated.name
+            let notification = Notification(name: name, object: nil, userInfo: userInfo)
+            NotificationCenter.default.post(notification)
         }
         catch {
             logger.error("Failed to save creators to keychain")

@@ -21,6 +21,7 @@
 
 import UIKit
 import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 
 class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
     var creators: [BaseCreator] = []

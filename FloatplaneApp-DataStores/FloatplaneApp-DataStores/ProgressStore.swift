@@ -19,13 +19,13 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
 import Cache
 
-class ProgressStore {
+public class ProgressStore {
     
-    static let instance = ProgressStore()
-    static let updateInterval: TimeInterval = 10
+    public static let instance = ProgressStore()
+    public static let updateInterval: TimeInterval = 10
     
     private let storage: Storage<String, TimeInterval>
     
@@ -40,11 +40,11 @@ class ProgressStore {
         )
     }
     
-    func getProgress(for videoGuid: String) -> TimeInterval? {
+    public func getProgress(for videoGuid: String) -> TimeInterval? {
         return try? storage.object(forKey: videoGuid)
     }
     
-    func setProgress(for videoGuid: String, progress: TimeInterval) {
+    public func setProgress(for videoGuid: String, progress: TimeInterval) {
         try? storage.setObject(progress, forKey: videoGuid)
     }
 

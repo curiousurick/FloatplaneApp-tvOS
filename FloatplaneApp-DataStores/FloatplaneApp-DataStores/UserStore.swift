@@ -24,7 +24,7 @@ import UICKeyChainStore
 import FloatplaneApp_Utilities
 import FloatplaneApp_Models
 
-class UserStore {
+public class UserStore {
     
     private let logger = Log4S()
     private let UserStoreKey = "UserStoreKey"
@@ -32,13 +32,13 @@ class UserStore {
     private let decoder = JSONDecoder()
     private let keychain: UICKeyChainStore
     
-    static let instance = UserStore()
+    public static let instance = UserStore()
     
     private init() {
         keychain = KeychainManager.instance.keychain
     }
     
-    func getUser() -> User? {
+    public func getUser() -> User? {
         guard let data = keychain.data(forKey: UserStoreKey) else {
             logger.info("User is not logged in")
             return nil
@@ -52,7 +52,7 @@ class UserStore {
         return nil
     }
     
-    func setUser(user: User) {
+    public func setUser(user: User) {
         do {
             let data = try encoder.encode(user)
             keychain.setData(data, forKey: UserStoreKey)
@@ -62,7 +62,7 @@ class UserStore {
         }
     }
     
-    func removeUser() {
+    public func removeUser() {
         keychain.removeItem(forKey: UserStoreKey)
     }
 

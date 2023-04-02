@@ -19,12 +19,12 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import UIKit
 import ParallaxView
 import AlamofireImage
 import SwiftDate
 import FloatplaneApp_Models
+import FloatplaneApp_DataStores
 
 protocol FeedViewItem {
     var imageViewUrl: URL { get }
