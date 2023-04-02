@@ -34,7 +34,6 @@
 		5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BF829CFAD65006751F3 /* AppDelegate.swift */; };
 		5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */; };
 		5E507BFE29CFAD65006751F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507BFC29CFAD65006751F3 /* Main.storyboard */; };
-		5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BFF29CFAD65006751F3 /* FloatplaneApp.xcdatamodeld */; };
 		5E507C0329CFAD66006751F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E507C0229CFAD66006751F3 /* Assets.xcassets */; };
 		5E507C0629CFAD66006751F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */; };
 		5E507C1129CFAD66006751F3 /* FloatplaneAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1029CFAD66006751F3 /* FloatplaneAppTests.swift */; };
@@ -183,7 +182,6 @@
 		5E507BF829CFAD65006751F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		5E507BFD29CFAD65006751F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5E507C0029CFAD65006751F3 /* FloatplaneApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FloatplaneApp.xcdatamodel; sourceTree = "<group>"; };
 		5E507C0229CFAD66006751F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E507C0529CFAD66006751F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E507C0729CFAD66006751F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -387,7 +385,6 @@
 			children = (
 				5E507BF829CFAD65006751F3 /* AppDelegate.swift */,
 				5E507C0729CFAD66006751F3 /* Info.plist */,
-				5E507BFF29CFAD65006751F3 /* FloatplaneApp.xcdatamodeld */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -800,7 +797,6 @@
 				5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */,
 				5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */,
 				5EC0575729D49A7700D775EB /* LiveStreamOfflineViewController.swift in Sources */,
-				5E507C0129CFAD65006751F3 /* FloatplaneApp.xcdatamodeld in Sources */,
 				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
 				5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */,
 				5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */,
@@ -1227,19 +1223,6 @@
 			productName = UICKeyChainStore;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		5E507BFF29CFAD65006751F3 /* FloatplaneApp.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5E507C0029CFAD65006751F3 /* FloatplaneApp.xcdatamodel */,
-			);
-			currentVersion = 5E507C0029CFAD65006751F3 /* FloatplaneApp.xcdatamodel */;
-			path = FloatplaneApp.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5E0C3CCA29CF766700C71A19 /* Project object */;
 }
