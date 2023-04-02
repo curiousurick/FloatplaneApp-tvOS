@@ -50,9 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(true)
         
-        self.rootViewController = UIStoryboard.main.instantiateInitialViewController()
-        self.window?.rootViewController = self.rootViewController
-        self.window?.makeKeyAndVisible()
+        self.rootViewController = self.window?.rootViewController as! RootViewController
+//        self.rootViewController = UIStoryboard.main.instantiateInitialViewController()
+//        self.window?.rootViewController = self.rootViewController
+//        self.window?.makeKeyAndVisible()
         
         return true
     }
