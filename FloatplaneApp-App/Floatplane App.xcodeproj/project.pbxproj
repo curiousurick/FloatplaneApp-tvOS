@@ -329,7 +329,6 @@
 			isa = PBXGroup;
 			children = (
 				5E507BFC29CFAD65006751F3 /* Main.storyboard */,
-				5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */,
 				5E507C0229CFAD66006751F3 /* Assets.xcassets */,
 				5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */,
 			);
@@ -367,6 +366,7 @@
 		5E507C2729CFADAB006751F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */,
 				5EC057B929D68E6A00D775EB /* Fonts */,
 				5E0E516829D3F630006744E4 /* Xibs */,
 				5EC0576029D53DCA00D775EB /* TopNav */,
