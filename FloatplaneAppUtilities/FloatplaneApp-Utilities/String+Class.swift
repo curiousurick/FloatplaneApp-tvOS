@@ -23,8 +23,11 @@ import Foundation
 
 public extension String {
     
-    static func fromClass(_ any: Any) -> String {
-        return String(describing: type(of: any))
+    static func fromClass(_ any: Any?) -> String {
+        if let any = any {
+            return String(describing: type(of: any))
+        }
+        return "\(String(describing: type(of: any)))(nil)"
     }
     
     static func fromClass(_ type: Any.Type) -> String {
