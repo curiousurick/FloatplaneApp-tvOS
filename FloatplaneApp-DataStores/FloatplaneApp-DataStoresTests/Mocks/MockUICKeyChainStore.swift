@@ -20,17 +20,27 @@
 //
 
 import Foundation
+import UICKeyChainStore
 
-public struct Icon: Codable, Equatable {
-    public let childImages: [Image]
-    public let height: UInt64
-    public let path: URL
-    public let width: UInt64
+class MockUICKeyChainStore: UICKeyChainStore {
     
-    public init(childImages: [Image], height: UInt64, path: URL, width: UInt64) {
-        self.childImages = childImages
-        self.height = height
-        self.path = path
-        self.width = width
+    var mockDataForKey: Data?
+    var dataForKeyCallCount = 0
+    override func data(forKey key: String) -> Data? {
+        dataForKeyCallCount += 1
+        return mockDataForKey
     }
+    
+    var setDataForKeyCallCount = 0
+    override func setData(_ data: Data?, forKey key: String) -> Bool {
+        setDataForKeyCallCount += 1
+        return true
+    }
+    
+    var removeItemCallCount = 0
+    override func removeItem(forKey key: String) -> Bool {
+        removeItemCallCount += 1
+        return true
+    }
+    
 }

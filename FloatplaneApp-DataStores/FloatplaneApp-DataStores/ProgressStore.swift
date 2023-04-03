@@ -27,25 +27,31 @@ public class ProgressStore {
     public static let instance = ProgressStore()
     public static let updateInterval: TimeInterval = 10
     
-    private let storage: Storage<String, TimeInterval>
+    private let storage: DiskStorageWrapper<String, TimeInterval>
+    
+    @available(*, deprecated, message: "VisibleForTesting")
+    init(storage: DiskStorageWrapper<String, TimeInterval>) {
+        self.storage = storage
+    }
     
     private init() {
         let diskConfig = DiskConfig(name: "org.georgie.ProgressStore", expiry: .never)
         let memoryConfig = MemoryConfig(expiry: .never)
 
-        self.storage = try! Storage(
+        let storage: Storage<String, TimeInterval> = try! Storage(
           diskConfig: diskConfig,
           memoryConfig: memoryConfig,
           transformer: TransformerFactory.forCodable(ofType: TimeInterval.self)
         )
+        self.storage = DiskStorageWrapper(storage: storage)
     }
     
     public func getProgress(for videoGuid: String) -> TimeInterval? {
-        return try? storage.object(forKey: videoGuid)
+        return storage.readObject(forKey: videoGuid)
     }
     
     public func setProgress(for videoGuid: String, progress: TimeInterval) {
-        try? storage.setObject(progress, forKey: videoGuid)
+        storage.writeObject(progress, forKey: videoGuid)
     }
 
 }

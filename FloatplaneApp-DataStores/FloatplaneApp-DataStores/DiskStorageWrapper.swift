@@ -20,17 +20,27 @@
 //
 
 import Foundation
+import Cache
 
-public struct Icon: Codable, Equatable {
-    public let childImages: [Image]
-    public let height: UInt64
-    public let path: URL
-    public let width: UInt64
+public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
     
-    public init(childImages: [Image], height: UInt64, path: URL, width: UInt64) {
-        self.childImages = childImages
-        self.height = height
-        self.path = path
-        self.width = width
+    private let storage: Storage<Key, Value>?
+    
+    @available(*, deprecated, message: "VisibleForTesting")
+    init() {
+        self.storage = nil
+    }
+    
+    
+    init(storage: Storage<Key, Value>) {
+        self.storage = storage
+    }
+    
+    func readObject(forKey key: Key) -> Value? {
+        return try? storage?.object(forKey: key)
+    }
+    
+    func writeObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) {
+        try? storage?.setObject(object, forKey: key, expiry: expiry)
     }
 }

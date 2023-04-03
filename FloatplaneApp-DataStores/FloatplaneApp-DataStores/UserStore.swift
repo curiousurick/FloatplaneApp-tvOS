@@ -23,14 +23,19 @@ import FloatplaneApp_Utilities
 import FloatplaneApp_Models
 
 public class UserStore {
-    
     private let logger = Log4S()
     private let UserStoreKey = "UserStoreKey"
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
+    
     private let keychainAccess: KeychainAccess
     
     public static let instance = UserStore()
+
+    @available(*, deprecated, message: "VisibleForTesting")
+    init(keychainAccess: KeychainAccess) {
+        self.keychainAccess = keychainAccess
+    }
     
     private init() {
         keychainAccess = KeychainAccess.instance

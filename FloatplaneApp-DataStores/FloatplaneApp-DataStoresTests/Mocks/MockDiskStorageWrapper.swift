@@ -20,17 +20,37 @@
 //
 
 import Foundation
+import Cache
+import XCTest
+@testable import FloatplaneApp_DataStores
 
-public struct Icon: Codable, Equatable {
-    public let childImages: [Image]
-    public let height: UInt64
-    public let path: URL
-    public let width: UInt64
+extension Expiry: Equatable {
+    public static func == (lhs: Expiry, rhs: Expiry) -> Bool {
+        return lhs.date == rhs.date
+    }
+}
+
+class MockDiskStorageWrapper<K: Hashable & Equatable, V: Codable & Equatable>: DiskStorageWrapper<K, V> {
     
-    public init(childImages: [Image], height: UInt64, path: URL, width: UInt64) {
-        self.childImages = childImages
-        self.height = height
-        self.path = path
-        self.width = width
+    private var writeObjectCalledParams: [(V, K, Expiry?)] = []
+    func verifyWriteObject(value: V, key: K, expiry: Expiry?) {
+        XCTAssertTrue(writeObjectCalledParams.contains { $0 == (value, key, expiry) })
+    }
+    var writeObjectCallCount = 0
+    override func writeObject(_ object: V, forKey key: K, expiry: Expiry? = nil) {
+        writeObjectCallCount += 1
+        writeObjectCalledParams.append((object, key, expiry))
+    }
+    
+    private var readObjectCalledParams: [K] = []
+    func verifyReadObject(key: K) {
+        XCTAssertTrue(readObjectCalledParams.contains { $0 == key })
+    }
+    var readObjectCallCount = 0
+    var mockReadObject: [K : V] = [:]
+    override func readObject(forKey key: K) -> V? {
+        readObjectCallCount += 1
+        readObjectCalledParams.append(key)
+        return mockReadObject[key]
     }
 }

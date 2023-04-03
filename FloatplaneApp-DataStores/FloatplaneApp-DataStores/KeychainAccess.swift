@@ -27,6 +27,11 @@ class KeychainAccess {
     
     let keychain: UICKeyChainStore
     
+    @available(*, deprecated, message: "VisibleForTesting")
+    init(keychain: UICKeyChainStore) {
+        self.keychain = keychain
+    }
+    
     private init() {
         keychain = UICKeyChainStore(service: "org.georgie.Floatplane.Keychain")
     }
