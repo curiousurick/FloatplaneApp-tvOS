@@ -22,14 +22,18 @@
 import FloatplaneApp_Utilities
 import FloatplaneApp_Models
 
+/// Keychain-based data store for User information.
 public class UserStore {
     private let logger = Log4S()
     private let UserStoreKey = "UserStoreKey"
+    // Data is stored as JSON
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     
+    /// Package-level access to Keychain
     private let keychainAccess: KeychainAccess
     
+    /// Singleton instance of the UserStore.
     public static let instance = UserStore()
 
     @available(*, deprecated, message: "VisibleForTesting")
@@ -41,6 +45,8 @@ public class UserStore {
         keychainAccess = KeychainAccess.instance
     }
     
+    /// Returns a User if one exists in keychain.
+    /// If nil returned, that means the user is not logged in.
     public func getUser() -> User? {
         guard let data = keychainAccess.data(forKey: UserStoreKey) else {
             logger.info("User is not logged in")
@@ -55,6 +61,7 @@ public class UserStore {
         return nil
     }
     
+    /// Saved user to keychain.
     public func setUser(user: User) {
         do {
             let data = try encoder.encode(user)
@@ -65,6 +72,7 @@ public class UserStore {
         }
     }
     
+    /// Removes saved user from keychain upon logout
     public func removeUser() {
         keychainAccess.removeItem(forKey: UserStoreKey)
     }

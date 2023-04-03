@@ -118,9 +118,9 @@
 				5E4CE94029D90F560029110E /* UserStore.swift */,
 				5E4CE93E29D90F560029110E /* ProgressStore.swift */,
 				5E4CE93D29D90F560029110E /* UserSettings.swift */,
+				5E1FD71229DAA3450015AE6F /* DiskStorageWrapper.swift */,
 				5E4CE91D29D90F330029110E /* FloatplaneApp_DataStores.h */,
 				5E4CE91E29D90F330029110E /* FloatplaneApp_DataStores.docc */,
-				5E1FD71229DAA3450015AE6F /* DiskStorageWrapper.swift */,
 			);
 			path = "FloatplaneApp-DataStores";
 			sourceTree = "<group>";
@@ -421,6 +421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DOCC_EXTRACT_OBJC_INFO_FOR_SWIFT_SYMBOLS = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -458,6 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DOCC_EXTRACT_OBJC_INFO_FOR_SWIFT_SYMBOLS = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

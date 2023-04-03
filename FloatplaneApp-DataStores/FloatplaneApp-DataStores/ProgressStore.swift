@@ -22,11 +22,15 @@
 import Foundation
 import Cache
 
+/// Saves progress for given videos to disk with memory-backed cache.
 public class ProgressStore {
     
+    /// Singleton instance to ProgressStore
     public static let instance = ProgressStore()
+    /// Standard update interval in seconds while watching a video that a video controller should save current progress
     public static let updateInterval: TimeInterval = 10
     
+    /// Wrapper access to Cache framework's Storage object. This is for unit-testing purposes.
     private let storage: DiskStorageWrapper<String, TimeInterval>
     
     @available(*, deprecated, message: "VisibleForTesting")
@@ -35,6 +39,7 @@ public class ProgressStore {
     }
     
     private init() {
+        // Actual storage. Never expires and has no data limit (obviously device storage is limit)
         let diskConfig = DiskConfig(name: "org.georgie.ProgressStore", expiry: .never)
         let memoryConfig = MemoryConfig(expiry: .never)
 
@@ -43,13 +48,16 @@ public class ProgressStore {
           memoryConfig: memoryConfig,
           transformer: TransformerFactory.forCodable(ofType: TimeInterval.self)
         )
+        // Wrapper
         self.storage = DiskStorageWrapper(storage: storage)
     }
     
+    /// Reads the last-saved progress value in seconds from storage for given video guid
     public func getProgress(for videoGuid: String) -> TimeInterval? {
         return storage.readObject(forKey: videoGuid)
     }
     
+    /// Saves current progress in seconds to data store for given video guid
     public func setProgress(for videoGuid: String, progress: TimeInterval) {
         storage.writeObject(progress, forKey: videoGuid)
     }

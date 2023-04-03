@@ -22,8 +22,10 @@
 import Foundation
 import Cache
 
+/// Wrapper for Cache framework's Storage object
 public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
     
+    /// Actual storage
     private let storage: Storage<Key, Value>?
     
     @available(*, deprecated, message: "VisibleForTesting")
@@ -31,15 +33,17 @@ public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
         self.storage = nil
     }
     
-    
     init(storage: Storage<Key, Value>) {
         self.storage = storage
     }
     
+    /// Reads an object for given key.
     func readObject(forKey key: Key) -> Value? {
         return try? storage?.object(forKey: key)
     }
     
+    /// Write given object for given key. Expiry indicates when the data will be considered expired.
+    /// Note: Storage does not automatically delete object when expired
     func writeObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) {
         try? storage?.setObject(object, forKey: key, expiry: expiry)
     }
