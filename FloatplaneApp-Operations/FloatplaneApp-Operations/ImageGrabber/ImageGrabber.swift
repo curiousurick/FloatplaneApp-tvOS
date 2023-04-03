@@ -22,16 +22,19 @@
 import Foundation
 import AlamofireImage
 
+/// Wrapper for ImageDownloader to make it easier to get images from a URL
 public class ImageGrabber {
     
     public static let instance = ImageGrabber()
     
     private init() { }
     
+    /// Takes the image URL and returns the image data returned by ImageDownloader.
+    /// Returns nil if ImageDownloader cannot find the image data.
+    /// TODO: Add logging for errors
     public func grab(url: URL, completion: @escaping ((Data?) -> Void)) {
         let _ = try? ImageDownloader.default.download(URLRequest(url: url, method: .get), completion: { response in
             completion(response.data)
-            
         })
     }
     

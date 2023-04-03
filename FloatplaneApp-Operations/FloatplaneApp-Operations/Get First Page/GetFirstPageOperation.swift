@@ -22,9 +22,16 @@
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 
+/// Multi-step asynchronous operation to get all the data you need to display the first page of results.
+/// BaseCreators - Array<BaseCreator> - This is the list of the creators the user is subscribed to. It does not include all the info we need, though.
+/// ActiveCreator - Creator - This is the full metadata for the first creator in the list. This is the creator whose feed will be displayed on first load.
+/// Feed - Array<FeedItem> - This is the first page of video items that will be displayed on the browse tab.
+///
+/// The active creator call and first page feed call are made at the same time to improve latency.
 public class GetFirstPageOperation {
     private let logger = Log4S()
     
+    /// Asynchronous retrieves the first page of data required to display the browse page
     public func get() async -> (GetFirstPageResponse?, Error?) {
         async let baseCreatorsAsync = getCreators()
         guard let baseCreators = await baseCreatorsAsync.0, !baseCreators.isEmpty else {
@@ -43,6 +50,7 @@ public class GetFirstPageOperation {
         return (response, nil)
     }
     
+    /// Gets the list of basic metadata for the creators the user is subscribed to.
     private func getCreators() async -> ([BaseCreator]?, Error?) {
         return await withCheckedContinuation { continuation in
             OperationManager.instance.creatorListOperation.get(request: CreatorListRequest()) { response, error in
@@ -51,6 +59,7 @@ public class GetFirstPageOperation {
         }
     }
     
+    /// Gets the full metadata for the active creator selected by the default.
     private func getActiveCreator(urlName: String) async -> (Creator?, Error?) {
         let request = CreatorRequest(named: urlName)
         return await withCheckedContinuation { continutation in
@@ -60,6 +69,7 @@ public class GetFirstPageOperation {
         }
     }
     
+    /// Gets the first page of feed items for the active creator.
     private func getFirstPage(creatorId: String) async -> ([FeedItem]?, Error?) {
         logger.debug("Fetching next page of content for feed")
         let request = ContentFeedRequest.firstPage(for: creatorId)

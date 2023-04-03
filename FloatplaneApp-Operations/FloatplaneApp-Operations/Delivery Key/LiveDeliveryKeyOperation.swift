@@ -28,7 +28,7 @@ import FloatplaneApp_Models
 /// However, the delivery key looks different for VOD and Live so the responses are different.
 /// The result of this operation is not cached.
 public class LiveDeliveryKeyOperation {
-    public let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
+    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
     
     // 1 minute
     let timeBetweenLiveStreamChecks: TimeInterval = 60 * 1
@@ -49,6 +49,7 @@ public class LiveDeliveryKeyOperation {
         return true
     }
     
+    /// Gets a DeliveryKey for a livestream of a given creator ID.
     public func get(request: LiveDeliveryKeyRequest, completion: ((DeliveryKey?, Error?) -> Void)? = nil) {
         AF.request(baseUrl, parameters: request.params).responseDecodable(of: DeliveryKey.self) { response in
             completion?(response.value!, nil)

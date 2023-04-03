@@ -23,14 +23,18 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
+/// Looks up user subscriptions. Includes information about the subscription itself.
+/// May need to use this in the future to determine if the user has access to a given video.
+/// TODO: Investigate if ContentFeed returns videos that user does not have access to. Maybe need to do client-side limiting to avoid CX cliff.
 public class SubscriptionOperation: CacheableAPIOperation<SubscriptionRequest, SubscriptionResponse> {
     
-    static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
+    private static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
     
     init() {
         super.init(baseUrl: SubscriptionOperation.baseUrl)
     }
     
+    /// Looks up subscription data for the user, including the level of support for each subscribed creator.
     override func _get(request: SubscriptionRequest, completion: ((SubscriptionResponse?, Error?) -> Void)?) -> DataRequest {
         return AF.request(baseUrl).responseDecodable(of: [Subscription].self) { response in
             if let subscriptions = response.value {

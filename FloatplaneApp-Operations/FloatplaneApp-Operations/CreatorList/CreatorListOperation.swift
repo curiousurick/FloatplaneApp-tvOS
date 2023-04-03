@@ -23,14 +23,18 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
+/// Gets the list of basic creator metadata. Essentially treated as the Subscriptions for the customer to be displayed on the browse view's sidebar.
+/// This is not sufficient to keep track of the active creator because it does not include livestream or subscription information.
+/// It also gets an object called UserNotificationSetting for each creator but its not really utilized on tvOS.
 public class CreatorListOperation: CacheableAPIOperation<CreatorListRequest, CreatorListResponse> {
     
-    static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
+    private static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
     
     init() {
         super.init(baseUrl: CreatorListOperation.baseUrl)
     }
     
+    /// Gets the list of BaseCreator information for every creator the user is subscribed to.
     override func _get(request: CreatorListRequest, completion: ((CreatorListResponse?, Error?) -> Void)?) -> DataRequest {
         return AF.request(baseUrl).responseDecodable(of: [CreatorListResponse.CreatorResponseObject].self, decoder: FloatplaneDecoder()) { response in
             if let value = response.value {

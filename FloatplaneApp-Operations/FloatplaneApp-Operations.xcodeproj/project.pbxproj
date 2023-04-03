@@ -141,7 +141,6 @@
 				5E389B6C29D8B34B00FC8B4B /* Login */,
 				5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */,
 				5E389B2E29D8B29800FC8B4B /* FloatplaneApp_Operations.docc */,
-				5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */,
 			);
 			path = "FloatplaneApp-Operations";
 			sourceTree = "<group>";
@@ -240,6 +239,7 @@
 		5E389B9029D8B42E00FC8B4B /* ImageGrabber */ = {
 			isa = PBXGroup;
 			children = (
+				5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */,
 				5E389B9129D8B43A00FC8B4B /* ImageGrabber.swift */,
 			);
 			path = ImageGrabber;

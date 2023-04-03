@@ -23,9 +23,10 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
+/// Attempts to login the user to Floatplane. Takes a username and password and relies on cookies to maintain access to user-level APIs.
 public class LoginOperation {
     
-    var baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
+    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
     // Used to simulate iOS so we don't need captcha
     private let userAgent = "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"
     private let headers: HTTPHeaders
@@ -37,6 +38,7 @@ public class LoginOperation {
         headers = HTTPHeaders(headerMap)
     }
     
+    /// Attempts a login. If login fails, it returns a LoginFailedResponse containing the reason for failure, which also includes a clear message on the failure.
     public func get(request: LoginRequest, completion: ((LoginResponse?, LoginFailedResponse?) -> Void)? = nil) {
         AF.request(baseUrl, method: .post, parameters: request, headers: headers).response { response in
             // Login successful

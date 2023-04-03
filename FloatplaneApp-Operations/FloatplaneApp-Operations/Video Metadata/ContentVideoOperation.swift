@@ -23,17 +23,21 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
+/// This gets the full metadata for a given Video ID.
+/// It includes additional metadata not included in a FeedItem, such as quality levels.
+/// NOTE: This is a CacheableAPIOperation and uses the default expiry and capacity limits
 public class ContentVideoOperation: CacheableAPIOperation<ContentVideoRequest, ContentVideoResponse> {
     
     typealias Request = ContentVideoRequest
     typealias Response = ContentVideoResponse
     
-    static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
+    private static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
     
     init() {
         super.init(baseUrl: ContentVideoOperation.baseUrl)
     }
     
+    /// Gets the full metadata for a given video ID.
     override func _get(request: ContentVideoRequest, completion: ((ContentVideoResponse?, Error?) -> Void)?) -> DataRequest {
         return AF.request(baseUrl, parameters: request.params).responseDecodable(of: ContentVideoResponse.self) { response in
             if let response = response.value {

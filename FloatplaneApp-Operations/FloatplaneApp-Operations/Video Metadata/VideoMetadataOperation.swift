@@ -23,8 +23,15 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
+/// Gets the full video metadata wrapper object for a given feed item.
+/// This is a compound API operation which gets a DeliveryKey and full ContentVideoResponse and wraps it in VideoMetadata with the given FeedItem.
+/// Note: DeliveryKey will not be cached but ContentVideoOperation is a CacheableAPIOperation
 public class VideoMetadataOperation {
     
+    /// Takes a feedItem and the video's GUID and returns a wrapper object with more full metadata with:
+    /// 1. The video including quality levels
+    /// 2. The delivery key for the video.
+    /// 3. The given FeedItem object
     public func get(request: VideoMetadataRequest, completion: ((VideoMetadata?, Error?) -> Void)? = nil) {
         Task {
             async let deliveryKey = await getDeliveryKey(id: request.id)
@@ -43,6 +50,7 @@ public class VideoMetadataOperation {
         }
     }
     
+    /// Retrieves the full metadata for a given video ID.
     private func getContentVideo(id: String) async -> (ContentVideoResponse?, Error?) {
         await withCheckedContinuation({ continuation in
             let request = ContentVideoRequest(id: id)
@@ -52,6 +60,7 @@ public class VideoMetadataOperation {
         })
     }
     
+    /// Retrieves the DeliveryKey for a given video ID.
     private func getDeliveryKey(id: String) async -> (DeliveryKey?, Error?) {
         await withCheckedContinuation({ continuation in
             let request = VodDeliveryKeyRequest(guid: id)

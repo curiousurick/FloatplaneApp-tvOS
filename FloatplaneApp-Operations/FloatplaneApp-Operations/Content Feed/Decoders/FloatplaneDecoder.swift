@@ -21,10 +21,16 @@
 
 import Foundation
 
+/// Standard decoder for any API Operations whose responses contain a special type that Alamofire cannot decode immediately.
 class FloatplaneDecoder: JSONDecoder {
     
     override init() {
         super.init()
+        self.configureDataDecoding()
+    }
+    
+    /// Configures date format in the way that floatplane APIs return them.
+    private func configureDataDecoding() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateDecodingStrategy = .formatted(dateFormatter)

@@ -23,10 +23,15 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
+/// Performs a search on a given creator for a given query.
+/// Today, this search is basic and limited to videos because this is for tvOS.
+/// TODO: Determine if tvOS makes sense to support image and text posts.
 public class SearchOperation: CacheableAPIOperation<SearchRequest, SearchResponse> {
     
-    static let base = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
+    private static let base = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
     
+    /// Initializer which sets the countLimit to a higher level of 500 items in the cache.
+    /// Sets a cache expiration of 30 minutes instead of the default.
     init() {
         super.init(
             countLimit: 500,
@@ -36,6 +41,9 @@ public class SearchOperation: CacheableAPIOperation<SearchRequest, SearchRespons
         )
     }
     
+    /// Performs search for a given creator and query string.
+    /// Includes pagination through fetchAfter field,
+    /// Includes order through sortOrder field.
     override func _get(request: SearchRequest, completion: ((SearchResponse?, Error?) -> Void)? = nil) -> DataRequest {
         return AF.request(SearchOperation.base, parameters: request.params)
             .responseDecodable(of: [FeedItem].self, decoder: FloatplaneDecoder()) { response in

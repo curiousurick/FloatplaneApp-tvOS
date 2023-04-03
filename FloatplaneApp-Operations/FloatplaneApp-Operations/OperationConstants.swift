@@ -21,6 +21,8 @@
 
 import Foundation
 
+/// Put basic constants here.
 struct OperationConstants {
+    /// Standard domain url for floatplane APIs.
     static let domainBaseUrl = "https://www.floatplane.com"
 }

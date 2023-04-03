@@ -24,6 +24,7 @@ import Alamofire
 import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
 
+/// Attemps a Logout. Clears all caches after successful logout.
 public class LogoutOperation {
     private let logger = Log4S()
     
@@ -39,10 +40,13 @@ public class LogoutOperation {
         headers = HTTPHeaders(headerMap)
     }
     
+    /// Performs a logout and then clears all caches upon success.
+    /// TODO: Investigate if we should clear the cache even if the call fails.
     public func get(completion: ((Error?) -> Void)? = nil) {
         AF.request(baseUrl, method: .post, headers: headers).response() { response in
             if response.response?.statusCode == 200 {
                 UserStore.instance.removeUser()
+                OperationManager.instance.cancelAllOperations()
                 OperationManager.instance.clearCache()
                 URLCache.shared.removeAllCachedResponses()
                 self.logger.info("Successfully logged out")
