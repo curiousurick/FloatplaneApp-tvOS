@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct ContentCreator: Codable {
+public struct ContentCreator: Codable, Equatable {
     public let about: String
     public let card: Icon
     public let category: Category?

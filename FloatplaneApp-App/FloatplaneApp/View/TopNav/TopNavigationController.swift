@@ -38,51 +38,28 @@ class TopNavigationController: UINavigationController {
     }
     
     // Main data for viewing
-    var baseCreators: [BaseCreator]?
-    var activeCreator: Creator?
-    var firstPage: [FeedItem]?
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+    private let dataSource = DataSource.instance
     
     func clearAndGoToLoginView() {
-        self.activeCreator = nil
-        self.baseCreators = nil
-        self.firstPage = nil
+        self.dataSource.clearData()
         self.fpTabBarController?.resetView()
         AppDelegate.instance.rootViewController.goToLogin()
     }
     
-    func updateChildViewData(baseCreators: [BaseCreator], activeCreator: Creator, firstPage: [FeedItem]) {
-        self.firstPage = firstPage
-        self.activeCreator = activeCreator
-        self.baseCreators = baseCreators
-        self.fpTabBarController?.baseCreators = baseCreators
-        self.fpTabBarController?.firstPage = firstPage
-        self.fpTabBarController?.activeCreator = activeCreator
+    func updateChildViewData() {
         self.fpTabBarController?.resetView()
     }
     
     func changeSelectedCreator(baseCreator: BaseCreator) {
-        guard let baseCreators = baseCreators,
+        guard let baseCreators = dataSource.baseCreators,
               baseCreators.contains(where: { $0 == baseCreator }) else {
             logger.error("Switching to creator which is not known")
             return
         }
-        if let activeCreator = activeCreator,
-           let firstPage = firstPage,
+        if let activeCreator = dataSource.activeCreator,
            baseCreator.id == activeCreator.id {
             logger.debug("Asked to change to already active creator.")
-            self.updateChildViewData(baseCreators: baseCreators, activeCreator: activeCreator, firstPage: firstPage)
+            self.updateChildViewData()
             return
         }
         let urlName = baseCreator.urlname
@@ -95,7 +72,9 @@ class TopNavigationController: UINavigationController {
                 // TODO: Give error page
                 return
             }
-            self.updateChildViewData(baseCreators: baseCreators, activeCreator: activeCreator, firstPage: firstPage)
+            self.dataSource.activeCreator = activeCreator
+            self.dataSource.feed = firstPage
+            self.updateChildViewData()
         }
     }
     

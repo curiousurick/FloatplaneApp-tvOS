@@ -29,33 +29,13 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
     private let logger = Log4S()
     private let updateLiveTabQueue = OperationQueue()
     private let creatorOperation = OperationManager.instance.creatorOperation
-    
-    private struct Tab {
-        static let liveName = "Live"
-        static let liveIndex = 0
-        static let liveId = liveIndex
-        static let browseName = "Browse"
-        static let browseIndex = 1
-        static let browseId = browseIndex
-        static let searchName = "Search"
-        static let searchIndex = 2
-        static let searchId = searchIndex
-        static let settingsName = "Settings"
-        static let settingsIndex = 3
-        static let settingsId = settingsIndex
-    }
+    private let creatorDataSourceManager = DataSource.instance
     
     private var livePlayerViewController: LivePlayerViewController!
     private var liveStreamOfflineViewController: LiveStreamOfflineViewController!
     private var browseViewController: BrowseViewController!
     private var searchViewController: SearchContainerViewController!
     private var settingsViewConroller: SettingsViewController!
-    
-    private var creatorViewControllers: [any CreatorViewControllerProtocol] = []
-    
-    var firstPage: [FeedItem]?
-    var baseCreators: [BaseCreator]?
-    var activeCreator: Creator?
     
     var lastFocusedIndex: Int?
     var viewToFocus: UIFocusEnvironment? = nil {
@@ -85,26 +65,25 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
         // Setup Live Tab
         livePlayerViewController = storyboard.getLivePlayerViewController()
         liveStreamOfflineViewController = storyboard.getLiveStreamOfflineViewController()
-        let liveTab = UITabBarItem(title: Tab.liveName, image: nil, tag: Tab.liveId)
+        let liveTab = UITabBarItem(title: TabConstants.liveName, image: nil, tag: TabConstants.liveId)
         liveStreamOfflineViewController.tabBarItem = liveTab
         livePlayerViewController.tabBarItem = liveTab
         
-        
         // Setup Browse ViewController
         self.browseViewController = storyboard.getBrowseViewController()
-        let browseTab = UITabBarItem(title: Tab.browseName, image: nil, tag: Tab.browseId)
+        let browseTab = UITabBarItem(title: TabConstants.browseName, image: nil, tag: TabConstants.browseId)
         browseViewController.tabBarItem = browseTab
 
         // Setup Search ViewController
         searchViewController = storyboard.getSearchContainerViewController()
         
-        let searchTab = UITabBarItem(title: Tab.searchName, image: nil, tag: Tab.searchId)
+        let searchTab = UITabBarItem(title: TabConstants.searchName, image: nil, tag: TabConstants.searchId)
         searchViewController.tabBarItem = searchTab
         
         // Setup Settings ViewController
         self.settingsViewConroller = storyboard.getSettingsViewController()
         
-        let settingsTab = UITabBarItem(title: Tab.settingsName, image: nil, tag: Tab.settingsId)
+        let settingsTab = UITabBarItem(title: TabConstants.settingsName, image: nil, tag: TabConstants.settingsId)
         settingsViewConroller.tabBarItem = settingsTab
 
         self.viewControllers = [
@@ -112,12 +91,6 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
             browseViewController,
             searchViewController,
             settingsViewConroller
-        ]
-        self.creatorViewControllers = [
-            livePlayerViewController,
-            liveStreamOfflineViewController,
-            browseViewController,
-            searchViewController
         ]
         self.resetView()
     }
@@ -128,11 +101,6 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
             return
         }
         self.selectedViewController = self.viewControllers?[1]
-        for (index, _) in creatorViewControllers.enumerated() {
-            creatorViewControllers[index].activeCreator = activeCreator
-            creatorViewControllers[index].baseCreators = baseCreators
-        }
-        browseViewController?.feed = firstPage
         DispatchQueue.main.async {
             self.viewToFocus = self.tabBar
         }
@@ -171,8 +139,8 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         // If switching to search view, focus its search bar
-        if viewController == viewControllers?[Tab.searchIndex] &&
-            lastFocusedIndex != Tab.searchIndex {
+        if viewController == viewControllers?[TabConstants.searchIndex] &&
+            lastFocusedIndex != TabConstants.searchIndex {
             self.viewToFocus = searchViewController.view
         }
         
@@ -180,13 +148,13 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func updateCreatorInfo() {
-        guard let activeCreator = activeCreator else {
+        guard let activeCreator = creatorDataSourceManager.activeCreator else {
             return
         }
         let request = CreatorRequest(named: activeCreator.urlname)
         creatorOperation.get(request: request, invalidateCache: true) { response, error in
             if let response = response {
-                self.activeCreator = response
+                self.creatorDataSourceManager.activeCreator = response
             }
         }
     }

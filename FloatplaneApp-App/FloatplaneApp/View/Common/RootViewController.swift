@@ -27,6 +27,7 @@ import FloatplaneApp_Utilities
 class RootViewController: UIViewController {
     private let logger = Log4S()
     private let getFirstPageOperation = OperationManager.instance.getFirstPageOperation
+    private let dataSource = DataSource.instance
     
     var topNavigationController: TopNavigationController?
     
@@ -102,13 +103,12 @@ class RootViewController: UIViewController {
             let getFirstPageResponse = await getFirstPageOperation.get()
             if let result = getFirstPageResponse.0 {
                 // Don't replace navigation controller if you have it.
+                dataSource.feed = result.firstPage
+                dataSource.baseCreators = result.baseCreators
+                dataSource.activeCreator = result.activeCreator
                 let navController = self.topNavigationController ?? UIStoryboard.main.getTopNavigationController()
                 self.topNavigationController = navController
-                self.switchToMainView(
-                    baseCreators: result.baseCreators,
-                    activeCreator: result.activeCreator,
-                    firstPage: result.firstPage
-                )
+                self.switchToMainView()
             }
             else {
                 self.logger.error("Error getting first page. Returning to login. Error \(String(describing: getFirstPageResponse.1))")
@@ -117,18 +117,9 @@ class RootViewController: UIViewController {
         }
     }
     
-    func switchToMainView(
-        baseCreators: [BaseCreator],
-        activeCreator: Creator,
-        firstPage: [FeedItem]
-    ) {
+    func switchToMainView() {
         if let registerViewController = self.children.first(where: { $0 is LaunchScreenViewController }),
            let topNavigationController = topNavigationController {
-            topNavigationController.updateChildViewData(
-                baseCreators: baseCreators,
-                activeCreator: activeCreator,
-                firstPage: firstPage
-            )
             self.transition(from: registerViewController, to: topNavigationController)
         }
     }

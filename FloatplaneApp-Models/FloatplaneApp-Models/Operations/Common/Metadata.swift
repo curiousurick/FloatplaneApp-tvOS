@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct Metadata: Codable {
+public struct Metadata: Codable, Equatable {
     public let audioCount: UInt64
     public let audioDuration: UInt64
     public let galleryCount: UInt64

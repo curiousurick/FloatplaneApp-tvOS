@@ -22,19 +22,6 @@
 import UIKit
 import FloatplaneApp_Models
 
-class SearchContainerViewController: UISearchContainerViewController, CreatorViewControllerProtocol {
-    
-    var baseCreators: [BaseCreator]! {
-        didSet {
-            let searchViewController = searchController.searchResultsController as? SearchViewController
-            searchViewController?.baseCreators = baseCreators
-        }
-    }
-    var activeCreator: Creator! {
-        didSet {
-            let searchViewController = searchController.searchResultsController as? SearchViewController
-            searchViewController?.activeCreator = activeCreator
-        }
-    }
+class SearchContainerViewController: UISearchContainerViewController {
     
 }

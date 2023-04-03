@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct Channel: Codable {
+public struct Channel: Codable, Equatable {
     public let about: String
     public let card: String?
     public let cover: String?

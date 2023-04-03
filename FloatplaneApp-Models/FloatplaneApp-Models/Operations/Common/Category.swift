@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct Category: Codable {
+public struct Category: Codable, Equatable {
     public let id: String
     public let title: String
 }

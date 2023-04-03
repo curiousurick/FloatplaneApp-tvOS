@@ -19,9 +19,19 @@
 //  THE SOFTWARE.
 //
 
-import FloatplaneApp_Models
+import Foundation
 
-protocol CreatorViewControllerProtocol {
-    var baseCreators: [BaseCreator]! { get set }
-    var activeCreator: Creator! { get set }
+struct TabConstants {
+    static let liveName = "Live"
+    static let liveIndex = 0
+    static let liveId = liveIndex
+    static let browseName = "Browse"
+    static let browseIndex = 1
+    static let browseId = browseIndex
+    static let searchName = "Search"
+    static let searchIndex = 2
+    static let searchId = searchIndex
+    static let settingsName = "Settings"
+    static let settingsIndex = 3
+    static let settingsId = settingsIndex
 }

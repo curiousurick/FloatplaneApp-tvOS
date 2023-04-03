@@ -24,9 +24,10 @@ import AVKit
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class LivePlayerViewController: BaseVideoPlayerViewController, CreatorViewControllerProtocol {
+class LivePlayerViewController: BaseVideoPlayerViewController {
     private var menuPressRecognizer: UITapGestureRecognizer?
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
+    private let dataSource = DataSource.instance
     
     private var timeObserverToken: Any?
     
@@ -38,8 +39,6 @@ class LivePlayerViewController: BaseVideoPlayerViewController, CreatorViewContro
     
     let liveStreamEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
     var registeredForLiveStreamEndNotification: Bool = false
-    var activeCreator: Creator!
-    var baseCreators: [BaseCreator]!
     var deliveryKey: DeliveryKey?
     
     override func viewDidLoad() {
@@ -81,16 +80,20 @@ class LivePlayerViewController: BaseVideoPlayerViewController, CreatorViewContro
             return
         }
         // You're being presented without knowledge of livestream availability.
-        let video = activeCreator.liveStream
+        guard let activeCreator = dataSource.activeCreator else {
+            logger.error("LivePlayerViewController opened without an activeCreator")
+            return
+        }
+        let liveStream = activeCreator.liveStream
         Task {
-            if let deliveryKey = await getDeliveryKey(video: video) {
+            if let deliveryKey = await getDeliveryKey(video: liveStream) {
                 self.deliveryKey = deliveryKey
                 DispatchQueue.main.async {
                     self.startVideo(deliveryKey: deliveryKey)
                 }
             }
             else {
-                self.logger.error("Unable to get live delivery key for owner \(video.owner).")
+                self.logger.error("Unable to get live delivery key for owner \(liveStream.owner).")
                 self.fpTabBarController?.updateLiveTab(online: false)
             }
         }

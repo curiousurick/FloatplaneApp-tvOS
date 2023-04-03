@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct Owner: Codable {
+public struct Owner: Codable, Equatable {
     public let id: String
     public let username: String
 }

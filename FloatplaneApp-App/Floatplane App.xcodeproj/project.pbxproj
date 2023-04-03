@@ -10,6 +10,8 @@
 		5E0E516A29D3F6B3006744E4 /* FeedItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */; };
 		5E1FD6F329DA35C60015AE6F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F229DA35C60015AE6F /* RootViewController.swift */; };
 		5E1FD6F529DA62B10015AE6F /* SearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */; };
+		5E1FD6F729DA65A80015AE6F /* CreatorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */; };
+		5E1FD6F929DA7F8A0015AE6F /* TabConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */; };
 		5E389A2E29D6A12000FC8B4B /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C529D68E8B00D775EB /* Roboto-BlackItalic.ttf */; };
 		5E389A2F29D6A12000FC8B4B /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BD29D68E8B00D775EB /* Roboto-Thin.ttf */; };
 		5E389A3029D6A12000FC8B4B /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C129D68E8B00D775EB /* Roboto-Black.ttf */; };
@@ -35,7 +37,6 @@
 		5E4CE95C29D911670029110E /* FloatplaneApp_DataStores.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5E4CE96029D914F00029110E /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE95F29D914F00029110E /* LaunchScreenViewController.swift */; };
 		5E4CE96329DA053E0029110E /* SegueIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE96229DA053E0029110E /* SegueIdentifier.swift */; };
-		5E4CE96629DA08DA0029110E /* CreatorViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE96529DA08DA0029110E /* CreatorViewControllerProtocol.swift */; };
 		5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BF829CFAD65006751F3 /* AppDelegate.swift */; };
 		5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */; };
 		5E507BFE29CFAD65006751F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507BFC29CFAD65006751F3 /* Main.storyboard */; };
@@ -170,6 +171,8 @@
 		5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		5E1FD6F229DA35C60015AE6F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContainerViewController.swift; sourceTree = "<group>"; };
+		5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorDataSource.swift; sourceTree = "<group>"; };
+		5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabConstants.swift; sourceTree = "<group>"; };
 		5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginImageTextView.swift; sourceTree = "<group>"; };
@@ -187,7 +190,6 @@
 		5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-DataStores.xcodeproj"; path = "../../FloatplaneApp-DataStores/FloatplaneApp-DataStores.xcodeproj"; sourceTree = "<group>"; };
 		5E4CE95F29D914F00029110E /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		5E4CE96229DA053E0029110E /* SegueIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifier.swift; sourceTree = "<group>"; };
-		5E4CE96529DA08DA0029110E /* CreatorViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorViewControllerProtocol.swift; sourceTree = "<group>"; };
 		5E507BF629CFAD65006751F3 /* FloatplaneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloatplaneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E507BF829CFAD65006751F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
@@ -365,8 +367,8 @@
 			isa = PBXGroup;
 			children = (
 				5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */,
-				5E4CE96529DA08DA0029110E /* CreatorViewControllerProtocol.swift */,
 				5E1FD6F229DA35C60015AE6F /* RootViewController.swift */,
+				5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -461,6 +463,7 @@
 			isa = PBXGroup;
 			children = (
 				5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */,
+				5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -818,6 +821,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E389A3C29D6A52800FC8B4B /* LoginTextField.swift in Sources */,
+				5E1FD6F929DA7F8A0015AE6F /* TabConstants.swift in Sources */,
 				5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */,
 				5EC0576829D54ED400D775EB /* CreatorListView.swift in Sources */,
 				5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */,
@@ -825,7 +829,6 @@
 				5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */,
 				5E1FD6F529DA62B10015AE6F /* SearchContainerViewController.swift in Sources */,
 				5E4CE96029D914F00029110E /* LaunchScreenViewController.swift in Sources */,
-				5E4CE96629DA08DA0029110E /* CreatorViewControllerProtocol.swift in Sources */,
 				5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */,
 				5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */,
 				5EC0576B29D551DD00D775EB /* CreatorListViewCell.swift in Sources */,
@@ -837,6 +840,7 @@
 				5E389A4029D6BD5A00FC8B4B /* UIFont+Roboto.swift in Sources */,
 				5EC0574F29D41C9A00D775EB /* LivePlayerViewController.swift in Sources */,
 				5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */,
+				5E1FD6F729DA65A80015AE6F /* CreatorDataSource.swift in Sources */,
 				5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */,
 				5E1FD6F329DA35C60015AE6F /* RootViewController.swift in Sources */,
 				5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */,

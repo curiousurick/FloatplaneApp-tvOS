@@ -23,12 +23,8 @@ import UIKit
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 
-class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
-    var creators: [BaseCreator]? {
-        didSet {
-            self.collectionView.reloadData()
-        }
-    }
+class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, DataSourceUpdating {
+    private let dataSource = DataSource.instance
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
@@ -42,6 +38,7 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.dataSource.registerDelegate(delegate: self)
     }
     
     override func awakeFromNib() {
@@ -59,33 +56,22 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         collectionView.collectionViewLayout = flowLayout
     }
     
-    @objc private func updatedCreators(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-        let creators = userInfo[FPNotifications.CreatorListUpdated.creatorsKey] as? [BaseCreator] else {
-            return
-        }
-        self.creators = creators
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return creators?.count ?? 0
+        return dataSource.baseCreators?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatorListViewCell.identifier, for: indexPath) as! CreatorListViewCell
-        cell.updateImage(creator: creators![indexPath.row])
+        cell.updateImage(creator: dataSource.baseCreators![indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedBaseCreator = creators![indexPath.row]
+        let selectedBaseCreator = dataSource.baseCreators![indexPath.row]
         let navController = AppDelegate.instance.topNavigationController
         navController?.changeSelectedCreator(baseCreator: selectedBaseCreator)
     }

@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct FeedItem: Codable {
+public struct FeedItem: Codable, Equatable {
     public let attachmentOrder: [String]
     public let audioAttachments: [String]
     public let channel: Channel

@@ -25,16 +25,10 @@ import FloatplaneApp_Utilities
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class LiveStreamOfflineViewController: UIViewController, CreatorViewControllerProtocol {
+class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
     private let logger = Log4S()
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
-    
-    var activeCreator: Creator! {
-        didSet {
-            self.updateThumbnailView()
-        }
-    }
-    var baseCreators: [BaseCreator]!
+    private let dataSource = DataSource.instance
     
     private var fpTabBarController: FPTabBarController? {
         get {
@@ -55,29 +49,34 @@ class LiveStreamOfflineViewController: UIViewController, CreatorViewControllerPr
     }
     
     func checkIfVideoOnline() {
-        guard let video = activeCreator?.liveStream else {
+        guard let activeCreator = dataSource.activeCreator else {
             logger.error("Cannot start live stream because liveSream is nil")
             return
         }
-        let request = LiveDeliveryKeyRequest(creator: video.owner)
+        let liveStream = activeCreator.liveStream
+        let request = LiveDeliveryKeyRequest(creator: liveStream.owner)
         guard liveDeliveryKeyOperation.isAllowedToCheckForLiveStream(request: request) else {
             logger.info("Cannot check if live because not allowed to check.")
             return
         }
         liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
             if let deliveryKey = deliveryKey {
-                self.logger.error("Unable to get live delivery key for owner \(video.owner).")
+                self.logger.error("Unable to get live delivery key for owner \(liveStream.owner).")
                 self.fpTabBarController?.updateLiveTab(online: true, deliverKey: deliveryKey)
                 return
             }
         }
     }
     
+    func activeCreatorUpdated(activeCreator: Creator) {
+        updateThumbnailView()
+    }
+    
     func updateThumbnailView() {
         if let offlineThumbnailView = self.offlineThumbnailView,
-           let creator = activeCreator {
+           let activeCreator = dataSource.activeCreator {
             DispatchQueue.main.async {
-                if let url = creator.liveStream.offline?.thumbnail.path {
+                if let url = activeCreator.liveStream.offline?.thumbnail.path {
                     offlineThumbnailView.af.setImage(withURL: url)
                 }
                 else {
@@ -86,6 +85,4 @@ class LiveStreamOfflineViewController: UIViewController, CreatorViewControllerPr
             }
         }
     }
-    
-    
 }
