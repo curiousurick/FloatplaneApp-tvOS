@@ -21,15 +21,21 @@
 
 import Foundation
 
+/// Extension to make it easy to get the class name of any type
 public extension String {
     
+    /// Returns the simple class name of the given object.
+    /// If a nil value is given, this cannot infer the intended type.
     static func fromClass(_ any: Any?) -> String {
         if let any = any {
             return String(describing: type(of: any))
         }
+        // Will return "Optional<Any>(nil)" because we can't get the type of a nil value
         return "\(String(describing: type(of: any)))(nil)"
     }
     
+    /// Returns the simple class name of the given type.
+    /// To me this looks nicer than calling String(describing: Whatever.self)
     static func fromClass(_ type: Any.Type) -> String {
         return String(describing: type)
     }

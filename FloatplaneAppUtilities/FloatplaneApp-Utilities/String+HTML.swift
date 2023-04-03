@@ -21,21 +21,20 @@
 
 import Foundation
 
-public extension Data {
-    var html2AttributedString: NSAttributedString? {
-        do {
-            return try NSAttributedString(data: self, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            Log4S().error("Unable to remove HTML from input")
-            return  nil
-        }
-    }
-    var html2String: String { html2AttributedString?.string ?? "" }
-}
-
+/// Taken from https://www.hackingwithswift.com/example-code/system/how-to-convert-html-to-an-nsattributedstring
 public extension StringProtocol {
     var html2AttributedString: NSAttributedString? {
-        Data(utf8).html2AttributedString
+        do {
+            return try NSAttributedString(
+                data: Data(utf8),
+                options: [.documentType: NSAttributedString.DocumentType.html,
+                          .characterEncoding: String.Encoding.utf8.rawValue],
+                documentAttributes: nil
+            )
+        } catch {
+            Log4S().error("Unable to remove HTML from input")
+            return nil
+        }
     }
     var html2String: String {
         html2AttributedString?.string ?? ""

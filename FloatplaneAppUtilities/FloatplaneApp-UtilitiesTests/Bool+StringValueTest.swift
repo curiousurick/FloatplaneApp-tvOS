@@ -19,13 +19,24 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import XCTest
+@testable import FloatplaneApp_Utilities
 
-public struct FPNotifications {
-    private init() { }
-    public struct CreatorListUpdated {
-        private init() { }
-        public static let name = Notification.Name("FP.CreatorListUpdated")
-        public static let creatorsKey = "creators"
+class BoolStringValueTest: XCTestCase {
+    
+    func testStringValueTrue() {
+        // Act
+        let trueString = true.stringValue
+        // Assert
+        XCTAssertEqual("true", trueString)
     }
+    
+    func testStringValueFalse() {
+        // Act
+        let trueString = false.stringValue
+        
+        // Assert
+        XCTAssertEqual("false", trueString)
+    }
+    
 }

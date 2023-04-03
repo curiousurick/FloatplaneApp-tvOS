@@ -21,22 +21,13 @@
 
 import UIKit
 
+/// This was taken from https://stackoverflow.com/a/12228369
+/// It looks like this is replaces colors where all the values are between 222-255 (very light gray to full white)
+/// This doesn't seem to make a perfect transparent image, but it looks as good as Floatplane's site.
 public extension UIImage {
     func imageByMakingWhiteBackgroundTransparent() -> UIImage? {
-        
-        let image = UIImage(data: self.jpegData(compressionQuality: 1.0)!)!
-        let rawImageRef: CGImage = image.cgImage!
-        
         let colorMasking: [CGFloat] = [222, 255, 222, 255, 222, 255]
-        UIGraphicsBeginImageContext(image.size);
-        
-        let maskedImageRef = rawImageRef.copy(maskingColorComponents: colorMasking)
-        UIGraphicsGetCurrentContext()?.translateBy(x: 0.0,y: image.size.height)
-        UIGraphicsGetCurrentContext()?.scaleBy(x: 1.0, y: -1.0)
-        UIGraphicsGetCurrentContext()?.draw(maskedImageRef!, in: CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height))
-        let result = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return result
-        
+        guard let cgImage = cgImage?.copy(maskingColorComponents: colorMasking) else { return nil }
+        return UIImage(cgImage: cgImage)
     }
 }

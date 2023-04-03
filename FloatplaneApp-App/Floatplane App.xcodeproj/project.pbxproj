@@ -56,7 +56,6 @@
 		5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79329D141D700F9A83B /* PickerViewController.swift */; };
 		5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */; };
 		5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */; };
-		5EAAE7A429D2C64D00F9A83B /* String+ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */; };
 		5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0574C29D4089C00D775EB /* SearchViewController.swift */; };
 		5EC0574F29D41C9A00D775EB /* LivePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0574E29D41C9A00D775EB /* LivePlayerViewController.swift */; };
 		5EC0575729D49A7700D775EB /* LiveStreamOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0575629D49A7700D775EB /* LiveStreamOfflineViewController.swift */; };
@@ -207,7 +206,6 @@
 		5EAAE79329D141D700F9A83B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VODPlayerViewController.swift; sourceTree = "<group>"; };
 		5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemProgressBarView.swift; sourceTree = "<group>"; };
-		5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ClassTest.swift"; sourceTree = "<group>"; };
 		5EC0574C29D4089C00D775EB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5EC0574E29D41C9A00D775EB /* LivePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlayerViewController.swift; sourceTree = "<group>"; };
 		5EC0575629D49A7700D775EB /* LiveStreamOfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamOfflineViewController.swift; sourceTree = "<group>"; };
@@ -486,17 +484,8 @@
 		5EAAE7A129D2C63B00F9A83B /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				5EAAE7A229D2C64100F9A83B /* Logging */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		5EAAE7A229D2C64100F9A83B /* Logging */ = {
-			isa = PBXGroup;
-			children = (
-				5EAAE7A329D2C64D00F9A83B /* String+ClassTest.swift */,
-			);
-			path = Logging;
 			sourceTree = "<group>";
 		};
 		5EC0575529D49A6800D775EB /* Live */ = {
@@ -855,7 +844,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E507C1129CFAD66006751F3 /* FloatplaneAppTests.swift in Sources */,
-				5EAAE7A429D2C64D00F9A83B /* String+ClassTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

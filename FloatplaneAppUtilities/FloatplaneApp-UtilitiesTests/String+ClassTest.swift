@@ -21,30 +21,40 @@
 
 import XCTest
 @testable import FloatplaneApp_Utilities
+import FloatplaneApp_Models
 
-class FloatplaneAppUtilitiesTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+final class StringClassTest: XCTestCase {
+    
+    func testStringForObject() {
+        // Arrange
+        let request = ContentFeedRequest(fetchAfter: 20, limit: 20, creatorId: "CreatorId")
+        
+        // Act
+        let result = String.fromClass(request)
+        
+        // Assert
+        XCTAssertEqual(result, "ContentFeedRequest")
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    /// Unfortunately, I haven't found a way to get the type of a nil value.
+    /// The best we can do now is to describe that it's nil
+    func testStringForNilObject() {
+        // Arrange
+        let request: ContentFeedRequest? = nil
+        
+        // Act
+        let result = String.fromClass(request)
+        
+        // Assert
+        XCTAssertEqual(result, "Optional<Any>(nil)")
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testStringForClass() {
+        // Act
+        let result = String.fromClass(ContentFeedRequest.self)
+        
+        // Assert
+        XCTAssertEqual(result, "ContentFeedRequest")
     }
 
 }
