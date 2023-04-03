@@ -55,7 +55,6 @@ extension UIStoryboard {
     func getSearchContainerViewController() -> SearchContainerViewController {
         let searchViewController = getSearchViewController()
         let searchController = UISearchController(searchResultsController: searchViewController)
-        searchController.searchBar.delegate = searchViewController
         let searchContainerController = SearchContainerViewController(searchController: searchController)
         searchController.searchResultsUpdater = searchViewController
         return searchContainerController
