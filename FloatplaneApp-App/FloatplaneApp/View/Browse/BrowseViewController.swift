@@ -21,7 +21,6 @@
 
 import UIKit
 import AVKit
-import Alamofire
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
@@ -43,7 +42,6 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate,
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
     private let contentFeedOperation = OperationManager.instance.contentFeedOperation
-    
     private let dataSource = DataSource.instance
     
     @IBOutlet var videoCollectionView: UICollectionView!

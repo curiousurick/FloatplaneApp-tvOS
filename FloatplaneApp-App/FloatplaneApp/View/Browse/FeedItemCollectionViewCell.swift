@@ -21,7 +21,6 @@
 
 import UIKit
 import ParallaxView
-import AlamofireImage
 import SwiftDate
 import FloatplaneApp_Models
 import FloatplaneApp_DataStores

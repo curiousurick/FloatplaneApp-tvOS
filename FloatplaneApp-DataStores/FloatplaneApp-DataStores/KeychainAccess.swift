@@ -19,49 +19,27 @@
 //  THE SOFTWARE.
 //
 
-import FloatplaneApp_Utilities
-import FloatplaneApp_Models
+import Foundation
+import UICKeyChainStore
 
-public class UserStore {
+class KeychainAccess {
+    static let instance = KeychainAccess()
     
-    private let logger = Log4S()
-    private let UserStoreKey = "UserStoreKey"
-    private let encoder = JSONEncoder()
-    private let decoder = JSONDecoder()
-    private let keychainAccess: KeychainAccess
-    
-    public static let instance = UserStore()
+    let keychain: UICKeyChainStore
     
     private init() {
-        keychainAccess = KeychainAccess.instance
+        keychain = UICKeyChainStore(service: "org.georgie.Floatplane.Keychain")
     }
     
-    public func getUser() -> User? {
-        guard let data = keychainAccess.data(forKey: UserStoreKey) else {
-            logger.info("User is not logged in")
-            return nil
-        }
-        do {
-            return try decoder.decode(User.self, from: data)
-        }
-        catch {
-            logger.error("Failed to decode creators from keychain")
-        }
-        return nil
+    func data(forKey key: String) -> Data? {
+        return keychain.data(forKey: key)
     }
     
-    public func setUser(user: User) {
-        do {
-            let data = try encoder.encode(user)
-            keychainAccess.setData(data, forKey: UserStoreKey)
-        }
-        catch {
-            logger.error("Failed to save creators to keychain")
-        }
+    func setData(_ data: Data?, forKey key: String) {
+        keychain.setData(data, forKey: key)
     }
     
-    public func removeUser() {
-        keychainAccess.removeItem(forKey: UserStoreKey)
+    func removeItem(forKey key: String) {
+        keychain.removeItem(forKey: key)
     }
-
 }

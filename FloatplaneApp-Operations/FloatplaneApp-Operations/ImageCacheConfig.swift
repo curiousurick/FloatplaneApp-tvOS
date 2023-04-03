@@ -19,15 +19,27 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import UICKeyChainStore
+import FloatplaneApp_Utilities
+import AlamofireImage
+import UIKit
 
-class KeychainManager {
-    static let instance = KeychainManager()
+public class ImageCacheConfig {
     
-    let keychain: UICKeyChainStore
+    public static let instance = ImageCacheConfig()
     
-    private init() {
-        keychain = UICKeyChainStore(service: "org.georgie.Floatplane.Keychain")
+    private init() { }
+    
+    private var setup = false
+    public func setup(diskSpaceMB: Int = 150) {
+        if !setup {
+            return
+        }
+        let diskCapacity = diskSpaceMB * 1024 * 1024
+        let diskCache = URLCache(memoryCapacity: 0, diskCapacity: diskCapacity, diskPath: "image_disk_cache")
+        let configuration = URLSessionConfiguration.default
+        configuration.urlCache = diskCache
+        let downloader = ImageDownloader(configuration: configuration)
+        UIImageView.af.sharedImageDownloader = downloader
+        setup = true
     }
 }

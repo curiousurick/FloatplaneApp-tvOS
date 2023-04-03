@@ -20,7 +20,6 @@
 //
 
 import UIKit
-import AlamofireImage
 import FloatplaneApp_Utilities
 import FloatplaneApp_Operations
 import FloatplaneApp_Models

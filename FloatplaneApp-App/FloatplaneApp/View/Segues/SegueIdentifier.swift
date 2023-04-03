@@ -22,14 +22,23 @@
 import Foundation
 
 struct SegueIdentifier {
+    private init() { }
+    
     struct LaunchScreenViewController {
+        private init() { }
         static let showLoginScreen = "ShowLoginScreen"
         static let showMainScreen = "ShowMainScreen"
     }
     struct TopNavigationController {
+        private init() { }
         static let loginViewControllerSegue = "LoginViewController"
     }
     struct LoginViewController {
+        private init() { }
         static let unwindFromLoginSegue = "UnwindFromLogin"
+    }
+    struct SettingsViewController {
+        private init() { }
+        static let showResolutionOptions = "ShowResolutionOptions"
     }
 }

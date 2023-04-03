@@ -12,6 +12,7 @@
 		5E1FD6F529DA62B10015AE6F /* SearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */; };
 		5E1FD6F729DA65A80015AE6F /* CreatorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */; };
 		5E1FD6F929DA7F8A0015AE6F /* TabConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */; };
+		5E1FD70329DA93D00015AE6F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5E1FD70229DA93D00015AE6F /* Alamofire */; };
 		5E389A2E29D6A12000FC8B4B /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C529D68E8B00D775EB /* Roboto-BlackItalic.ttf */; };
 		5E389A2F29D6A12000FC8B4B /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BD29D68E8B00D775EB /* Roboto-Thin.ttf */; };
 		5E389A3029D6A12000FC8B4B /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C129D68E8B00D775EB /* Roboto-Black.ttf */; };
@@ -45,14 +46,12 @@
 		5E507C1129CFAD66006751F3 /* FloatplaneAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1029CFAD66006751F3 /* FloatplaneAppTests.swift */; };
 		5E507C1B29CFAD66006751F3 /* FloatplaneAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1A29CFAD66006751F3 /* FloatplaneAppUITests.swift */; };
 		5E507C1D29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1C29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift */; };
-		5E507C2E29CFB0FE006751F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5E507C2D29CFB0FE006751F3 /* Alamofire */; };
 		5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */; };
 		5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76129D03A9A00F9A83B /* ParallaxView */; };
 		5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76729D0B34D00F9A83B /* AlamofireImage */; };
 		5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76A29D0B56B00F9A83B /* SwiftDate */; };
 		5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */; };
 		5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */; };
-		5EAAE77B29D12B6300F9A83B /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE77A29D12B6300F9A83B /* Cache */; };
 		5EAAE79229D13E3A00F9A83B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */; };
 		5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79329D141D700F9A83B /* PickerViewController.swift */; };
 		5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */; };
@@ -64,7 +63,6 @@
 		5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0575E29D53DC400D775EB /* TopNavigationController.swift */; };
 		5EC0576829D54ED400D775EB /* CreatorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0576729D54ED400D775EB /* CreatorListView.swift */; };
 		5EC0576B29D551DD00D775EB /* CreatorListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0576A29D551DD00D775EB /* CreatorListViewCell.swift */; };
-		5EC0578729D559CF00D775EB /* UICKeyChainStore in Frameworks */ = {isa = PBXBuildFile; productRef = 5EC0578629D559CF00D775EB /* UICKeyChainStore */; };
 		5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057A529D603D400D775EB /* LoginViewController.swift */; };
 		5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B529D6848E00D775EB /* ViewController+Border.swift */; };
 		5EC057B829D689E700D775EB /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B729D689E700D775EB /* LoginButton.swift */; };
@@ -238,16 +236,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E1FD70329DA93D00015AE6F /* Alamofire in Frameworks */,
 				5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */,
 				5EFD927A29D8C746007E8374 /* FloatplaneApp_Operations.framework in Frameworks */,
-				5EC0578729D559CF00D775EB /* UICKeyChainStore in Frameworks */,
 				5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */,
 				5EFD927C29D8C746007E8374 /* FloatplaneApp_Utilities.framework in Frameworks */,
 				5EFD927829D8C746007E8374 /* FloatplaneApp_Models.framework in Frameworks */,
-				5E507C2E29CFB0FE006751F3 /* Alamofire in Frameworks */,
 				5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */,
 				5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */,
-				5EAAE77B29D12B6300F9A83B /* Cache in Frameworks */,
 				5E4CE95B29D911670029110E /* FloatplaneApp_DataStores.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,12 +596,10 @@
 			);
 			name = FloatplaneApp;
 			packageProductDependencies = (
-				5E507C2D29CFB0FE006751F3 /* Alamofire */,
 				5EAAE76129D03A9A00F9A83B /* ParallaxView */,
 				5EAAE76729D0B34D00F9A83B /* AlamofireImage */,
 				5EAAE76A29D0B56B00F9A83B /* SwiftDate */,
-				5EAAE77A29D12B6300F9A83B /* Cache */,
-				5EC0578629D559CF00D775EB /* UICKeyChainStore */,
+				5E1FD70229DA93D00015AE6F /* Alamofire */,
 			);
 			productName = FloatplaneApp;
 			productReference = 5E507BF629CFAD65006751F3 /* FloatplaneApp.app */;
@@ -1032,6 +1026,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EM3SMK3DU7;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FloatplaneApp/Config/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -1058,6 +1053,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EM3SMK3DU7;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FloatplaneApp/Config/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -1240,7 +1236,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5E507C2D29CFB0FE006751F3 /* Alamofire */ = {
+		5E1FD70229DA93D00015AE6F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5E0C3D0529CF772600C71A19 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
@@ -1259,16 +1255,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5EAAE76929D0B56B00F9A83B /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
-		};
-		5EAAE77A29D12B6300F9A83B /* Cache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5EAAE77929D12B6300F9A83B /* XCRemoteSwiftPackageReference "Cache" */;
-			productName = Cache;
-		};
-		5EC0578629D559CF00D775EB /* UICKeyChainStore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5EC0578529D559CF00D775EB /* XCRemoteSwiftPackageReference "UICKeyChainStore" */;
-			productName = UICKeyChainStore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

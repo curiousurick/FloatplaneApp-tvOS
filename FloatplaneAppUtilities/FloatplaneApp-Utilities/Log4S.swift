@@ -1,10 +1,3 @@
-//
-//  Logger+Quickstart.swift
-//  FloatplaneApp
-//
-//  Created by George Urick on 3/26/23.
-//
-
 //  Copyright © 2023 George Urick
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

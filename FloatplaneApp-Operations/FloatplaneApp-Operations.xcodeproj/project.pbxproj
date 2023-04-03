@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E1FD6FD29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */; };
+		5E1FD70129DA904E0015AE6F /* ImageCacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */; };
 		5E389B3529D8B29900FC8B4B /* FloatplaneApp_Operations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389B2A29D8B29800FC8B4B /* FloatplaneApp_Operations.framework */; };
 		5E389B3B29D8B29900FC8B4B /* FloatplaneApp_Operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E389B7029D8B34B00FC8B4B /* CreatorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5629D8B34B00FC8B4B /* CreatorOperation.swift */; };
@@ -46,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E1FD6FA29DA8FDB0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheConfig.swift; sourceTree = "<group>"; };
 		5E389B2A29D8B29800FC8B4B /* FloatplaneApp_Operations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatplaneApp_Operations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloatplaneApp_Operations.h; sourceTree = "<group>"; };
 		5E389B2E29D8B29800FC8B4B /* FloatplaneApp_Operations.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = FloatplaneApp_Operations.docc; sourceTree = "<group>"; };
@@ -83,6 +88,7 @@
 				5EFD929929D90D30007E8374 /* AVKit.framework in Frameworks */,
 				5E389B8F29D8B42600FC8B4B /* Alamofire in Frameworks */,
 				5E389C4529D8BA1D00FC8B4B /* Cache in Frameworks */,
+				5E1FD6FD29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework in Frameworks */,
 				5E389B9529D8B45700FC8B4B /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,8 +126,8 @@
 		5E389B2C29D8B29800FC8B4B /* FloatplaneApp-Operations */ = {
 			isa = PBXGroup;
 			children = (
-				5E4CE96729DA0B6C0029110E /* Get First Page */,
 				5E389C4C29D8BE0D00FC8B4B /* OperationConstants.swift */,
+				5E4CE96729DA0B6C0029110E /* Get First Page */,
 				5E389B9029D8B42E00FC8B4B /* ImageGrabber */,
 				5E389B5529D8B34B00FC8B4B /* Creator */,
 				5E389B5729D8B34B00FC8B4B /* Delivery Key */,
@@ -135,6 +141,7 @@
 				5E389B6C29D8B34B00FC8B4B /* Login */,
 				5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */,
 				5E389B2E29D8B29800FC8B4B /* FloatplaneApp_Operations.docc */,
+				5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */,
 			);
 			path = "FloatplaneApp-Operations";
 			sourceTree = "<group>";
@@ -241,6 +248,8 @@
 		5E389B9829D8B55400FC8B4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */,
+				5E1FD6FA29DA8FDB0015AE6F /* FloatplaneApp_DataStores.framework */,
 				5EFD929829D90D2F007E8374 /* AVKit.framework */,
 				5EFD928629D8C8BA007E8374 /* FloatplaneApp_Utilities.framework */,
 				5EFD927F29D8C766007E8374 /* FloatplaneApp_Models.framework */,
@@ -395,6 +404,7 @@
 				5E389B7429D8B34B00FC8B4B /* ContentVideoOperation.swift in Sources */,
 				5E389B7E29D8B34B00FC8B4B /* LoginOperation.swift in Sources */,
 				5E389B7229D8B34B00FC8B4B /* LiveDeliveryKeyOperation.swift in Sources */,
+				5E1FD70129DA904E0015AE6F /* ImageCacheConfig.swift in Sources */,
 				5E389B7129D8B34B00FC8B4B /* VodDeliveryKeyOperation.swift in Sources */,
 				5E389B7C29D8B34B00FC8B4B /* CacheableAPIOperation.swift in Sources */,
 				5E389B9229D8B43A00FC8B4B /* ImageGrabber.swift in Sources */,

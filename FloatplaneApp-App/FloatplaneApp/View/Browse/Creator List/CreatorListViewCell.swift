@@ -20,56 +20,34 @@
 //
 
 import UIKit
-import AlamofireImage
 import ParallaxView
+import FloatplaneApp_Operations
 import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 
 class CreatorListViewCell: ParallaxCollectionViewCell {
+    private let logger = Log4S()
+    
+    static let identifier = "CreatorListViewCell"
     
     @IBOutlet var creatorIconView: UIImageView!
     
-    static let identifier = "CreatorListViewCell"
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
     func updateImage(creator: BaseCreator?) {
-        if let icon = creator?.icon.path {
-            let downloader = AlamofireImage.ImageDownloader.default
-            downloader.download(URLRequest(url: icon), completion: { response in
-                DispatchQueue.main.async {
-                    if let data = response.data,
-                        let image = UIImage(data: data) {
-                        self.creatorIconView.image = image.imageByMakingWhiteBackgroundTransparent()
-                    }
-                    
-                }
-            })
-        }
-        else {
+        guard let creator = creator else {
             creatorIconView.image = nil
+            return
         }
-    }    
-}
-
-extension UIImage {
-    func imageByMakingWhiteBackgroundTransparent() -> UIImage? {
-        
-        let image = UIImage(data: self.jpegData(compressionQuality: 1.0)!)!
-        let rawImageRef: CGImage = image.cgImage!
-        
-        let colorMasking: [CGFloat] = [222, 255, 222, 255, 222, 255]
-        UIGraphicsBeginImageContext(image.size);
-        
-        let maskedImageRef = rawImageRef.copy(maskingColorComponents: colorMasking)
-        UIGraphicsGetCurrentContext()?.translateBy(x: 0.0,y: image.size.height)
-        UIGraphicsGetCurrentContext()?.scaleBy(x: 1.0, y: -1.0)
-        UIGraphicsGetCurrentContext()?.draw(maskedImageRef!, in: CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height))
-        let result = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return result
-        
+        let icon = creator.icon.path
+        ImageGrabber.instance.grab(url: icon) { response in
+            guard let data = response,
+                  let image = UIImage(data: data) else {
+                self.logger.error("Error getting image for CreatorList Icon")
+                return
+            }
+            DispatchQueue.main.async {
+                self.creatorIconView.image = image.imageByMakingWhiteBackgroundTransparent()
+            }
+        }
     }
 }
+

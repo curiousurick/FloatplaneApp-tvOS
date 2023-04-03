@@ -12,7 +12,7 @@
 		5E4CE92A29D90F330029110E /* FloatplaneApp_DataStoresTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE92929D90F330029110E /* FloatplaneApp_DataStoresTests.swift */; };
 		5E4CE92B29D90F330029110E /* FloatplaneApp_DataStores.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E4CE91D29D90F330029110E /* FloatplaneApp_DataStores.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E4CE94629D90F570029110E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE93D29D90F560029110E /* UserSettings.swift */; };
-		5E4CE94729D90F800029110E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE94229D90F560029110E /* KeychainManager.swift */; };
+		5E4CE94729D90F800029110E /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE94229D90F560029110E /* KeychainAccess.swift */; };
 		5E4CE94829D90F820029110E /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE94029D90F560029110E /* UserStore.swift */; };
 		5E4CE94A29D90F880029110E /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE93E29D90F560029110E /* ProgressStore.swift */; };
 		5E4CE94D29D90FAB0029110E /* UICKeyChainStore in Frameworks */ = {isa = PBXBuildFile; productRef = 5E4CE94C29D90FAB0029110E /* UICKeyChainStore */; };
@@ -40,7 +40,7 @@
 		5E4CE93D29D90F560029110E /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		5E4CE93E29D90F560029110E /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		5E4CE94029D90F560029110E /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
-		5E4CE94229D90F560029110E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		5E4CE94229D90F560029110E /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
 		5E4CE94F29D90FBD0029110E /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4CE95329D90FC30029110E /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -90,7 +90,7 @@
 		5E4CE91C29D90F330029110E /* FloatplaneApp-DataStores */ = {
 			isa = PBXGroup;
 			children = (
-				5E4CE94229D90F560029110E /* KeychainManager.swift */,
+				5E4CE94229D90F560029110E /* KeychainAccess.swift */,
 				5E4CE94029D90F560029110E /* UserStore.swift */,
 				5E4CE93E29D90F560029110E /* ProgressStore.swift */,
 				5E4CE93D29D90F560029110E /* UserSettings.swift */,
@@ -235,7 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E4CE91F29D90F330029110E /* FloatplaneApp_DataStores.docc in Sources */,
-				5E4CE94729D90F800029110E /* KeychainManager.swift in Sources */,
+				5E4CE94729D90F800029110E /* KeychainAccess.swift in Sources */,
 				5E4CE94829D90F820029110E /* UserStore.swift in Sources */,
 				5E4CE94629D90F570029110E /* UserSettings.swift in Sources */,
 				5E4CE94A29D90F880029110E /* ProgressStore.swift in Sources */,

@@ -22,6 +22,7 @@
 import Foundation
 import Alamofire
 import FloatplaneApp_Utilities
+import FloatplaneApp_DataStores
 
 public class LogoutOperation {
     private let logger = Log4S()
@@ -41,6 +42,9 @@ public class LogoutOperation {
     public func get(completion: ((Error?) -> Void)? = nil) {
         AF.request(baseUrl, method: .post, headers: headers).response() { response in
             if response.response?.statusCode == 200 {
+                UserStore.instance.removeUser()
+                OperationManager.instance.clearCache()
+                URLCache.shared.removeAllCachedResponses()
                 self.logger.info("Successfully logged out")
                 completion?(nil)
             }

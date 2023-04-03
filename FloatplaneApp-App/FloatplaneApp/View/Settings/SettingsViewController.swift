@@ -23,9 +23,11 @@ import UIKit
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_DataStores
+import FloatplaneApp_Utilities
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    private let logger = Log4S()
     private let logoutOperation = OperationManager.instance.logoutOperation
     private let changeResolutionRow = 0
     private let logoutRow = 1
@@ -34,10 +36,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet var tableView: UITableView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if indexPath.row == changeResolutionRow {
@@ -68,17 +66,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func changeResolution() {
-        performSegue(withIdentifier: "ShowResolutionOptions", sender: nil)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: SegueIdentifier.SettingsViewController.showResolutionOptions, sender: nil)
+        }
     }
     
     private func logout() {
         logoutOperation.get { error in
-            if error == nil {
-                UserStore.instance.removeUser()
-                OperationManager.instance.clearCache()
-                URLCache.shared.removeAllCachedResponses()
-                AppDelegate.instance.topNavigationController?.clearAndGoToLoginView()
+            if let error = error {
+                self.logger.error("Error logging out \(error)")
             }
+            AppDelegate.instance.topNavigationController?.clearAndGoToLoginView()
         }
     }
     

@@ -31,14 +31,13 @@ class TopNavigationController: UINavigationController {
     private let getFirstPageOperation = OperationManager.instance.getFirstPageOperation
     private let creatorOperation = OperationManager.instance.creatorOperation
     private let creatorListOperation = OperationManager.instance.creatorListOperation
+    // Main data for viewing
+    private let dataSource = DataSource.instance
     private let logger = Log4S()
 
     private var fpTabBarController: FPTabBarController? {
         return self.viewControllers[0] as? FPTabBarController
     }
-    
-    // Main data for viewing
-    private let dataSource = DataSource.instance
     
     func clearAndGoToLoginView() {
         self.dataSource.clearData()
