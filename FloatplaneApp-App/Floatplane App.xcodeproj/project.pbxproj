@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E0E516A29D3F6B3006744E4 /* FeedItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */; };
 		5E1FD6F329DA35C60015AE6F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F229DA35C60015AE6F /* RootViewController.swift */; };
+		5E1FD6F529DA62B10015AE6F /* SearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */; };
 		5E389A2E29D6A12000FC8B4B /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C529D68E8B00D775EB /* Roboto-BlackItalic.ttf */; };
 		5E389A2F29D6A12000FC8B4B /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BD29D68E8B00D775EB /* Roboto-Thin.ttf */; };
 		5E389A3029D6A12000FC8B4B /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C129D68E8B00D775EB /* Roboto-Black.ttf */; };
@@ -168,6 +169,7 @@
 /* Begin PBXFileReference section */
 		5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		5E1FD6F229DA35C60015AE6F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContainerViewController.swift; sourceTree = "<group>"; };
 		5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginImageTextView.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC0574C29D4089C00D775EB /* SearchViewController.swift */,
+				5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */,
 				5E389A3E29D6ABE600FC8B4B /* LoginImageTextView.swift in Sources */,
 				5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */,
+				5E1FD6F529DA62B10015AE6F /* SearchContainerViewController.swift in Sources */,
 				5E4CE96029D914F00029110E /* LaunchScreenViewController.swift in Sources */,
 				5E4CE96629DA08DA0029110E /* CreatorViewControllerProtocol.swift in Sources */,
 				5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */,

@@ -24,6 +24,7 @@ import UIKit
 fileprivate let LivePlayerViewStoryboardID = "LivePlayerViewController"
 fileprivate let LiveStreamOfflineViewStoryboardID = "LiveStreamOfflineViewController"
 fileprivate let BrowseViewControllerStoryboardID = "BrowseViewController"
+fileprivate let SearchViewControllerStoryboardID = "SearchViewController"
 fileprivate let SettingsViewControllerStoryboardID = "SettingsViewController"
 fileprivate let VodPlayerViewControllerStoryboardID = "VODPlayerViewController"
 fileprivate let TopNavigationControllerStoryboardID = "TopNavigationController"
@@ -44,6 +45,20 @@ extension UIStoryboard {
     
     func getBrowseViewController() -> BrowseViewController {
         return self.instantiateViewController(withIdentifier: BrowseViewControllerStoryboardID) as! BrowseViewController
+    }
+    
+    /// Private because cosumers should grab the UISearchContainerViewController
+    private func getSearchViewController() -> SearchViewController {
+        return self.instantiateViewController(withIdentifier: SearchViewControllerStoryboardID) as! SearchViewController
+    }
+    
+    func getSearchContainerViewController() -> SearchContainerViewController {
+        let searchViewController = getSearchViewController()
+        let searchController = UISearchController(searchResultsController: searchViewController)
+        searchController.searchBar.delegate = searchViewController
+        let searchContainerController = SearchContainerViewController(searchController: searchController)
+        searchController.searchResultsUpdater = searchViewController
+        return searchContainerController
     }
     
     func getSettingsViewController() -> SettingsViewController {

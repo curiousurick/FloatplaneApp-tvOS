@@ -36,7 +36,6 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
-    private var searchController: UISearchController!
     private let searchOperation = OperationManager.instance.searchOperation
     private let minimumQueryLength = 3
     
@@ -46,22 +45,16 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     var activeCreator: Creator!
     var baseCreators: [BaseCreator]!
 
-    init() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.invalidateLayout()
-        super.init(collectionViewLayout: flowLayout)
         let width = view.bounds.width / CollectionConstants.rowCount - CollectionConstants.totalSpacing
         let height = width
         flowLayout.itemSize = CGSize(width: width, height: height)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        collectionView.collectionViewLayout = flowLayout
+        
         collectionView?.register(
             UINib(nibName: FeedItemCollectionViewCell.nibName, bundle: nil),
             forCellWithReuseIdentifier: FeedItemCollectionViewCell.identifier
@@ -70,7 +63,6 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
         let horizInset = CollectionConstants.contentHorizontalInset
         collectionView?.contentInset = .init(top: vertInset, left:  horizInset, bottom: vertInset, right: horizInset)
         collectionView.alwaysBounceVertical = true
-        collectionView.remembersLastFocusedIndexPath = true
         collectionView.bounces = true
         collectionView.isPrefetchingEnabled = true
     }
@@ -175,18 +167,6 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
             .map { $0.imageViewUrl }
             .map { URLRequest(url: $0) }
         UIImageView.af.sharedImageDownloader.download(imageRequests)
-    }
-}
-
-extension SearchViewController {
-    static func createEmbeddedInNavigationController() -> UINavigationController {
-        let searchViewController = SearchViewController()
-        let searchController = UISearchController(searchResultsController: searchViewController)
-        searchViewController.searchController = searchController
-        let searchContainerController = UISearchContainerViewController(searchController: searchController)
-        searchController.searchResultsUpdater = searchViewController
-        let searchNavController = UINavigationController(rootViewController: searchContainerController)
-        return searchNavController
     }
 }
 

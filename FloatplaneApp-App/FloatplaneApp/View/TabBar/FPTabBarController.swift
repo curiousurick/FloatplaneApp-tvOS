@@ -32,19 +32,23 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private struct Tab {
         static let liveName = "Live"
-        static let liveId = 0
+        static let liveIndex = 0
+        static let liveId = liveIndex
         static let browseName = "Browse"
-        static let browseId = 1
+        static let browseIndex = 1
+        static let browseId = browseIndex
         static let searchName = "Search"
-        static let searchId = 2
+        static let searchIndex = 2
+        static let searchId = searchIndex
         static let settingsName = "Settings"
-        static let settingsId = 3
+        static let settingsIndex = 3
+        static let settingsId = settingsIndex
     }
     
     private var livePlayerViewController: LivePlayerViewController!
     private var liveStreamOfflineViewController: LiveStreamOfflineViewController!
     private var browseViewController: BrowseViewController!
-    private var searchViewController: SearchViewController!
+    private var searchViewController: SearchContainerViewController!
     private var settingsViewConroller: SettingsViewController!
     
     private var creatorViewControllers: [any CreatorViewControllerProtocol] = []
@@ -53,6 +57,7 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
     var baseCreators: [BaseCreator]?
     var activeCreator: Creator?
     
+    var lastFocusedIndex: Int?
     var viewToFocus: UIFocusEnvironment? = nil {
         didSet {
             if viewToFocus != nil {
@@ -91,12 +96,10 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
         browseViewController.tabBarItem = browseTab
 
         // Setup Search ViewController
-        let searchNavController = SearchViewController.createEmbeddedInNavigationController()
-        let searchContainer = searchNavController.viewControllers[0] as? UISearchContainerViewController
-        self.searchViewController = searchContainer?.searchController.searchResultsController as? SearchViewController
+        searchViewController = storyboard.getSearchContainerViewController()
         
         let searchTab = UITabBarItem(title: Tab.searchName, image: nil, tag: Tab.searchId)
-        searchNavController.tabBarItem = searchTab
+        searchViewController.tabBarItem = searchTab
         
         // Setup Settings ViewController
         self.settingsViewConroller = storyboard.getSettingsViewController()
@@ -107,7 +110,7 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.viewControllers = [
             livePlayerViewController,
             browseViewController,
-            searchNavController,
+            searchViewController,
             settingsViewConroller
         ]
         self.creatorViewControllers = [
@@ -164,6 +167,16 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
         else {
             self.tabBar.isHidden = false
         }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        // If switching to search view, focus its search bar
+        if viewController == viewControllers?[Tab.searchIndex] &&
+            lastFocusedIndex != Tab.searchIndex {
+            self.viewToFocus = searchViewController.view
+        }
+        
+        lastFocusedIndex = viewControllers?.firstIndex(of: viewController)
     }
     
     func updateCreatorInfo() {
