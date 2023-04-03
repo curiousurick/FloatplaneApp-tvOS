@@ -28,22 +28,11 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
     private var menuPressRecognizer: UITapGestureRecognizer?
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     private let dataSource = DataSource.instance
-    
     private var timeObserverToken: Any?
+    private let liveStreamEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
+    private var registeredForLiveStreamEndNotification = false
     
-    private var fpTabBarController: FPTabBarController? {
-        get {
-            return tabBarController as? FPTabBarController
-        }
-    }
-    
-    let liveStreamEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
-    var registeredForLiveStreamEndNotification: Bool = false
     var deliveryKey: DeliveryKey?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -94,7 +83,11 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
             }
             else {
                 self.logger.error("Unable to get live delivery key for owner \(liveStream.owner).")
-                self.fpTabBarController?.updateLiveTab(online: false)
+                guard let tabBarController = tabBarController as? FPTabBarController else {
+                    logger.error("LivePlayerViewController's tabBarController is not the FPTabBarController")
+                    return
+                }
+                tabBarController.updateLiveTab(online: false)
             }
         }
     }
@@ -124,7 +117,11 @@ extension LivePlayerViewController {
     }
     
     @objc func menuButtonAction(recognizer: UITapGestureRecognizer) {
-        fpTabBarController?.selectedIndex = 1
+        guard let tabBarController = tabBarController as? FPTabBarController else {
+            logger.error("LivePlayerViewController's tabBarController is not the FPTabBarController")
+            return
+        }
+        tabBarController.selectedIndex = 1
     }
 }
 
@@ -151,6 +148,10 @@ extension LivePlayerViewController {
         registeredForLiveStreamEndNotification = false
         self.player = nil
         NotificationCenter.default.removeObserver(self, name: liveStreamEndNotification, object: nil)
-        fpTabBarController?.updateLiveTab(online: false)
+        guard let tabBarController = tabBarController as? FPTabBarController else {
+            logger.error("LivePlayerViewController's tabBarController is not the FPTabBarController")
+            return
+        }
+        tabBarController.updateLiveTab(online: false)
     }
 }

@@ -30,17 +30,7 @@ class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     private let dataSource = DataSource.instance
     
-    private var fpTabBarController: FPTabBarController? {
-        get {
-            return tabBarController as? FPTabBarController
-        }
-    }
-    
     @IBOutlet var offlineThumbnailView: UIImageView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,8 +52,10 @@ class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
         liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
             if let deliveryKey = deliveryKey {
                 self.logger.error("Unable to get live delivery key for owner \(liveStream.owner).")
-                self.fpTabBarController?.updateLiveTab(online: true, deliverKey: deliveryKey)
-                return
+                guard let tabBarController = self.tabBarController as? FPTabBarController else {
+                    return
+                }
+                tabBarController.updateLiveTab(online: true, deliverKey: deliveryKey)
             }
         }
     }
