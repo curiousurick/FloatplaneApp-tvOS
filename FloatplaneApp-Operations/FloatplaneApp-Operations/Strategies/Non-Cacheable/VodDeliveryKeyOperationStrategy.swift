@@ -23,25 +23,22 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-/// Looks up user subscriptions. Includes information about the subscription itself.
-/// May need to use this in the future to determine if the user has access to a given video.
-/// TODO: Investigate if ContentFeed returns videos that user does not have access to. Maybe need to do client-side limiting to avoid CX cliff.
-public class SubscriptionOperation: CacheableAPIOperation<SubscriptionRequest, SubscriptionResponse> {
+protocol VodDeliveryKeyOperationStrategy: InternalOperationStrategy<VodDeliveryKeyRequest, DeliveryKey> { }
+
+/// Gets a delivery key for a given video GUID. This delivery key is used to generate a stream URL for an m3u8 (as of 4/3/2023) stream.
+/// This is not a cached API call because we should only retrieve it when starting a video and I think it's generated on demand.
+class VodDeliveryKeyOperationStrategyImpl: VodDeliveryKeyOperationStrategy {
+    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
     
-    private static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
+    var dataRequest: DataRequest?
     
-    init() {
-        super.init(baseUrl: SubscriptionOperation.baseUrl)
-    }
-    
-    /// Looks up subscription data for the user, including the level of support for each subscribed creator.
-    override func _get(request: SubscriptionRequest, completion: ((SubscriptionResponse?, Error?) -> Void)?) -> DataRequest {
-        return AF.request(baseUrl).responseDecodable(of: [Subscription].self) { response in
-            if let subscriptions = response.value {
-                completion?(SubscriptionResponse(subscriptions: subscriptions), nil)
-            }
-            else {
-                completion?(nil, response.error)
+    /// Gets a DeliveryKey for a given video GUID
+    func get(request: VodDeliveryKeyRequest) async -> OperationResponse<DeliveryKey> {
+        let dataRequest = AF.request(baseUrl, parameters: request.params)
+        self.dataRequest = dataRequest
+        return await withCheckedContinuation { continuation in
+            dataRequest.responseDecodable(of: DeliveryKey.self) { response in
+                continuation.resume(returning: OperationResponse(response: response.value, error: response.error))
             }
         }
     }

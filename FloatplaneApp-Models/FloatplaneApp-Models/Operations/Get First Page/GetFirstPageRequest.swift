@@ -21,27 +21,14 @@
 
 import Foundation
 
-public struct FeedItem: Hashable, Codable, Equatable {
-    public let attachmentOrder: [String]
-    public let audioAttachments: [String]
-    public let channel: Channel
-    public let comments: UInt64
-    public let creator: ContentCreator
-    public let dislikes: UInt64
-    public let galleryAttachments: [String]
-    public let guid: String
-    public let id: String
-    public var isAccessible: Bool? = true
-    public let likes: UInt64
-    public let metadata: Metadata
-    public let pictureAttachments: [String]
-    public let releaseDate: Date
-    public let score: UInt64
-    public let tags: [String]
-    public let text: String
-    public let thumbnail: Icon
-    public let title: String
-    public let type: VideoType
-    public let videoAttachments: [String]
-    public let wasReleasedSilently: Bool
+public struct GetFirstPageRequest: OperationRequest {
+    
+    public init() { }
+    
+    public var params: [String : Any] {
+        get {
+            [:]
+        }
+    }
 }
+

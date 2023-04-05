@@ -23,15 +23,20 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
+import FloatplaneApp_Models
 
 /// Attemps a Logout. Clears all caches after successful logout.
-public class LogoutOperation {
+protocol LogoutOperationStrategy: InternalOperationStrategy<LogoutRequest, LogoutResponse> { }
+
+class LogoutOperationStrategyImpl: LogoutOperationStrategy {
     private let logger = Log4S()
     
     var baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
     // Used to simulate iOS so we don't need captcha
     private let userAgent = "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"
     private let headers: HTTPHeaders
+    
+    var dataRequest: DataRequest?
     
     init() {
         let headerMap = [
@@ -42,18 +47,22 @@ public class LogoutOperation {
     
     /// Performs a logout and then clears all caches upon success.
     /// TODO: Investigate if we should clear the cache even if the call fails.
-    public func get(completion: ((Error?) -> Void)? = nil) {
-        AF.request(baseUrl, method: .post, headers: headers).response() { response in
-            if response.response?.statusCode == 200 {
-                UserStore.instance.removeUser()
-                OperationManager.instance.cancelAllOperations()
-                OperationManager.instance.clearCache()
-                URLCache.shared.removeAllCachedResponses()
-                self.logger.info("Successfully logged out")
-                completion?(nil)
-            }
-            else {
-                completion?(response.error)
+    func get(request: LogoutRequest) async -> OperationResponse<LogoutResponse> {
+        let dataRequest = AF.request(baseUrl, method: .post, headers: headers)
+        self.dataRequest = dataRequest
+        return await withCheckedContinuation { continuation in
+            dataRequest.response() { response in
+                if response.response?.statusCode == 200 {
+                    UserStore.instance.removeUser()
+                    OperationManager.instance.cancelAllOperations()
+                    OperationManager.instance.clearCache()
+                    URLCache.shared.removeAllCachedResponses()
+                    self.logger.info("Successfully logged out")
+                    continuation.resume(returning: OperationResponse(response: LogoutResponse(), error: nil))
+                }
+                else {
+                    continuation.resume(returning: OperationResponse(response: nil, error: response.error))
+                }
             }
         }
     }

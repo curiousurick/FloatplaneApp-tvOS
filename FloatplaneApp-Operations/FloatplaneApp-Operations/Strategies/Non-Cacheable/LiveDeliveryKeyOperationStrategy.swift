@@ -23,28 +23,23 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-/// Gets full metadata for a single creator by urlname
-/// Additional metadata over the base creator includes liveStream and subscription plans.
-/// NOTE: This is a cacheable API operation which means the result will be stored in memory and disk until expired.
-/// It uses the default expiry for CachableAPIOperation
-public class CreatorOperation: CacheableAPIOperation<CreatorRequest, Creator> {
+/// This operation retrieves a delivery key for the active creator's live stream.
+/// The delivery key contains a set of streams, parameterized by quality level.
+/// However, the delivery key looks different for VOD and Live so the responses are different.
+/// The result of this operation is not cached.
+protocol LiveDeliveryKeyOperationStrategy: InternalOperationStrategy<LiveDeliveryKeyRequest, DeliveryKey> { }
+
+class LiveDeliveryKeyOperationStrategyImpl: LiveDeliveryKeyOperationStrategy {
+    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
     
-    private static let base = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
+    var dataRequest: DataRequest?
     
-    init() {
-        super.init(baseUrl: CreatorOperation.base)
-    }
-    
-    // Gets the full metadata for a creator given its urlname
-    override func _get(request: CreatorRequest, completion: ((Creator?, Error?) -> Void)? = nil) -> DataRequest {
-        return AF.request(baseUrl, parameters: request.params).responseDecodable(of: [Creator].self) { response in
-            // We should only be getting a single creator object back, even though it comes in an array.
-            if let creators = response.value,
-               creators.count == 1 {
-                completion?(creators[0], nil)
-            }
-            else {
-                completion?(nil, response.error)
+    func get(request: LiveDeliveryKeyRequest) async -> OperationResponse<DeliveryKey> {
+        let dataRequest = AF.request(baseUrl, parameters: request.params)
+        self.dataRequest = dataRequest
+        return await withCheckedContinuation { continuation in
+            AF.request(baseUrl, parameters: request.params).responseDecodable(of: DeliveryKey.self) { response in
+                continuation.resume(returning: OperationResponse(response: response.value, error: response.error))
             }
         }
     }

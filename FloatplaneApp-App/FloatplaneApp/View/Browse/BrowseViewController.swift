@@ -104,10 +104,12 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate,
             limit: pageLimit,
             creatorId: creator.id
         )
-        contentFeedOperation.get(request: request) { fetchedFeed, error in
-            guard error == nil,
-                  let fetchedFeed = fetchedFeed else {
-                self.logger.error("Failed to retrieve next page of content from \(fetchAfter). Error \(error.debugDescription)")
+        Task {
+            let opResponse = await contentFeedOperation.get(request: request)
+            guard opResponse.error == nil,
+                  let fetchedFeed = opResponse.response else {
+                let errorString = String(describing: opResponse.error.debugDescription)
+                self.logger.error("Failed to retrieve next page of content from \(fetchAfter). Error \(errorString)")
                 return
             }
             if let existingFeed = self.dataSource.feed {

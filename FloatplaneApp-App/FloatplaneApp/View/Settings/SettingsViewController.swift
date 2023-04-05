@@ -72,8 +72,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func logout() {
-        logoutOperation.get { error in
-            if let error = error {
+        Task {
+            let opResponse = await logoutOperation.get(request: LogoutRequest())
+            if let error = opResponse.error {
                 self.logger.error("Error logging out \(error)")
             }
             AppDelegate.instance.topNavigationController?.clearAndGoToLoginView()

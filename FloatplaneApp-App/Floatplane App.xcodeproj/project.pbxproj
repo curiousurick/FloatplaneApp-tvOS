@@ -13,6 +13,8 @@
 		5E1FD6F729DA65A80015AE6F /* CreatorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */; };
 		5E1FD6F929DA7F8A0015AE6F /* TabConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */; };
 		5E1FD70329DA93D00015AE6F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5E1FD70229DA93D00015AE6F /* Alamofire */; };
+		5E1FD72E29DB37ED0015AE6F /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 5E1FD72D29DB37ED0015AE6F /* Cache */; };
+		5E1FD75529DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75429DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift */; };
 		5E389A2E29D6A12000FC8B4B /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C529D68E8B00D775EB /* Roboto-BlackItalic.ttf */; };
 		5E389A2F29D6A12000FC8B4B /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BD29D68E8B00D775EB /* Roboto-Thin.ttf */; };
 		5E389A3029D6A12000FC8B4B /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C129D68E8B00D775EB /* Roboto-Black.ttf */; };
@@ -170,6 +172,7 @@
 		5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContainerViewController.swift; sourceTree = "<group>"; };
 		5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorDataSource.swift; sourceTree = "<group>"; };
 		5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabConstants.swift; sourceTree = "<group>"; };
+		5E1FD75429DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDeliveryKeyDebuff.swift; sourceTree = "<group>"; };
 		5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginImageTextView.swift; sourceTree = "<group>"; };
@@ -243,6 +246,7 @@
 				5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */,
 				5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */,
 				5E4CE95B29D911670029110E /* FloatplaneApp_DataStores.framework in Frameworks */,
+				5E1FD72E29DB37ED0015AE6F /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +497,7 @@
 			children = (
 				5EC0574E29D41C9A00D775EB /* LivePlayerViewController.swift */,
 				5EC0575629D49A7700D775EB /* LiveStreamOfflineViewController.swift */,
+				5E1FD75429DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift */,
 			);
 			path = Live;
 			sourceTree = "<group>";
@@ -589,6 +594,7 @@
 				5EAAE76729D0B34D00F9A83B /* AlamofireImage */,
 				5EAAE76A29D0B56B00F9A83B /* SwiftDate */,
 				5E1FD70229DA93D00015AE6F /* Alamofire */,
+				5E1FD72D29DB37ED0015AE6F /* Cache */,
 			);
 			productName = FloatplaneApp;
 			productReference = 5E507BF629CFAD65006751F3 /* FloatplaneApp.app */;
@@ -820,6 +826,7 @@
 				5E4CE96329DA053E0029110E /* SegueIdentifier.swift in Sources */,
 				5EC057B829D689E700D775EB /* LoginButton.swift in Sources */,
 				5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */,
+				5E1FD75529DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift in Sources */,
 				5E389A4029D6BD5A00FC8B4B /* UIFont+Roboto.swift in Sources */,
 				5EC0574F29D41C9A00D775EB /* LivePlayerViewController.swift in Sources */,
 				5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */,
@@ -1228,6 +1235,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5E0C3D0529CF772600C71A19 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		5E1FD72D29DB37ED0015AE6F /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EAAE77929D12B6300F9A83B /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
 		};
 		5EAAE76129D03A9A00F9A83B /* ParallaxView */ = {
 			isa = XCSwiftPackageProductDependency;

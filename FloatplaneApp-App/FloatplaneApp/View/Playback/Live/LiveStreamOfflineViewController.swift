@@ -28,6 +28,7 @@ class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
     private let logger = Log4S()
     private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
     private let dataSource = DataSource.instance
+    private let liveDeliveryKeyDebuff = LiveDeliveryKeyDebuffImpl.instance
     
     @IBOutlet var offlineThumbnailView: UIImageView!
     
@@ -44,12 +45,14 @@ class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
         }
         let liveStream = activeCreator.liveStream
         let request = LiveDeliveryKeyRequest(creator: liveStream.owner)
-        guard liveDeliveryKeyOperation.isAllowedToCheckForLiveStream(request: request) else {
+        guard liveDeliveryKeyDebuff.isAllowedToCheckForLiveStream(request: request) else {
             logger.info("Cannot check if live because not allowed to check.")
             return
         }
-        liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
-            if let deliveryKey = deliveryKey {
+        Task {
+            let opResponse = await liveDeliveryKeyOperation.get(request: request)
+            self.liveDeliveryKeyDebuff.lastCheck[request] = Date()
+            if let deliveryKey = opResponse.response {
                 self.logger.error("Unable to get live delivery key for owner \(liveStream.owner).")
                 guard let tabBarController = self.tabBarController as? FPTabBarController else {
                     return

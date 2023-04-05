@@ -20,28 +20,25 @@
 //
 
 import Foundation
+import FloatplaneApp_Models
 
-public struct FeedItem: Hashable, Codable, Equatable {
-    public let attachmentOrder: [String]
-    public let audioAttachments: [String]
-    public let channel: Channel
-    public let comments: UInt64
-    public let creator: ContentCreator
-    public let dislikes: UInt64
-    public let galleryAttachments: [String]
-    public let guid: String
-    public let id: String
-    public var isAccessible: Bool? = true
-    public let likes: UInt64
-    public let metadata: Metadata
-    public let pictureAttachments: [String]
-    public let releaseDate: Date
-    public let score: UInt64
-    public let tags: [String]
-    public let text: String
-    public let thumbnail: Icon
-    public let title: String
-    public let type: VideoType
-    public let videoAttachments: [String]
-    public let wasReleasedSilently: Bool
+/// A basic public protocol that allows the OperationManager to cancel ops and check if they are active.
+/// This is done as a workaround to allow the OperationManager to collect all of them despite generics.
+/// As of Swift 5.5, Arrays can not collect objects of different types that belong to the same protocol, but not if they have generic parameters.
+public protocol Operation<Request, Response> {
+    
+    associatedtype Request: Hashable
+    associatedtype Response: Codable
+    
+    /// The actual API consumers will use to get a parameterized response.
+    /// request - This is the request whose type is determined by the Request generics paramters of the final implementation.
+    func get(request: Request) async -> OperationResponse<Response>
+    
+    /// Returns whether or not the Alamofire operation is in an active state.
+    func isActive() -> Bool
+    
+    /// Cancels whatever asynchronous operation is active.
+    func cancel()
+    
+    
 }

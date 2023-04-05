@@ -21,6 +21,10 @@
 
 import Foundation
 
+public enum LoginFailedError: Error {
+    case error(response: LoginFailedResponse)
+}
+
 public struct LoginFailedResponse: Codable {
     public struct LoginError: Codable {
         public let id: String

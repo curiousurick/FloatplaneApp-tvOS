@@ -31,6 +31,7 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
     private var timeObserverToken: Any?
     private let liveStreamEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
     private var registeredForLiveStreamEndNotification = false
+    private let liveDeliveryKeyDebuff = LiveDeliveryKeyDebuffImpl.instance
     
     var deliveryKey: DeliveryKey?
     
@@ -75,14 +76,18 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
         }
         let liveStream = activeCreator.liveStream
         Task {
-            if let deliveryKey = await getDeliveryKey(video: liveStream) {
+            let liveDeliveryKeyRequest = LiveDeliveryKeyRequest(creator: liveStream.owner)
+            self.liveDeliveryKeyDebuff.lastCheck[liveDeliveryKeyRequest] = Date()
+            let opResponse = await self.liveDeliveryKeyOperation.get(request: liveDeliveryKeyRequest)
+            if let deliveryKey = opResponse.response {
                 self.deliveryKey = deliveryKey
                 DispatchQueue.main.async {
                     self.startVideo(deliveryKey: deliveryKey)
                 }
             }
             else {
-                self.logger.error("Unable to get live delivery key for owner \(liveStream.owner).")
+                let errorString = String(describing: opResponse.error)
+                self.logger.error("Unable to get live delivery key for owner \(liveStream.owner). Error \(errorString)")
                 guard let tabBarController = tabBarController as? FPTabBarController else {
                     logger.error("LivePlayerViewController's tabBarController is not the FPTabBarController")
                     return
@@ -122,19 +127,6 @@ extension LivePlayerViewController {
             return
         }
         tabBarController.selectedIndex = 1
-    }
-}
-
-// MARK: Get Delivery Key
-extension LivePlayerViewController {
-    
-    func getDeliveryKey(video: LiveStream) async -> DeliveryKey? {
-        await withCheckedContinuation({ continuation in
-            let request = LiveDeliveryKeyRequest(creator: video.owner)
-            self.liveDeliveryKeyOperation.get(request: request) { deliveryKey, error in
-                continuation.resume(returning: deliveryKey)
-            }
-        })
     }
 }
 

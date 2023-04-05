@@ -100,8 +100,8 @@ class RootViewController: UIViewController {
     
     func getFirstPageAndLoadMainView() {
         Task {
-            let getFirstPageResponse = await getFirstPageOperation.get()
-            if let result = getFirstPageResponse.0 {
+            let getFirstPageResponse = await getFirstPageOperation.get(request: GetFirstPageRequest())
+            if let result = getFirstPageResponse.response {
                 // Don't replace navigation controller if you have it.
                 dataSource.feed = result.firstPage
                 dataSource.baseCreators = result.baseCreators
@@ -111,7 +111,8 @@ class RootViewController: UIViewController {
                 self.switchToMainView()
             }
             else {
-                self.logger.error("Error getting first page. Returning to login. Error \(String(describing: getFirstPageResponse.1))")
+                let errorString = String(describing: getFirstPageResponse.error)
+                self.logger.error("Error getting first page. Returning to login. Error \(errorString)")
                 return goToLogin()
             }
         }

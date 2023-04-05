@@ -21,8 +21,8 @@
 
 import Foundation
 
-public struct LiveStream: Codable, Equatable {
-    public struct Offline: Codable, Equatable {
+public struct LiveStream: Hashable, Codable, Equatable {
+    public struct Offline: Hashable, Codable, Equatable {
         public let description: String
         public let thumbnail: Icon
         public let title: String

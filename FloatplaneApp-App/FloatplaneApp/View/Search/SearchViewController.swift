@@ -109,10 +109,12 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
             searchQuery: searchString,
             fetchAfter: fetchAfter
         )
-        searchOperation.get(request: request) { searchResult, error in
-            guard error == nil,
-                  let searchResult = searchResult else {
-                self.logger.error("Failed to retrieve next page of content from \(fetchAfter). Error \(error.debugDescription)")
+        Task {
+            let opResponse = await searchOperation.get(request: request)
+            guard opResponse.error == nil,
+                  let searchResult = opResponse.response else {
+                let errorString = opResponse.error.debugDescription
+                self.logger.error("Failed to retrieve next page of content from \(fetchAfter). Error \(errorString)")
                 return
             }
             if let existingResults = self.results {

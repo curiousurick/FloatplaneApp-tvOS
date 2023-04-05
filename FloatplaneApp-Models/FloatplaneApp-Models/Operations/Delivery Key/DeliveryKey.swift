@@ -21,8 +21,8 @@
 
 import Foundation
 
-public struct DeliveryKey: Decodable {
-    public struct Resource: Decodable {
+public struct DeliveryKey: Codable {
+    public struct Resource: Codable {
         public let data: ResourceData
         public let uri: String
     }

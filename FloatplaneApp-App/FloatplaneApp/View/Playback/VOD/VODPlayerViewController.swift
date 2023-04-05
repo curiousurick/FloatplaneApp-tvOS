@@ -52,7 +52,9 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
-            if let videoMetadata = await getVideoMetadata() {
+            let request = VideoMetadataRequest(feedItem: feedItem, id: guid)
+            let videoMetadataOpResponse = await videoMetadataOperation.get(request: request)
+            if let videoMetadata = videoMetadataOpResponse.response {
                 self.videoMetadata = videoMetadata
                 self.setupMenu(videoMetadata: videoMetadata)
                 self.startVideo(videoMetadata: videoMetadata)
@@ -80,15 +82,6 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
     @objc func videoEnded() {
         DispatchQueue.main.async {
             self.dismiss(animated: true)
-        }
-    }
-    
-    private func getVideoMetadata() async -> VideoMetadata? {
-        await withCheckedContinuation { continuation in
-            let request = VideoMetadataRequest(feedItem: feedItem, id: guid)
-            videoMetadataOperation.get(request: request) { response, error in
-                continuation.resume(returning: response)
-            }
         }
     }
     

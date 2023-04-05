@@ -21,6 +21,6 @@
 
 import Foundation
 
-public enum VideoType: String, Codable, Equatable {
+public enum VideoType: String, Hashable, Codable, Equatable {
     case blogPost = "blogPost"
 }

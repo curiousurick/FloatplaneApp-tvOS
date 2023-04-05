@@ -151,9 +151,10 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
         guard let activeCreator = creatorDataSourceManager.activeCreator else {
             return
         }
-        let request = CreatorRequest(named: activeCreator.urlname)
-        creatorOperation.get(request: request, invalidateCache: true) { response, error in
-            if let response = response {
+        Task {
+            let request = CreatorRequest(named: activeCreator.urlname)
+            let opResponse = await creatorOperation.get(request: request, invalidateCache: true)
+            if let response = opResponse.response {
                 self.creatorDataSourceManager.activeCreator = response
             }
         }

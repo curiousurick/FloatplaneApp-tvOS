@@ -23,28 +23,30 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
+// Protocol implementation to allow mocking
+protocol ContentVideoOperationStrategy: InternalOperationStrategy<ContentVideoRequest, ContentVideoResponse> { }
+
 /// This gets the full metadata for a given Video ID.
 /// It includes additional metadata not included in a FeedItem, such as quality levels.
 /// NOTE: This is a CacheableAPIOperation and uses the default expiry and capacity limits
-public class ContentVideoOperation: CacheableAPIOperation<ContentVideoRequest, ContentVideoResponse> {
+class ContentVideoOperationStrategyImpl: ContentVideoOperationStrategy {
     
-    typealias Request = ContentVideoRequest
-    typealias Response = ContentVideoResponse
+    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
     
-    private static let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
-    
-    init() {
-        super.init(baseUrl: ContentVideoOperation.baseUrl)
-    }
+    var dataRequest: DataRequest?
     
     /// Gets the full metadata for a given video ID.
-    override func _get(request: ContentVideoRequest, completion: ((ContentVideoResponse?, Error?) -> Void)?) -> DataRequest {
-        return AF.request(baseUrl, parameters: request.params).responseDecodable(of: ContentVideoResponse.self) { response in
-            if let response = response.value {
-                completion?(response, nil)
-            }
-            else {
-                completion?(nil, response.error)
+    func get(request: ContentVideoRequest) async -> OperationResponse<ContentVideoResponse> {
+        let dataRequest = AF.request(baseUrl, parameters: request.params)
+        self.dataRequest = dataRequest
+        return await withCheckedContinuation { continuation in
+            dataRequest.responseDecodable(of: ContentVideoResponse.self) { response in
+                if let response = response.value {
+                    continuation.resume(returning: OperationResponse(response: response, error: nil))
+                }
+                else {
+                    continuation.resume(returning: OperationResponse(response: nil, error: response.error))
+                }
             }
         }
     }

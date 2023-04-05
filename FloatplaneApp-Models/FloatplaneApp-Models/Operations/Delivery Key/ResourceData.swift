@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct ResourceData: Decodable {
+public struct ResourceData: Codable {
     private var qualityLevels: [DeliveryKeyQualityLevel : QualityLevelResourceData] = [:]
     public var options: [DeliveryKeyQualityLevel] = []
     
@@ -69,5 +69,9 @@ public struct ResourceData: Decodable {
                 )
             }
         }
+    }
+    
+    /// TODO: Implement. Nobody caches or encodes this object.
+    public func encode(to encoder: Encoder) throws {
     }
 }

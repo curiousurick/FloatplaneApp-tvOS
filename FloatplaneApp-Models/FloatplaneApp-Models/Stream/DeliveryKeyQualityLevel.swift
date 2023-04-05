@@ -25,7 +25,7 @@ public protocol Readable {
     var readable: String { get }
 }
 
-public enum DeliveryKeyQualityLevel: String, Decodable, Readable {
+public enum DeliveryKeyQualityLevel: String, Codable, Readable {
     // Used for vod
     case ql360p = "360-avc1"
     case ql480p = "480-avc1"

@@ -19,29 +19,38 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import XCTest
+import AlamofireImage
+@testable import FloatplaneApp_Operations
 
-public struct FeedItem: Hashable, Codable, Equatable {
-    public let attachmentOrder: [String]
-    public let audioAttachments: [String]
-    public let channel: Channel
-    public let comments: UInt64
-    public let creator: ContentCreator
-    public let dislikes: UInt64
-    public let galleryAttachments: [String]
-    public let guid: String
-    public let id: String
-    public var isAccessible: Bool? = true
-    public let likes: UInt64
-    public let metadata: Metadata
-    public let pictureAttachments: [String]
-    public let releaseDate: Date
-    public let score: UInt64
-    public let tags: [String]
-    public let text: String
-    public let thumbnail: Icon
-    public let title: String
-    public let type: VideoType
-    public let videoAttachments: [String]
-    public let wasReleasedSilently: Bool
+final class ImageCacheConfigTest: XCTestCase {
+    
+    private var subject: ImageCacheConfig!
+    
+    override func setUp() {
+        subject = ImageCacheConfig.instance
+    }
+    
+    func testSetup() {
+        // Act
+        subject.setup(diskSpaceMB: 50)
+        
+        // Assert
+        let expectedCapacity = 50 * 1024 * 1024
+        assertCacheSize(expectedCapacity: expectedCapacity)
+        
+        // Test that it doesn't change if setup again
+        subject.setup(diskSpaceMB: 1500)
+        assertCacheSize(expectedCapacity: expectedCapacity)
+        
+    }
+    
+    private func assertCacheSize(expectedCapacity: Int) {
+        let urlCache = UIImageView.af.sharedImageDownloader.session.sessionConfiguration.urlCache
+        let diskCapacity = urlCache?.diskCapacity
+        let memoryCapacity = urlCache?.memoryCapacity
+        
+        XCTAssertEqual(diskCapacity, expectedCapacity)
+        XCTAssertEqual(memoryCapacity, expectedCapacity)
+    }
 }

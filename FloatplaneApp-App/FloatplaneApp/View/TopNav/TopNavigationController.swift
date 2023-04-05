@@ -26,11 +26,8 @@ import FloatplaneApp_Models
 import FloatplaneApp_DataStores
 
 class TopNavigationController: UINavigationController {
-    // 30 minutes
-    private let CreatorRefreshInternal: TimeInterval = 30 * 60
-    private let getFirstPageOperation = OperationManager.instance.getFirstPageOperation
     private let creatorOperation = OperationManager.instance.creatorOperation
-    private let creatorListOperation = OperationManager.instance.creatorListOperation
+    private let contentFeedOperation = OperationManager.instance.contentFeedOperation
     // Main data for viewing
     private let dataSource = DataSource.instance
     private let logger = Log4S()
@@ -64,35 +61,18 @@ class TopNavigationController: UINavigationController {
         let urlName = baseCreator.urlname
         let creatorId = baseCreator.id
         Task {
-            async let activeCreatorAsync = getActiveCreator(urlName: urlName)
-            async let getFirstPageAsync = getFirstPage(creatorId: creatorId)
-            guard let activeCreator = await activeCreatorAsync.0,
-                  let firstPage = await getFirstPageAsync.0 else {
+            let activeCreatorRequest = CreatorRequest(named: urlName)
+            async let activeCreatorAsync = creatorOperation.get(request: activeCreatorRequest)
+            let firstPageRequest = ContentFeedRequest.firstPage(for: creatorId)
+            async let getFirstPageAsync = contentFeedOperation.get(request: firstPageRequest)
+            guard let activeCreator = await activeCreatorAsync.response,
+                  let firstPage = await getFirstPageAsync.response else {
                 // TODO: Give error page
                 return
             }
             self.dataSource.activeCreator = activeCreator
-            self.dataSource.feed = firstPage
+            self.dataSource.feed = firstPage.items
             self.updateChildViewData()
-        }
-    }
-    
-    private func getActiveCreator(urlName: String) async -> (Creator?, Error?) {
-        let request = CreatorRequest(named: urlName)
-        return await withCheckedContinuation { continutation in
-            OperationManager.instance.creatorOperation.get(request: request) { response, error in
-                continutation.resume(returning: (response, error))
-            }
-        }
-    }
-    
-    private func getFirstPage(creatorId: String) async -> ([FeedItem]?, Error?) {
-        logger.debug("Fetching next page of content for feed")
-        let request = ContentFeedRequest.firstPage(for: creatorId)
-        return await withCheckedContinuation { continuation in
-            OperationManager.instance.contentFeedOperation.get(request: request) { fetchedFeed, error in
-                continuation.resume(returning: (fetchedFeed?.items, error))
-            }
         }
     }
 }

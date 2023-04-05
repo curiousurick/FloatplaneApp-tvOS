@@ -20,19 +20,9 @@
 //
 
 import Foundation
-import Alamofire
 import FloatplaneApp_Models
 
-/// This operation retrieves a delivery key for the active creator's live stream.
-/// The delivery key contains a set of streams, parameterized by quality level.
-/// However, the delivery key looks different for VOD and Live so the responses are different.
-/// The result of this operation is not cached.
-public class LiveDeliveryKeyOperation {
-    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
-    
-    // 1 minute
-    let timeBetweenLiveStreamChecks: TimeInterval = 60 * 1
-    var lastCheck: [LiveDeliveryKeyRequest : Date] = [:]
+protocol LiveDeliveryKeyDebuff {
     
     /// If this request has been made in the last minute, it's not allowed.
     /// This is because the LiveStream View and Offline View both check
@@ -42,18 +32,24 @@ public class LiveDeliveryKeyOperation {
     /// and switch back. As of now, there's no signal that 100% proves it's offline
     /// until an AVPlayer attempts to play.
     /// TODO: Find a better solution that just stopping the request from being made again.
-    public func isAllowedToCheckForLiveStream(request: LiveDeliveryKeyRequest) -> Bool {
+    func isAllowedToCheckForLiveStream(request: LiveDeliveryKeyRequest) -> Bool
+    
+}
+
+class LiveDeliveryKeyDebuffImpl {
+    
+    static let instance = LiveDeliveryKeyDebuffImpl()
+    
+    private init() { }
+    
+    // 1 minute
+    let timeBetweenLiveStreamChecks: TimeInterval = 60 * 1
+    var lastCheck: [LiveDeliveryKeyRequest : Date] = [:]
+    
+    func isAllowedToCheckForLiveStream(request: LiveDeliveryKeyRequest) -> Bool {
         if let lastCheck = lastCheck[request] {
             return Date().timeIntervalSince(lastCheck) > timeBetweenLiveStreamChecks
         }
         return true
-    }
-    
-    /// Gets a DeliveryKey for a livestream of a given creator ID.
-    public func get(request: LiveDeliveryKeyRequest, completion: ((DeliveryKey?, Error?) -> Void)? = nil) {
-        AF.request(baseUrl, parameters: request.params).responseDecodable(of: DeliveryKey.self) { response in
-            completion?(response.value!, nil)
-            self.lastCheck[request] = Date()
-        }
     }
 }

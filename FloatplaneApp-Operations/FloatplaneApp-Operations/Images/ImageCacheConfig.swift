@@ -30,6 +30,7 @@ import UIKit
 public class ImageCacheConfig {
     
     public static let instance = ImageCacheConfig()
+    private let imageDiskCachePath = "image_disk_cache"
     
     private init() { }
     
@@ -38,11 +39,11 @@ public class ImageCacheConfig {
     
     /// Sets up the image cache configuration to set the disk path and capacity of the image cache.
     public func setup(diskSpaceMB: Int = 150) {
-        if !setup {
+        if setup {
             return
         }
         let diskCapacity = diskSpaceMB * 1024 * 1024
-        let diskCache = URLCache(memoryCapacity: 0, diskCapacity: diskCapacity, diskPath: "image_disk_cache")
+        let diskCache = URLCache(memoryCapacity: diskCapacity, diskCapacity: diskCapacity, diskPath: imageDiskCachePath)
         let configuration = URLSessionConfiguration.default
         configuration.urlCache = diskCache
         let downloader = ImageDownloader(configuration: configuration)

@@ -21,8 +21,8 @@
 
 import Foundation
 
-public struct Subscription: Codable, Equatable {
-    public struct Plan: Codable, Equatable {
+public struct Subscription: Hashable, Codable, Equatable {
+    public struct Plan: Hashable, Codable, Equatable {
         public let allowGrandfatheredAccess: Bool
         public let currency: String
         public let description: String
@@ -37,7 +37,7 @@ public struct Subscription: Codable, Equatable {
         public let title: String
     }
     
-    public enum Interval: String, Codable, Equatable {
+    public enum Interval: String, Hashable, Codable, Equatable {
         case month
         case year
     }

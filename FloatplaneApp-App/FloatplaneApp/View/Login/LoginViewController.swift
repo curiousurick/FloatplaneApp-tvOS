@@ -77,9 +77,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginButtonPressed(sender: UIButton!) {
-        let request = LoginRequest(username: usernameField.text ?? "", password: passwordField.text ?? "")
-        loginOp.get(request: request) { response, error in
-            if let user = response?.user {
+        Task {
+            let request = LoginRequest(username: usernameField.text ?? "", password: passwordField.text ?? "")
+            let opResponse = await loginOp.get(request: request)
+            if let user = opResponse.response?.user {
                 UserStore.instance.setUser(user: user)
                 DispatchQueue.main.async {
                     self.performSegue(
@@ -88,8 +89,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     )
                 }
             }
-            else {
-                self.displayLoginFailureAlert(message: error?.message)
+            else if let loginFailedError = opResponse.error as? LoginFailedError {
+                switch loginFailedError {
+                case .error(let response):
+                    self.displayLoginFailureAlert(message: response.message)
+                }
+                
             }
         }
     }

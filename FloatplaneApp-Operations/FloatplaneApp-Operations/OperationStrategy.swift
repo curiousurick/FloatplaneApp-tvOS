@@ -23,29 +23,37 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-/// This gets a page of the ContentFeed for a given creator's ID. Takes other parameters like the limit of results and fetchAfter which indicates the index to start returning for pagination.
-/// Note: This API has a max limit of 20 results per call.
-public class ContentFeedOperation: CacheableAPIOperation<ContentFeedRequest, CreatorFeed> {
+/// These are Alamofire states which indicate that the operation can be canceled.
+fileprivate let activeStates: [DataRequest.State] = [
+    .initialized,
+    .resumed,
+    .suspended
+]
+
+public protocol OperationStrategy {
+    func cancel()
+    func isActive() -> Bool
+}
+
+protocol InternalOperationStrategy<Request, Response> {
+    associatedtype Request: Hashable
+    associatedtype Response: Codable
     
-    typealias Request = ContentFeedRequest
-    typealias ResponseValue = CreatorFeed
+    var dataRequest: DataRequest? { get }
     
-    private static let base = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
+    func get(request: Request) async -> OperationResponse<Response>
+}
+
+extension InternalOperationStrategy {
     
-    init() {
-        super.init(baseUrl: ContentFeedOperation.base)
+    func cancel() {
+        dataRequest?.cancel()
     }
     
-    /// Gets a list of FeedItems for a given creator, limit, and fetchAfter.
-    override func _get(request: ContentFeedRequest, completion: ((CreatorFeed?, Error?) -> Void)? = nil) -> DataRequest {
-        return AF.request(baseUrl, parameters: request.params).responseDecodable(of: [FeedItem].self, decoder: FloatplaneDecoder()) { response in
-            if let items = response.value {
-                let creatorFeed = CreatorFeed(items: items)
-                completion?(creatorFeed, nil)
-            }
-            else {
-                completion?(nil, response.error)
-            }
+    func isActive() -> Bool {
+        if let dataRequest = dataRequest {
+            return activeStates.contains(dataRequest.state)
         }
+        return false
     }
 }

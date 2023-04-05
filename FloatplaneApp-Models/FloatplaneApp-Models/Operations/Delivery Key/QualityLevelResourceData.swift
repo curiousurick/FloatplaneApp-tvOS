@@ -21,7 +21,7 @@
 
 import Foundation
 
-public class DecodedQualityLevel: Decodable {
+public class DecodedQualityLevel: Codable {
     public let codecs: String?
     public let height: UInt64?
     public let label: String?
