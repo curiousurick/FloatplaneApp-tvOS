@@ -44,7 +44,7 @@ class SubscriptionOperationStrategyImpl: SubscriptionOperationStrategy {
         let dataRequest = session.request(baseUrl)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
-            dataRequest.responseDecodable(of: [Subscription].self) { response in
+            dataRequest.responseDecodable(of: [Subscription].self, decoder: FloatplaneDecoder()) { response in
                 if let subscriptions = response.value {
                     let subsResponse = SubscriptionResponse(subscriptions: subscriptions)
                     let opResponse = OperationResponse(response: subsResponse, error: nil)

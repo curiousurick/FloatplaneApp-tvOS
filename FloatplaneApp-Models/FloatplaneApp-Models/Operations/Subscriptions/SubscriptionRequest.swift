@@ -22,6 +22,9 @@
 import Foundation
 
 public struct SubscriptionRequest: OperationRequest {
+    
+    public init() { }
+    
     public var params: [String : Any] {
         get {
             [:]

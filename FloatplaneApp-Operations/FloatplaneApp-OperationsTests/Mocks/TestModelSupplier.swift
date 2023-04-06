@@ -205,4 +205,14 @@ class TestModelSupplier {
     
     static let videoMetadataRequest = VideoMetadataRequest(feedItem: feedItem, id: id)
     static let videoMetadata = VideoMetadata(feedItem: feedItem, contentVideoResponse: contentVideoResponse, deliveryKey: deliveryKey)
+    
+    static let subscriptionRequest = SubscriptionRequest()
+    static let endDate = Date(timeIntervalSince1970: 500100)
+    static let startDate = Date(timeIntervalSince1970: 500000)
+    static let paymentCancelled = true
+    static let paymentID = 1
+    static let subscription = Subscription(
+        creator: creatorString, endDate: endDate, interval: interval, paymentCancelled: paymentCancelled,
+        paymentID: paymentID, plan: subscriptionPlan, startDate: startDate)
+    static let subscriptionResponse = SubscriptionResponse(subscriptions: [subscription])
 }

@@ -69,9 +69,22 @@ public struct Subscription: Hashable, Codable, Equatable {
     public let plan: Plan
     public let startDate: Date
     
+    public init(
+        creator: String, endDate: Date, interval: Interval, paymentCancelled: Bool,
+        paymentID: Int, plan: Plan, startDate: Date
+    ) {
+        self.creator = creator
+        self.endDate = endDate
+        self.interval = interval
+        self.paymentCancelled = paymentCancelled
+        self.paymentID = paymentID
+        self.plan = plan
+        self.startDate = startDate
+    }
+    
 }
 
-public struct SubscriptionResponse: Codable {
+public struct SubscriptionResponse: Codable, Equatable {
     
     public let subscriptions: [Subscription]
     
