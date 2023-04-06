@@ -13,6 +13,7 @@
 		5E08F46329DE9EA4003C3694 /* FloatplaneEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F46229DE9EA4003C3694 /* FloatplaneEncoder.swift */; };
 		5E08F46529DE9F7D003C3694 /* SubscriptionOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F46429DE9F7D003C3694 /* SubscriptionOperationStrategyTest.swift */; };
 		5E08F46729DEA360003C3694 /* SearchOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F46629DEA360003C3694 /* SearchOperationStrategyTest.swift */; };
+		5E08F46929DEABA2003C3694 /* ContentFeedOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F46829DEABA2003C3694 /* ContentFeedOperationStrategyTest.swift */; };
 		5E1FD6FD29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */; };
 		5E1FD70129DA904E0015AE6F /* ImageCacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */; };
 		5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71F29DB35AD0015AE6F /* ImageCacheConfigTest.swift */; };
@@ -73,6 +74,7 @@
 		5E08F46229DE9EA4003C3694 /* FloatplaneEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneEncoder.swift; sourceTree = "<group>"; };
 		5E08F46429DE9F7D003C3694 /* SubscriptionOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionOperationStrategyTest.swift; sourceTree = "<group>"; };
 		5E08F46629DEA360003C3694 /* SearchOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOperationStrategyTest.swift; sourceTree = "<group>"; };
+		5E08F46829DEABA2003C3694 /* ContentFeedOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFeedOperationStrategyTest.swift; sourceTree = "<group>"; };
 		5E1FD6FA29DA8FDB0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheConfig.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				5E08F46029DE9C11003C3694 /* CreatorListOperationStrategyTest.swift */,
 				5E08F46429DE9F7D003C3694 /* SubscriptionOperationStrategyTest.swift */,
 				5E08F46629DEA360003C3694 /* SearchOperationStrategyTest.swift */,
+				5E08F46829DEABA2003C3694 /* ContentFeedOperationStrategyTest.swift */,
 			);
 			path = Cacheable;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				5E1FD75C29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift in Sources */,
 				5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */,
 				5E1FD75729DDD4190015AE6F /* MockInternalOperationStrategy.swift in Sources */,
+				5E08F46929DEABA2003C3694 /* ContentFeedOperationStrategyTest.swift in Sources */,
 				5E1FD73029DB38390015AE6F /* ImageGrabberTest.swift in Sources */,
 				5E1FD76329DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift in Sources */,
 				5E08F45D29DE9737003C3694 /* OperationStrategyTestBase.swift in Sources */,

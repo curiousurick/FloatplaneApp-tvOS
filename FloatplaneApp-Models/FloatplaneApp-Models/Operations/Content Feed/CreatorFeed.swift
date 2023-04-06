@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct CreatorFeed: Codable {
+public struct CreatorFeed: Codable, Equatable {
     public let items: [FeedItem]
     
     public init(items: [FeedItem]) {
