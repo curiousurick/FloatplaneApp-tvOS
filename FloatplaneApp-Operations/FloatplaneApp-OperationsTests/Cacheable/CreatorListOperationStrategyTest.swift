@@ -23,22 +23,24 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class ContentVideoOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
-
-    private var subject: ContentVideoOperationStrategyImpl!
+class CreatorListOperationStrategyTest: OperationStrategyTestBase {
+    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
+    
+    private var subject: CreatorListOperationStrategyImpl!
     
     override func setUp() {
         super.setUp()
         
-        subject = ContentVideoOperationStrategyImpl(session: session)
+        subject = CreatorListOperationStrategyImpl(session: session)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.contentVideoRequest
-        let response = TestModelSupplier.contentVideoResponse
-        try mockGet(baseUrl: baseUrl, request: request, response: response)
+        let request = TestModelSupplier.creatorListRequest
+        let response = TestModelSupplier.creatorListResponse
+        let httpResponse = [TestModelSupplier.creatorResponseObject]
+        
+        try mockGet(baseUrl: baseUrl, response: httpResponse)
         
         // Act
         let result = await subject.get(request: request)
@@ -50,8 +52,8 @@ class ContentVideoOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.contentVideoRequest
-        try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
+        let request = TestModelSupplier.creatorListRequest
+        try mockHTTPError(baseUrl: baseUrl, statusCode: 403)
         
         // Act
         let result = await subject.get(request: request)
@@ -63,7 +65,7 @@ class ContentVideoOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.contentVideoRequest
+        let request = TestModelSupplier.creatorListRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act
@@ -73,4 +75,5 @@ class ContentVideoOperationStrategyTest: OperationStrategyTestBase {
         XCTAssertNotNil(result.error)
         XCTAssertNil(result.response)
     }
+
 }

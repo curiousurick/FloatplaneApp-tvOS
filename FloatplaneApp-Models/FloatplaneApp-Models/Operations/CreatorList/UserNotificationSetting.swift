@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct UserNotificationSetting: Codable {
+public struct UserNotificationSetting: Codable, Equatable {
     public let contentEmail: Bool
     public let contentFirebase: Bool
     public let createdAt: Date

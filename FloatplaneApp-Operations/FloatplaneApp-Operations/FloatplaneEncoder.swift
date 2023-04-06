@@ -21,22 +21,18 @@
 
 import Foundation
 
-public struct CreatorListResponse: Codable, Equatable {
+/// Standard decoder for any API Operations whose responses contain a special type that Alamofire cannot decode immediately.
+class FloatplaneEncoder: JSONEncoder {
     
-    public struct CreatorResponseObject: Codable, Equatable {
-        public let creator: BaseCreator
-        public let userNotificationSetting: UserNotificationSetting
-        
-        public init(creator: BaseCreator, userNotificationSetting: UserNotificationSetting) {
-            self.creator = creator
-            self.userNotificationSetting = userNotificationSetting
-        }
+    override init() {
+        super.init()
+        self.configureDataDecoding()
     }
     
-    public let creators: [BaseCreator]
-    
-    public init(responseObjects: [CreatorResponseObject]) {
-        self.creators = responseObjects.map { $0.creator }
+    /// Configures date format in the way that floatplane APIs return them.
+    private func configureDataDecoding() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateEncodingStrategy = .formatted(dateFormatter)
     }
-    
 }

@@ -46,37 +46,43 @@ class OperationStrategyTestBase: XCTestCase {
         self.session = Session(configuration: configuration)
     }
     
-    func mockGet(baseUrl: URL, request: any OperationRequest, response: Codable) throws {
+    func mockGet(baseUrl: URL, request: (any OperationRequest)? = nil, response: Codable) throws {
         var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        let queryItems = request.params.map {
-            return URLQueryItem(name: "\($0)", value: "\($1)")
+        if let request = request {
+            let queryItems = request.params.map {
+                return URLQueryItem(name: "\($0)", value: "\($1)")
+            }
+            urlComponents.queryItems = queryItems
         }
-        urlComponents.queryItems = queryItems
-        let jsonData = try JSONEncoder().encode(response)
+        let jsonData = try FloatplaneEncoder().encode(response)
         let mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: 200, data: [
             .get : jsonData
         ])
         mock.register()
     }
     
-    func mockHTTPError(baseUrl: URL, request: any OperationRequest, statusCode: Int) throws {
+    func mockHTTPError(baseUrl: URL, request: (any OperationRequest)? = nil, statusCode: Int) throws {
         var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        let queryItems = request.params.map {
-            return URLQueryItem(name: "\($0)", value: "\($1)")
+        if let request = request {
+            let queryItems = request.params.map {
+                return URLQueryItem(name: "\($0)", value: "\($1)")
+            }
+            urlComponents.queryItems = queryItems
         }
-        urlComponents.queryItems = queryItems
         let mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: statusCode, data: [
             .get : Data()
         ])
         mock.register()
     }
     
-    func mockWrongResponse(baseUrl: URL, request: any OperationRequest) throws {
+    func mockWrongResponse(baseUrl: URL, request: (any OperationRequest)? = nil) throws {
         var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        let queryItems = request.params.map {
-            return URLQueryItem(name: "\($0)", value: "\($1)")
+        if let request = request {
+            let queryItems = request.params.map {
+                return URLQueryItem(name: "\($0)", value: "\($1)")
+            }
+            urlComponents.queryItems = queryItems
         }
-        urlComponents.queryItems = queryItems
         let response = UnknownObject.defaultVal
         let jsonData = try JSONEncoder().encode(response)
         let mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: 200, data: [

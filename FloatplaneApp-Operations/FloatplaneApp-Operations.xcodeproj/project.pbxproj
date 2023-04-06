@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5E08F45D29DE9737003C3694 /* OperationStrategyTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */; };
 		5E08F45F29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F45E29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift */; };
+		5E08F46129DE9C11003C3694 /* CreatorListOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F46029DE9C11003C3694 /* CreatorListOperationStrategyTest.swift */; };
+		5E08F46329DE9EA4003C3694 /* FloatplaneEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F46229DE9EA4003C3694 /* FloatplaneEncoder.swift */; };
 		5E1FD6FD29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */; };
 		5E1FD70129DA904E0015AE6F /* ImageCacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */; };
 		5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71F29DB35AD0015AE6F /* ImageCacheConfigTest.swift */; };
@@ -65,6 +67,8 @@
 /* Begin PBXFileReference section */
 		5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStrategyTestBase.swift; sourceTree = "<group>"; };
 		5E08F45E29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentVideoOperationStrategyTest.swift; sourceTree = "<group>"; };
+		5E08F46029DE9C11003C3694 /* CreatorListOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorListOperationStrategyTest.swift; sourceTree = "<group>"; };
+		5E08F46229DE9EA4003C3694 /* FloatplaneEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneEncoder.swift; sourceTree = "<group>"; };
 		5E1FD6FA29DA8FDB0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheConfig.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */,
 				5E1FD77129DE902D0015AE6F /* CreatorOperationStrategyTest.swift */,
 				5E08F45E29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift */,
+				5E08F46029DE9C11003C3694 /* CreatorListOperationStrategyTest.swift */,
 			);
 			path = Cacheable;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				5E389B6029D8B34B00FC8B4B /* OperationManager.swift */,
 				5E389C4C29D8BE0D00FC8B4B /* OperationConstants.swift */,
 				5E389C4E29D8BF3E00FC8B4B /* FloatplaneDecoder.swift */,
+				5E08F46229DE9EA4003C3694 /* FloatplaneEncoder.swift */,
 				5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */,
 				5E389B2E29D8B29800FC8B4B /* FloatplaneApp_Operations.docc */,
 			);
@@ -430,6 +436,7 @@
 				5E389B7629D8B34B00FC8B4B /* OperationManager.swift in Sources */,
 				5E389B7F29D8B34B00FC8B4B /* LogoutOperationStrategy.swift in Sources */,
 				5E389B7829D8B34B00FC8B4B /* SubscriptionOperationStrategy.swift in Sources */,
+				5E08F46329DE9EA4003C3694 /* FloatplaneEncoder.swift in Sources */,
 				5E1FD73B29DCFEAE0015AE6F /* StrategyBasedOperation.swift in Sources */,
 				5E1FD73929DCFDDE0015AE6F /* OperationStrategy.swift in Sources */,
 				5E389C5129D8C01D00FC8B4B /* FloatplaneDecoder.swift in Sources */,
@@ -449,6 +456,7 @@
 				5E08F45D29DE9737003C3694 /* OperationStrategyTestBase.swift in Sources */,
 				5E1FD77229DE902D0015AE6F /* CreatorOperationStrategyTest.swift in Sources */,
 				5E1FD75A29DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift in Sources */,
+				5E08F46129DE9C11003C3694 /* CreatorListOperationStrategyTest.swift in Sources */,
 				5E1FD75E29DDD8E30015AE6F /* TestModelSupplier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
