@@ -34,10 +34,15 @@ class CreatorOperationStrategyImpl: CreatorOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
     
     var dataRequest: DataRequest?
+    var session: Session
+    
+    init(session: Session) {
+        self.session = session
+    }
     
     // Gets the full metadata for a creator given its urlname
     func get(request: CreatorRequest) async -> OperationResponse<Creator> {
-        let dataRequest = AF.request(baseUrl, parameters: request.params)
+        let dataRequest = session.request(baseUrl, parameters: request.params)
         self.dataRequest = dataRequest
         
         return await withCheckedContinuation { continuation in

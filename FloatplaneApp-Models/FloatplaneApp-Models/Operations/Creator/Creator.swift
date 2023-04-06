@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct Creator: Codable {
+public struct Creator: Codable, Equatable {
     public let about: String
     // Note: This looks to be a bug in v2 API.
     public let category: String
@@ -38,4 +38,38 @@ public struct Creator: Codable {
     public var subscriptionPlans: [Subscription.Plan]?
     public let title: String
     public let urlname: String
+    
+    public init(
+        about: String,
+        category: String,
+        cover: Icon,
+        defaultChannel: String,
+        description: String,
+        discoverable: Bool,
+        icon: Icon,
+        id: String,
+        incomeDisplay: Bool,
+        liveStream: LiveStream,
+        owner: String,
+        subscriberCountDisplay: String,
+        subscriptionPlans: [Subscription.Plan]? = nil,
+        title: String,
+        urlname: String
+    ) {
+        self.about = about
+        self.category = category
+        self.cover = cover
+        self.defaultChannel = defaultChannel
+        self.description = description
+        self.discoverable = discoverable
+        self.icon = icon
+        self.id = id
+        self.incomeDisplay = incomeDisplay
+        self.liveStream = liveStream
+        self.owner = owner
+        self.subscriberCountDisplay = subscriberCountDisplay
+        self.subscriptionPlans = subscriptionPlans
+        self.title = title
+        self.urlname = urlname
+    }
 }

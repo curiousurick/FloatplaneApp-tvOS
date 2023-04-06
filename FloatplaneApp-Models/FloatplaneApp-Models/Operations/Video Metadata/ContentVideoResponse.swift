@@ -42,4 +42,32 @@ public struct ContentVideoResponse: Codable {
     public let userInteraction: [String]
     public let levels: [QualityLevel]
     
+    public init(
+        id: String, guid: String, title: String, type: PostType, description: String,
+        releaseDate: Date?, duration: UInt64, creator: String, likes: UInt64, dislikes: UInt64,
+        score: UInt64, isProcessing: Bool, primaryBlogPost: String, thumbnail: Icon,
+        isAccessible: Bool, blogPosts: [String], timelineSprite: Icon?, userInteraction: [String],
+        levels: [QualityLevel]
+    ) {
+        self.id = id
+        self.guid = guid
+        self.title = title
+        self.type = type
+        self.description = description
+        self.releaseDate = releaseDate
+        self.duration = duration
+        self.creator = creator
+        self.likes = likes
+        self.dislikes = dislikes
+        self.score = score
+        self.isProcessing = isProcessing
+        self.primaryBlogPost = primaryBlogPost
+        self.thumbnail = thumbnail
+        self.isAccessible = isAccessible
+        self.blogPosts = blogPosts
+        self.timelineSprite = timelineSprite
+        self.userInteraction = userInteraction
+        self.levels = levels
+    }
+    
 }

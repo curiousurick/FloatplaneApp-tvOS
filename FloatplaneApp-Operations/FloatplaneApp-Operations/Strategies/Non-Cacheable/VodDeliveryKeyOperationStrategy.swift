@@ -31,10 +31,15 @@ class VodDeliveryKeyOperationStrategyImpl: VodDeliveryKeyOperationStrategy {
     private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
     
     var dataRequest: DataRequest?
+    var session: Session
+    
+    init(session: Session) {
+        self.session = session
+    }
     
     /// Gets a DeliveryKey for a given video GUID
     func get(request: VodDeliveryKeyRequest) async -> OperationResponse<DeliveryKey> {
-        let dataRequest = AF.request(baseUrl, parameters: request.params)
+        let dataRequest = session.request(baseUrl, parameters: request.params)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
             dataRequest.responseDecodable(of: DeliveryKey.self) { response in

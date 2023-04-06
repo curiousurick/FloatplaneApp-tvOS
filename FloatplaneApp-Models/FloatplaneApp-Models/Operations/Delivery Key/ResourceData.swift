@@ -21,9 +21,17 @@
 
 import Foundation
 
-public struct ResourceData: Codable {
+public struct ResourceData: Codable, Equatable {
     private var qualityLevels: [DeliveryKeyQualityLevel : QualityLevelResourceData] = [:]
     public var options: [DeliveryKeyQualityLevel] = []
+    
+    public init(
+        qualityLevels: [DeliveryKeyQualityLevel : QualityLevelResourceData],
+        options: [DeliveryKeyQualityLevel]
+    ) {
+        self.qualityLevels = qualityLevels
+        self.options = options
+    }
     
     enum CodingKeys: CodingKey {
         case qualityLevelParams

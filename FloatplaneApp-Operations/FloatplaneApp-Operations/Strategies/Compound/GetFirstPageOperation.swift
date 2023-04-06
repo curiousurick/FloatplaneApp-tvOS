@@ -29,27 +29,15 @@ import Alamofire
 /// Feed - Array<FeedItem> - This is the first page of video items that will be displayed on the browse tab.
 ///
 /// The active creator call and first page feed call are made at the same time to improve latency.
-protocol GetFirstPageOperationStrategy: InternalOperationStrategy<GetFirstPageRequest, GetFirstPageResponse> { }
+public protocol GetFirstPageOperation: Operation<GetFirstPageRequest, GetFirstPageResponse> { }
 
-class GetFirstPageOperationStrategyImpl: GetFirstPageOperationStrategy {
+class GetFirstPageOperationImpl: GetFirstPageOperation {
     private let logger = Log4S()
     
     private let creatorOperation: any CacheableStrategyBasedOperation<CreatorRequest, Creator>
     private let contentFeedOperation: any CacheableStrategyBasedOperation<ContentFeedRequest, CreatorFeed>
     private let creatorListOperation: any CacheableStrategyBasedOperation<CreatorListRequest, CreatorListResponse>
     
-    var dataRequest: DataRequest?
-    
-    convenience init() {
-        let operationManager = OperationManager.instance
-        self.init(
-            creatorOperation: operationManager.creatorOperation,
-            contentFeedOperation: operationManager.contentFeedOperation,
-            creatorListOperation: operationManager.creatorListOperation
-        )
-    }
-    
-    /// This is only for testing
     init(
         creatorOperation: any CacheableStrategyBasedOperation<CreatorRequest, Creator>,
         contentFeedOperation: any CacheableStrategyBasedOperation<ContentFeedRequest, CreatorFeed>,
@@ -79,5 +67,17 @@ class GetFirstPageOperationStrategyImpl: GetFirstPageOperationStrategy {
         }
         let response = GetFirstPageResponse(firstPage: firstPage, activeCreator: activeCreator, baseCreators: baseCreators)
         return OperationResponse(response: response, error: nil)
+    }
+    
+    func isActive() -> Bool {
+        return creatorListOperation.isActive() ||
+        creatorOperation.isActive() ||
+        contentFeedOperation.isActive()
+    }
+    
+    func cancel() {
+        creatorListOperation.cancel()
+        creatorOperation.cancel()
+        contentFeedOperation.cancel()
     }
 }

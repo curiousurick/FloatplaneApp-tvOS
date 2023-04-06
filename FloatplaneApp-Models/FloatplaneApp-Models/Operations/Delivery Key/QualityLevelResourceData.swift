@@ -21,7 +21,7 @@
 
 import Foundation
 
-public class DecodedQualityLevel: Codable {
+public class DecodedQualityLevel: Codable, Equatable {
     public let codecs: String?
     public let height: UInt64?
     public let label: String?
@@ -30,10 +30,10 @@ public class DecodedQualityLevel: Codable {
     public let order: UInt64
     public let width: UInt64?
     
-    init(
+    public init(
         codecs: String?,
         height: UInt64?,
-        label: String,
+        label: String?,
         mimeType: String,
         name: DeliveryKeyQualityLevel,
         order: UInt64,
@@ -48,14 +48,14 @@ public class DecodedQualityLevel: Codable {
         self.width = width
     }
     
-    public init(original: DecodedQualityLevel) {
-        self.codecs = original.codecs
-        self.height = original.height
-        self.label = original.label
-        self.mimeType = original.mimeType
-        self.name = original.name
-        self.order = original.order
-        self.width = original.width
+    public static func == (lhs: DecodedQualityLevel, rhs: DecodedQualityLevel) -> Bool {
+        return lhs.codecs == rhs.codecs &&
+        lhs.height == rhs.height &&
+        lhs.label == rhs.label &&
+        lhs.mimeType == rhs.mimeType &&
+        lhs.name == rhs.name &&
+        lhs.order == rhs.order &&
+        lhs.width == rhs.width
     }
 }
 public class QualityLevelResourceData: DecodedQualityLevel {
@@ -69,7 +69,27 @@ public class QualityLevelResourceData: DecodedQualityLevel {
     ) {
         self.fileName = fileName
         self.accessToken = accessToken
-        super.init(original: decodedQualityLevel)
+        super.init(
+            codecs: decodedQualityLevel.codecs,
+            height: decodedQualityLevel.height,
+            label: decodedQualityLevel.label,
+            mimeType: decodedQualityLevel.mimeType,
+            name: decodedQualityLevel.name,
+            order: decodedQualityLevel.order,
+            width: decodedQualityLevel.width
+        )
+    }
+    
+    public static func == (lhs: QualityLevelResourceData, rhs: QualityLevelResourceData) -> Bool {
+        return lhs.codecs == rhs.codecs &&
+        lhs.height == rhs.height &&
+        lhs.label == rhs.label &&
+        lhs.mimeType == rhs.mimeType &&
+        lhs.name == rhs.name &&
+        lhs.order == rhs.order &&
+        lhs.width == rhs.width &&
+        lhs.fileName == rhs.fileName &&
+        lhs.accessToken == rhs.accessToken
     }
     
     required init(from decoder: Decoder) throws {

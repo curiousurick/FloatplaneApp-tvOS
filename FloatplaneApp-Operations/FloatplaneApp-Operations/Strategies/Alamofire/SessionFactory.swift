@@ -20,10 +20,13 @@
 //
 
 import Foundation
+import Alamofire
 
-public enum PostType: String, Codable, Equatable {
-    case live
-    case vod
-    case video
-    case download
+class SessionFactory {
+    
+    func get() -> Session {
+        let configuration = URLSessionConfiguration.af.default
+        return Session(configuration: configuration)
+    }
+    
 }

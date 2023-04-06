@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct VideoMetadata: Codable {
+public struct VideoMetadata: Codable, Equatable {
     public let id: String
     public let guid: String
     public let title: String

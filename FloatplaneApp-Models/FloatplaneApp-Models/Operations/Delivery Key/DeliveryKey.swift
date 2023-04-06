@@ -21,12 +21,23 @@
 
 import Foundation
 
-public struct DeliveryKey: Codable {
-    public struct Resource: Codable {
+public struct DeliveryKey: Codable, Equatable {
+    public struct Resource: Codable, Equatable {
         public let data: ResourceData
         public let uri: String
+        
+        public init(data: ResourceData, uri: String) {
+            self.data = data
+            self.uri = uri
+        }
     }
     public let cdn: String
     public let resource: Resource
     public let strategy: String
+    
+    public init(cdn: String, resource: Resource, strategy: String) {
+        self.cdn = cdn
+        self.resource = resource
+        self.strategy = strategy
+    }
 }

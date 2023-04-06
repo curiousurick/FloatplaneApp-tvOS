@@ -34,10 +34,15 @@ class CreatorListOperationStrategyImpl: CreatorListOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
     
     var dataRequest: DataRequest?
+    var session: Session
+    
+    init(session: Session) {
+        self.session = session
+    }
     
     /// Gets the list of BaseCreator information for every creator the user is subscribed to.
     func get(request: CreatorListRequest) async -> OperationResponse<CreatorListResponse> {
-        let dataRequest = AF.request(baseUrl)
+        let dataRequest = session.request(baseUrl)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
             dataRequest.responseDecodable(of: [CreatorListResponse.CreatorResponseObject].self, decoder: FloatplaneDecoder()) { response in

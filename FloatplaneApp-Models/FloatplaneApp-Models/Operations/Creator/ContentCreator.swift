@@ -39,4 +39,30 @@ public struct ContentCreator: Hashable, Codable, Equatable {
     public let subscriptionPlans: [Subscription.Plan]
     public let title: String
     public let urlname: String
+    
+    public init(
+        about: String, card: Icon, category: Category?, channels: [String],
+        cover: Icon, defaultChannel: String, description: String, discoverable: Bool,
+        icon: Icon, id: String, incomeDisplay: Bool, liveStream: LiveStream, owner: Owner,
+        subscriberCountDisplay: String, subscriptionPlans: [Subscription.Plan],
+        title: String, urlname: String
+    ) {
+        self.about = about
+        self.card = card
+        self.category = category
+        self.channels = channels
+        self.cover = cover
+        self.defaultChannel = defaultChannel
+        self.description = description
+        self.discoverable = discoverable
+        self.icon = icon
+        self.id = id
+        self.incomeDisplay = incomeDisplay
+        self.liveStream = liveStream
+        self.owner = owner
+        self.subscriberCountDisplay = subscriberCountDisplay
+        self.subscriptionPlans = subscriptionPlans
+        self.title = title
+        self.urlname = urlname
+    }
 }

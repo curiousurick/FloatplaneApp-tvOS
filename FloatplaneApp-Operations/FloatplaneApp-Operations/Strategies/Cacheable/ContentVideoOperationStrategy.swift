@@ -34,10 +34,15 @@ class ContentVideoOperationStrategyImpl: ContentVideoOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
     
     var dataRequest: DataRequest?
+    var session: Session
+    
+    init(session: Session) {
+        self.session = session
+    }
     
     /// Gets the full metadata for a given video ID.
     func get(request: ContentVideoRequest) async -> OperationResponse<ContentVideoResponse> {
-        let dataRequest = AF.request(baseUrl, parameters: request.params)
+        let dataRequest = session.request(baseUrl, parameters: request.params)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
             dataRequest.responseDecodable(of: ContentVideoResponse.self) { response in

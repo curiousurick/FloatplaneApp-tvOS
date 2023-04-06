@@ -30,4 +30,18 @@ public struct UserNotificationSetting: Codable {
     public let id: String
     public let updatedAt: Date
     public let user: String
+    
+    public init(
+        contentEmail: Bool, contentFirebase: Bool, createdAt: Date, creator: String,
+        creatorMessageEmail: Bool, id: String, updatedAt: Date, user: String
+    ) {
+        self.contentEmail = contentEmail
+        self.contentFirebase = contentFirebase
+        self.createdAt = createdAt
+        self.creator = creator
+        self.creatorMessageEmail = creatorMessageEmail
+        self.id = id
+        self.updatedAt = updatedAt
+        self.user = user
+    }
 }

@@ -20,40 +20,43 @@
 //
 
 import Foundation
-import Alamofire
+@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-/// These are Alamofire states which indicate that the operation can be canceled.
-fileprivate let activeStates: [DataRequest.State] = [
-    .initialized,
-    .resumed,
-    .suspended
-]
-
-public protocol OperationStrategy {
-    func cancel()
-    func isActive() -> Bool
-}
-
-protocol InternalOperationStrategy<Request, Response>: OperationStrategy {
-    associatedtype Request: Hashable
-    associatedtype Response: Codable
+class MockCacheableStrategyBasedOperation<I: Hashable, O: Codable>: CacheableStrategyBasedOperation {
+    typealias Request = I
+    typealias Response = O
     
-    var dataRequest: DataRequest? { get }
-    
-    func get(request: Request) async -> OperationResponse<Response>
-}
-
-extension InternalOperationStrategy {
-    
-    func cancel() {
-        dataRequest?.cancel()
+    var getWithInvalidateCallCount = 0
+    var mockGetWithInvalidate: ((Request, Bool) -> OperationResponse<Response>)?
+    func get(request: Request, invalidateCache: Bool) async -> OperationResponse<Response> {
+        getWithInvalidateCallCount += 1
+        return mockGetWithInvalidate?(request, invalidateCache) ?? OperationResponse(response: nil, error: nil)
     }
     
+    var clearCacheCallCount = 0
+    func clearCache() {
+        clearCacheCallCount += 1
+    }
+    
+    var getCallCount = 0
+    var mockGet: ((Request) -> OperationResponse<Response>)?
+    func get(request: Request) async -> OperationResponse<Response> {
+        getCallCount += 1
+        return mockGet?(request) ?? OperationResponse(response: nil, error: nil)
+    }
+    
+    var isActiveCallCount = 0
+    var mockIsActive: Bool = false
     func isActive() -> Bool {
-        if let dataRequest = dataRequest {
-            return activeStates.contains(dataRequest.state)
-        }
-        return false
+        isActiveCallCount += 1
+        return mockIsActive
     }
+    
+    var cancelCallCount = 0
+    func cancel() {
+        cancelCallCount += 1
+    }
+    
+    
 }

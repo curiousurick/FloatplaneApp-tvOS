@@ -26,6 +26,11 @@ public struct CreatorListResponse: Codable {
     public struct CreatorResponseObject: Codable {
         public let creator: BaseCreator
         public let userNotificationSetting: UserNotificationSetting
+        
+        public init(creator: BaseCreator, userNotificationSetting: UserNotificationSetting) {
+            self.creator = creator
+            self.userNotificationSetting = userNotificationSetting
+        }
     }
     
     public let creators: [BaseCreator]

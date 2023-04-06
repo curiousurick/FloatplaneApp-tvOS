@@ -31,4 +31,19 @@ public struct Channel: Hashable, Codable, Equatable {
     public let order: UInt64
     public let title: String
     public let urlname: String
+    
+    public init(
+        about: String, card: String?, cover: String?, creator: String,
+        icon: Icon, id: String, order: UInt64, title: String, urlname: String
+    ) {
+        self.about = about
+        self.card = card
+        self.cover = cover
+        self.creator = creator
+        self.icon = icon
+        self.id = id
+        self.order = order
+        self.title = title
+        self.urlname = urlname
+    }
 }

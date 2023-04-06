@@ -25,4 +25,10 @@ public struct Image: Hashable, Codable, Equatable {
     public let height: UInt64
     public let path: URL
     public let width: UInt64
+    
+    public init(height: UInt64, path: URL, width: UInt64) {
+        self.height = height
+        self.path = path
+        self.width = width
+    }
 }

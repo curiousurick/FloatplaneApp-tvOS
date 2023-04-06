@@ -37,18 +37,20 @@ class LogoutOperationStrategyImpl: LogoutOperationStrategy {
     private let headers: HTTPHeaders
     
     var dataRequest: DataRequest?
+    var session: Session
     
-    init() {
+    init(session: Session) {
         let headerMap = [
             "user-agent" : userAgent
         ]
         headers = HTTPHeaders(headerMap)
+        self.session = session
     }
     
     /// Performs a logout and then clears all caches upon success.
     /// TODO: Investigate if we should clear the cache even if the call fails.
     func get(request: LogoutRequest) async -> OperationResponse<LogoutResponse> {
-        let dataRequest = AF.request(baseUrl, method: .post, headers: headers)
+        let dataRequest = session.request(baseUrl, method: .post, headers: headers)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
             dataRequest.response() { response in

@@ -34,17 +34,19 @@ class LoginOperationStrategyImpl: LoginOperationStrategy {
     private let headers: HTTPHeaders
     
     var dataRequest: DataRequest?
+    var session: Session
     
-    init() {
+    init(session: Session) {
         let headerMap = [
             "user-agent" : userAgent
         ]
         headers = HTTPHeaders(headerMap)
+        self.session = session
     }
     
     /// Attempts a login. If login fails, it returns a LoginFailedResponse containing the reason for failure, which also includes a clear message on the failure.
     func get(request: LoginRequest) async -> OperationResponse<LoginResponse> {
-        let dataRequest = AF.request(baseUrl, method: .post, parameters: request, headers: headers)
+        let dataRequest = session.request(baseUrl, method: .post, parameters: request, headers: headers)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
             dataRequest.response { response in

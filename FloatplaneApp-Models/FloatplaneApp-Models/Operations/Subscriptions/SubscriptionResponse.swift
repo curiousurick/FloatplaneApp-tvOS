@@ -35,6 +35,25 @@ public struct Subscription: Hashable, Codable, Equatable {
         public let price: String
         public let priceYearly: String
         public let title: String
+        
+        public init(
+            allowGrandfatheredAccess: Bool, currency: String, description: String,
+            discordRoles: [String], discordServers: [String], featured: Bool, id: String,
+            interval: Interval, logo: Icon?, price: String, priceYearly: String, title: String
+        ) {
+            self.allowGrandfatheredAccess = allowGrandfatheredAccess
+            self.currency = currency
+            self.description = description
+            self.discordRoles = discordRoles
+            self.discordServers = discordServers
+            self.featured = featured
+            self.id = id
+            self.interval = interval
+            self.logo = logo
+            self.price = price
+            self.priceYearly = priceYearly
+            self.title = title
+        }
     }
     
     public enum Interval: String, Hashable, Codable, Equatable {

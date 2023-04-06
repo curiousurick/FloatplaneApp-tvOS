@@ -44,4 +44,36 @@ public struct FeedItem: Hashable, Codable, Equatable {
     public let type: VideoType
     public let videoAttachments: [String]
     public let wasReleasedSilently: Bool
+    
+    public init(
+        attachmentOrder: [String], audioAttachments: [String], channel: Channel,
+        comments: UInt64, creator: ContentCreator, dislikes: UInt64,
+        galleryAttachments: [String], guid: String, id: String, isAccessible: Bool? = nil,
+        likes: UInt64, metadata: Metadata, pictureAttachments: [String], releaseDate: Date,
+        score: UInt64, tags: [String], text: String, thumbnail: Icon, title: String,
+        type: VideoType, videoAttachments: [String], wasReleasedSilently: Bool
+    ) {
+        self.attachmentOrder = attachmentOrder
+        self.audioAttachments = audioAttachments
+        self.channel = channel
+        self.comments = comments
+        self.creator = creator
+        self.dislikes = dislikes
+        self.galleryAttachments = galleryAttachments
+        self.guid = guid
+        self.id = id
+        self.isAccessible = isAccessible
+        self.likes = likes
+        self.metadata = metadata
+        self.pictureAttachments = pictureAttachments
+        self.releaseDate = releaseDate
+        self.score = score
+        self.tags = tags
+        self.text = text
+        self.thumbnail = thumbnail
+        self.title = title
+        self.type = type
+        self.videoAttachments = videoAttachments
+        self.wasReleasedSilently = wasReleasedSilently
+    }
 }

@@ -33,4 +33,22 @@ public struct Metadata: Hashable, Codable, Equatable {
     public let pictureCount: UInt64
     public let videoCount: UInt64
     public let videoDuration: UInt64
+    
+    public init(
+        audioCount: UInt64, audioDuration: UInt64, galleryCount: UInt64, hasAudio: Bool,
+        hasGallery: Bool, hasPicture: Bool, hasVideo: Bool, isFeatured: Bool,
+        pictureCount: UInt64, videoCount: UInt64, videoDuration: UInt64
+    ) {
+        self.audioCount = audioCount
+        self.audioDuration = audioDuration
+        self.galleryCount = galleryCount
+        self.hasAudio = hasAudio
+        self.hasGallery = hasGallery
+        self.hasPicture = hasPicture
+        self.hasVideo = hasVideo
+        self.isFeatured = isFeatured
+        self.pictureCount = pictureCount
+        self.videoCount = videoCount
+        self.videoDuration = videoDuration
+    }
 }

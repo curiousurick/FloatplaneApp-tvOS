@@ -26,12 +26,19 @@ import FloatplaneApp_Models
 /// Gets the full video metadata wrapper object for a given feed item.
 /// This is a compound API operation which gets a DeliveryKey and full ContentVideoResponse and wraps it in VideoMetadata with the given FeedItem.
 /// Note: DeliveryKey will not be cached but ContentVideoOperation is a CacheableAPIOperation
-protocol VideoMetadataOperationStrategy: InternalOperationStrategy<VideoMetadataRequest, VideoMetadata> { }
+public protocol VideoMetadataOperation: Operation<VideoMetadataRequest, VideoMetadata> { }
 
-class VideoMetadataOperationStrategyImpl: VideoMetadataOperationStrategy {
+class VideoMetadataOperationImpl: VideoMetadataOperation {
+    private let contentVideoOperation: any CacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse>
+    private let vodDeliveryKeyOperation: any StrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey>
     
-    private lazy var contentVideoOperation = OperationManager.instance.contentVideoOperation
-    private lazy var vodDeliveryKeyOperation = OperationManager.instance.vodDeliveryKeyOperation
+    init(
+        contentVideoOperation: any CacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse>,
+        vodDeliveryKeyOperation: any StrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey>
+    ) {
+        self.contentVideoOperation = contentVideoOperation
+        self.vodDeliveryKeyOperation = vodDeliveryKeyOperation
+    }
     
     var dataRequest: Alamofire.DataRequest?
     
@@ -55,5 +62,15 @@ class VideoMetadataOperationStrategyImpl: VideoMetadataOperationStrategy {
             let error: Error? = deliveryKeyError ?? contentVideoError
             return OperationResponse(response: nil, error: error)
         }
+    }
+    
+    func isActive() -> Bool {
+        return contentVideoOperation.isActive() ||
+        vodDeliveryKeyOperation.isActive()
+    }
+    
+    func cancel() {
+        contentVideoOperation.cancel()
+        vodDeliveryKeyOperation.cancel()
     }
 }

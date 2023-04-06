@@ -67,11 +67,17 @@ public class OperationManager {
     public lazy var logoutOperation = operationFactory.createOp(strategy: operationFactory.logoutStrategy)
     
     // Compound Operations
-    public lazy var videoMetadataOperation = operationFactory.createOp(strategy: operationFactory.videoMetadataStrategy)
-    public lazy var getFirstPageOperation = operationFactory.createOp(strategy: operationFactory.getFirstPageStrategy)
+    public lazy var videoMetadataOperation: any VideoMetadataOperation = VideoMetadataOperationImpl(
+        contentVideoOperation: contentVideoOperation,
+        vodDeliveryKeyOperation: vodDeliveryKeyOperation
+    )
+    public lazy var getFirstPageOperation: any GetFirstPageOperation = GetFirstPageOperationImpl(
+        creatorOperation: creatorOperation,
+        contentFeedOperation: contentFeedOperation,
+        creatorListOperation: creatorListOperation
+    )
     
-    private init() {
-    }
+    private init() { }
     
     /// Clears the cache for all cacheable operations
     public func clearCache() {
@@ -90,23 +96,22 @@ public class OperationManager {
 }
 
 class OperationFactory {
+    
+    lazy var sessionFactory = SessionFactory()
+    
     // Cacheable Operation implementations.
-    lazy var contentFeedStrategy = ContentFeedOperationStrategyImpl()
-    lazy var subscriptionStrategy = SubscriptionOperationStrategyImpl()
-    lazy var searchStrategy = SearchOperationStrategyImpl()
-    lazy var creatorListStrategy = CreatorListOperationStrategyImpl()
-    lazy var creatorStrategy = CreatorOperationStrategyImpl()
-    lazy var contentVideoStrategy = ContentVideoOperationStrategyImpl()
+    lazy var contentFeedStrategy = ContentFeedOperationStrategyImpl(session: sessionFactory.get())
+    lazy var subscriptionStrategy = SubscriptionOperationStrategyImpl(session: sessionFactory.get())
+    lazy var searchStrategy = SearchOperationStrategyImpl(session: sessionFactory.get())
+    lazy var creatorListStrategy = CreatorListOperationStrategyImpl(session: sessionFactory.get())
+    lazy var creatorStrategy = CreatorOperationStrategyImpl(session: sessionFactory.get())
+    lazy var contentVideoStrategy = ContentVideoOperationStrategyImpl(session: sessionFactory.get())
     
     // Non-Cached Operations
-    lazy var vodDeliveryKeyStrategy = VodDeliveryKeyOperationStrategyImpl()
-    lazy var liveDeliveryKeyStrategy = LiveDeliveryKeyOperationStrategyImpl()
-    lazy var loginStrategy = LoginOperationStrategyImpl()
-    lazy var logoutStrategy = LogoutOperationStrategyImpl()
-    
-    // Compound Operations
-    lazy var videoMetadataStrategy = VideoMetadataOperationStrategyImpl()
-    lazy var getFirstPageStrategy = GetFirstPageOperationStrategyImpl()
+    lazy var vodDeliveryKeyStrategy = VodDeliveryKeyOperationStrategyImpl(session: sessionFactory.get())
+    lazy var liveDeliveryKeyStrategy = LiveDeliveryKeyOperationStrategyImpl(session: sessionFactory.get())
+    lazy var loginStrategy = LoginOperationStrategyImpl(session: sessionFactory.get())
+    lazy var logoutStrategy = LogoutOperationStrategyImpl(session: sessionFactory.get())
     
     func createOp<I: Hashable, O: Codable>(strategy: any InternalOperationStrategy<I, O>) -> any StrategyBasedOperation<I, O> {
         return StrategyBasedOperationImpl(strategy: strategy)

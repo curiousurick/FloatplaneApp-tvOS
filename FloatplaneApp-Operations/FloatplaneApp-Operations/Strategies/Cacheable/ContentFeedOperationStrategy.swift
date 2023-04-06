@@ -33,10 +33,15 @@ class ContentFeedOperationStrategyImpl: ContentFeedOperationStrategy  {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
     
     var dataRequest: DataRequest?
+    var session: Session
+    
+    init(session: Session) {
+        self.session = session
+    }
     
     /// Gets a list of FeedItems for a given creator, limit, and fetchAfter.
     func get(request: ContentFeedRequest) async -> OperationResponse<CreatorFeed> {
-        let dataRequest = AF.request(baseUrl, parameters: request.params)
+        let dataRequest = session.request(baseUrl, parameters: request.params)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
             dataRequest.responseDecodable(of: [FeedItem].self, decoder: FloatplaneDecoder()) { response in

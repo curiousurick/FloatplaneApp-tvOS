@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E08F45D29DE9737003C3694 /* OperationStrategyTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */; };
 		5E1FD6FD29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */; };
 		5E1FD70129DA904E0015AE6F /* ImageCacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */; };
 		5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71F29DB35AD0015AE6F /* ImageCacheConfigTest.swift */; };
@@ -15,12 +16,19 @@
 		5E1FD73929DCFDDE0015AE6F /* OperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD73829DCFDDE0015AE6F /* OperationStrategy.swift */; };
 		5E1FD73B29DCFEAE0015AE6F /* StrategyBasedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD73A29DCFEAE0015AE6F /* StrategyBasedOperation.swift */; };
 		5E1FD73D29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD73C29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift */; };
+		5E1FD75729DDD4190015AE6F /* MockInternalOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75629DDD4190015AE6F /* MockInternalOperationStrategy.swift */; };
+		5E1FD75A29DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75929DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift */; };
+		5E1FD75C29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75B29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift */; };
+		5E1FD75E29DDD8E30015AE6F /* TestModelSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75D29DDD8E30015AE6F /* TestModelSupplier.swift */; };
+		5E1FD76329DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD76229DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift */; };
+		5E1FD77229DE902D0015AE6F /* CreatorOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD77129DE902D0015AE6F /* CreatorOperationStrategyTest.swift */; };
+		5E1FD77529DE914B0015AE6F /* SessionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD77429DE914B0015AE6F /* SessionFactory.swift */; };
 		5E389B3529D8B29900FC8B4B /* FloatplaneApp_Operations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389B2A29D8B29800FC8B4B /* FloatplaneApp_Operations.framework */; };
 		5E389B3B29D8B29900FC8B4B /* FloatplaneApp_Operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E389B7029D8B34B00FC8B4B /* CreatorOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5629D8B34B00FC8B4B /* CreatorOperationStrategy.swift */; };
 		5E389B7129D8B34B00FC8B4B /* VodDeliveryKeyOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5829D8B34B00FC8B4B /* VodDeliveryKeyOperationStrategy.swift */; };
 		5E389B7229D8B34B00FC8B4B /* LiveDeliveryKeyOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5929D8B34B00FC8B4B /* LiveDeliveryKeyOperationStrategy.swift */; };
-		5E389B7329D8B34B00FC8B4B /* VideoMetadataOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5B29D8B34B00FC8B4B /* VideoMetadataOperationStrategy.swift */; };
+		5E389B7329D8B34B00FC8B4B /* VideoMetadataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5B29D8B34B00FC8B4B /* VideoMetadataOperation.swift */; };
 		5E389B7429D8B34B00FC8B4B /* ContentVideoOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5C29D8B34B00FC8B4B /* ContentVideoOperationStrategy.swift */; };
 		5E389B7529D8B34B00FC8B4B /* CreatorListOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5E29D8B34B00FC8B4B /* CreatorListOperationStrategy.swift */; };
 		5E389B7629D8B34B00FC8B4B /* OperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B6029D8B34B00FC8B4B /* OperationManager.swift */; };
@@ -36,7 +44,8 @@
 		5E389C4529D8BA1D00FC8B4B /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 5E389C4429D8BA1D00FC8B4B /* Cache */; };
 		5E389C4D29D8BE0D00FC8B4B /* OperationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C4C29D8BE0D00FC8B4B /* OperationConstants.swift */; };
 		5E389C5129D8C01D00FC8B4B /* FloatplaneDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C4E29D8BF3E00FC8B4B /* FloatplaneDecoder.swift */; };
-		5E4CE96929DA0B7F0029110E /* GetFirstPageOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE96829DA0B7F0029110E /* GetFirstPageOperationStrategy.swift */; };
+		5E3FC09629DE940500A5E16B /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 5E3FC09529DE940500A5E16B /* Mocker */; };
+		5E4CE96929DA0B7F0029110E /* GetFirstPageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE96829DA0B7F0029110E /* GetFirstPageOperation.swift */; };
 		5EFD928329D8C883007E8374 /* FloatplaneApp_Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD927F29D8C766007E8374 /* FloatplaneApp_Models.framework */; };
 		5EFD928729D8C8BA007E8374 /* FloatplaneApp_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD928629D8C8BA007E8374 /* FloatplaneApp_Utilities.framework */; };
 		5EFD929929D90D30007E8374 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD929829D90D2F007E8374 /* AVKit.framework */; };
@@ -53,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStrategyTestBase.swift; sourceTree = "<group>"; };
 		5E1FD6FA29DA8FDB0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheConfig.swift; sourceTree = "<group>"; };
@@ -62,6 +72,13 @@
 		5E1FD73829DCFDDE0015AE6F /* OperationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStrategy.swift; sourceTree = "<group>"; };
 		5E1FD73A29DCFEAE0015AE6F /* StrategyBasedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyBasedOperation.swift; sourceTree = "<group>"; };
 		5E1FD73C29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableStrategyBasedOperation.swift; sourceTree = "<group>"; };
+		5E1FD75629DDD4190015AE6F /* MockInternalOperationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInternalOperationStrategy.swift; sourceTree = "<group>"; };
+		5E1FD75929DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFirstPageOperationStrategyTest.swift; sourceTree = "<group>"; };
+		5E1FD75B29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCacheableStrategyBasedOperation.swift; sourceTree = "<group>"; };
+		5E1FD75D29DDD8E30015AE6F /* TestModelSupplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelSupplier.swift; sourceTree = "<group>"; };
+		5E1FD76229DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMetadataOperationStrategyTest.swift; sourceTree = "<group>"; };
+		5E1FD77129DE902D0015AE6F /* CreatorOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorOperationStrategyTest.swift; sourceTree = "<group>"; };
+		5E1FD77429DE914B0015AE6F /* SessionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFactory.swift; sourceTree = "<group>"; };
 		5E389B2A29D8B29800FC8B4B /* FloatplaneApp_Operations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatplaneApp_Operations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloatplaneApp_Operations.h; sourceTree = "<group>"; };
 		5E389B2E29D8B29800FC8B4B /* FloatplaneApp_Operations.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = FloatplaneApp_Operations.docc; sourceTree = "<group>"; };
@@ -69,7 +86,7 @@
 		5E389B5629D8B34B00FC8B4B /* CreatorOperationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorOperationStrategy.swift; sourceTree = "<group>"; };
 		5E389B5829D8B34B00FC8B4B /* VodDeliveryKeyOperationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VodDeliveryKeyOperationStrategy.swift; sourceTree = "<group>"; };
 		5E389B5929D8B34B00FC8B4B /* LiveDeliveryKeyOperationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDeliveryKeyOperationStrategy.swift; sourceTree = "<group>"; };
-		5E389B5B29D8B34B00FC8B4B /* VideoMetadataOperationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoMetadataOperationStrategy.swift; sourceTree = "<group>"; };
+		5E389B5B29D8B34B00FC8B4B /* VideoMetadataOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoMetadataOperation.swift; sourceTree = "<group>"; };
 		5E389B5C29D8B34B00FC8B4B /* ContentVideoOperationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentVideoOperationStrategy.swift; sourceTree = "<group>"; };
 		5E389B5E29D8B34B00FC8B4B /* CreatorListOperationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorListOperationStrategy.swift; sourceTree = "<group>"; };
 		5E389B6029D8B34B00FC8B4B /* OperationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationManager.swift; sourceTree = "<group>"; };
@@ -82,7 +99,7 @@
 		5E389B9929D8B55400FC8B4B /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389C4C29D8BE0D00FC8B4B /* OperationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationConstants.swift; sourceTree = "<group>"; };
 		5E389C4E29D8BF3E00FC8B4B /* FloatplaneDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatplaneDecoder.swift; sourceTree = "<group>"; };
-		5E4CE96829DA0B7F0029110E /* GetFirstPageOperationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFirstPageOperationStrategy.swift; sourceTree = "<group>"; };
+		5E4CE96829DA0B7F0029110E /* GetFirstPageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFirstPageOperation.swift; sourceTree = "<group>"; };
 		5EFD927F29D8C766007E8374 /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EFD928629D8C8BA007E8374 /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EFD929829D90D2F007E8374 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS16.1.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -108,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E389B3529D8B29900FC8B4B /* FloatplaneApp_Operations.framework in Frameworks */,
+				5E3FC09629DE940500A5E16B /* Mocker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +135,9 @@
 		5E1FD73329DB3B910015AE6F /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				5E1FD75629DDD4190015AE6F /* MockInternalOperationStrategy.swift */,
+				5E1FD75B29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift */,
+				5E1FD75D29DDD8E30015AE6F /* TestModelSupplier.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -137,8 +158,8 @@
 		5E1FD74B29DD48ED0015AE6F /* Compound */ = {
 			isa = PBXGroup;
 			children = (
-				5E4CE96829DA0B7F0029110E /* GetFirstPageOperationStrategy.swift */,
-				5E389B5B29D8B34B00FC8B4B /* VideoMetadataOperationStrategy.swift */,
+				5E4CE96829DA0B7F0029110E /* GetFirstPageOperation.swift */,
+				5E389B5B29D8B34B00FC8B4B /* VideoMetadataOperation.swift */,
 			);
 			path = Compound;
 			sourceTree = "<group>";
@@ -166,11 +187,38 @@
 		5E1FD74E29DD492C0015AE6F /* Strategies */ = {
 			isa = PBXGroup;
 			children = (
+				5E1FD77329DE913D0015AE6F /* Alamofire */,
 				5E1FD74B29DD48ED0015AE6F /* Compound */,
 				5E1FD74A29DD48D70015AE6F /* Cacheable */,
 				5E1FD74D29DD490E0015AE6F /* Non-Cacheable */,
 			);
 			path = Strategies;
+			sourceTree = "<group>";
+		};
+		5E1FD75829DDD6670015AE6F /* Compound */ = {
+			isa = PBXGroup;
+			children = (
+				5E1FD75929DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift */,
+				5E1FD76229DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift */,
+			);
+			path = Compound;
+			sourceTree = "<group>";
+		};
+		5E1FD77029DE901D0015AE6F /* Cacheable */ = {
+			isa = PBXGroup;
+			children = (
+				5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */,
+				5E1FD77129DE902D0015AE6F /* CreatorOperationStrategyTest.swift */,
+			);
+			path = Cacheable;
+			sourceTree = "<group>";
+		};
+		5E1FD77329DE913D0015AE6F /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				5E1FD77429DE914B0015AE6F /* SessionFactory.swift */,
+			);
+			path = Alamofire;
 			sourceTree = "<group>";
 		};
 		5E389B2029D8B29800FC8B4B = {
@@ -214,6 +262,8 @@
 			isa = PBXGroup;
 			children = (
 				5E1FD73329DB3B910015AE6F /* Mocks */,
+				5E1FD75829DDD6670015AE6F /* Compound */,
+				5E1FD77029DE901D0015AE6F /* Cacheable */,
 				5E1FD71F29DB35AD0015AE6F /* ImageCacheConfigTest.swift */,
 				5E1FD72F29DB38390015AE6F /* ImageGrabberTest.swift */,
 			);
@@ -284,6 +334,9 @@
 				5E389B3729D8B29900FC8B4B /* PBXTargetDependency */,
 			);
 			name = "FloatplaneApp-OperationsTests";
+			packageProductDependencies = (
+				5E3FC09529DE940500A5E16B /* Mocker */,
+			);
 			productName = "FloatplaneApp-OperationsTests";
 			productReference = 5E389B3429D8B29900FC8B4B /* FloatplaneApp-OperationsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -320,6 +373,7 @@
 				5E389B8D29D8B42600FC8B4B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				5E389B9329D8B45600FC8B4B /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				5E389C4329D8BA1D00FC8B4B /* XCRemoteSwiftPackageReference "Cache" */,
+				5E3FC09229DE93F600A5E16B /* XCRemoteSwiftPackageReference "Mocker" */,
 			);
 			productRefGroup = 5E389B2B29D8B29800FC8B4B /* Products */;
 			projectDirPath = "";
@@ -357,11 +411,12 @@
 				5E389B7D29D8B34B00FC8B4B /* ContentFeedOperationStrategy.swift in Sources */,
 				5E1FD73D29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift in Sources */,
 				5E389C4D29D8BE0D00FC8B4B /* OperationConstants.swift in Sources */,
+				5E1FD77529DE914B0015AE6F /* SessionFactory.swift in Sources */,
 				5E389B7029D8B34B00FC8B4B /* CreatorOperationStrategy.swift in Sources */,
 				5E389B7929D8B34B00FC8B4B /* SearchOperationStrategy.swift in Sources */,
 				5E389B7529D8B34B00FC8B4B /* CreatorListOperationStrategy.swift in Sources */,
-				5E4CE96929DA0B7F0029110E /* GetFirstPageOperationStrategy.swift in Sources */,
-				5E389B7329D8B34B00FC8B4B /* VideoMetadataOperationStrategy.swift in Sources */,
+				5E4CE96929DA0B7F0029110E /* GetFirstPageOperation.swift in Sources */,
+				5E389B7329D8B34B00FC8B4B /* VideoMetadataOperation.swift in Sources */,
 				5E389B7429D8B34B00FC8B4B /* ContentVideoOperationStrategy.swift in Sources */,
 				5E1FD73729DC89550015AE6F /* Operation.swift in Sources */,
 				5E389B7E29D8B34B00FC8B4B /* LoginOperationStrategy.swift in Sources */,
@@ -382,8 +437,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E1FD75C29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift in Sources */,
 				5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */,
+				5E1FD75729DDD4190015AE6F /* MockInternalOperationStrategy.swift in Sources */,
 				5E1FD73029DB38390015AE6F /* ImageGrabberTest.swift in Sources */,
+				5E1FD76329DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift in Sources */,
+				5E08F45D29DE9737003C3694 /* OperationStrategyTestBase.swift in Sources */,
+				5E1FD77229DE902D0015AE6F /* CreatorOperationStrategyTest.swift in Sources */,
+				5E1FD75A29DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift in Sources */,
+				5E1FD75E29DDD8E30015AE6F /* TestModelSupplier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +763,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		5E3FC09229DE93F600A5E16B /* XCRemoteSwiftPackageReference "Mocker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WeTransfer/Mocker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -718,6 +788,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5E389C4329D8BA1D00FC8B4B /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		5E3FC09529DE940500A5E16B /* Mocker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E3FC09229DE93F600A5E16B /* XCRemoteSwiftPackageReference "Mocker" */;
+			productName = Mocker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

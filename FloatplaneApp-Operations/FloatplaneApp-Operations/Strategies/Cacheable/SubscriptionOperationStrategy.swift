@@ -33,10 +33,15 @@ class SubscriptionOperationStrategyImpl: SubscriptionOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
     
     var dataRequest: DataRequest?
+    var session: Session
+    
+    init(session: Session) {
+        self.session = session
+    }
 
     /// Looks up subscription data for the user, including the level of support for each subscribed creator.
     func get(request: SubscriptionRequest) async -> OperationResponse<SubscriptionResponse> {
-        let dataRequest = AF.request(baseUrl)
+        let dataRequest = session.request(baseUrl)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
             dataRequest.responseDecodable(of: [Subscription].self) { response in
