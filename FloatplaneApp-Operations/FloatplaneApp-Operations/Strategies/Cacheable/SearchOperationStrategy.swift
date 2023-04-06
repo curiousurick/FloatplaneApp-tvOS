@@ -50,15 +50,14 @@ class SearchOperationStrategyImpl: SearchOperationStrategy {
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
             dataRequest.responseDecodable(of: [FeedItem].self, decoder: FloatplaneDecoder()) { response in
-                // This is because we don't want to burden the caller with handling this.
-                // Search Queries will update views upon results and a failed/canceled call while
-                // typing shouldn't erase what is currently visible.
                 if let error = response.error, error.isExplicitlyCancelledError {
                     self.logger.info("SearchRequest canceled before response was ready. This is okay")
+                    continuation.resume(returning: OperationResponse(response: nil, error: response.error))
                     return
                 }
                 guard let items = response.value else {
                     self.logger.error("SearchRequest returned with no error but also no results.")
+                    continuation.resume(returning: OperationResponse(response: nil, error: response.error))
                     return
                 }
                 let searchResponse = SearchResponse(items: items)

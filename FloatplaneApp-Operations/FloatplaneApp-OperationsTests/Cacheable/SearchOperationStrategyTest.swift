@@ -23,23 +23,23 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class SubscriptionOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
+class SearchOperationStrategyTest: OperationStrategyTestBase {
+    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
     
-    private var subject: SubscriptionOperationStrategyImpl!
+    private var subject: SearchOperationStrategyImpl!
     
     override func setUp() {
         super.setUp()
         
-        subject = SubscriptionOperationStrategyImpl(session: session)
+        subject = SearchOperationStrategyImpl(session: session)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.subscriptionRequest
-        let response = TestModelSupplier.subscriptionResponse
+        let request = TestModelSupplier.searchRequest
+        let response = TestModelSupplier.searchResponse
         
-        try mockGet(baseUrl: baseUrl, response: response.subscriptions)
+        try mockGet(baseUrl: baseUrl, request: request, response: response.items)
         
         // Act
         let result = await subject.get(request: request)
@@ -49,10 +49,32 @@ class SubscriptionOperationStrategyTest: OperationStrategyTestBase {
         XCTAssertEqual(result.response, response)
     }
     
+    func testGetCanceled() async throws {
+        // Arrange
+        let request = TestModelSupplier.searchRequest
+        let response = TestModelSupplier.searchResponse
+        
+        try mockGet(baseUrl: baseUrl, request: request, response: response.items, delaySeconds: 1)
+        
+        // Act
+        async let resultAsync = subject.get(request: request)
+        // Canceling once the data request has definitely been saved.
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+            self.subject.cancel()
+        }
+        let result = await resultAsync
+        
+        // Assert
+        XCTAssertNotNil(result.error)
+        let error = result.error!.asAFError!
+        XCTAssertTrue(error.isExplicitlyCancelledError)
+        XCTAssertNil(result.response)
+    }
+    
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.subscriptionRequest
-        try mockHTTPError(baseUrl: baseUrl, statusCode: 403)
+        let request = TestModelSupplier.searchRequest
+        try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
         
         // Act
         let result = await subject.get(request: request)
@@ -64,8 +86,8 @@ class SubscriptionOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.subscriptionRequest
-        try mockWrongResponse(baseUrl: baseUrl)
+        let request = TestModelSupplier.searchRequest
+        try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act
         let result = await subject.get(request: request)

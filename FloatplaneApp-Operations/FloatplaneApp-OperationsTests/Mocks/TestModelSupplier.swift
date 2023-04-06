@@ -125,7 +125,7 @@ class TestModelSupplier {
         videoDuration: videoDuration
     )
     static let pictureAttachment = "pic.jpg"
-    static let releaseDate = Date()
+    static let releaseDate = Date(timeIntervalSince1970: 20000)
     static let score: UInt64 = 40
     static let tag = "tech"
     static let text = "this is text"
@@ -215,4 +215,8 @@ class TestModelSupplier {
         creator: creatorString, endDate: endDate, interval: interval, paymentCancelled: paymentCancelled,
         paymentID: paymentID, plan: subscriptionPlan, startDate: startDate)
     static let subscriptionResponse = SubscriptionResponse(subscriptions: [subscription])
+    static let sortOrder = SortOrder.ascending
+    static let searchQuery = "intel"
+    static let searchRequest = SearchRequest(creatorId: creatorId, sort: sortOrder, searchQuery: searchQuery, fetchAfter: fetchAfter)
+    static let searchResponse = SearchResponse(items: [feedItem])
 }

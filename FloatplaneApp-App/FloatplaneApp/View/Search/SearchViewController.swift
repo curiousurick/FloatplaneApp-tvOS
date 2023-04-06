@@ -114,7 +114,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
             guard opResponse.error == nil,
                   let searchResult = opResponse.response else {
                 let errorString = opResponse.error.debugDescription
-                self.logger.error("Failed to retrieve next page of content from \(fetchAfter). Error \(errorString)")
+                self.logger.warn("Failed to retrieve next page of content from \(fetchAfter). Error \(errorString)")
                 return
             }
             if let existingResults = self.results {

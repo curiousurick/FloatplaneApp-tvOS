@@ -46,48 +46,63 @@ class OperationStrategyTestBase: XCTestCase {
         self.session = Session(configuration: configuration)
     }
     
-    func mockGet(baseUrl: URL, request: (any OperationRequest)? = nil, response: Codable) throws {
+    func mockGet(
+        baseUrl: URL, request: (any OperationRequest)? = nil,
+        response: Codable, delaySeconds: Int? = nil
+    ) throws {
         var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        if let request = request {
-            let queryItems = request.params.map {
-                return URLQueryItem(name: "\($0)", value: "\($1)")
-            }
-            urlComponents.queryItems = queryItems
-        }
+        urlComponents.queryItems = getQueryItems(request: request)
         let jsonData = try FloatplaneEncoder().encode(response)
-        let mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: 200, data: [
+        var mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: 200, data: [
             .get : jsonData
         ])
+        if let delay = delaySeconds {
+            mock.delay = DispatchTimeInterval.seconds(delay)
+        }
         mock.register()
     }
     
-    func mockHTTPError(baseUrl: URL, request: (any OperationRequest)? = nil, statusCode: Int) throws {
+    func mockHTTPError(
+        baseUrl: URL, request: (any OperationRequest)? = nil,
+        statusCode: Int, delaySeconds: Int? = nil
+    ) throws {
         var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        if let request = request {
-            let queryItems = request.params.map {
-                return URLQueryItem(name: "\($0)", value: "\($1)")
-            }
-            urlComponents.queryItems = queryItems
-        }
-        let mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: statusCode, data: [
+        urlComponents.queryItems = getQueryItems(request: request)
+        var mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: statusCode, data: [
             .get : Data()
         ])
+        if let delay = delaySeconds {
+            mock.delay = DispatchTimeInterval.seconds(delay)
+        }
         mock.register()
     }
     
-    func mockWrongResponse(baseUrl: URL, request: (any OperationRequest)? = nil) throws {
+    func mockWrongResponse(
+        baseUrl: URL, request: (any OperationRequest)? = nil,
+        delaySeconds: Int? = nil
+    ) throws {
         var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        if let request = request {
-            let queryItems = request.params.map {
-                return URLQueryItem(name: "\($0)", value: "\($1)")
-            }
-            urlComponents.queryItems = queryItems
-        }
+        urlComponents.queryItems = getQueryItems(request: request)
         let response = UnknownObject.defaultVal
         let jsonData = try JSONEncoder().encode(response)
-        let mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: 200, data: [
+        var mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: 200, data: [
             .get : jsonData
         ])
+        if let delay = delaySeconds {
+            mock.delay = DispatchTimeInterval.seconds(delay)
+        }
         mock.register()
+    }
+    
+    private func getQueryItems(request: (any OperationRequest)?) -> [URLQueryItem]? {
+        guard let request = request else { return nil }
+        // We sort the keys first because Alamofire seems to do this and Mocker
+        // requires an exact URL match, which is dumb.
+        return request.params.keys.sorted().compactMap {
+            if let value = request.params[$0] {
+                return URLQueryItem(name: "\($0)", value: "\(value)")
+            }
+            return nil
+        }
     }
 }

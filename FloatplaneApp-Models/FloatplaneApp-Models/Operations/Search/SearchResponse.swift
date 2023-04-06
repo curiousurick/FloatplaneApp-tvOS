@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct SearchResponse: Codable {
+public struct SearchResponse: Codable, Equatable {
     public let items: [FeedItem]
     
     public init(items: [FeedItem]) {

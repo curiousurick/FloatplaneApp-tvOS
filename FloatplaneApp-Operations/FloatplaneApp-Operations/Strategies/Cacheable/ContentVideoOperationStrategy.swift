@@ -45,7 +45,7 @@ class ContentVideoOperationStrategyImpl: ContentVideoOperationStrategy {
         let dataRequest = session.request(baseUrl, parameters: request.params)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
-            dataRequest.responseDecodable(of: ContentVideoResponse.self) { response in
+            dataRequest.responseDecodable(of: ContentVideoResponse.self, decoder: FloatplaneDecoder()) { response in
                 if let response = response.value {
                     continuation.resume(returning: OperationResponse(response: response, error: nil))
                 }
