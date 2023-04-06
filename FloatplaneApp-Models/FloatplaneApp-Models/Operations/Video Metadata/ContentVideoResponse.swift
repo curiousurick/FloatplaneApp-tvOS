@@ -21,7 +21,7 @@
 
 import Foundation
 
-public struct ContentVideoResponse: Codable {
+public struct ContentVideoResponse: Codable, Equatable {
     public let id: String
     public let guid: String
     public let title: String

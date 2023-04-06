@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E08F45D29DE9737003C3694 /* OperationStrategyTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */; };
+		5E08F45F29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F45E29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift */; };
 		5E1FD6FD29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */; };
 		5E1FD70129DA904E0015AE6F /* ImageCacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */; };
 		5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71F29DB35AD0015AE6F /* ImageCacheConfigTest.swift */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStrategyTestBase.swift; sourceTree = "<group>"; };
+		5E08F45E29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentVideoOperationStrategyTest.swift; sourceTree = "<group>"; };
 		5E1FD6FA29DA8FDB0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheConfig.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			children = (
 				5E08F45C29DE9737003C3694 /* OperationStrategyTestBase.swift */,
 				5E1FD77129DE902D0015AE6F /* CreatorOperationStrategyTest.swift */,
+				5E08F45E29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift */,
 			);
 			path = Cacheable;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E08F45F29DE9AFC003C3694 /* ContentVideoOperationStrategyTest.swift in Sources */,
 				5E1FD75C29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift in Sources */,
 				5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */,
 				5E1FD75729DDD4190015AE6F /* MockInternalOperationStrategy.swift in Sources */,

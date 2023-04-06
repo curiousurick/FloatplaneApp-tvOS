@@ -23,22 +23,22 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class CreatorOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
-    
-    private var subject: CreatorOperationStrategyImpl!
+class ContentVideoOperationStrategyTest: OperationStrategyTestBase {
+    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
+
+    private var subject: ContentVideoOperationStrategyImpl!
     
     override func setUp() {
         super.setUp()
         
-        subject = CreatorOperationStrategyImpl(session: session)
+        subject = ContentVideoOperationStrategyImpl(session: session)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorRequest
-        let response = TestModelSupplier.creator
-        try mockGet(baseUrl: baseUrl, request: request, response: [response])
+        let request = TestModelSupplier.contentVideoRequest
+        let response = TestModelSupplier.contentVideoResponse
+        try mockGet(baseUrl: baseUrl, request: request, response: response)
         
         // Act
         let result = await subject.get(request: request)
@@ -48,37 +48,9 @@ class CreatorOperationStrategyTest: OperationStrategyTestBase {
         XCTAssertEqual(result.response, response)
     }
     
-    func testGetEmptyArray() async throws {
-        // Arrange
-        let request = TestModelSupplier.creatorRequest
-        let response: [Creator] = []
-        try mockGet(baseUrl: baseUrl, request: request, response: response)
-        
-        // Act
-        let result = await subject.get(request: request)
-        
-        // Assert
-        XCTAssertNil(result.error)
-        XCTAssertNil(result.response)
-    }
-    
-    func testGetMoreThanOneCreator() async throws {
-        // Arrange
-        let request = TestModelSupplier.creatorRequest
-        let response: [Creator] = [TestModelSupplier.creator, TestModelSupplier.creator]
-        try mockGet(baseUrl: baseUrl, request: request, response: response)
-        
-        // Act
-        let result = await subject.get(request: request)
-        
-        // Assert
-        XCTAssertNil(result.error)
-        XCTAssertNil(result.response)
-    }
-    
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorRequest
+        let request = TestModelSupplier.contentVideoRequest
         try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
         
         // Act
@@ -91,7 +63,7 @@ class CreatorOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorRequest
+        let request = TestModelSupplier.contentVideoRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act
@@ -101,5 +73,6 @@ class CreatorOperationStrategyTest: OperationStrategyTestBase {
         XCTAssertNotNil(result.error)
         XCTAssertNil(result.response)
     }
+    
 
 }
