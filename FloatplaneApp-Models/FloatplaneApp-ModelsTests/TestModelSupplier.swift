@@ -1,0 +1,272 @@
+//  Copyright © 2023 George Urick
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+
+import Foundation
+@testable import FloatplaneApp_Models
+
+enum TestingError: Error, Equatable {
+    case reallyBad
+    case notSoBad
+    case strangelyGood
+    case whyCallMeAnError
+}
+
+class TestModelSupplier {
+    
+    static let about = "about"
+    static let categoryString = "category"
+    static let height: UInt64 = 720
+    static let width: UInt64 = 1280
+    static let path = URL(string: "https://fp.c/foo")!
+    static let image = Image(height: height, path: path, width: width)
+    static let icon = Icon(childImages: [image], height: height, path: path, width: width)
+    static let defaultChannel = "defaultChannel"
+    static let description = "description"
+    static let discoverable = true
+    static let id = "id"
+    static let incomeDisplay = true
+    static let channelString = "channel"
+    static let title = "title"
+    static let ownerString = "owner"
+    static let streamPath = "https://fp.c/streamthis.m3u8"
+    static let offline = LiveStream.Offline(description: description, thumbnail: icon, title: title)
+    static let liveStream = LiveStream(
+        channel: channelString, description: description, id: id, offline: offline,
+        owner: ownerString, streamPath: streamPath, thumbnail: icon, title: title
+    )
+    static let subscriberCountDisplay = "42000"
+    static let urlname = "linustechtips"
+    
+    
+    static let creatorRequest = CreatorRequest(named: urlname)
+    static let creator = Creator(
+        about: about, category: categoryString, cover: icon, defaultChannel: defaultChannel,
+        description: description, discoverable: discoverable, icon: icon, id: id,
+        incomeDisplay: incomeDisplay, liveStream: liveStream, owner: ownerString,
+        subscriberCountDisplay: subscriberCountDisplay, title: title, urlname: urlname
+    )
+    
+    static let fetchAfter = 20
+    static let limit: UInt64 = 20
+    static let creatorId = "creatorId"
+    static let contentFeedRequest = ContentFeedRequest(fetchAfter: fetchAfter, limit: limit, creatorId: creatorId)
+    static let attachmentOrder = "0"
+    static let audioAttachment = "audioAttachment.mp3"
+    static let cardString = "card"
+    static let coverString = "cover"
+    static let creatorString = "creator"
+    static let order: UInt64 = 1
+    static let channel = Channel(
+        about: about, card: cardString, cover: coverString, creator: creatorId,
+        icon: icon, id: id, order: order, title: title, urlname: urlname
+    )
+    static let comments: UInt64 = 1000
+    static let category = Category(id: id, title: title)
+    static let allowGrandfatheredAccess = false
+    static let currency = "USD"
+    static let discordRole = "discordRole"
+    static let discordServer = "discordServer"
+    static let featured = true
+    static let interval = Subscription.Interval.month
+    static let price = "5.00"
+    static let priceYearly = "50.00"
+    static let subscriptionPlan = Subscription.Plan(
+        allowGrandfatheredAccess: allowGrandfatheredAccess, currency: currency, description: description,
+        discordRoles: [discordRole], discordServers: [discordServer], featured: featured, id: id,
+        interval: interval, logo: icon, price: price, priceYearly: priceYearly, title: title
+    )
+    static let username = "username"
+    static let owner = Owner(id: id, username: username)
+    static let contentCreator = ContentCreator(
+        about: about, card: icon, category: category, channels: [channelString], cover: icon,
+        defaultChannel: defaultChannel, description: description, discoverable: discoverable, icon: icon,
+        id: id, incomeDisplay: incomeDisplay, liveStream: liveStream, owner: owner,
+        subscriberCountDisplay: subscriberCountDisplay, subscriptionPlans: [subscriptionPlan], title: title,
+        urlname: urlname
+    )
+    static let dislikes: UInt64 = 1
+    static let galleryAttachment = "galleryattachment.jpg"
+    static let guid = "guid"
+    static let likes: UInt64 = 40
+    static let audioCount: UInt64 = 1
+    static let audioDuration: UInt64 = 1
+    static let galleryCount: UInt64 = 0
+    static let hasAudio = true
+    static let hasGallery = false
+    static let hasPicture = true
+    static let hasVideo = true
+    static let isFeatured = true
+    static let pictureCount: UInt64 = 1
+    static let videoCount: UInt64 = 1
+    static let videoDuration: UInt64 = 120
+    
+    static let metadata = Metadata(
+        audioCount: audioCount, audioDuration: audioDuration, galleryCount: galleryCount,
+        hasAudio: hasAudio, hasGallery: hasGallery, hasPicture: hasPicture, hasVideo: hasVideo,
+        isFeatured: isFeatured, pictureCount: pictureCount, videoCount: videoCount,
+        videoDuration: videoDuration
+    )
+    static let pictureAttachment = "pic.jpg"
+    static let releaseDate = Date(timeIntervalSince1970: 20000)
+    static let score: UInt64 = 40
+    static let tag = "tech"
+    static let text = "this is text"
+    static let videoType = VideoType.blogPost
+    static let videoAttachment = "video.mp4"
+    static let wasReleasedSilently = true
+    static let feedItem = FeedItem(
+        attachmentOrder: [attachmentOrder], audioAttachments: [audioAttachment], channel: channel, comments: comments,
+        creator: contentCreator, dislikes: dislikes, galleryAttachments: [galleryAttachment], guid: guid, id: id,
+        likes: likes, metadata: metadata, pictureAttachments: [pictureAttachment], releaseDate: releaseDate,
+        score: score, tags: [tag], text: text, thumbnail: icon, title: title, type: videoType,
+        videoAttachments: [videoAttachment], wasReleasedSilently: wasReleasedSilently
+    )
+    static let creatorFeed = CreatorFeed(items: [feedItem])
+    
+    static let creatorListRequest = CreatorListRequest()
+    static let baseCreator = BaseCreator(
+        about: about, category: categoryString, cover: icon, defaultChannel: defaultChannel,
+        description: description, discoverable: discoverable, icon: icon, id: id, incomeDisplay: incomeDisplay,
+        liveStream: liveStream, owner: ownerString, subscriberCountDisplay: subscriberCountDisplay,
+        title: title, urlname: urlname
+    )
+    static let contentEmail = true
+    static let contentFirebase = false
+    static let createdAt = Date()
+    static let creatorMessageEmail = true
+    static let updatedAt = Date()
+    static let user = "user"
+    static let userNotificationSettings = UserNotificationSetting(
+        contentEmail: contentEmail, contentFirebase: contentFirebase, createdAt: createdAt,
+        creator: creatorString, creatorMessageEmail: creatorMessageEmail, id: id,
+        updatedAt: updatedAt, user: user
+    )
+    static let creatorResponseObject = CreatorListResponse.CreatorResponseObject(
+        creator: baseCreator,
+        userNotificationSetting: userNotificationSettings
+    )
+    static let creatorListResponse = CreatorListResponse(responseObjects: [creatorResponseObject])
+    
+    static let contentVideoRequest = ContentVideoRequest(id: id)
+    static let postType = PostType.vod
+    static let duration: UInt64 = 39583
+    static let isProcessing = true
+    static let primaryBlogPost = "primaryBlogPost"
+    static let isAccessible = true
+    static let userInteraction = "userInteraction"
+    static let qualityLevel = QualityLevel.Standard.ql1080p
+    static let contentVideoResponse = ContentVideoResponse(
+        id: id, guid: guid, title: title, type: postType, description: description,
+        releaseDate: releaseDate, duration: duration, creator: creatorString, likes: likes,
+        dislikes: dislikes, score: score, isProcessing: isProcessing, primaryBlogPost: primaryBlogPost,
+        thumbnail: icon, isAccessible: isAccessible, blogPosts: [primaryBlogPost], timelineSprite: icon,
+        userInteraction: [userInteraction], levels: [qualityLevel]
+    )
+    
+    static let vodDeliveryKeyRequest = VodDeliveryKeyRequest(guid: guid)
+    static let cdn = "cdn"
+    static let strategy = "strategy"
+    static let codecs = "codecs"
+    static let label = "label"
+    static let mimeType = "mimeType"
+    static let decodedQualityLevel1080 = DecodedQualityLevel(
+        codecs: codecs, height: height, label: label, mimeType: mimeType,
+        name: DeliveryKeyQualityLevel.ql1080p, order: order, width: width
+    )
+    static let decodedQualityLevel720 = DecodedQualityLevel(
+        codecs: codecs, height: height, label: label, mimeType: mimeType,
+        name: DeliveryKeyQualityLevel.ql720p, order: order, width: width
+    )
+    static let decodedQualityLevel480 = DecodedQualityLevel(
+        codecs: codecs, height: height, label: label, mimeType: mimeType,
+        name: DeliveryKeyQualityLevel.ql480p, order: order, width: width
+    )
+    static let decodedQualityLevel360 = DecodedQualityLevel(
+        codecs: codecs, height: height, label: label, mimeType: mimeType,
+        name: DeliveryKeyQualityLevel.ql360p, order: order, width: width
+    )
+    static let filename1080 = "filename1080.mp4"
+    static let accessToken1080 = "password1080"
+    static let filename720 = "filename720.mp4"
+    static let accessToken720 = "password720"
+    static let filename480 = "filename480.mp4"
+    static let accessToken480 = "password480"
+    static let filename360 = "filename360.mp4"
+    static let accessToken360 = "password360"
+    static let qualityLevelResourceData1080 = QualityLevelResourceData(
+        decodedQualityLevel: decodedQualityLevel1080, fileName: filename1080, accessToken: accessToken1080
+    )
+    static let qualityLevelResourceData720 = QualityLevelResourceData(
+        decodedQualityLevel: decodedQualityLevel720, fileName: filename720, accessToken: accessToken720
+    )
+    static let qualityLevelResourceData480 = QualityLevelResourceData(
+        decodedQualityLevel: decodedQualityLevel480, fileName: filename480, accessToken: accessToken480
+    )
+    static let qualityLevelResourceData360 = QualityLevelResourceData(
+        decodedQualityLevel: decodedQualityLevel360, fileName: filename360, accessToken: accessToken360
+    )
+    static let qualityLevelMap = [
+        DeliveryKeyQualityLevel.ql1080p : qualityLevelResourceData1080,
+        DeliveryKeyQualityLevel.ql720p : qualityLevelResourceData720,
+        DeliveryKeyQualityLevel.ql480p : qualityLevelResourceData480,
+        DeliveryKeyQualityLevel.ql360p : qualityLevelResourceData360
+    ]
+    
+    static let qualityLevelOptions = [
+        DeliveryKeyQualityLevel.ql1080p,
+        DeliveryKeyQualityLevel.ql720p,
+        DeliveryKeyQualityLevel.ql480p,
+        DeliveryKeyQualityLevel.ql360p
+    ]
+    static let resourceData = ResourceData(qualityLevels: qualityLevelMap, options: qualityLevelOptions)
+    static let uri = "uri"
+    static let resource = DeliveryKey.Resource(data: resourceData, uri: uri)
+    static let deliveryKey = DeliveryKey(cdn: cdn, resource: resource, strategy: strategy)
+    
+    static let videoMetadataRequest = VideoMetadataRequest(feedItem: feedItem, id: id)
+    static let videoMetadata = VideoMetadata(feedItem: feedItem, contentVideoResponse: contentVideoResponse, deliveryKey: deliveryKey)
+    
+    static let subscriptionRequest = SubscriptionRequest()
+    static let endDate = Date(timeIntervalSince1970: 500100)
+    static let startDate = Date(timeIntervalSince1970: 500000)
+    static let paymentCancelled = true
+    static let paymentID = 1
+    static let subscription = Subscription(
+        creator: creatorString, endDate: endDate, interval: interval, paymentCancelled: paymentCancelled,
+        paymentID: paymentID, plan: subscriptionPlan, startDate: startDate)
+    static let subscriptionResponse = SubscriptionResponse(subscriptions: [subscription])
+    static let sortOrder = SortOrder.ascending
+    static let searchQuery = "intel"
+    static let searchRequest = SearchRequest(creatorId: creatorId, sort: sortOrder, searchQuery: searchQuery, fetchAfter: fetchAfter)
+    static let searchResponse = SearchResponse(items: [feedItem])
+    
+    static let param1080 = QualityLevelParams.QualityLevelParam(filename: filename1080, accessToken: accessToken1080)
+    static let param720 = QualityLevelParams.QualityLevelParam(filename: filename720, accessToken: accessToken720)
+    static let param480 = QualityLevelParams.QualityLevelParam(filename: filename480, accessToken: accessToken480)
+    static let param360 = QualityLevelParams.QualityLevelParam(filename: filename360, accessToken: accessToken360)
+    static let paramMap = [
+        DeliveryKeyQualityLevel.ql1080p.rawValue : param1080,
+        DeliveryKeyQualityLevel.ql720p.rawValue : param720,
+        DeliveryKeyQualityLevel.ql480p.rawValue : param480,
+        DeliveryKeyQualityLevel.ql360p.rawValue : param360,
+    ]
+    static let qualityLevelParams = QualityLevelParams(params: paramMap)
+}

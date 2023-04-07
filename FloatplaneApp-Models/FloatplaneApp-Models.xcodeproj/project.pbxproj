@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E08F47029E0705A003C3694 /* DeliveryKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F46F29E0705A003C3694 /* DeliveryKeyTest.swift */; };
+		5E08F47229E07137003C3694 /* TestModelSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F47129E07137003C3694 /* TestModelSupplier.swift */; };
+		5E08F47429E07547003C3694 /* QualityLevelParamsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F47329E07547003C3694 /* QualityLevelParamsTest.swift */; };
+		5E08F47629E078FA003C3694 /* ResourceDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F47529E078FA003C3694 /* ResourceDataTest.swift */; };
 		5E1FD74329DD34AD0015AE6F /* OperationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD74229DD34AD0015AE6F /* OperationResponse.swift */; };
 		5E1FD74729DD477F0015AE6F /* CreatorListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD74629DD477F0015AE6F /* CreatorListRequest.swift */; };
 		5E1FD74929DD47B80015AE6F /* GetFirstPageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD74829DD47B80015AE6F /* GetFirstPageRequest.swift */; };
@@ -72,6 +76,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E08F46F29E0705A003C3694 /* DeliveryKeyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryKeyTest.swift; sourceTree = "<group>"; };
+		5E08F47129E07137003C3694 /* TestModelSupplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelSupplier.swift; sourceTree = "<group>"; };
+		5E08F47329E07547003C3694 /* QualityLevelParamsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityLevelParamsTest.swift; sourceTree = "<group>"; };
+		5E08F47529E078FA003C3694 /* ResourceDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceDataTest.swift; sourceTree = "<group>"; };
 		5E1FD74229DD34AD0015AE6F /* OperationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationResponse.swift; sourceTree = "<group>"; };
 		5E1FD74629DD477F0015AE6F /* CreatorListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorListRequest.swift; sourceTree = "<group>"; };
 		5E1FD74829DD47B80015AE6F /* GetFirstPageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFirstPageRequest.swift; sourceTree = "<group>"; };
@@ -148,6 +156,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E08F46D29E07048003C3694 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				5E08F46E29E0704C003C3694 /* Delivery Key */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		5E08F46E29E0704C003C3694 /* Delivery Key */ = {
+			isa = PBXGroup;
+			children = (
+				5E08F46F29E0705A003C3694 /* DeliveryKeyTest.swift */,
+				5E08F47329E07547003C3694 /* QualityLevelParamsTest.swift */,
+				5E08F47529E078FA003C3694 /* ResourceDataTest.swift */,
+			);
+			path = "Delivery Key";
+			sourceTree = "<group>";
+		};
 		5E1FD74F29DD4CC20015AE6F /* Logout */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +216,8 @@
 		5E389B0629D8B1A500FC8B4B /* FloatplaneApp-ModelsTests */ = {
 			isa = PBXGroup;
 			children = (
+				5E08F47129E07137003C3694 /* TestModelSupplier.swift */,
+				5E08F46D29E07048003C3694 /* Operations */,
 				5E389B0729D8B1A500FC8B4B /* FloatplaneApp_ModelsTests.swift */,
 			);
 			path = "FloatplaneApp-ModelsTests";
@@ -508,7 +536,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E08F47429E07547003C3694 /* QualityLevelParamsTest.swift in Sources */,
 				5E389B0829D8B1A500FC8B4B /* FloatplaneApp_ModelsTests.swift in Sources */,
+				5E08F47629E078FA003C3694 /* ResourceDataTest.swift in Sources */,
+				5E08F47029E0705A003C3694 /* DeliveryKeyTest.swift in Sources */,
+				5E08F47229E07137003C3694 /* TestModelSupplier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

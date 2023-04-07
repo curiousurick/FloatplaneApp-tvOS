@@ -38,33 +38,10 @@ public struct ResourceData: Codable, Equatable {
         case qualityLevels
     }
     
-    public func getResource(qualitylevelName: DeliveryKeyQualityLevel?) -> QualityLevelResourceData? {
-        guard let qualitylevelName = qualitylevelName else {
-            return nil
-        }
-        return qualityLevels[qualitylevelName]
-    }
-    
-    public func highestQuality() -> QualityLevelResourceData {
-        guard let last = options.last,
-              let lastLevel = qualityLevels[last] else {
-            fatalError("ResourceData cannot be implemented without at least one level of quality")
-        }
-        return lastLevel
-    }
-    
-    public func lowestQuality() -> QualityLevelResourceData {
-        guard let first = options.first,
-              let firstLevel = qualityLevels[first] else {
-            fatalError("ResourceData cannot be implemented without at least one level of quality")
-        }
-        return firstLevel
-    }
-    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ResourceData.CodingKeys.self)
-        let qualityLevelParams = try container.decode(QualityLevelParams.self, forKey: ResourceData.CodingKeys.qualityLevelParams)
-        let qualityLevels = try container.decode([DecodedQualityLevel].self, forKey: ResourceData.CodingKeys.qualityLevels)
+        let qualityLevelParams = try container.decode(QualityLevelParams.self, forKey: .qualityLevelParams)
+        let qualityLevels = try container.decode([DecodedQualityLevel].self, forKey: .qualityLevels)
         for level in qualityLevels {
             options.append(level.name)
             // There are some cases where qualityLevelParams are empty because there's one option
@@ -79,7 +56,48 @@ public struct ResourceData: Codable, Equatable {
         }
     }
     
-    /// TODO: Implement. Nobody caches or encodes this object.
     public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: ResourceData.CodingKeys.self)
+        var qualityLevelParamMap: [String: QualityLevelParams.QualityLevelParam] = [:]
+        var decodedQualityLevels: [DecodedQualityLevel] = []
+        for option in options {
+            guard let qualityLevelResourceData = qualityLevels[option] else {
+                continue
+            }
+            qualityLevelParamMap[option.rawValue] = QualityLevelParams.QualityLevelParam(
+                filename: qualityLevelResourceData.fileName,
+                accessToken: qualityLevelResourceData.accessToken
+            )
+            decodedQualityLevels.append(qualityLevelResourceData as DecodedQualityLevel)
+        }
+        let qualityLevelParams = QualityLevelParams(params: qualityLevelParamMap)
+        try container.encode(qualityLevelParams, forKey: .qualityLevelParams)
+        try container.encode(decodedQualityLevels, forKey: .qualityLevels)
+    }
+}
+
+/// Getter helpers.
+public extension ResourceData {
+    func getResource(qualitylevelName: DeliveryKeyQualityLevel?) -> QualityLevelResourceData? {
+        guard let qualitylevelName = qualitylevelName else {
+            return nil
+        }
+        return qualityLevels[qualitylevelName]
+    }
+    
+    func highestQuality() -> QualityLevelResourceData {
+        guard let last = options.last,
+              let lastLevel = qualityLevels[last] else {
+            fatalError("ResourceData cannot be implemented without at least one level of quality")
+        }
+        return lastLevel
+    }
+    
+    func lowestQuality() -> QualityLevelResourceData {
+        guard let first = options.first,
+              let firstLevel = qualityLevels[first] else {
+            fatalError("ResourceData cannot be implemented without at least one level of quality")
+        }
+        return firstLevel
     }
 }

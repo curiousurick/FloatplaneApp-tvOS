@@ -21,17 +21,21 @@
 
 import Foundation
 
-struct QualityLevelParams: Decodable {
+struct QualityLevelParams: Codable, Equatable {
     struct Constants {
         static let FileNameKey = "{qualityLevelParams.2}"
         static let AccessTokenKey = "{qualityLevelParams.4}"
     }
     
-    struct QualityLevelParam {
+    struct QualityLevelParam: Equatable {
         let filename: String
         let accessToken: String
     }
     let params: [String: QualityLevelParam]
+    
+    init(params: [String: QualityLevelParam]) {
+        self.params = params
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ParamsKey.self)
@@ -46,15 +50,25 @@ struct QualityLevelParams: Decodable {
         self.params = params
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: ParamsKey.self)
+        for param in params {
+            let keyParamCodingKey = ParamsKey(stringValue: param.key)
+            var nested = container.nestedContainer(keyedBy: ParamsKey.self, forKey: keyParamCodingKey)
+            try nested.encode(param.value.filename, forKey: .fileName)
+            try nested.encode(param.value.accessToken, forKey: .accessToken)
+        }
+    }
+    
     struct ParamsKey: CodingKey {
         var stringValue: String
-        init?(stringValue: String) {
+        init(stringValue: String) {
             self.stringValue = stringValue
         }
         var intValue: Int? { return nil }
         init?(intValue: Int) { return nil }
         
-        static let fileName = ParamsKey(stringValue: "2")!
-        static let accessToken = ParamsKey(stringValue: "4")!
+        static let fileName = ParamsKey(stringValue: "2")
+        static let accessToken = ParamsKey(stringValue: "4")
     }
 }
