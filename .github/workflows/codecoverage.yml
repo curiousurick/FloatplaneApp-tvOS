@@ -13,12 +13,14 @@ jobs:
       - name: Test
         uses: actions/checkout@v1
       - name: Build and Test Models
-        run:  xcodebuild test -project FloatplaneApp-Models/FloatplaneApp-Models.xcodeproj -scheme FloatplaneApp-Models -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
+        run:  xcodebuild test -project FloatplaneApp-App/Floatplane\ App.xcodeproj -scheme FloatplaneApp-Models -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
       - name: Build and Test Utilities
-        run:  xcodebuild test -project FloatplaneApp-Utilities/FloatplaneApp-Utilities.xcodeproj -scheme FloatplaneApp-Utilities -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
+        run:  xcodebuild test -project FloatplaneApp-App/Floatplane\ App.xcodeproj -scheme FloatplaneApp-Utilities -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
       - name: Build and Test DataStores
-        run:  xcodebuild test -project FloatplaneApp-DataStores/FloatplaneApp-DataStores.xcodeproj -scheme FloatplaneApp-DataStores -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
+        run:  xcodebuild test -project FloatplaneApp-App/Floatplane\ App.xcodeproj -scheme FloatplaneApp-DataStores -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
       - name: Build and Test Operations
-        run:  xcodebuild test -project FloatplaneApp-Operations/FloatplaneApp-Operations.xcodeproj -scheme FloatplaneApp-Operation -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
+        run:  xcodebuild test -project FloatplaneApp-App/Floatplane\ App.xcodeproj -scheme FloatplaneApp-Operations -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
+      - name: Build App
+        run:  xcodebuild test -project FloatplaneApp-App/Floatplane\ App.xcodeproj -scheme FloatplaneApp -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=16.1' build test
         
 
