@@ -203,6 +203,11 @@ class TestModelSupplier {
     static let uri = "uri"
     static let resource = DeliveryKey.Resource(data: resourceData, uri: uri)
     static let deliveryKey = DeliveryKey(cdn: cdn, resource: resource, strategy: strategy)
+
+    static let realCdn = "https://cdn-vod-drm2.floatplane.com"
+    static let realUri = "/Videos/MRYfq5bLkt/{qualityLevelParams.2}/chunk.m3u8?token={qualityLevelParams.4}"
+    static let realResource = DeliveryKey.Resource(data: resourceData, uri: realUri)
+    static let realDeliveryKey = DeliveryKey(cdn: realCdn, resource: realResource, strategy: strategy)
     
     static let videoMetadataRequest = VideoMetadataRequest(feedItem: feedItem, id: id)
     static let videoMetadata = VideoMetadata(feedItem: feedItem, contentVideoResponse: contentVideoResponse, deliveryKey: deliveryKey)

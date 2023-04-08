@@ -20,30 +20,57 @@
 //
 
 import XCTest
+@testable import FloatplaneApp_Utilities
+import FloatplaneApp_Models
 
-final class StreamURLFactoryTest: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+class StreamURLFactoryTest: XCTestCase {
+    
+    private var subject: StreamURLFactoryImpl!
+    
+    override func setUp() {
+        super.setUp()
+        
+        subject = StreamURLFactoryImpl()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testCreateWithDeliveryKey() {
+        
+        // Arrange
+        let deliveryKey = TestModelSupplier.deliveryKey
+        let cdn = deliveryKey.cdn
+        let uri = deliveryKey.resource.uri
+        
+        // Act
+        let result = subject.create(deliveryKey: deliveryKey)
+        
+        // Assert
+        let expectedUrl = URL(string: "\(cdn)\(uri)")!
+        XCTAssertEqual(result, expectedUrl)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testCreateWithDeliveryKeyAndQualityLevel() {
+        
+        // Arrange
+        let deliveryKey = TestModelSupplier.realDeliveryKey
+        let cdn = deliveryKey.cdn
+        let uri = deliveryKey.resource.uri
+        let qualityLevel = QualityLevel.Standard.ql1080p
+        let dkQualityLevel = DeliveryKeyQualityLevel.vodCases.first { $0.readable == qualityLevel.label }
+        let resourceData = deliveryKey.resource.data.getResource(qualitylevelName: dkQualityLevel)!
+        let fileName = resourceData.fileName
+        let accessToken = resourceData.accessToken
+        let fileNameKey = QualityLevelParams.Constants.FileNameKey
+        let accessTokenKey = QualityLevelParams.Constants.AccessTokenKey
+        let path = uri
+            .replacing(fileNameKey, with: fileName)
+            .replacing(accessTokenKey, with: accessToken)
+        
+        // Act
+        let result = subject.create(deliveryKey: deliveryKey, qualityLevel: qualityLevel)
+        
+        // Assert
+        let expectedUrl = URL(string: "\(cdn)\(path)")!
+        XCTAssertEqual(result, expectedUrl)
     }
 
 }

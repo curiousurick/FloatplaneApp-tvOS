@@ -226,10 +226,10 @@
 		5E1FD73329DB3B910015AE6F /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				5E1FD75D29DDD8E30015AE6F /* TestModelSupplier.swift */,
 				5E1FD75629DDD4190015AE6F /* MockInternalOperationStrategy.swift */,
 				5E08F48D29E097E9003C3694 /* MockStrategyBasedOperation.swift */,
 				5E1FD75B29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift */,
-				5E1FD75D29DDD8E30015AE6F /* TestModelSupplier.swift */,
 				5E08F47D29E08E7C003C3694 /* MockUserStore.swift */,
 				5E08F47F29E09119003C3694 /* MockOperationManager.swift */,
 				5E08F48129E092C1003C3694 /* MockVideoOperation.swift */,

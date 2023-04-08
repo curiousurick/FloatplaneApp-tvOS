@@ -30,16 +30,25 @@ public protocol StreamURLFactory {
 
 public class StreamURLFactoryImpl: StreamURLFactory {
     
+    private let logger = Log4S()
+    
     public init() { }
     
     public func create(deliveryKey: DeliveryKey, qualityLevel: QualityLevel) -> URL {
         // If none provided, use the last (highest quality)
         let resourceData = deliveryKey.resource.data
         let qualityLevelName = DeliveryKeyQualityLevel.vodCases.first { $0.readable ==  qualityLevel.label }
-        let qualityLevel = resourceData.getResource(qualitylevelName: qualityLevelName) ?? resourceData.lowestQuality()
+        var chosenQualityLevel: QualityLevelResourceData!
+        if let foundQualityLevel = resourceData.getResource(qualitylevelName: qualityLevelName) {
+            chosenQualityLevel = foundQualityLevel
+        }
+        else {
+            logger.error("Did not find a valid quality level resource for the chosen quality level. \(qualityLevel.label)")
+            chosenQualityLevel = resourceData.lowestQuality()
+        }
 
-        let fileName = qualityLevel.fileName
-        let token = qualityLevel.accessToken
+        let fileName = chosenQualityLevel.fileName
+        let token = chosenQualityLevel.accessToken
         let cdn = deliveryKey.cdn
         let fileNameKey = QualityLevelParams.Constants.FileNameKey
         let accessTokenKey = QualityLevelParams.Constants.AccessTokenKey
