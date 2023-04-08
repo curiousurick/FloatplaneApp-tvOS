@@ -72,6 +72,8 @@ public class UserStoreImpl: UserStore {
         return nil
     }
     
+    /// Returns a ProgressStore instance for the logged-in User.
+    /// Returns nil if the user is not logged in.
     public func getProgressStore() -> ProgressStore? {
         if let user = getUser() {
             let userId = user.id

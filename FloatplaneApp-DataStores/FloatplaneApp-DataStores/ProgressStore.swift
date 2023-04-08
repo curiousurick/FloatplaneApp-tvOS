@@ -36,6 +36,8 @@ public class ProgressStore {
         self.storage = storage
     }
     
+    /// Initializes for a given userId. Progress is currently stored locally but may be easily extended to cloud storage
+    /// by efficiently making updates to some cloud data store while this acts as a local facade for more frequent updates.
     init(userId: String) {
         // Actual storage. Never expires and has no data limit (obviously device storage is limit)
         let diskConfig = DiskConfig(name: "org.georgie.ProgressStore.\(userId)", expiry: .never)
@@ -46,7 +48,7 @@ public class ProgressStore {
           memoryConfig: memoryConfig,
           transformer: TransformerFactory.forCodable(ofType: TimeInterval.self)
         )
-        // Wrapper
+        // Wrapper for enabling mocking because Cache's Storage object is final
         self.storage = DiskStorageWrapper(storage: storage)
     }
     

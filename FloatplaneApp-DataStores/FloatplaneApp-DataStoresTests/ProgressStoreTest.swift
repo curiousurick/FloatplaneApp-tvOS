@@ -21,6 +21,7 @@
 
 import XCTest
 @testable import FloatplaneApp_DataStores
+import Cache
 
 final class ProgressStoreTest: XCTestCase {
     
@@ -34,7 +35,12 @@ final class ProgressStoreTest: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        mockDiskStorageWrapper = MockDiskStorageWrapper()
+        let storage: Storage<String, TimeInterval> = try! Storage(
+            diskConfig: DiskConfig(name: "FakeDiskConfig"),
+            memoryConfig: MemoryConfig(),
+            transformer: TransformerFactory.forCodable(ofType: TimeInterval.self)
+        )
+        mockDiskStorageWrapper = MockDiskStorageWrapper(storage: storage)
         subject = ProgressStore(storage: mockDiskStorageWrapper)
     }
     

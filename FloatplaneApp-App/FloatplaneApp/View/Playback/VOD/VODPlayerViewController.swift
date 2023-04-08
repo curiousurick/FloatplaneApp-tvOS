@@ -49,7 +49,7 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
     }
     var videoMetadata: VideoMetadata?
     // Initialize with default quality level
-    var selectedQualityLevel: QualityLevel = UserSettings.instance.qualitySettings.toQualityLevel
+    var selectedQualityLevel: QualityLevel = AppSettings.instance.qualitySettings.toQualityLevel
     
     override func viewDidLoad() {
         super.viewDidLoad()

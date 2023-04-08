@@ -14,11 +14,11 @@
 		5E1FD70F29DAA1E40015AE6F /* ProgressStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70E29DAA1E40015AE6F /* ProgressStoreTest.swift */; };
 		5E1FD71129DAA2970015AE6F /* MockDiskStorageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71029DAA2970015AE6F /* MockDiskStorageWrapper.swift */; };
 		5E1FD71329DAA3450015AE6F /* DiskStorageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71229DAA3450015AE6F /* DiskStorageWrapper.swift */; };
-		5E1FD71529DAADA80015AE6F /* UserSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71429DAADA80015AE6F /* UserSettingsTest.swift */; };
+		5E1FD71529DAADA80015AE6F /* AppSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71429DAADA80015AE6F /* AppSettingsTest.swift */; };
 		5E4CE91F29D90F330029110E /* FloatplaneApp_DataStores.docc in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE91E29D90F330029110E /* FloatplaneApp_DataStores.docc */; };
 		5E4CE92529D90F330029110E /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4CE91A29D90F330029110E /* FloatplaneApp_DataStores.framework */; };
 		5E4CE92B29D90F330029110E /* FloatplaneApp_DataStores.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E4CE91D29D90F330029110E /* FloatplaneApp_DataStores.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5E4CE94629D90F570029110E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE93D29D90F560029110E /* UserSettings.swift */; };
+		5E4CE94629D90F570029110E /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE93D29D90F560029110E /* AppSettings.swift */; };
 		5E4CE94729D90F800029110E /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE94229D90F560029110E /* KeychainAccess.swift */; };
 		5E4CE94829D90F820029110E /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE94029D90F560029110E /* UserStore.swift */; };
 		5E4CE94A29D90F880029110E /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE93E29D90F560029110E /* ProgressStore.swift */; };
@@ -46,12 +46,12 @@
 		5E1FD70E29DAA1E40015AE6F /* ProgressStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStoreTest.swift; sourceTree = "<group>"; };
 		5E1FD71029DAA2970015AE6F /* MockDiskStorageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDiskStorageWrapper.swift; sourceTree = "<group>"; };
 		5E1FD71229DAA3450015AE6F /* DiskStorageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorageWrapper.swift; sourceTree = "<group>"; };
-		5E1FD71429DAADA80015AE6F /* UserSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsTest.swift; sourceTree = "<group>"; };
+		5E1FD71429DAADA80015AE6F /* AppSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTest.swift; sourceTree = "<group>"; };
 		5E4CE91A29D90F330029110E /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4CE91D29D90F330029110E /* FloatplaneApp_DataStores.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloatplaneApp_DataStores.h; sourceTree = "<group>"; };
 		5E4CE91E29D90F330029110E /* FloatplaneApp_DataStores.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = FloatplaneApp_DataStores.docc; sourceTree = "<group>"; };
 		5E4CE92429D90F330029110E /* FloatplaneApp-DataStoresTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FloatplaneApp-DataStoresTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E4CE93D29D90F560029110E /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		5E4CE93D29D90F560029110E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		5E4CE93E29D90F560029110E /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
 		5E4CE94029D90F560029110E /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		5E4CE94229D90F560029110E /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 				5E4CE94229D90F560029110E /* KeychainAccess.swift */,
 				5E4CE94029D90F560029110E /* UserStore.swift */,
 				5E4CE93E29D90F560029110E /* ProgressStore.swift */,
-				5E4CE93D29D90F560029110E /* UserSettings.swift */,
+				5E4CE93D29D90F560029110E /* AppSettings.swift */,
 				5E1FD71229DAA3450015AE6F /* DiskStorageWrapper.swift */,
 				5E4CE91D29D90F330029110E /* FloatplaneApp_DataStores.h */,
 				5E4CE91E29D90F330029110E /* FloatplaneApp_DataStores.docc */,
@@ -132,7 +132,7 @@
 				5E1FD70529DA99B50015AE6F /* KeychainAccessTest.swift */,
 				5E1FD70A29DA9F440015AE6F /* UserStoreTest.swift */,
 				5E1FD70E29DAA1E40015AE6F /* ProgressStoreTest.swift */,
-				5E1FD71429DAADA80015AE6F /* UserSettingsTest.swift */,
+				5E1FD71429DAADA80015AE6F /* AppSettingsTest.swift */,
 			);
 			path = "FloatplaneApp-DataStoresTests";
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 				5E4CE91F29D90F330029110E /* FloatplaneApp_DataStores.docc in Sources */,
 				5E4CE94729D90F800029110E /* KeychainAccess.swift in Sources */,
 				5E4CE94829D90F820029110E /* UserStore.swift in Sources */,
-				5E4CE94629D90F570029110E /* UserSettings.swift in Sources */,
+				5E4CE94629D90F570029110E /* AppSettings.swift in Sources */,
 				5E1FD71329DAA3450015AE6F /* DiskStorageWrapper.swift in Sources */,
 				5E4CE94A29D90F880029110E /* ProgressStore.swift in Sources */,
 			);
@@ -278,7 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E1FD70F29DAA1E40015AE6F /* ProgressStoreTest.swift in Sources */,
-				5E1FD71529DAADA80015AE6F /* UserSettingsTest.swift in Sources */,
+				5E1FD71529DAADA80015AE6F /* AppSettingsTest.swift in Sources */,
 				5E1FD70629DA99B50015AE6F /* KeychainAccessTest.swift in Sources */,
 				5E1FD70B29DA9F440015AE6F /* UserStoreTest.swift in Sources */,
 				5E1FD71129DAA2970015AE6F /* MockDiskStorageWrapper.swift in Sources */,

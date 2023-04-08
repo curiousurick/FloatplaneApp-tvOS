@@ -19,47 +19,38 @@
 //  THE SOFTWARE.
 //
 
-import XCTest
-@testable import FloatplaneApp_DataStores
+import Foundation
 import FloatplaneApp_Models
 
-fileprivate let QualitySettingsKey = "com.georgie.floatplane.QualitySettings"
-
-fileprivate extension UserSettings {
-    func reset() {
-        UserDefaults.standard.removeObject(forKey: QualitySettingsKey)
-    }
-}
-
-final class UserSettingsTest: XCTestCase {
+/// Basic App settings access. Use this for non-restricted data.
+/// Currently used for default quality level settings. Do not put personal or private data here.
+public class AppSettings {
     
-    private var subject: UserSettings!
+    private let QualitySettingsKey = "com.georgie.floatplane.QualitySettings"
+    /// Data is stored in UserDefaults
+    private let userDefaults = UserDefaults.standard
     
-    override func setUp() {
-        super.setUp()
-        subject = UserSettings.instance
-        subject.reset()
+    /// Singleton access to UserSettings
+    public static let instance = AppSettings()
+    
+    private init() { }
+    
+    /// This is used as the default quality level settings when starting a new video.
+    /// If never selected, the default value is returned of 720p.
+    public var qualitySettings: DeliveryKeyQualityLevel {
+        get {
+            // Found in userDefault
+            if let savedValue = userDefaults.string(forKey: QualitySettingsKey),
+               let quality = DeliveryKeyQualityLevel(rawValue: savedValue) {
+                return quality
+            }
+            // First time use default
+            return DeliveryKeyQualityLevel.defaultLevel
+        }
+        set {
+            userDefaults.set(newValue.rawValue, forKey: QualitySettingsKey)
+        }
     }
     
-    func testSetAndGetQualitySettings() {
-        // Act
-        subject.qualitySettings = .ql1080p
-        
-        // Assert
-        XCTAssertEqual(subject.qualitySettings, .ql1080p)
-    }
     
-    func testGetDefaultQualityLevel() {
-        // Assert
-        XCTAssertEqual(subject.qualitySettings, DeliveryKeyQualityLevel.defaultLevel)
-    }
-    
-    func testGetWhenSavedIsNotValidQualityLevel() {
-        // Arrange
-        UserDefaults.standard.set("Blah", forKey: QualitySettingsKey)
-        
-        // Assert
-        XCTAssertEqual(subject.qualitySettings, DeliveryKeyQualityLevel.defaultLevel)
-    }
-
 }
