@@ -1,0 +1,26 @@
+name: Floatplane-App Demo
+
+on:
+  push:
+    branches:
+main
+  pull_request:
+    branches:
+main
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+      - name: Test
+        uses: actions/checkout@v1
+      - name: Build and Test Models
+        run:  xcodebuild test -project FloatplaneApp.xcodeproj -scheme FloatplaneApp-Models -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.3' build test
+      - name: Build and Test Utilities
+        run:  xcodebuild test -project FloatplaneApp.xcodeproj -scheme FloatplaneApp-Utilies -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.3' build test
+      - name: Build and Test DataStores
+        run:  xcodebuild test -project FloatplaneApp.xcodeproj -scheme FloatplaneApp-DataStores -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.3' build test
+      - name: Build and Test Operations
+        run:  xcodebuild test -project FloatplaneApp.xcodeproj -scheme FloatplaneApp-Operation -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.3' build test
+        
+
