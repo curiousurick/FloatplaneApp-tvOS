@@ -36,8 +36,8 @@ class TestModelSupplier {
     static let height: UInt64 = 720
     static let width: UInt64 = 1280
     static let path = URL(string: "https://fp.c/foo")!
-    static let image = Image(height: height, path: path, width: width)
-    static let icon = Icon(childImages: [image], height: height, path: path, width: width)
+    static let subImage = Icon(childImages: [], height: height, path: path, width: width)
+    static let icon = Icon(childImages: [subImage], height: height, path: path, width: width)
     static let defaultChannel = "defaultChannel"
     static let description = "description"
     static let discoverable = true
