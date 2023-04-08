@@ -25,8 +25,8 @@
 		5E08F48629E0952E003C3694 /* MockURLCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F48529E0952E003C3694 /* MockURLCache.swift */; };
 		5E08F48929E09677003C3694 /* OperationManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F48829E09677003C3694 /* OperationManagerTest.swift */; };
 		5E08F48E29E097E9003C3694 /* MockStrategyBasedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F48D29E097E9003C3694 /* MockStrategyBasedOperation.swift */; };
-		5E08F49029E12FBC003C3694 /* AppWiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F48F29E12FBC003C3694 /* AppWiper.swift */; };
-		5E08F49329E13282003C3694 /* AppWiperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F49229E13282003C3694 /* AppWiperTest.swift */; };
+		5E08F49029E12FBC003C3694 /* AppCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F48F29E12FBC003C3694 /* AppCleaner.swift */; };
+		5E08F49329E13282003C3694 /* AppCleanerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08F49229E13282003C3694 /* AppCleanerTest.swift */; };
 		5E1FD6FD29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */; };
 		5E1FD70129DA904E0015AE6F /* ImageCacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */; };
 		5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71F29DB35AD0015AE6F /* ImageCacheConfigTest.swift */; };
@@ -105,8 +105,8 @@
 		5E08F48529E0952E003C3694 /* MockURLCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLCache.swift; sourceTree = "<group>"; };
 		5E08F48829E09677003C3694 /* OperationManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationManagerTest.swift; sourceTree = "<group>"; };
 		5E08F48D29E097E9003C3694 /* MockStrategyBasedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStrategyBasedOperation.swift; sourceTree = "<group>"; };
-		5E08F48F29E12FBC003C3694 /* AppWiper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWiper.swift; sourceTree = "<group>"; };
-		5E08F49229E13282003C3694 /* AppWiperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWiperTest.swift; sourceTree = "<group>"; };
+		5E08F48F29E12FBC003C3694 /* AppCleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCleaner.swift; sourceTree = "<group>"; };
+		5E08F49229E13282003C3694 /* AppCleanerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCleanerTest.swift; sourceTree = "<group>"; };
 		5E1FD6FA29DA8FDB0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD6FC29DA8FEC0015AE6F /* FloatplaneApp_DataStores.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_DataStores.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD70029DA904E0015AE6F /* ImageCacheConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheConfig.swift; sourceTree = "<group>"; };
@@ -348,7 +348,7 @@
 				5E08F49129E13151003C3694 /* Coding */,
 				5E1FD74E29DD492C0015AE6F /* Strategies */,
 				5E1FD74C29DD48FE0015AE6F /* Images */,
-				5E08F48F29E12FBC003C3694 /* AppWiper.swift */,
+				5E08F48F29E12FBC003C3694 /* AppCleaner.swift */,
 				5E1FD73629DC89550015AE6F /* Operation.swift */,
 				5E1FD73A29DCFEAE0015AE6F /* StrategyBasedOperation.swift */,
 				5E1FD73829DCFDDE0015AE6F /* OperationStrategy.swift */,
@@ -368,7 +368,7 @@
 				5E56E74D29E148F10098B302 /* Coding */,
 				5E08F48A29E0978D003C3694 /* Strategies */,
 				5E08F48729E09662003C3694 /* Images */,
-				5E08F49229E13282003C3694 /* AppWiperTest.swift */,
+				5E08F49229E13282003C3694 /* AppCleanerTest.swift */,
 				5E56E74129E1386F0098B302 /* StrategyBasedOperationTest.swift */,
 				5E56E74329E13AEC0098B302 /* CacheableStrategyBasedOperationTest.swift */,
 				5E08F48829E09677003C3694 /* OperationManagerTest.swift */,
@@ -527,7 +527,7 @@
 			files = (
 				5E389B7D29D8B34B00FC8B4B /* ContentFeedOperationStrategy.swift in Sources */,
 				5E1FD73D29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift in Sources */,
-				5E08F49029E12FBC003C3694 /* AppWiper.swift in Sources */,
+				5E08F49029E12FBC003C3694 /* AppCleaner.swift in Sources */,
 				5E389C4D29D8BE0D00FC8B4B /* OperationConstants.swift in Sources */,
 				5E1FD77529DE914B0015AE6F /* SessionFactory.swift in Sources */,
 				5E389B7029D8B34B00FC8B4B /* CreatorOperationStrategy.swift in Sources */,
@@ -565,7 +565,7 @@
 				5E08F47C29E08BDD003C3694 /* LogoutOperationStrategyTest.swift in Sources */,
 				5E56E74429E13AEC0098B302 /* CacheableStrategyBasedOperationTest.swift in Sources */,
 				5E08F48429E0936C003C3694 /* MockGetFirstPageOperation.swift in Sources */,
-				5E08F49329E13282003C3694 /* AppWiperTest.swift in Sources */,
+				5E08F49329E13282003C3694 /* AppCleanerTest.swift in Sources */,
 				5E08F47E29E08E7C003C3694 /* MockUserStore.swift in Sources */,
 				5E1FD72029DB35AD0015AE6F /* ImageCacheConfigTest.swift in Sources */,
 				5E56E75129E14A360098B302 /* FloatplaneEncoderTest.swift in Sources */,

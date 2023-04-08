@@ -23,12 +23,12 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-protocol CreatorOperationStrategy: InternalOperationStrategy<CreatorRequest, Creator> { }
-
 /// Gets full metadata for a single creator by urlname
 /// Additional metadata over the base creator includes liveStream and subscription plans.
 /// NOTE: This is a cacheable API operation which means the result will be stored in memory and disk until expired.
 /// It uses the default expiry for CachableAPIOperation
+protocol CreatorOperationStrategy: InternalOperationStrategy<CreatorRequest, Creator> { }
+
 class CreatorOperationStrategyImpl: CreatorOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
     
@@ -40,7 +40,7 @@ class CreatorOperationStrategyImpl: CreatorOperationStrategy {
         self.session = session
     }
     
-    // Gets the full metadata for a creator given its urlname
+    /// Gets the full metadata for a creator given its urlname
     func get(request: CreatorRequest) async -> OperationResponse<Creator> {
         let dataRequest = session.request(baseUrl, parameters: request.params)
         self.dataRequest = dataRequest

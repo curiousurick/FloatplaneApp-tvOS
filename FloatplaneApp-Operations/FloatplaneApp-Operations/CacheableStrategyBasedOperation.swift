@@ -25,10 +25,19 @@ import FloatplaneApp_Utilities
 import FloatplaneApp_Models
 import FloatplaneApp_DataStores
 
+/// Inherits from StrategyBasedOperation but also uses Disk and Memory caching to replace strategy implementations with usage of said cache.
+/// Users of this operation can defined a limit of items to be stored for the request type as well as time before expiration of the object.
+///
+/// Uses a DispatchQueue for thread-safe access to the Storage object.
 public protocol CacheableStrategyBasedOperation<Request, Response>: StrategyBasedOperation {
     
+    /// Uses either cache or strategy to get a response for the given request.
+    ///
+    /// request - The request metadata used to dynamically get a response. Used a the cache key.
+    /// invalidateCache - Allows callers to explicitly use the strategy and remove the old cache.
     func get(request: Request, invalidateCache: Bool) async -> OperationResponse<Response>
     
+    /// Clears the storage of cached data.
     func clearCache()
 }
 
@@ -42,6 +51,7 @@ class CacheableStrategyBasedOperationImpl<I: Hashable, O: Codable>: CacheableStr
     private let storage: DiskStorageWrapper<Request, Response>
     private let cacheQueue: DispatchQueue
     
+    /// The implementation of the operation.
     let strategy: any InternalOperationStrategy<Request, Response>
     
     convenience init(
@@ -97,10 +107,12 @@ class CacheableStrategyBasedOperationImpl<I: Hashable, O: Codable>: CacheableStr
         return result
     }
     
+    /// Tells the strategy to cancel
     public func cancel() {
         strategy.cancel()
     }
     
+    /// Checks if the strategy of the operation is active.
     public func isActive() -> Bool {
         return strategy.isActive()
     }

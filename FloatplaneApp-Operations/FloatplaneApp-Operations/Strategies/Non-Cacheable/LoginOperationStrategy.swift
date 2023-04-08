@@ -23,9 +23,9 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
+/// Attempts to login the user to Floatplane. Takes a username and password and relies on cookies to maintain access to user-level APIs.
 protocol LoginOperationStrategy: InternalOperationStrategy<LoginRequest, LoginResponse> { }
 
-/// Attempts to login the user to Floatplane. Takes a username and password and relies on cookies to maintain access to user-level APIs.
 class LoginOperationStrategyImpl: LoginOperationStrategy {
     private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
     

@@ -28,7 +28,7 @@ import FloatplaneApp_Utilities
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let logger = Log4S()
-    private let appWiper: AppWiper = AppWiperImpl()
+    private let appWiper: AppCleaner = AppCleanerImpl()
     private let logoutOperation = OperationManagerImpl.instance.logoutOperation
     private let changeResolutionRow = 0
     private let logoutRow = 1

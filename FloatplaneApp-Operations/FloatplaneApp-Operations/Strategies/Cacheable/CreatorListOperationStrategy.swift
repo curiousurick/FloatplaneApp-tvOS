@@ -23,12 +23,11 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-// Protocol implementation to allow mocking
-protocol CreatorListOperationStrategy: InternalOperationStrategy<CreatorListRequest, CreatorListResponse> { }
-
 /// Gets the list of basic creator metadata. Essentially treated as the Subscriptions for the customer to be displayed on the browse view's sidebar.
 /// This is not sufficient to keep track of the active creator because it does not include livestream or subscription information.
 /// It also gets an object called UserNotificationSetting for each creator but its not really utilized on tvOS.
+protocol CreatorListOperationStrategy: InternalOperationStrategy<CreatorListRequest, CreatorListResponse> { }
+
 class CreatorListOperationStrategyImpl: CreatorListOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
     

@@ -23,10 +23,10 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-protocol VodDeliveryKeyOperationStrategy: InternalOperationStrategy<VodDeliveryKeyRequest, DeliveryKey> { }
-
 /// Gets a delivery key for a given video GUID. This delivery key is used to generate a stream URL for an m3u8 (as of 4/3/2023) stream.
 /// This is not a cached API call because we should only retrieve it when starting a video and I think it's generated on demand.
+protocol VodDeliveryKeyOperationStrategy: InternalOperationStrategy<VodDeliveryKeyRequest, DeliveryKey> { }
+
 class VodDeliveryKeyOperationStrategyImpl: VodDeliveryKeyOperationStrategy {
     private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
     

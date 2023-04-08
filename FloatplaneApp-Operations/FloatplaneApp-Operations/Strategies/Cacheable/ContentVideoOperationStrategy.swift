@@ -23,12 +23,11 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-// Protocol implementation to allow mocking
-protocol ContentVideoOperationStrategy: InternalOperationStrategy<ContentVideoRequest, ContentVideoResponse> { }
-
 /// This gets the full metadata for a given Video ID.
 /// It includes additional metadata not included in a FeedItem, such as quality levels.
 /// NOTE: This is a CacheableAPIOperation and uses the default expiry and capacity limits
+protocol ContentVideoOperationStrategy: InternalOperationStrategy<ContentVideoRequest, ContentVideoResponse> { }
+
 class ContentVideoOperationStrategyImpl: ContentVideoOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
     

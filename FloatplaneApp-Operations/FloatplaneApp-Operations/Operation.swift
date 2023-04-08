@@ -27,7 +27,7 @@ import FloatplaneApp_Models
 /// As of Swift 5.5, Arrays can not collect objects of different types that belong to the same protocol, but not if they have generic parameters.
 public protocol Operation<Request, Response> {
     
-    associatedtype Request: Hashable
+    associatedtype Request: Any
     associatedtype Response: Codable
     
     /// The actual API consumers will use to get a parameterized response.

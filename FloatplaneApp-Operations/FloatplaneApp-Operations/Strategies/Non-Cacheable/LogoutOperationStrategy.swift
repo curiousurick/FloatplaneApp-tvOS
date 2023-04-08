@@ -25,7 +25,7 @@ import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
 import FloatplaneApp_Models
 
-/// Attemps a Logout. Clears all caches after successful logout.
+/// Attemps a Logout.
 protocol LogoutOperationStrategy: InternalOperationStrategy<LogoutRequest, LogoutResponse> { }
 
 class LogoutOperationStrategyImpl: LogoutOperationStrategy {
@@ -45,6 +45,7 @@ class LogoutOperationStrategyImpl: LogoutOperationStrategy {
         )
     }
     
+    /// Available for testing purposes.
     init(
         session: Session,
         headers: HTTPHeaders

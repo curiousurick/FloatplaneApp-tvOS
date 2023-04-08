@@ -22,12 +22,15 @@
 import Foundation
 import FloatplaneApp_DataStores
 
-public protocol AppWiper {
+/// This class is the central component to clear the app of data which should only live through a User lifecyle.
+/// When the user is logged out, this class should be invoked to clean the app of user data.
+public protocol AppCleaner {
     
+    /// Cleans the app of
     func clean()
 }
 
-public class AppWiperImpl: AppWiper {
+public class AppCleanerImpl: AppCleaner {
     
     private let userStore: UserStore
     private let operationManager: OperationManager
@@ -52,9 +55,13 @@ public class AppWiperImpl: AppWiper {
     }
     
     public func clean() {
+        // Removes user from keychain.
         self.userStore.removeUser()
+        // Cancels all network calls
         self.operationManager.cancelAllOperations()
+        // Clears all URL cache from disk cache.
         self.operationManager.clearCache()
+        // Clears all URL cache from iOS's URLCache.
         self.urlCache.removeAllCachedResponses()
     }
 }

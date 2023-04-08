@@ -40,6 +40,7 @@ class LiveDeliveryKeyOperationStrategyImpl: LiveDeliveryKeyOperationStrategy {
         self.session = session
     }
     
+    /// Gets a DeliveryKey for a livestream for a given creator.
     func get(request: LiveDeliveryKeyRequest) async -> OperationResponse<DeliveryKey> {
         let dataRequest = session.request(baseUrl, parameters: request.params)
         self.dataRequest = dataRequest

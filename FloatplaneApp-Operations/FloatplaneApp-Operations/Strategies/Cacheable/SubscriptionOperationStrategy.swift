@@ -23,11 +23,11 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-protocol SubscriptionOperationStrategy: InternalOperationStrategy<SubscriptionRequest, SubscriptionResponse> { }
-
 /// Looks up user subscriptions. Includes information about the subscription itself.
 /// May need to use this in the future to determine if the user has access to a given video.
 /// TODO: Investigate if ContentFeed returns videos that user does not have access to. Maybe need to do client-side limiting to avoid CX cliff.
+protocol SubscriptionOperationStrategy: InternalOperationStrategy<SubscriptionRequest, SubscriptionResponse> { }
+
 class SubscriptionOperationStrategyImpl: SubscriptionOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
 

@@ -23,14 +23,14 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_DataStores
 
-class AppWiperTest: XCTestCase {
+class AppCleanerTest: XCTestCase {
     
     // Mocks
     private var mockUserStore: MockUserStore!
     private var mockOperationManager: MockOperationManager!
     private var mockUrlCache: MockURLCache!
     
-    private var subject: AppWiperImpl!
+    private var subject: AppCleanerImpl!
     
     override func setUp() {
         super.setUp()
@@ -39,7 +39,7 @@ class AppWiperTest: XCTestCase {
         mockOperationManager = MockOperationManager()
         mockUrlCache = MockURLCache()
         
-        subject = AppWiperImpl(
+        subject = AppCleanerImpl(
             userStore: mockUserStore,
             operationManager: mockOperationManager,
             urlCache: mockUrlCache

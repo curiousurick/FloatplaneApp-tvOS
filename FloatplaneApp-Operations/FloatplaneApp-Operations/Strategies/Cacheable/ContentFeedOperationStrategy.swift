@@ -23,11 +23,10 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-// Protocol implementation to allow mocking
-protocol ContentFeedOperationStrategy: InternalOperationStrategy<ContentFeedRequest, CreatorFeed> { }
-
 /// This gets a page of the ContentFeed for a given creator's ID. Takes other parameters like the limit of results and fetchAfter which indicates the index to start returning for pagination.
 /// Note: This API has a max limit of 20 results per call.
+protocol ContentFeedOperationStrategy: InternalOperationStrategy<ContentFeedRequest, CreatorFeed> { }
+
 class ContentFeedOperationStrategyImpl: ContentFeedOperationStrategy  {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
     

@@ -22,8 +22,10 @@
 import Foundation
 import Alamofire
 
+/// A factory to provide the default Alamofire Session. This allows for mocking to let unit tests mock this factory.
 class SessionFactory {
     
+    /// Gives a Session object with the default configuration.
     func get() -> Session {
         let configuration = URLSessionConfiguration.af.default
         return Session(configuration: configuration)

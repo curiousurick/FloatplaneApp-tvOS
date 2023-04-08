@@ -24,12 +24,11 @@ import Alamofire
 import FloatplaneApp_Utilities
 import FloatplaneApp_Models
 
-// Protocol implementation to allow mocking
-protocol SearchOperationStrategy: InternalOperationStrategy<SearchRequest, SearchResponse> { }
-
 /// Performs a search on a given creator for a given query.
 /// Today, this search is basic and limited to videos because this is for tvOS.
 /// TODO: Determine if tvOS makes sense to support image and text posts.
+protocol SearchOperationStrategy: InternalOperationStrategy<SearchRequest, SearchResponse> { }
+
 class SearchOperationStrategyImpl: SearchOperationStrategy {
     private let logger = Log4S()
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
