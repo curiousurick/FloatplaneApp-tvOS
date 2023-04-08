@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Typed request to logout the user.
 public struct LogoutRequest: OperationRequest {
     
     public init() { }

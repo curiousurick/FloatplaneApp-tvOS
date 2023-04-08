@@ -23,6 +23,7 @@ import UIKit
 import AVKit
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 
 class LivePlayerViewController: BaseVideoPlayerViewController {
     private var menuPressRecognizer: UITapGestureRecognizer?
@@ -32,6 +33,7 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
     private let liveStreamEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
     private var registeredForLiveStreamEndNotification = false
     private let liveDeliveryKeyDebuff = LiveDeliveryKeyDebuffImpl.instance
+    private let streamURLFactory = StreamURLFactoryImpl()
     
     var deliveryKey: DeliveryKey?
     
@@ -98,7 +100,7 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
     }
     
     private func startVideo(deliveryKey: DeliveryKey) {
-        let url = StreamUrl(deliveryKey: deliveryKey).url
+        let url = streamURLFactory.create(deliveryKey: deliveryKey)
         let player = AVPlayer(url: url)
         self.player = player
         player.play()

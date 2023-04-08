@@ -21,9 +21,14 @@
 
 import Foundation
 
+/// Known options for a post's type.
 public enum PostType: String, Codable, Equatable {
+    /// Livestream
     case live
+    /// Video on demand
     case vod
+    /// Not sure how this is different from VOD
     case video
+    /// I guess this is like a VOD but intended to be downloaded.
     case download
 }

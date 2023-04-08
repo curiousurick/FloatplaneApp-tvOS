@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Request to login the user given a username and password.
 public struct LoginRequest: OperationRequest {
     
     public let username: String

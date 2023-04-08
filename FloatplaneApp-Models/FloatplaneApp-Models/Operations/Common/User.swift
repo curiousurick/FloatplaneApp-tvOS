@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Metadata about a logged-in user.
 public struct User: Codable, Equatable {
     public let id: String
     public let username: String

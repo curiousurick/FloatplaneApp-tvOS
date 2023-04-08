@@ -21,6 +21,8 @@
 
 import Foundation
 
+/// Request to get a content feed. Allows for pagination by setting the index to fetch after.
+/// Note: The max limit is 20. If it's higher, the API will reject.
 public struct ContentFeedRequest: OperationRequest {
     public let fetchAfter: Int
     public let limit: UInt64
@@ -30,6 +32,7 @@ public struct ContentFeedRequest: OperationRequest {
     private let hasPicture: Bool = false
     private let hasText: Bool = false
     
+    /// Simplifier for creating a request to get the first 20 items for a creator.
     public static func firstPage(for creatorId: String) -> ContentFeedRequest {
         return ContentFeedRequest(fetchAfter: 0, limit: 20, creatorId: creatorId)
     }

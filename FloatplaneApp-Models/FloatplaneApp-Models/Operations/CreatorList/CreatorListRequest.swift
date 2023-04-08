@@ -21,6 +21,8 @@
 
 import Foundation
 
+/// Types CreatorListRequest. Has no parameters because the session cookie is used to determine
+/// the creators to which the user is subscribed.
 public struct CreatorListRequest: OperationRequest {
     
     public init() { }

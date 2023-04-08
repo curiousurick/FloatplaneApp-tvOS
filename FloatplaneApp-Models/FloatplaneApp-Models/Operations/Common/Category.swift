@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Channel category
 public struct Category: Hashable, Codable, Equatable {
     public let id: String
     public let title: String

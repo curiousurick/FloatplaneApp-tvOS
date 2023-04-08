@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Response from ContentFeedOperation. Contains a list of feed items for a creator.
 public struct CreatorFeed: Codable, Equatable {
     public let items: [FeedItem]
     

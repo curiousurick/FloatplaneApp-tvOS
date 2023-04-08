@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Metadata about a creator's channel.
 public struct Channel: Hashable, Codable, Equatable {
     public let about: String
     public let card: String?

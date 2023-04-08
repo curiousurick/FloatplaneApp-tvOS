@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// The creator object in the Creator API. The full metadata for the requested Creator.
 public struct Creator: Codable, Equatable {
     public let about: String
     // Note: This looks to be a bug in v2 API.

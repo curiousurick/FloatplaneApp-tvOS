@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Contains information about the resource. Provides the list of quality levels and information about each level.
 public struct ResourceData: Codable, Equatable {
     private var qualityLevels: [DeliveryKeyQualityLevel : QualityLevelResourceData] = [:]
     public var options: [DeliveryKeyQualityLevel] = []

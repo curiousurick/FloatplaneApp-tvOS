@@ -17,6 +17,8 @@
 		5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2C29D8B68A00FC8B4B /* String+Class.swift */; };
 		5E389C3429D8B6AB00FC8B4B /* UIImage+Transparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */; };
 		5E389C3B29D8B6D800FC8B4B /* Log4S.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C3A29D8B6D800FC8B4B /* Log4S.swift */; };
+		5E7711B629E15CDE002E1883 /* StreamURLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7711B529E15CDE002E1883 /* StreamURLFactory.swift */; };
+		5E7711B829E15D87002E1883 /* StreamURLFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7711B729E15D87002E1883 /* StreamURLFactoryTest.swift */; };
 		5EFD929529D90CA0007E8374 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 5EFD929429D90CA0007E8374 /* Logging */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Transparency.swift"; sourceTree = "<group>"; };
 		5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		5E389C3A29D8B6D800FC8B4B /* Log4S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4S.swift; sourceTree = "<group>"; };
+		5E7711B529E15CDE002E1883 /* StreamURLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamURLFactory.swift; sourceTree = "<group>"; };
+		5E7711B729E15D87002E1883 /* StreamURLFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamURLFactoryTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				5E389C3A29D8B6D800FC8B4B /* Log4S.swift */,
+				5E7711B529E15CDE002E1883 /* StreamURLFactory.swift */,
 				5E389C2C29D8B68A00FC8B4B /* String+Class.swift */,
 				5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */,
 				5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */,
@@ -102,6 +107,7 @@
 			children = (
 				5E1FD71629DAB0100015AE6F /* String+ClassTest.swift */,
 				5E1FD71D29DAB6B00015AE6F /* String+HTMLTest.swift */,
+				5E7711B729E15D87002E1883 /* StreamURLFactoryTest.swift */,
 			);
 			path = "FloatplaneApp-UtilitiesTests";
 			sourceTree = "<group>";
@@ -231,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E7711B629E15CDE002E1883 /* StreamURLFactory.swift in Sources */,
 				5E389C3229D8B6AB00FC8B4B /* String+HTML.swift in Sources */,
 				5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */,
 				5E389C3429D8B6AB00FC8B4B /* UIImage+Transparency.swift in Sources */,
@@ -244,6 +251,7 @@
 			files = (
 				5E1FD71E29DAB6B00015AE6F /* String+HTMLTest.swift in Sources */,
 				5E1FD71729DAB0100015AE6F /* String+ClassTest.swift in Sources */,
+				5E7711B829E15D87002E1883 /* StreamURLFactoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

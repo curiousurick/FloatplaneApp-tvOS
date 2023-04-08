@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Quality level for the purpose of selecting video quality inside a video.
 public struct QualityLevel: Codable, Equatable {
     public let name: String
     public let width: UInt

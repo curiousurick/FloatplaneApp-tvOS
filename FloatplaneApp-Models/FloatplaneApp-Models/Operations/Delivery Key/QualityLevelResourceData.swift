@@ -21,6 +21,8 @@
 
 import Foundation
 
+/// The object which is in the JSON result from the delivery key API.
+/// Contains information about the stream.
 public class DecodedQualityLevel: Codable, Equatable {
     public let codecs: String?
     public let height: UInt64?
@@ -58,6 +60,8 @@ public class DecodedQualityLevel: Codable, Equatable {
         lhs.width == rhs.width
     }
 }
+
+/// Built on the Decoded QualityLevel, includes the filename and accessToken.
 public class QualityLevelResourceData: DecodedQualityLevel {
     public let fileName: String
     public let accessToken: String

@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Metadata about a FeedItem.
 public struct Metadata: Hashable, Codable, Equatable {
     public let audioCount: UInt64
     public let audioDuration: UInt64

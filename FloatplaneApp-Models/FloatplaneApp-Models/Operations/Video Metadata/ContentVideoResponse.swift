@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// The response from the ContentVideoOperation.
 public struct ContentVideoResponse: Codable, Equatable {
     public let id: String
     public let guid: String

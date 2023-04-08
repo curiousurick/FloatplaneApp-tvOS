@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Request to get the full metadata for the named Creator.
 public struct CreatorRequest: OperationRequest {
     public let named: String
     

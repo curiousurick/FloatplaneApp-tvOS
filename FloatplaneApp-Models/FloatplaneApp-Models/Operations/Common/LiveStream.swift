@@ -21,7 +21,9 @@
 
 import Foundation
 
+/// Metadata about a channel's live stream.
 public struct LiveStream: Hashable, Codable, Equatable {
+    /// Info for display when the livestream is offline.
     public struct Offline: Hashable, Codable, Equatable {
         public let description: String
         public let thumbnail: Icon

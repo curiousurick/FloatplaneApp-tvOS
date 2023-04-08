@@ -89,7 +89,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             picker.delegate = self
             picker.label = "Change Default Video Quality"
             picker.options = DeliveryKeyQualityLevel.vodCases
-            picker.selectedIndex = AppSettings.instance.qualitySettings.index
+            let selectedSetting = AppSettings.instance.qualitySettings
+            if let selectedIndex = DeliveryKeyQualityLevel.vodCases.firstIndex(of: selectedSetting) {
+                picker.selectedIndex = selectedIndex
+            }
         }
     }
 }

@@ -21,10 +21,12 @@
 
 import Foundation
 
+/// Basic protocol to force the quality level to be readable.
 public protocol Readable {
     var readable: String { get }
 }
 
+/// Known quality levels for vods and livestreams.
 public enum DeliveryKeyQualityLevel: String, Codable, Equatable, Readable {
     // Used for vod
     case ql360p = "360-avc1"
@@ -36,12 +38,15 @@ public enum DeliveryKeyQualityLevel: String, Codable, Equatable, Readable {
     
     public static let defaultLevel = ql720p
     
+    /// Known vod quality levels
     public static let vodCases: [DeliveryKeyQualityLevel] = [
         .ql360p,
         .ql480p,
         .ql720p,
         .ql1080p
     ]
+    
+    /// Known livestream quality levels
     static let liveCases: [DeliveryKeyQualityLevel] = [
         .liveAbr
     ]
@@ -53,6 +58,7 @@ public enum DeliveryKeyQualityLevel: String, Codable, Equatable, Readable {
         .liveAbr
     ]
     
+    /// Variable to get the struct for a QualityLevel including a label for it.
     public var toQualityLevel: QualityLevel {
         get {
             switch self {
@@ -70,29 +76,7 @@ public enum DeliveryKeyQualityLevel: String, Codable, Equatable, Readable {
         }
     }
     
-    public var index: Int {
-        get {
-            switch self {
-            case .ql360p:
-                return 0
-            case .ql480p:
-                return 1
-            case .ql720p:
-                return 2
-            case .ql1080p:
-                return 3
-            case .liveAbr:
-                return 4
-            }
-        }
-    }
-    
-    public static func fromReadable(readable: String) -> DeliveryKeyQualityLevel? {
-        vodCases.filter {
-            $0.readable == readable
-        }.first
-    }
-    
+    /// A readable text for the quality level
     public var readable: String {
         get {
             switch self {

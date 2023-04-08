@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Contains info about the user's notification settings for a creator.
 public struct UserNotificationSetting: Codable, Equatable {
     public let contentEmail: Bool
     public let contentFirebase: Bool

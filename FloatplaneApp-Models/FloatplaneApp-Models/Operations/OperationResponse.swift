@@ -21,8 +21,12 @@
 
 import Foundation
 
+/// Wrapper for the decodable Operation Response.
+/// Contains either a Response object or an Error, though it's possible for both or neither to be present.
 public struct OperationResponse<T: Decodable> {
+    /// Parameterized response
     public let response: T?
+    /// Error that came from the operation which failed.
     public let error: Error?
     
     public init(response: T?, error: Error?) {

@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// The request for the ContentVideoOperation by video ID.
 public struct ContentVideoRequest: OperationRequest {
     
     public let id: String

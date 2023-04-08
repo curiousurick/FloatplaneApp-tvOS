@@ -21,6 +21,7 @@
 
 import UIKit
 
+/// Request to get search results for a given creator, filtered by the search query.
 public struct SearchRequest: OperationRequest {
     public let creatorId: String
     public let sort: SortOrder

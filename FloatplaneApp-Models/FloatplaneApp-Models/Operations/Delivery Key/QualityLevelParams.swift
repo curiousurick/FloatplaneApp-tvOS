@@ -21,12 +21,15 @@
 
 import Foundation
 
-struct QualityLevelParams: Codable, Equatable {
-    struct Constants {
-        static let FileNameKey = "{qualityLevelParams.2}"
-        static let AccessTokenKey = "{qualityLevelParams.4}"
+/// The parameters for constructing a stream URL for a given quality level.
+/// Maps a quality level to the filename and access token
+public struct QualityLevelParams: Codable, Equatable {
+    public struct Constants {
+        public static let FileNameKey = "{qualityLevelParams.2}"
+        public static let AccessTokenKey = "{qualityLevelParams.4}"
     }
     
+    /// The filename and access token for a given quality level.
     struct QualityLevelParam: Equatable {
         let filename: String
         let accessToken: String
@@ -37,7 +40,7 @@ struct QualityLevelParams: Codable, Equatable {
         self.params = params
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ParamsKey.self)
         
         var params: [String: QualityLevelParam] = [:]
@@ -50,7 +53,7 @@ struct QualityLevelParams: Codable, Equatable {
         self.params = params
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: ParamsKey.self)
         for param in params {
             let keyParamCodingKey = ParamsKey(stringValue: param.key)

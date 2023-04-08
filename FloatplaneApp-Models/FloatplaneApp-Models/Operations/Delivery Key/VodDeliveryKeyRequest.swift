@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Request for a Vod DeliveryKey. Takes a guid for the video. sets the type parameters to "vod"
 public struct VodDeliveryKeyRequest: OperationRequest {
     public let guid: String
     public let type: PostType = .vod

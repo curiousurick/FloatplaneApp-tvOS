@@ -20,14 +20,22 @@
 //
 
 import Foundation
+import FloatplaneApp_Models
 
-public struct StreamUrl {
-    public let url: URL
+public protocol StreamURLFactory {
     
-    public init(deliveryKey: DeliveryKey, qualityLevel: QualityLevel) {
+    func create(deliveryKey: DeliveryKey, qualityLevel: QualityLevel) -> URL
+    
+}
+
+public class StreamURLFactoryImpl: StreamURLFactory {
+    
+    public init() { }
+    
+    public func create(deliveryKey: DeliveryKey, qualityLevel: QualityLevel) -> URL {
         // If none provided, use the last (highest quality)
         let resourceData = deliveryKey.resource.data
-        let qualityLevelName = DeliveryKeyQualityLevel.fromReadable(readable: qualityLevel.label)
+        let qualityLevelName = DeliveryKeyQualityLevel.vodCases.first { $0.readable ==  qualityLevel.label }
         let qualityLevel = resourceData.getResource(qualitylevelName: qualityLevelName) ?? resourceData.lowestQuality()
 
         let fileName = qualityLevel.fileName
@@ -40,13 +48,14 @@ public struct StreamUrl {
             .replacing(accessTokenKey, with: token)
         
         let video = "\(cdn)\(path)"
-        url = URL(string: video)!
+        return URL(string: video)!
     }
     
-    public init(deliveryKey: DeliveryKey) {
+    public func create(deliveryKey: DeliveryKey) -> URL {
         let cdn = deliveryKey.cdn
         let path = deliveryKey.resource.uri
         let video = "\(cdn)\(path)"
-        url = URL(string: video)!
+        return URL(string: video)!
     }
+    
 }

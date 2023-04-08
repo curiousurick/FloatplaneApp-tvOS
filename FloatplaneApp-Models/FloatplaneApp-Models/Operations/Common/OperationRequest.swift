@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Basic structure for an Operation Request. Enforces that there is a map for the parameters.
 public protocol OperationRequest: Encodable, Equatable, Hashable {
     
     var params: [String : Any] { get }

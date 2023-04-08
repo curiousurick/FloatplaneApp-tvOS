@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// The creator object which is present in a FeedItem.
 public struct ContentCreator: Hashable, Codable, Equatable {
     public let about: String
     public let card: Icon

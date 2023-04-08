@@ -21,7 +21,9 @@
 
 import Foundation
 
+/// Has the info about a user's given creator subscription
 public struct Subscription: Hashable, Codable, Equatable {
+    /// Info about the subscription plan like how much it costs and at what interval.
     public struct Plan: Hashable, Codable, Equatable {
         public let allowGrandfatheredAccess: Bool
         public let currency: String
@@ -56,6 +58,7 @@ public struct Subscription: Hashable, Codable, Equatable {
         }
     }
     
+    /// Known options for plan intervals.
     public enum Interval: String, Hashable, Codable, Equatable {
         case month
         case year
@@ -84,6 +87,7 @@ public struct Subscription: Hashable, Codable, Equatable {
     
 }
 
+/// Response from the SubscriptionOperation containing the list of subscriptions for the user.
 public struct SubscriptionResponse: Codable, Equatable {
     
     public let subscriptions: [Subscription]

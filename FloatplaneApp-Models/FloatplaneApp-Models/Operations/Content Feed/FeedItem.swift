@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Contains the info needed to display an item in the browse feed or search results.
 public struct FeedItem: Hashable, Codable, Equatable {
     public let attachmentOrder: [String]
     public let audioAttachments: [String]

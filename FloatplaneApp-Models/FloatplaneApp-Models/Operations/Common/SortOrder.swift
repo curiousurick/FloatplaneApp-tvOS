@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Request's order that the results are sorted.
 public enum SortOrder: String, Codable {
     case descending = "DESC"
     case ascending = "ASC"

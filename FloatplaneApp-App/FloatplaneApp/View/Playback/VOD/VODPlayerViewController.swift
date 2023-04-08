@@ -24,6 +24,7 @@ import SwiftDate
 import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_DataStores
+import FloatplaneApp_Utilities
 
 protocol VODPlayerViewDelegate {
     
@@ -36,6 +37,7 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
         return UserStoreImpl.instance.getProgressStore()
     }
     private let videoMetadataOperation = OperationManagerImpl.instance.videoMetadataOperation
+    private let streamURLFactory = StreamURLFactoryImpl()
     private let closeEnoughToFinishToRestart = 0.95
     
     var vodDelegate: VODPlayerViewDelegate?
@@ -88,7 +90,7 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
     }
     
     private func startVideo(videoMetadata: VideoMetadata) {
-        let url = StreamUrl(deliveryKey: videoMetadata.deliveryKey, qualityLevel: selectedQualityLevel).url
+        let url = streamURLFactory.create(deliveryKey: videoMetadata.deliveryKey, qualityLevel: selectedQualityLevel)
         let playerItem = AVPlayerItem(url: url)
         
         let progress = getStartTime(videoMetadata: videoMetadata)

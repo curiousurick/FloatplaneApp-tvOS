@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// The basic metadata about a given creator. Used in the CreatorListOperation.
 public struct BaseCreator: Codable, Equatable {
     public let about: String
     // Note: This looks to be a bug in v2 API.

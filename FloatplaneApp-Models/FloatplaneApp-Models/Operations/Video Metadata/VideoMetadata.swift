@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Contains the metadata for a given video for use in streaming that video and providing information to the user about it.
 public struct VideoMetadata: Codable, Equatable {
     public let id: String
     public let guid: String

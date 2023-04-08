@@ -21,9 +21,12 @@
 
 import Foundation
 
+/// Swift Error for failure to login. Contains the API's LoginFailedResponse with info why it failed.
 public enum LoginFailedError: Error {
+    /// Should remain the only option
     case error(response: LoginFailedResponse)
     
+    /// Extracts the response because Swift errors are weird.
     public var response: LoginFailedResponse {
         switch self {
         case .error(let response):
@@ -32,9 +35,11 @@ public enum LoginFailedError: Error {
     }
 }
 
+/// Contains info about errors which occurred when the cloud tried to login the user.
 public struct LoginFailedResponse: Codable, Equatable {
     public struct LoginError: Codable, Equatable {
         public let id: String
+        /// Readable info about the error that occurred while logging in. Will be displayed to customer.
         public let message: String
         public let name: String
         

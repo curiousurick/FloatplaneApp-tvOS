@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// The list of BaseCreators. Contains basic info about all creators to which the user is subscribed.
 public struct CreatorListResponse: Codable, Equatable {
     
     public struct CreatorResponseObject: Codable, Equatable {

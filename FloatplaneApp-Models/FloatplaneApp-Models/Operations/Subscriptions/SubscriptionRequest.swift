@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Request to get the list of creators to which the user is subscribed.
 public struct SubscriptionRequest: OperationRequest {
     
     public init() { }

@@ -21,6 +21,8 @@
 
 import Foundation
 
+/// The compound operation request to get video metadata and delivery key for a given video.
+/// Also includes the feedItem for the video for use in inclusion in the response.
 public struct VideoMetadataRequest: OperationRequest {
     
     public let feedItem: FeedItem

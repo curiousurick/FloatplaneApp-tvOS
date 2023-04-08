@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// The owner of a feed item. The creator who runs the channel that has the feed item.
 public struct Owner: Hashable, Codable, Equatable {
     public let id: String
     public let username: String

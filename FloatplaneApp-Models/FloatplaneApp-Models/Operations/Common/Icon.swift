@@ -21,13 +21,14 @@
 
 import Foundation
 
+/// Structure for an image icon.
 public struct Icon: Hashable, Codable, Equatable {
-    public let childImages: [Image]
+    public let childImages: [Icon]?
     public let height: UInt64
     public let path: URL
     public let width: UInt64
     
-    public init(childImages: [Image], height: UInt64, path: URL, width: UInt64) {
+    public init(childImages: [Icon], height: UInt64, path: URL, width: UInt64) {
         self.childImages = childImages
         self.height = height
         self.path = path

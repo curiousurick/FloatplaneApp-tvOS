@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Request for a Live DeliveryKey. Takes a creator's ID for the livestream. sets the type parameters to "live"
 public struct LiveDeliveryKeyRequest: OperationRequest {
     public let creator: String
     public let type: PostType = .live

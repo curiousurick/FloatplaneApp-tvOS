@@ -21,9 +21,13 @@
 
 import Foundation
 
+/// The data needed to display the first page in the app when logged in.
 public struct GetFirstPageResponse: Codable {
+    /// Active creator's first page of results (20 items as of 4/8/2023)
     public var firstPage: [FeedItem]
+    /// Full metadata for the active creator.
     public var activeCreator: Creator
+    /// List of basic metadata for all creators to which the user is subscribed.
     public var baseCreators: [BaseCreator]
     
     public init(firstPage: [FeedItem], activeCreator: Creator, baseCreators: [BaseCreator]) {

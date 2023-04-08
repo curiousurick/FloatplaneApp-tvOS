@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// Results for a search request. The same items as the browse page.
 public struct SearchResponse: Codable, Equatable {
     public let items: [FeedItem]
     

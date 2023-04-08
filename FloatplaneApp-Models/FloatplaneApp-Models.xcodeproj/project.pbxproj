@@ -22,7 +22,6 @@
 		5E389B0829D8B1A500FC8B4B /* FloatplaneApp_ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B0729D8B1A500FC8B4B /* FloatplaneApp_ModelsTests.swift */; };
 		5E389B0929D8B1A500FC8B4B /* FloatplaneApp_Models.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E389AFB29D8B1A500FC8B4B /* FloatplaneApp_Models.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E389BD429D8B5A300FC8B4B /* DeliveryKeyQualityLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B9F29D8B5A300FC8B4B /* DeliveryKeyQualityLevel.swift */; };
-		5E389BD529D8B5A300FC8B4B /* StreamUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BA029D8B5A300FC8B4B /* StreamUrl.swift */; };
 		5E389BD629D8B5A300FC8B4B /* ContentCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BA329D8B5A300FC8B4B /* ContentCreator.swift */; };
 		5E389BD729D8B5A300FC8B4B /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BA429D8B5A300FC8B4B /* Creator.swift */; };
 		5E389BD829D8B5A300FC8B4B /* BaseCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BA529D8B5A300FC8B4B /* BaseCreator.swift */; };
@@ -46,7 +45,6 @@
 		5E389BEC29D8B5A300FC8B4B /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BBF29D8B5A300FC8B4B /* Icon.swift */; };
 		5E389BED29D8B5A300FC8B4B /* LiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BC029D8B5A300FC8B4B /* LiveStream.swift */; };
 		5E389BEE29D8B5A300FC8B4B /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BC129D8B5A300FC8B4B /* Channel.swift */; };
-		5E389BEF29D8B5A300FC8B4B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BC229D8B5A300FC8B4B /* Image.swift */; };
 		5E389BF029D8B5A300FC8B4B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BC329D8B5A300FC8B4B /* User.swift */; };
 		5E389BF129D8B5A300FC8B4B /* OperationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BC429D8B5A300FC8B4B /* OperationRequest.swift */; };
 		5E389BF229D8B5A300FC8B4B /* SortOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BC529D8B5A300FC8B4B /* SortOrder.swift */; };
@@ -94,7 +92,6 @@
 		5E389B0229D8B1A500FC8B4B /* FloatplaneApp-ModelsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FloatplaneApp-ModelsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389B0729D8B1A500FC8B4B /* FloatplaneApp_ModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneApp_ModelsTests.swift; sourceTree = "<group>"; };
 		5E389B9F29D8B5A300FC8B4B /* DeliveryKeyQualityLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryKeyQualityLevel.swift; sourceTree = "<group>"; };
-		5E389BA029D8B5A300FC8B4B /* StreamUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamUrl.swift; sourceTree = "<group>"; };
 		5E389BA329D8B5A300FC8B4B /* ContentCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCreator.swift; sourceTree = "<group>"; };
 		5E389BA429D8B5A300FC8B4B /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		5E389BA529D8B5A300FC8B4B /* BaseCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCreator.swift; sourceTree = "<group>"; };
@@ -118,7 +115,6 @@
 		5E389BBF29D8B5A300FC8B4B /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		5E389BC029D8B5A300FC8B4B /* LiveStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStream.swift; sourceTree = "<group>"; };
 		5E389BC129D8B5A300FC8B4B /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
-		5E389BC229D8B5A300FC8B4B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		5E389BC329D8B5A300FC8B4B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5E389BC429D8B5A300FC8B4B /* OperationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationRequest.swift; sourceTree = "<group>"; };
 		5E389BC529D8B5A300FC8B4B /* SortOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortOrder.swift; sourceTree = "<group>"; };
@@ -247,7 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				5E389B9F29D8B5A300FC8B4B /* DeliveryKeyQualityLevel.swift */,
-				5E389BA029D8B5A300FC8B4B /* StreamUrl.swift */,
 			);
 			path = Stream;
 			sourceTree = "<group>";
@@ -343,7 +338,6 @@
 				5E389BBF29D8B5A300FC8B4B /* Icon.swift */,
 				5E389BC029D8B5A300FC8B4B /* LiveStream.swift */,
 				5E389BC129D8B5A300FC8B4B /* Channel.swift */,
-				5E389BC229D8B5A300FC8B4B /* Image.swift */,
 				5E389BC329D8B5A300FC8B4B /* User.swift */,
 				5E389BC429D8B5A300FC8B4B /* OperationRequest.swift */,
 				5E389BC529D8B5A300FC8B4B /* SortOrder.swift */,
@@ -514,7 +508,6 @@
 				5E389BFA29D8B5A300FC8B4B /* LoginRequest.swift in Sources */,
 				5E1FD74329DD34AD0015AE6F /* OperationResponse.swift in Sources */,
 				5E389BE029D8B5A300FC8B4B /* VideoMetadata.swift in Sources */,
-				5E389BD529D8B5A300FC8B4B /* StreamUrl.swift in Sources */,
 				5E389BDA29D8B5A300FC8B4B /* VodDeliveryKeyRequest.swift in Sources */,
 				5E389C4729D8BAFE00FC8B4B /* QualityLevelParams.swift in Sources */,
 				5E389BE129D8B5A300FC8B4B /* ContentVideoResponse.swift in Sources */,
@@ -532,7 +525,6 @@
 				5E389BEE29D8B5A300FC8B4B /* Channel.swift in Sources */,
 				5E389BD629D8B5A300FC8B4B /* ContentCreator.swift in Sources */,
 				5E389BE229D8B5A300FC8B4B /* ContentVideoRequest.swift in Sources */,
-				5E389BEF29D8B5A300FC8B4B /* Image.swift in Sources */,
 				5E389BED29D8B5A300FC8B4B /* LiveStream.swift in Sources */,
 				5E389BE529D8B5A300FC8B4B /* UserNotificationSetting.swift in Sources */,
 				5E389BE729D8B5A300FC8B4B /* SubscriptionResponse.swift in Sources */,
