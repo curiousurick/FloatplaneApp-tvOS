@@ -79,8 +79,11 @@ class RootViewController: UIViewController {
     private func transition(from: UIViewController, to: UIViewController) {
         from.willMove(toParent: nil)
         self.addChild(to)
-        
-        self.transition(from: from, to: to, duration: self.transitionCoordinator?.transitionDuration ?? 0.4, options: [], animations: {
+        to.view.alpha = 0.0
+        from.view.alpha = 1.0
+        self.transition(from: from, to: to, duration: 0.4, options: [.allowAnimatedContent, .allowUserInteraction], animations: {
+            to.view.alpha = 1.0
+            from.view.alpha = 0.0
             
         }) { (finished) in
             from.removeFromParent()
@@ -89,8 +92,9 @@ class RootViewController: UIViewController {
     }
     
     func goToLogin() {
+        let loginScreen = UIStoryboard.main.instantiateViewController(withIdentifier: "LoginViewController")
         DispatchQueue.main.async {
-            self.performSegue(withIdentifier: SegueIdentifier.LaunchScreenViewController.showLoginScreen, sender: nil)
+            self.transition(from: self.children.first!, to: loginScreen)
         }
     }
 
@@ -119,9 +123,13 @@ class RootViewController: UIViewController {
     }
     
     func switchToMainView() {
-        if let registerViewController = self.children.first(where: { $0 is LaunchScreenViewController }),
+        if let launchViewController = self.children.first(where: { $0 is LaunchScreenViewController }),
            let topNavigationController = topNavigationController {
-            self.transition(from: registerViewController, to: topNavigationController)
+            self.transition(from: launchViewController, to: topNavigationController)
+        }
+        else if let loginViewController = self.children.first(where: { $0 is LoginViewController }),
+                let topNavigationController = topNavigationController {
+            self.transition(from: loginViewController, to: topNavigationController)
         }
     }
     

@@ -83,10 +83,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let user = opResponse.response?.user {
                 UserStoreImpl.instance.setUser(user: user)
                 DispatchQueue.main.async {
-                    self.performSegue(
-                        withIdentifier: SegueIdentifier.LoginViewController.unwindFromLoginSegue,
-                        sender: self
-                    )
+                    self.dismiss(animated: true) {
+                        AppDelegate.instance.rootViewController.getFirstPageAndLoadMainView()
+                    }
                 }
             }
             else {
@@ -116,6 +115,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
         ensurePlaceholderColor()
     }
     
