@@ -26,8 +26,8 @@ import FloatplaneApp_Models
 import FloatplaneApp_DataStores
 
 class TopNavigationController: UINavigationController {
-    private let creatorOperation = OperationManager.instance.creatorOperation
-    private let contentFeedOperation = OperationManager.instance.contentFeedOperation
+    private let creatorOperation = OperationManagerImpl.instance.creatorOperation
+    private let contentFeedOperation = OperationManagerImpl.instance.contentFeedOperation
     // Main data for viewing
     private let dataSource = DataSource.instance
     private let logger = Log4S()

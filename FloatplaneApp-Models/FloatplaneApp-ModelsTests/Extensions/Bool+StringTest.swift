@@ -19,35 +19,24 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-@testable import FloatplaneApp_Operations
-import Alamofire
-import FloatplaneApp_Models
+import XCTest
+@testable import FloatplaneApp_Models
 
-class MockInternalOperationStrategy<I: Hashable, O: Codable>: InternalOperationStrategy {
-    typealias Request = I
-    typealias Response = O
+class BoolStringValueTest: XCTestCase {
     
-    var dataRequest: Alamofire.DataRequest?
-    
-    var getCallCount = 0
-    var mockRequest: ((Request) -> OperationResponse<Response>)?
-    func get(request: I) async -> OperationResponse<Response> {
-        getCallCount += 1
-        return mockRequest?(request) ?? OperationResponse(response: nil, error: nil)
+    func testStringValueTrue() {
+        // Act
+        let trueString = true.stringValue
+        // Assert
+        XCTAssertEqual("true", trueString)
     }
     
-    var cancelCallCount = 0
-    func cancel() {
-        cancelCallCount += 1
+    func testStringValueFalse() {
+        // Act
+        let trueString = false.stringValue
+        
+        // Assert
+        XCTAssertEqual("false", trueString)
     }
-    
-    var mockIsActive = false
-    var isActiveCallCount = 0
-    func isActive() -> Bool {
-        isActiveCallCount += 1
-        return mockIsActive
-    }
-    
     
 }

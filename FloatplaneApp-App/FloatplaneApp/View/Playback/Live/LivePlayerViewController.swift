@@ -26,7 +26,7 @@ import FloatplaneApp_Models
 
 class LivePlayerViewController: BaseVideoPlayerViewController {
     private var menuPressRecognizer: UITapGestureRecognizer?
-    private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
+    private let liveDeliveryKeyOperation = OperationManagerImpl.instance.liveDeliveryKeyOperation
     private let dataSource = DataSource.instance
     private var timeObserverToken: Any?
     private let liveStreamEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime

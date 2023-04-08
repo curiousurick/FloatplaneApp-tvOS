@@ -32,11 +32,11 @@ protocol SearchOperationStrategy: InternalOperationStrategy<SearchRequest, Searc
 /// TODO: Determine if tvOS makes sense to support image and text posts.
 class SearchOperationStrategyImpl: SearchOperationStrategy {
     private let logger = Log4S()
-    
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
     
+    private let session: Session
+    
     var dataRequest: DataRequest?
-    var session: Session
     
     init(session: Session) {
         self.session = session

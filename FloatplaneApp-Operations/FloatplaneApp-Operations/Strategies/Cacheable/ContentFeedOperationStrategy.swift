@@ -29,11 +29,11 @@ protocol ContentFeedOperationStrategy: InternalOperationStrategy<ContentFeedRequ
 /// This gets a page of the ContentFeed for a given creator's ID. Takes other parameters like the limit of results and fetchAfter which indicates the index to start returning for pagination.
 /// Note: This API has a max limit of 20 results per call.
 class ContentFeedOperationStrategyImpl: ContentFeedOperationStrategy  {
-    
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
     
+    private let session: Session
+    
     var dataRequest: DataRequest?
-    var session: Session
     
     init(session: Session) {
         self.session = session

@@ -30,20 +30,26 @@ protocol LogoutOperationStrategy: InternalOperationStrategy<LogoutRequest, Logou
 
 class LogoutOperationStrategyImpl: LogoutOperationStrategy {
     private let logger = Log4S()
+    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
     
-    var baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
-    // Used to simulate iOS so we don't need captcha
-    private let userAgent = "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"
+    private let session: Session
     private let headers: HTTPHeaders
-    
+
     var dataRequest: DataRequest?
-    var session: Session
     
-    init(session: Session) {
-        let headerMap = [
-            "user-agent" : userAgent
-        ]
-        headers = HTTPHeaders(headerMap)
+    convenience init(session: Session) {
+        let headerMap = ["user-agent" : OperationConstants.iOSUserAgent]
+        self.init(
+            session: session,
+            headers: HTTPHeaders(headerMap)
+        )
+    }
+    
+    init(
+        session: Session,
+        headers: HTTPHeaders
+    ) {
+        self.headers = headers
         self.session = session
     }
     
@@ -55,10 +61,6 @@ class LogoutOperationStrategyImpl: LogoutOperationStrategy {
         return await withCheckedContinuation { continuation in
             dataRequest.response() { response in
                 if response.response?.statusCode == 200 {
-                    UserStore.instance.removeUser()
-                    OperationManager.instance.cancelAllOperations()
-                    OperationManager.instance.clearCache()
-                    URLCache.shared.removeAllCachedResponses()
                     self.logger.info("Successfully logged out")
                     continuation.resume(returning: OperationResponse(response: LogoutResponse(), error: nil))
                 }

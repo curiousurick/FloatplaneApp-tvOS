@@ -48,14 +48,19 @@ class OperationStrategyTestBase: XCTestCase {
     
     func mockGet(
         baseUrl: URL, request: (any OperationRequest)? = nil,
-        response: Codable, delaySeconds: Int? = nil
+        response: Codable, delaySeconds: Int? = nil,
+        method: Mock.HTTPMethod = .get,
+        additionalHeaders: [String : String] = [:]
     ) throws {
-        var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        urlComponents.queryItems = getQueryItems(request: request)
+        let urlRequest = try getUrlRequest(baseUrl: baseUrl, method: method, request: request)
         let jsonData = try FloatplaneEncoder().encode(response)
-        var mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: 200, data: [
-            .get : jsonData
-        ])
+        var mock = Mock(
+            url: urlRequest.url!,
+            dataType: .json,
+            statusCode: 200,
+            data: [method : jsonData],
+            additionalHeaders: additionalHeaders
+        )
         if let delay = delaySeconds {
             mock.delay = DispatchTimeInterval.seconds(delay)
         }
@@ -64,13 +69,20 @@ class OperationStrategyTestBase: XCTestCase {
     
     func mockHTTPError(
         baseUrl: URL, request: (any OperationRequest)? = nil,
-        statusCode: Int, delaySeconds: Int? = nil
+        statusCode: Int, delaySeconds: Int? = nil,
+        method: Mock.HTTPMethod = .get,
+        additionalHeaders: [String : String] = [:]
     ) throws {
-        var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        urlComponents.queryItems = getQueryItems(request: request)
-        var mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: statusCode, data: [
-            .get : Data()
-        ])
+        let urlRequest = try getUrlRequest(baseUrl: baseUrl, method: method, request: request)
+        let error = URLError(.badServerResponse)
+        var mock = Mock(
+            url: urlRequest.url!,
+            dataType: .json,
+            statusCode: statusCode,
+            data: [method : Data()],
+            additionalHeaders: additionalHeaders,
+            requestError: error
+        )
         if let delay = delaySeconds {
             mock.delay = DispatchTimeInterval.seconds(delay)
         }
@@ -79,19 +91,40 @@ class OperationStrategyTestBase: XCTestCase {
     
     func mockWrongResponse(
         baseUrl: URL, request: (any OperationRequest)? = nil,
-        delaySeconds: Int? = nil
+        delaySeconds: Int? = nil,
+        method: Mock.HTTPMethod = .get,
+        additionalHeaders: [String : String] = [:]
     ) throws {
-        var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
-        urlComponents.queryItems = getQueryItems(request: request)
+        let urlRequest = try getUrlRequest(baseUrl: baseUrl, method: method, request: request)
         let response = UnknownObject.defaultVal
         let jsonData = try JSONEncoder().encode(response)
-        var mock = try Mock(url: urlComponents.asURL(), dataType: .json, statusCode: 200, data: [
-            .get : jsonData
-        ])
+        var mock = Mock(
+            url: urlRequest.url!,
+            dataType: .json,
+            statusCode: 200,
+            data: [method : jsonData],
+            additionalHeaders: additionalHeaders
+        )
         if let delay = delaySeconds {
             mock.delay = DispatchTimeInterval.seconds(delay)
         }
         mock.register()
+    }
+    
+    private func getUrlRequest(baseUrl: URL, method: Mock.HTTPMethod, request: (any OperationRequest)?) throws -> URLRequest {
+        var urlRequest = try URLRequest(url: baseUrl, method: method.toHTTPMethod())
+        guard let request = request else {
+            return urlRequest
+        }
+        if method == .post {
+            urlRequest.httpBody = try? JSONEncoder().encode(request)
+        }
+        else if method == .get {
+            var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
+            urlComponents.queryItems = getQueryItems(request: request)
+            urlRequest.url = try urlComponents.asURL()
+        }
+        return urlRequest
     }
     
     private func getQueryItems(request: (any OperationRequest)?) -> [URLQueryItem]? {
@@ -103,6 +136,31 @@ class OperationStrategyTestBase: XCTestCase {
                 return URLQueryItem(name: "\($0)", value: "\(value)")
             }
             return nil
+        }
+    }
+}
+
+extension Mock.HTTPMethod {
+    func toHTTPMethod() -> HTTPMethod {
+        switch self {
+        case .post:
+            return .post
+        case .get:
+            return .get
+        case .delete:
+            return .delete
+        case .connect:
+            return .connect
+        case .head:
+            return .head
+        case .options:
+            return .options
+        case .patch:
+            return .patch
+        case .put:
+            return .put
+        case .trace:
+            return .trace
         }
     }
 }

@@ -19,45 +19,39 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
 import FloatplaneApp_DataStores
-import FloatplaneApp_Operations
 import FloatplaneApp_Models
-import FloatplaneApp_Utilities
+import XCTest
 
-class LaunchScreenViewController: UIViewController {
-    private let logger = Log4S()
+class MockUserStore: UserStore {
     
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var floatPlaneLabel: UILabel!
-    
-    private let getFirstPageOperation = OperationManagerImpl.instance.getFirstPageOperation
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupAndDisplayFirstView()
+    var getUserCallCount = 0
+    var mockUser: User?
+    func getUser() -> User? {
+        getUserCallCount += 1
+        return mockUser
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    var getProgressStoreCallCount = 0
+    var mockProgressStore: ProgressStore?
+    func getProgressStore() -> ProgressStore? {
+        getProgressStoreCallCount += 1
+        return mockProgressStore
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    var setUserCallCount = 0
+    private var setUserInputs: [User] = []
+    func verifySetUserInput(user: User) {
+        XCTAssertTrue(setUserInputs.contains { $0 == user })
+    }
+    func setUser(user: User) {
+        setUserCallCount += 1
+        setUserInputs.append(user)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
-    private func setupAndDisplayFirstView() {
-        Task {
-            if UserStoreImpl.instance.getUser() == nil {
-                AppDelegate.instance.rootViewController.goToLogin()
-            }
-            else {
-                AppDelegate.instance.rootViewController.getFirstPageAndLoadMainView()
-            }
-        }
+    var removeUserCallCount = 0
+    func removeUser() {
+        removeUserCallCount += 1
     }
 }

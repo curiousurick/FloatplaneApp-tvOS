@@ -21,6 +21,6 @@
 
 import Foundation
 
-public struct LogoutResponse: Codable {
+public struct LogoutResponse: Codable, Equatable {
     public init() { }
 }

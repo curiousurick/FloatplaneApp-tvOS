@@ -19,45 +19,42 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import XCTest
+@testable import FloatplaneApp_Operations
 import FloatplaneApp_DataStores
-import FloatplaneApp_Operations
-import FloatplaneApp_Models
-import FloatplaneApp_Utilities
 
-class LaunchScreenViewController: UIViewController {
-    private let logger = Log4S()
+class AppWiperTest: XCTestCase {
     
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var floatPlaneLabel: UILabel!
+    // Mocks
+    private var mockUserStore: MockUserStore!
+    private var mockOperationManager: MockOperationManager!
+    private var mockUrlCache: MockURLCache!
     
-    private let getFirstPageOperation = OperationManagerImpl.instance.getFirstPageOperation
+    private var subject: AppWiperImpl!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupAndDisplayFirstView()
+    override func setUp() {
+        super.setUp()
+        
+        mockUserStore = MockUserStore()
+        mockOperationManager = MockOperationManager()
+        mockUrlCache = MockURLCache()
+        
+        subject = AppWiperImpl(
+            userStore: mockUserStore,
+            operationManager: mockOperationManager,
+            urlCache: mockUrlCache
+        )
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func testClean() {
+        // Act
+        subject.clean()
+        
+        // Assert
+        XCTAssertEqual(mockUserStore.removeUserCallCount, 1)
+        XCTAssertEqual(mockOperationManager.cancelAllOperationsCallCount, 1)
+        XCTAssertEqual(mockOperationManager.clearCacheCallCount, 1)
+        XCTAssertEqual(mockUrlCache.removeAllCachedResponsesCallCount, 1)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
-    private func setupAndDisplayFirstView() {
-        Task {
-            if UserStoreImpl.instance.getUser() == nil {
-                AppDelegate.instance.rootViewController.goToLogin()
-            }
-            else {
-                AppDelegate.instance.rootViewController.getFirstPageAndLoadMainView()
-            }
-        }
-    }
+
 }

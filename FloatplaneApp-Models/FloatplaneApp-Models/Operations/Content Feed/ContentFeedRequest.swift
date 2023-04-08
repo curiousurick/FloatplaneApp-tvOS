@@ -20,7 +20,6 @@
 //
 
 import Foundation
-import FloatplaneApp_Utilities
 
 public struct ContentFeedRequest: OperationRequest {
     public let fetchAfter: Int

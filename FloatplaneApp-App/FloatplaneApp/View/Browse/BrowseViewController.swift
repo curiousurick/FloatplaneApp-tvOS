@@ -41,7 +41,7 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate,
     
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
-    private let contentFeedOperation = OperationManager.instance.contentFeedOperation
+    private let contentFeedOperation = OperationManagerImpl.instance.contentFeedOperation
     private let dataSource = DataSource.instance
     
     @IBOutlet var videoCollectionView: UICollectionView!
@@ -193,7 +193,8 @@ extension BrowseViewController {
 extension BrowseViewController: VODPlayerViewDelegate {
     
     func videoDidEnd(guid: String) {
-        guard let progress = ProgressStore.instance.getProgress(for: guid) else {
+        guard let progressStore = UserStoreImpl.instance.getProgressStore(),
+              let progress = progressStore.getProgress(for: guid) else {
             logger.warn("No progress found for video on return from ending")
             return
         }

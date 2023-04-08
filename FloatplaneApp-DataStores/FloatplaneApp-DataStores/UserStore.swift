@@ -22,8 +22,19 @@
 import FloatplaneApp_Utilities
 import FloatplaneApp_Models
 
+public protocol UserStore {
+    
+    func getUser() -> User?
+    
+    func getProgressStore() -> ProgressStore?
+    
+    func setUser(user: User)
+    
+    func removeUser()
+}
+
 /// Keychain-based data store for User information.
-public class UserStore {
+public class UserStoreImpl: UserStore {
     private let logger = Log4S()
     private let UserStoreKey = "UserStoreKey"
     // Data is stored as JSON
@@ -34,7 +45,7 @@ public class UserStore {
     private let keychainAccess: KeychainAccess
     
     /// Singleton instance of the UserStore.
-    public static let instance = UserStore()
+    public static let instance: UserStore = UserStoreImpl()
 
     @available(*, deprecated, message: "VisibleForTesting")
     init(keychainAccess: KeychainAccess) {
@@ -57,6 +68,14 @@ public class UserStore {
         }
         catch {
             logger.error("Failed to decode creators from keychain")
+        }
+        return nil
+    }
+    
+    public func getProgressStore() -> ProgressStore? {
+        if let user = getUser() {
+            let userId = user.id
+            return ProgressStore(userId: userId)
         }
         return nil
     }

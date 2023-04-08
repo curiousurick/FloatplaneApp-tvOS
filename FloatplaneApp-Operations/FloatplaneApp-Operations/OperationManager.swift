@@ -22,6 +22,29 @@
 import Foundation
 import FloatplaneApp_Models
 
+public protocol OperationManager {
+    
+    var contentFeedOperation: any CacheableStrategyBasedOperation<ContentFeedRequest, CreatorFeed> { get }
+    var subscriptionOperation: any CacheableStrategyBasedOperation<SubscriptionRequest, SubscriptionResponse> { get }
+    var searchOperation: any CacheableStrategyBasedOperation<SearchRequest, SearchResponse> { get }
+    var creatorListOperation: any CacheableStrategyBasedOperation<CreatorListRequest, CreatorListResponse> { get }
+    var creatorOperation: any CacheableStrategyBasedOperation<CreatorRequest, Creator> { get }
+    var contentVideoOperation: any CacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse> { get }
+    
+    var vodDeliveryKeyOperation: any StrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey> { get }
+    var liveDeliveryKeyOperation: any StrategyBasedOperation<LiveDeliveryKeyRequest, DeliveryKey> { get }
+    var loginOperation: any StrategyBasedOperation<LoginRequest, LoginResponse> { get }
+    var logoutOperation: any StrategyBasedOperation<LogoutRequest, LogoutResponse> { get }
+    
+    // Compound Operations
+    var videoMetadataOperation: any VideoMetadataOperation { get }
+    var getFirstPageOperation: any GetFirstPageOperation { get }
+    
+    func clearCache()
+    
+    func cancelAllOperations()
+}
+
 
 /// This is the sole gateway to any operation. In order to maintain efficient access to cached data and to simplify logout, all operations are created once
 /// per application lifecycle so that we don't have to create a new Storage access every time an operation is called.
@@ -35,53 +58,110 @@ import FloatplaneApp_Models
 /// Note: All the operations are lazy for two reasons.
 /// 1. So we don't have to create these operations are start time
 /// 2. Because some operations are compound operations that require access back to OperationManager. Without laziness, it would cause an infinite loop.
-public class OperationManager {
+public class OperationManagerImpl: OperationManager {
     /// Singleton access to OperationManager
-    public static let instance = OperationManager()
-    private let operationFactory = OperationFactory()
+    public static let instance = OperationManagerImpl()
     
-    public lazy var contentFeedOperation = operationFactory.createCachedOp(strategy: operationFactory.contentFeedStrategy)
-    public lazy var subscriptionOperation = operationFactory.createCachedOp(strategy: operationFactory.subscriptionStrategy)
-    public lazy var searchOperation = operationFactory.createCachedOp(
-        strategy: operationFactory.searchStrategy,
-        countLimit: 500,
-        // 30 minutes
-        cacheExpiration: 30 * 60
-    )
-    public lazy var creatorListOperation = operationFactory.createCachedOp(strategy: operationFactory.creatorListStrategy)
-    public lazy var creatorOperation = operationFactory.createCachedOp(strategy: operationFactory.creatorStrategy)
-    public lazy var contentVideoOperation = operationFactory.createCachedOp(strategy: operationFactory.contentVideoStrategy)
+    private let operationFactory: OperationFactory
+    
+    public var contentFeedOperation: any CacheableStrategyBasedOperation<ContentFeedRequest, CreatorFeed>
+    public var subscriptionOperation: any CacheableStrategyBasedOperation<SubscriptionRequest, SubscriptionResponse>
+    public var searchOperation: any CacheableStrategyBasedOperation<SearchRequest, SearchResponse>
+    public var creatorListOperation: any CacheableStrategyBasedOperation<CreatorListRequest, CreatorListResponse>
+    public var creatorOperation: any CacheableStrategyBasedOperation<CreatorRequest, Creator>
+    public var contentVideoOperation: any CacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse>
     
     private lazy var allCacheableOperations: [any CacheableStrategyBasedOperation] = [
-        contentFeedOperation,
-        subscriptionOperation,
-        searchOperation,
-        creatorListOperation,
-        creatorOperation,
-        contentVideoOperation
+        
     ]
     
-    public lazy var vodDeliveryKeyOperation = operationFactory.createOp(strategy: operationFactory.vodDeliveryKeyStrategy)
-    public lazy var liveDeliveryKeyOperation = operationFactory.createOp(strategy: operationFactory.liveDeliveryKeyStrategy)
-    public lazy var loginOperation = operationFactory.createOp(strategy: operationFactory.loginStrategy)
-    public lazy var logoutOperation = operationFactory.createOp(strategy: operationFactory.logoutStrategy)
+    public var vodDeliveryKeyOperation: any StrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey>
+    public var liveDeliveryKeyOperation: any StrategyBasedOperation<LiveDeliveryKeyRequest, DeliveryKey>
+    public var loginOperation: any StrategyBasedOperation<LoginRequest, LoginResponse>
+    public var logoutOperation: any StrategyBasedOperation<LogoutRequest, LogoutResponse>
     
     // Compound Operations
-    public lazy var videoMetadataOperation: any VideoMetadataOperation = VideoMetadataOperationImpl(
-        contentVideoOperation: contentVideoOperation,
-        vodDeliveryKeyOperation: vodDeliveryKeyOperation
-    )
-    public lazy var getFirstPageOperation: any GetFirstPageOperation = GetFirstPageOperationImpl(
-        creatorOperation: creatorOperation,
-        contentFeedOperation: contentFeedOperation,
-        creatorListOperation: creatorListOperation
-    )
+    public var videoMetadataOperation: any VideoMetadataOperation
+    public var getFirstPageOperation: any GetFirstPageOperation
     
-    private init() { }
+    private convenience init() {
+        let operationFactory = OperationFactory()
+        let contentVideoOperation = operationFactory.createCachedOp(strategy: operationFactory.contentVideoStrategy)
+        let vodDeliveryKeyOperation = operationFactory.createOp(strategy: operationFactory.vodDeliveryKeyStrategy)
+        let creatorOperation = operationFactory.createCachedOp(strategy: operationFactory.creatorStrategy)
+        let creatorListOperation = operationFactory.createCachedOp(strategy: operationFactory.creatorListStrategy)
+        let contentFeedOperation = operationFactory.createCachedOp(strategy: operationFactory.contentFeedStrategy)
+        self.init(
+            operationFactory: operationFactory,
+            contentFeedOperation: contentFeedOperation,
+            subscriptionOperation: operationFactory.createCachedOp(strategy: operationFactory.subscriptionStrategy),
+            searchOperation: operationFactory.createCachedOp(
+                strategy: operationFactory.searchStrategy,
+                countLimit: 500,
+                // 30 minutes
+                cacheExpiration: 30 * 60
+            ),
+            creatorListOperation: creatorListOperation,
+            creatorOperation: creatorOperation,
+            contentVideoOperation: contentVideoOperation,
+            vodDeliveryKeyOperation: vodDeliveryKeyOperation,
+            liveDeliveryKeyOperation: operationFactory.createOp(strategy: operationFactory.liveDeliveryKeyStrategy),
+            loginOperation: operationFactory.createOp(strategy: operationFactory.loginStrategy),
+            logoutOperation: operationFactory.createOp(strategy: operationFactory.logoutStrategy),
+            videoMetadataOperation: VideoMetadataOperationImpl(
+                contentVideoOperation: contentVideoOperation,
+                vodDeliveryKeyOperation: vodDeliveryKeyOperation
+            ),
+            getFirstPageOperation: GetFirstPageOperationImpl(
+                creatorOperation: creatorOperation,
+                contentFeedOperation: contentFeedOperation,
+                creatorListOperation: creatorListOperation
+            )
+        )
+    }
+    
+    init(
+        operationFactory: OperationFactory,
+        contentFeedOperation: any CacheableStrategyBasedOperation<ContentFeedRequest, CreatorFeed>,
+        subscriptionOperation: any CacheableStrategyBasedOperation<SubscriptionRequest, SubscriptionResponse>,
+        searchOperation: any CacheableStrategyBasedOperation<SearchRequest, SearchResponse>,
+        creatorListOperation: any CacheableStrategyBasedOperation<CreatorListRequest, CreatorListResponse>,
+        creatorOperation: any CacheableStrategyBasedOperation<CreatorRequest, Creator>,
+        contentVideoOperation: any CacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse>,
+        vodDeliveryKeyOperation: any StrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey>,
+        liveDeliveryKeyOperation: any StrategyBasedOperation<LiveDeliveryKeyRequest, DeliveryKey>,
+        loginOperation: any StrategyBasedOperation<LoginRequest, LoginResponse>,
+        logoutOperation: any StrategyBasedOperation<LogoutRequest, LogoutResponse>,
+        videoMetadataOperation: any VideoMetadataOperation,
+        getFirstPageOperation: any GetFirstPageOperation
+        
+    ) {
+        self.operationFactory = operationFactory
+        self.contentFeedOperation = contentFeedOperation
+        self.subscriptionOperation = subscriptionOperation
+        self.searchOperation = searchOperation
+        self.creatorListOperation = creatorListOperation
+        self.creatorOperation = creatorOperation
+        self.contentVideoOperation = contentVideoOperation
+        self.vodDeliveryKeyOperation = vodDeliveryKeyOperation
+        self.liveDeliveryKeyOperation = liveDeliveryKeyOperation
+        self.loginOperation = loginOperation
+        self.logoutOperation = logoutOperation
+        self.videoMetadataOperation = videoMetadataOperation
+        self.getFirstPageOperation = getFirstPageOperation
+    }
     
     /// Clears the cache for all cacheable operations
     public func clearCache() {
-        allCacheableOperations.forEach {
+        let cacheableOps: [any CacheableStrategyBasedOperation] = [
+            contentFeedOperation,
+            subscriptionOperation,
+            searchOperation,
+            creatorListOperation,
+            creatorOperation,
+            contentVideoOperation
+        ]
+        cacheableOps.forEach {
             $0.clearCache()
         }
     }
@@ -89,7 +169,21 @@ public class OperationManager {
     /// Cancels all cacheable operations.
     /// TODO: Support all operations
     public func cancelAllOperations() {
-        allCacheableOperations.forEach {
+        let allOps: [any Operation] = [
+            contentFeedOperation,
+            subscriptionOperation,
+            searchOperation,
+            creatorListOperation,
+            creatorOperation,
+            contentVideoOperation,
+            vodDeliveryKeyOperation,
+            liveDeliveryKeyOperation,
+            loginOperation,
+            logoutOperation,
+            videoMetadataOperation,
+            getFirstPageOperation
+        ]
+        allOps.forEach {
             $0.cancel()
         }
     }

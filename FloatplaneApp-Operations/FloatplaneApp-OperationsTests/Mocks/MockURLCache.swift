@@ -20,34 +20,12 @@
 //
 
 import Foundation
-@testable import FloatplaneApp_Operations
-import Alamofire
-import FloatplaneApp_Models
 
-class MockInternalOperationStrategy<I: Hashable, O: Codable>: InternalOperationStrategy {
-    typealias Request = I
-    typealias Response = O
+class MockURLCache: URLCache {
     
-    var dataRequest: Alamofire.DataRequest?
-    
-    var getCallCount = 0
-    var mockRequest: ((Request) -> OperationResponse<Response>)?
-    func get(request: I) async -> OperationResponse<Response> {
-        getCallCount += 1
-        return mockRequest?(request) ?? OperationResponse(response: nil, error: nil)
+    var removeAllCachedResponsesCallCount = 0
+    override func removeAllCachedResponses() {
+        removeAllCachedResponsesCallCount += 1
     }
-    
-    var cancelCallCount = 0
-    func cancel() {
-        cancelCallCount += 1
-    }
-    
-    var mockIsActive = false
-    var isActiveCallCount = 0
-    func isActive() -> Bool {
-        isActiveCallCount += 1
-        return mockIsActive
-    }
-    
     
 }

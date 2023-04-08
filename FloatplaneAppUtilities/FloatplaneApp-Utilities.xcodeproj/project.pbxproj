@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E08F49529E1355D003C3694 /* FloatplaneApp_Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E08F49429E1355D003C3694 /* FloatplaneApp_Models.framework */; };
 		5E1FD71729DAB0100015AE6F /* String+ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71629DAB0100015AE6F /* String+ClassTest.swift */; };
-		5E1FD71C29DAB1F00015AE6F /* Bool+StringValueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71B29DAB1F00015AE6F /* Bool+StringValueTest.swift */; };
 		5E1FD71E29DAB6B00015AE6F /* String+HTMLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71D29DAB6B00015AE6F /* String+HTMLTest.swift */; };
 		5E389C0E29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc in Resources */ = {isa = PBXBuildFile; fileRef = 5E389C0D29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc */; };
 		5E389C1429D8B67900FC8B4B /* FloatplaneApp_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389C0929D8B67900FC8B4B /* FloatplaneApp_Utilities.framework */; };
 		5E389C1A29D8B67900FC8B4B /* FloatplaneApp-Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E389C0C29D8B67900FC8B4B /* FloatplaneApp-Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5E389C3129D8B6AB00FC8B4B /* Bool+StringValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2D29D8B68A00FC8B4B /* Bool+StringValue.swift */; };
 		5E389C3229D8B6AB00FC8B4B /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */; };
 		5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2C29D8B68A00FC8B4B /* String+Class.swift */; };
 		5E389C3429D8B6AB00FC8B4B /* UIImage+Transparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */; };
@@ -32,15 +31,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E08F49429E1355D003C3694 /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E1FD71629DAB0100015AE6F /* String+ClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ClassTest.swift"; sourceTree = "<group>"; };
-		5E1FD71B29DAB1F00015AE6F /* Bool+StringValueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+StringValueTest.swift"; sourceTree = "<group>"; };
 		5E1FD71D29DAB6B00015AE6F /* String+HTMLTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLTest.swift"; sourceTree = "<group>"; };
 		5E389C0929D8B67900FC8B4B /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389C0C29D8B67900FC8B4B /* FloatplaneApp-Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FloatplaneApp-Utilities.h"; sourceTree = "<group>"; };
 		5E389C0D29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = "FloatplaneApp-Utilities.docc"; sourceTree = "<group>"; };
 		5E389C1329D8B67900FC8B4B /* FloatplaneApp-UtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FloatplaneApp-UtilitiesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389C2C29D8B68A00FC8B4B /* String+Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Class.swift"; sourceTree = "<group>"; };
-		5E389C2D29D8B68A00FC8B4B /* Bool+StringValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+StringValue.swift"; sourceTree = "<group>"; };
 		5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Transparency.swift"; sourceTree = "<group>"; };
 		5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		5E389C3A29D8B6D800FC8B4B /* Log4S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4S.swift; sourceTree = "<group>"; };
@@ -51,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E08F49529E1355D003C3694 /* FloatplaneApp_Models.framework in Frameworks */,
 				5EFD929529D90CA0007E8374 /* Logging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,7 +89,6 @@
 			children = (
 				5E389C3A29D8B6D800FC8B4B /* Log4S.swift */,
 				5E389C2C29D8B68A00FC8B4B /* String+Class.swift */,
-				5E389C2D29D8B68A00FC8B4B /* Bool+StringValue.swift */,
 				5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */,
 				5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */,
 				5E389C0C29D8B67900FC8B4B /* FloatplaneApp-Utilities.h */,
@@ -103,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				5E1FD71629DAB0100015AE6F /* String+ClassTest.swift */,
-				5E1FD71B29DAB1F00015AE6F /* Bool+StringValueTest.swift */,
 				5E1FD71D29DAB6B00015AE6F /* String+HTMLTest.swift */,
 			);
 			path = "FloatplaneApp-UtilitiesTests";
@@ -112,6 +109,7 @@
 		5EFD929329D90CA0007E8374 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E08F49429E1355D003C3694 /* FloatplaneApp_Models.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -236,7 +234,6 @@
 				5E389C3229D8B6AB00FC8B4B /* String+HTML.swift in Sources */,
 				5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */,
 				5E389C3429D8B6AB00FC8B4B /* UIImage+Transparency.swift in Sources */,
-				5E389C3129D8B6AB00FC8B4B /* Bool+StringValue.swift in Sources */,
 				5E389C3B29D8B6D800FC8B4B /* Log4S.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,7 +243,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E1FD71E29DAB6B00015AE6F /* String+HTMLTest.swift in Sources */,
-				5E1FD71C29DAB1F00015AE6F /* Bool+StringValueTest.swift in Sources */,
 				5E1FD71729DAB0100015AE6F /* String+ClassTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,8 +404,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -446,8 +442,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

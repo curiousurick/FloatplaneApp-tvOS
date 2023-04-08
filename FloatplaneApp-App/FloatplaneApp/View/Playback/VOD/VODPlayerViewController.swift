@@ -32,8 +32,10 @@ protocol VODPlayerViewDelegate {
 }
 
 class VODPlayerViewController: BaseVideoPlayerViewController {
-    private let progressStore = ProgressStore.instance
-    private let videoMetadataOperation = OperationManager.instance.videoMetadataOperation
+    private var progressStore: ProgressStore? {
+        return UserStoreImpl.instance.getProgressStore()
+    }
+    private let videoMetadataOperation = OperationManagerImpl.instance.videoMetadataOperation
     private let closeEnoughToFinishToRestart = 0.95
     
     var vodDelegate: VODPlayerViewDelegate?
@@ -69,14 +71,14 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
         super.viewWillDisappear(animated)
         if let player = player {
             let seconds = player.currentTime().seconds
-            progressStore.setProgress(for: guid, progress: seconds)
+            progressStore?.setProgress(for: guid, progress: seconds)
         }
         vodDelegate?.videoDidEnd(guid: guid)
     }
     
     override func progressUpdate(time: CMTime) {
         let seconds = time.seconds
-        self.progressStore.setProgress(for: self.guid, progress: seconds)
+        self.progressStore?.setProgress(for: self.guid, progress: seconds)
     }
     
     @objc func videoEnded() {
@@ -124,7 +126,8 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
             return player.currentTime()
         }
         // Starting video that was watched before and we have its progress
-        else if let savedProgress = progressStore.getProgress(for: guid) {
+        else if let progressStore = progressStore,
+                let savedProgress = progressStore.getProgress(for: guid) {
             let percent = savedProgress / Double(videoMetadata.duration)
             // Only continue from last position if you're not close enough to restart the video.
             if percent < closeEnoughToFinishToRestart {

@@ -26,7 +26,7 @@ import FloatplaneApp_Utilities
 
 class RootViewController: UIViewController {
     private let logger = Log4S()
-    private let getFirstPageOperation = OperationManager.instance.getFirstPageOperation
+    private let getFirstPageOperation = OperationManagerImpl.instance.getFirstPageOperation
     private let dataSource = DataSource.instance
     
     var topNavigationController: TopNavigationController?

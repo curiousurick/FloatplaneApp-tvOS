@@ -19,45 +19,42 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
 import FloatplaneApp_DataStores
-import FloatplaneApp_Operations
-import FloatplaneApp_Models
-import FloatplaneApp_Utilities
 
-class LaunchScreenViewController: UIViewController {
-    private let logger = Log4S()
+public protocol AppWiper {
     
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var floatPlaneLabel: UILabel!
+    func clean()
+}
+
+public class AppWiperImpl: AppWiper {
     
-    private let getFirstPageOperation = OperationManagerImpl.instance.getFirstPageOperation
+    private let userStore: UserStore
+    private let operationManager: OperationManager
+    private let urlCache: URLCache
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupAndDisplayFirstView()
+    public convenience init() {
+        self.init(
+            userStore: UserStoreImpl.instance,
+            operationManager: OperationManagerImpl.instance,
+            urlCache: URLCache.shared
+        )
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    init(
+        userStore: UserStore,
+        operationManager: OperationManager,
+        urlCache: URLCache
+    ) {
+        self.userStore = userStore
+        self.operationManager = operationManager
+        self.urlCache = urlCache
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
-    private func setupAndDisplayFirstView() {
-        Task {
-            if UserStoreImpl.instance.getUser() == nil {
-                AppDelegate.instance.rootViewController.goToLogin()
-            }
-            else {
-                AppDelegate.instance.rootViewController.getFirstPageAndLoadMainView()
-            }
-        }
+    public func clean() {
+        self.userStore.removeUser()
+        self.operationManager.cancelAllOperations()
+        self.operationManager.clearCache()
+        self.urlCache.removeAllCachedResponses()
     }
 }

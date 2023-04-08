@@ -26,7 +26,7 @@ import FloatplaneApp_DataStores
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    private let loginOp = OperationManager.instance.loginOperation
+    private let loginOp = OperationManagerImpl.instance.loginOperation
     
     @IBOutlet var usernameField: UITextField!
     @IBOutlet var passwordField: UITextField!
@@ -81,7 +81,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             let request = LoginRequest(username: usernameField.text ?? "", password: passwordField.text ?? "")
             let opResponse = await loginOp.get(request: request)
             if let user = opResponse.response?.user {
-                UserStore.instance.setUser(user: user)
+                UserStoreImpl.instance.setUser(user: user)
                 DispatchQueue.main.async {
                     self.performSegue(
                         withIdentifier: SegueIdentifier.LoginViewController.unwindFromLoginSegue,
@@ -89,12 +89,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     )
                 }
             }
-            else if let loginFailedError = opResponse.error as? LoginFailedError {
-                switch loginFailedError {
-                case .error(let response):
-                    self.displayLoginFailureAlert(message: response.message)
+            else {
+                var message: String?
+                if let loginFailedError = opResponse.error as? LoginFailedError {
+                    message = loginFailedError.response.message
                 }
-                
+                self.displayLoginFailureAlert(message: message)
             }
         }
     }
@@ -119,7 +119,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         ensurePlaceholderColor()
     }
     
-    func displayLoginFailureAlert(message: String?) {
+    func displayLoginFailureAlert(message: String? = nil) {
         let title = "Sorry, we had trouble logging you in"
         let defaultErrorMessage = "Your Floatplane username or password could not be verified. Please try again."
         let alert = UIAlertController(title: title, message: message ?? defaultErrorMessage, preferredStyle: .alert)

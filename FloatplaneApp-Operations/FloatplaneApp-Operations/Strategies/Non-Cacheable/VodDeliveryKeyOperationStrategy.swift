@@ -30,8 +30,9 @@ protocol VodDeliveryKeyOperationStrategy: InternalOperationStrategy<VodDeliveryK
 class VodDeliveryKeyOperationStrategyImpl: VodDeliveryKeyOperationStrategy {
     private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
     
+    private let session: Session
+    
     var dataRequest: DataRequest?
-    var session: Session
     
     init(session: Session) {
         self.session = session

@@ -23,6 +23,7 @@ import Foundation
 import Cache
 import FloatplaneApp_Utilities
 import FloatplaneApp_Models
+import FloatplaneApp_DataStores
 
 public protocol CacheableStrategyBasedOperation<Request, Response>: StrategyBasedOperation {
     
@@ -38,32 +39,41 @@ class CacheableStrategyBasedOperationImpl<I: Hashable, O: Codable>: CacheableStr
     private let logger = Log4S()
     private let cacheQueueLabel = "com.georgie.cacheQueue"
     
-    private let cacheExpiration: TimeInterval
-    private let storage: Storage<Request, Response>
+    private let storage: DiskStorageWrapper<Request, Response>
     private let cacheQueue: DispatchQueue
     
     let strategy: any InternalOperationStrategy<Request, Response>
     
-    init(
+    convenience init(
         strategy: any InternalOperationStrategy<Request, Response>,
         countLimit: UInt = 50,
         // Default 5 minutes
         cacheExpiration: TimeInterval = 5 * 60
     ) {
-        self.strategy = strategy
-        self.cacheExpiration = cacheExpiration
-        
         let expiry: Expiry = .date(Date().addingTimeInterval(cacheExpiration))
         let diskConfig = DiskConfig(name: "org.georgie.\(String.fromClass(Request.self))", expiry: expiry)
         let memoryConfig = MemoryConfig(expiry: expiry, countLimit: countLimit, totalCostLimit: 0)
 
-        self.storage = try! Storage(
+        let storage: Storage<Request, Response> = try! Storage(
           diskConfig: diskConfig,
           memoryConfig: memoryConfig,
           transformer: TransformerFactory.forCodable(ofType: Response.self)
         )
+        let storageWrapper = DiskStorageWrapper(storage: storage)
+        self.init(
+            strategy: strategy,
+            storage: storageWrapper
+        )
+    }
+    
+    init(
+        strategy: any InternalOperationStrategy<Request, Response>,
+        storage: DiskStorageWrapper<Request, Response>
+    ) {
         // For thread-safe access to the Storage object.
         cacheQueue = DispatchQueue(label: cacheQueueLabel)
+        self.strategy = strategy
+        self.storage = storage
     }
     
     /// The actual API consumers will use to get a parameterized response.
@@ -76,21 +86,8 @@ class CacheableStrategyBasedOperationImpl<I: Hashable, O: Codable>: CacheableStr
     /// request - This is the request whose type is determined by the Request generics paramters of the final implementation.
     /// invalidateCache - This is an optional parameter that lets caller explicitly make the actual network call.
     public func get(request: Request, invalidateCache: Bool) async -> OperationResponse<Response> {
-        do {
-            // Get rid of the cache if it's expired or explicitly asked to clear.
-            if try self.storage.isExpiredObject(forKey: request) || invalidateCache {
-                try self.storage.removeExpiredObjects()
-            }
-            else {
-                // Gets the response from the cache. Yay!
-                let response = try self.storage.object(forKey: request) as Response
-                return OperationResponse(response: response, error: nil)
-            }
-        }
-        // Access to storage failed for some reason. Returns with error.
-        // TODO: Determine if we should just fallthrough to the network call.
-        catch {
-            return OperationResponse(response: nil, error: error)
+        if let cache = getCache(request: request, invalidateCache: invalidateCache) {
+            return cache
         }
         // No cache available. Make network call.
         let result = await self.strategy.get(request: request)
@@ -100,15 +97,37 @@ class CacheableStrategyBasedOperationImpl<I: Hashable, O: Codable>: CacheableStr
         return result
     }
     
+    public func cancel() {
+        strategy.cancel()
+    }
+    
+    public func isActive() -> Bool {
+        return strategy.isActive()
+    }
+    
     /// Clears the storage cache of all data for this API.
     func clearCache() {
         cacheQueue.sync {
-            do {
-                try self.storage.removeAll()
+            self.storage.removeAll()
+        }
+    }
+}
+
+// MARK: Caching functions
+fileprivate extension CacheableStrategyBasedOperationImpl {
+    /// Gets response from cache if available.
+    private func getCache(request: Request, invalidateCache: Bool) -> OperationResponse<Response>? {
+        cacheQueue.sync {
+            // Get rid of the cache if it's expired or explicitly asked to clear.
+            if invalidateCache || self.storage.isExpiredObject(forKey: request) {
+                self.storage.removeExpiredObjects()
+                return nil
             }
-            catch {
-                self.logger.error("Error clearing cache. \(error)")
+            // Gets the response from the cache. Yay!
+            if let response = self.storage.readObject(forKey: request) {
+                return OperationResponse(response: response, error: nil)
             }
+            return nil
         }
     }
     
@@ -116,20 +135,7 @@ class CacheableStrategyBasedOperationImpl<I: Hashable, O: Codable>: CacheableStr
     /// TODO: Investigate if this function should throw or return a boolean so the implementation can act on failure to write.
     private func setCache(request: Request, response: Response) {
         cacheQueue.async {
-            do {
-                try self.storage.setObject(response, forKey: request)
-            }
-            catch {
-                self.logger.error("Error setting cache. \(error) Request type \(String.fromClass(request))) and Response type \(String.fromClass(response))")
-            }
+            self.storage.writeObject(response, forKey: request)
         }
-    }
-    
-    public func cancel() {
-        strategy.cancel()
-    }
-    
-    public func isActive() -> Bool {
-        return strategy.isActive()
     }
 }

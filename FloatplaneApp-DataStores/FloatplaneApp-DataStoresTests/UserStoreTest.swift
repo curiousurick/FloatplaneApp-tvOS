@@ -35,14 +35,14 @@ final class UserStoreTest: XCTestCase {
     // Mocks
     private var mockKeychainAccess: MockKeychainAccess!
     
-    private var subject: UserStore!
+    private var subject: UserStoreImpl!
     
     override func setUp() {
         super.setUp()
         
         mockKeychainAccess = MockKeychainAccess()
         
-        subject = UserStore(keychainAccess: mockKeychainAccess)
+        subject = UserStoreImpl(keychainAccess: mockKeychainAccess)
     }
     
     func testGetUser() {
@@ -58,6 +58,29 @@ final class UserStoreTest: XCTestCase {
         // Assert
         XCTAssertEqual(result, user)
         XCTAssertEqual(mockKeychainAccess.dataForKeyCallCount, 1)
+    }
+    
+    func getProgressStore() {
+        let icon = Icon(childImages: [], height: height, path: path, width: width)
+        let user = User(id: id, username: username, profileImage: icon)
+        let userData = try! JSONEncoder().encode(user)
+        mockKeychainAccess.mockDataForKey = (UserStoreKey, userData)
+        
+        // Act
+        let result = subject.getProgressStore()
+        
+        // Assert
+        XCTAssertNotNil(result)
+    }
+    
+    func getProgressStore_notLoggedIn() {
+        mockKeychainAccess.mockDataForKey = (UserStoreKey, nil)
+        
+        // Act
+        let result = subject.getProgressStore()
+        
+        // Assert
+        XCTAssertNil(result)
     }
     
     func testSetUser() {

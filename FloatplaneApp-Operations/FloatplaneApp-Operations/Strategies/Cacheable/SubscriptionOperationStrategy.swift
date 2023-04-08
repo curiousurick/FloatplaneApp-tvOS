@@ -29,11 +29,11 @@ protocol SubscriptionOperationStrategy: InternalOperationStrategy<SubscriptionRe
 /// May need to use this in the future to determine if the user has access to a given video.
 /// TODO: Investigate if ContentFeed returns videos that user does not have access to. Maybe need to do client-side limiting to avoid CX cliff.
 class SubscriptionOperationStrategyImpl: SubscriptionOperationStrategy {
-    
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
+
+    private let session: Session
     
     var dataRequest: DataRequest?
-    var session: Session
     
     init(session: Session) {
         self.session = session

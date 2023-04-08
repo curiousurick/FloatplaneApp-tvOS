@@ -28,7 +28,7 @@ import FloatplaneApp_Operations
 class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
     private let logger = Log4S()
     private let updateLiveTabQueue = OperationQueue()
-    private let creatorOperation = OperationManager.instance.creatorOperation
+    private let creatorOperation = OperationManagerImpl.instance.creatorOperation
     private let creatorDataSourceManager = DataSource.instance
     
     private var livePlayerViewController: LivePlayerViewController!

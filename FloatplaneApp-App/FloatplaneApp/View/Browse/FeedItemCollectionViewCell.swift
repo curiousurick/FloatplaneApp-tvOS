@@ -65,9 +65,10 @@ extension FeedItem: FeedViewItem {
     }
     
     var progress: TimeInterval? {
-        if videoAttachments.count > 0 {
+        if videoAttachments.count > 0,
+           let progressStore = UserStoreImpl.instance.getProgressStore() {
             let videoGuid = videoAttachments[0]
-            return ProgressStore.instance.getProgress(for: videoGuid)
+            return progressStore.getProgress(for: videoGuid)
         }
         return nil
     }

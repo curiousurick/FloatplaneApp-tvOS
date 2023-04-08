@@ -20,23 +20,23 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Utilities
+@testable import FloatplaneApp_Operations
 
-class BoolStringValueTest: XCTestCase {
+class FloatplaneDecoderTest: XCTestCase {
     
-    func testStringValueTrue() {
-        // Act
-        let trueString = true.stringValue
-        // Assert
-        XCTAssertEqual("true", trueString)
-    }
+    private let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     
-    func testStringValueFalse() {
-        // Act
-        let trueString = false.stringValue
+    func testDateFormatter() {
         
-        // Assert
-        XCTAssertEqual("false", trueString)
+        let subject = FloatplaneDecoder()
+        
+        // Assert date formatter
+        if case JSONDecoder.DateDecodingStrategy.formatted(let dateFormatter) = subject.dateDecodingStrategy {
+            XCTAssertEqual(dateFormat, dateFormatter.dateFormat)
+        }
+        else {
+            XCTFail()
+        }
     }
-    
+
 }

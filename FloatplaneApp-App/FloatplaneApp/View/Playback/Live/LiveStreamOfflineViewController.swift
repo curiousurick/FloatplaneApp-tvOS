@@ -26,7 +26,7 @@ import FloatplaneApp_Models
 
 class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
     private let logger = Log4S()
-    private let liveDeliveryKeyOperation = OperationManager.instance.liveDeliveryKeyOperation
+    private let liveDeliveryKeyOperation = OperationManagerImpl.instance.liveDeliveryKeyOperation
     private let dataSource = DataSource.instance
     private let liveDeliveryKeyDebuff = LiveDeliveryKeyDebuffImpl.instance
     

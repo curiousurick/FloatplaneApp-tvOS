@@ -153,11 +153,11 @@ class TestModelSupplier {
     static let createdAt = Date()
     static let creatorMessageEmail = true
     static let updatedAt = Date()
-    static let user = "user"
+    static let userString = "user"
     static let userNotificationSettings = UserNotificationSetting(
         contentEmail: contentEmail, contentFirebase: contentFirebase, createdAt: createdAt,
         creator: creatorString, creatorMessageEmail: creatorMessageEmail, id: id,
-        updatedAt: updatedAt, user: user
+        updatedAt: updatedAt, user: userString
     )
     static let creatorResponseObject = CreatorListResponse.CreatorResponseObject(
         creator: baseCreator,
@@ -181,6 +181,7 @@ class TestModelSupplier {
         userInteraction: [userInteraction], levels: [qualityLevel]
     )
     
+    static let liveDeliveryKeyRequest = LiveDeliveryKeyRequest(creator: creatorString)
     static let vodDeliveryKeyRequest = VodDeliveryKeyRequest(guid: guid)
     static let cdn = "cdn"
     static let strategy = "strategy"
@@ -219,4 +220,18 @@ class TestModelSupplier {
     static let searchQuery = "intel"
     static let searchRequest = SearchRequest(creatorId: creatorId, sort: sortOrder, searchQuery: searchQuery, fetchAfter: fetchAfter)
     static let searchResponse = SearchResponse(items: [feedItem])
+    
+    static let password = "mySuperS3cretPassword"
+    static let loginRequest = LoginRequest(username: username, password: password)
+    static let user = User(id: userString, username: username, profileImage: icon)
+    static let needs2FA = true
+    static let loginResponse = LoginResponse(user: user, needs2FA: needs2FA)
+    static let errorMessage = "Wrong password!!!!"
+    static let errorName = "ERROR_NAME.WRONG_PASSWORD"
+    static let errorId = "403"
+    static let loginError = LoginFailedResponse.LoginError(id: errorId, message: errorMessage, name: errorName)
+    static let loginFailedResponse = LoginFailedResponse(errors: [loginError], message: errorMessage)
+    
+    static let logoutRequest = LogoutRequest()
+    static let logoutResponse = LogoutResponse()
 }

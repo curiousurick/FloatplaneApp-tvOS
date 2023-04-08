@@ -30,11 +30,11 @@ protocol CreatorListOperationStrategy: InternalOperationStrategy<CreatorListRequ
 /// This is not sufficient to keep track of the active creator because it does not include livestream or subscription information.
 /// It also gets an object called UserNotificationSetting for each creator but its not really utilized on tvOS.
 class CreatorListOperationStrategyImpl: CreatorListOperationStrategy {
-    
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
     
+    private let session: Session
+    
     var dataRequest: DataRequest?
-    var session: Session
     
     init(session: Session) {
         self.session = session

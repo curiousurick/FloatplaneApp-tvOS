@@ -23,13 +23,26 @@ import Foundation
 
 public enum LoginFailedError: Error {
     case error(response: LoginFailedResponse)
+    
+    public var response: LoginFailedResponse {
+        switch self {
+        case .error(let response):
+            return response
+        }
+    }
 }
 
-public struct LoginFailedResponse: Codable {
-    public struct LoginError: Codable {
+public struct LoginFailedResponse: Codable, Equatable {
+    public struct LoginError: Codable, Equatable {
         public let id: String
         public let message: String
         public let name: String
+        
+        public init(id: String, message: String, name: String) {
+            self.id = id
+            self.message = message
+            self.name = name
+        }
     }
     
     public let errors: [LoginError]

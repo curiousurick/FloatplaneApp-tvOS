@@ -30,11 +30,11 @@ protocol ContentVideoOperationStrategy: InternalOperationStrategy<ContentVideoRe
 /// It includes additional metadata not included in a FeedItem, such as quality levels.
 /// NOTE: This is a CacheableAPIOperation and uses the default expiry and capacity limits
 class ContentVideoOperationStrategyImpl: ContentVideoOperationStrategy {
-    
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
     
+    private let session: Session
+    
     var dataRequest: DataRequest?
-    var session: Session
     
     init(session: Session) {
         self.session = session

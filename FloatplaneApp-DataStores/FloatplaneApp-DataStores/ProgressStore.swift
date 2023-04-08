@@ -25,8 +25,6 @@ import Cache
 /// Saves progress for given videos to disk with memory-backed cache.
 public class ProgressStore {
     
-    /// Singleton instance to ProgressStore
-    public static let instance = ProgressStore()
     /// Standard update interval in seconds while watching a video that a video controller should save current progress
     public static let updateInterval: TimeInterval = 10
     
@@ -38,9 +36,9 @@ public class ProgressStore {
         self.storage = storage
     }
     
-    private init() {
+    init(userId: String) {
         // Actual storage. Never expires and has no data limit (obviously device storage is limit)
-        let diskConfig = DiskConfig(name: "org.georgie.ProgressStore", expiry: .never)
+        let diskConfig = DiskConfig(name: "org.georgie.ProgressStore.\(userId)", expiry: .never)
         let memoryConfig = MemoryConfig(expiry: .never)
 
         let storage: Storage<String, TimeInterval> = try! Storage(

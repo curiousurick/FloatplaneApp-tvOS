@@ -36,7 +36,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
-    private let searchOperation = OperationManager.instance.searchOperation
+    private let searchOperation = OperationManagerImpl.instance.searchOperation
     private let minimumQueryLength = 3
     
     private var searchString: String?
@@ -178,7 +178,8 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
 extension SearchViewController: VODPlayerViewDelegate {
     
     func videoDidEnd(guid: String) {
-        guard let progress = ProgressStore.instance.getProgress(for: guid) else {
+        guard let progressStore = UserStoreImpl.instance.getProgressStore(),
+              let progress = progressStore.getProgress(for: guid) else {
             logger.warn("No progress found for video on return from ending")
             return
         }

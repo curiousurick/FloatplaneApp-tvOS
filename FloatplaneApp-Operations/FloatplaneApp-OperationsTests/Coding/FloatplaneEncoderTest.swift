@@ -19,35 +19,24 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import XCTest
 @testable import FloatplaneApp_Operations
-import Alamofire
-import FloatplaneApp_Models
 
-class MockInternalOperationStrategy<I: Hashable, O: Codable>: InternalOperationStrategy {
-    typealias Request = I
-    typealias Response = O
+class FloatplaneEncoderTest: XCTestCase {
+
+    private let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     
-    var dataRequest: Alamofire.DataRequest?
-    
-    var getCallCount = 0
-    var mockRequest: ((Request) -> OperationResponse<Response>)?
-    func get(request: I) async -> OperationResponse<Response> {
-        getCallCount += 1
-        return mockRequest?(request) ?? OperationResponse(response: nil, error: nil)
+    func testDateFormatter() {
+        
+        let subject = FloatplaneEncoder()
+        
+        // Assert date formatter
+        if case JSONEncoder.DateEncodingStrategy.formatted(let dateFormatter) = subject.dateEncodingStrategy {
+            XCTAssertEqual(dateFormat, dateFormatter.dateFormat)
+        }
+        else {
+            XCTFail()
+        }
     }
-    
-    var cancelCallCount = 0
-    func cancel() {
-        cancelCallCount += 1
-    }
-    
-    var mockIsActive = false
-    var isActiveCallCount = 0
-    func isActive() -> Bool {
-        isActiveCallCount += 1
-        return mockIsActive
-    }
-    
-    
+
 }

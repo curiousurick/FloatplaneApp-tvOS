@@ -30,11 +30,11 @@ protocol CreatorOperationStrategy: InternalOperationStrategy<CreatorRequest, Cre
 /// NOTE: This is a cacheable API operation which means the result will be stored in memory and disk until expired.
 /// It uses the default expiry for CachableAPIOperation
 class CreatorOperationStrategyImpl: CreatorOperationStrategy {
-    
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
     
+    private let session: Session
+    
     var dataRequest: DataRequest?
-    var session: Session
     
     init(session: Session) {
         self.session = session

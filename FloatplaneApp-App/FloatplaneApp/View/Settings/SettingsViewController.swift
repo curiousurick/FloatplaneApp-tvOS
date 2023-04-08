@@ -28,7 +28,8 @@ import FloatplaneApp_Utilities
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let logger = Log4S()
-    private let logoutOperation = OperationManager.instance.logoutOperation
+    private let appWiper: AppWiper = AppWiperImpl()
+    private let logoutOperation = OperationManagerImpl.instance.logoutOperation
     private let changeResolutionRow = 0
     private let logoutRow = 1
     private let totalSettingRows = 2
@@ -77,6 +78,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             if let error = opResponse.error {
                 self.logger.error("Error logging out \(error)")
             }
+            self.appWiper.clean()
             AppDelegate.instance.topNavigationController?.clearAndGoToLoginView()
         }
     }

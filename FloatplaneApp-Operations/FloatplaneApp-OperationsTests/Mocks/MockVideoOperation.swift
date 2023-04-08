@@ -19,45 +19,28 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
-import FloatplaneApp_DataStores
-import FloatplaneApp_Operations
+import Foundation
+@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
-import FloatplaneApp_Utilities
 
-class LaunchScreenViewController: UIViewController {
-    private let logger = Log4S()
+class MockVideoMetadataOperation: VideoMetadataOperation {
     
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var floatPlaneLabel: UILabel!
-    
-    private let getFirstPageOperation = OperationManagerImpl.instance.getFirstPageOperation
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupAndDisplayFirstView()
+    var getCallCount = 0
+    var mockGet: ((VideoMetadataRequest) -> OperationResponse<VideoMetadata>)?
+    func get(request: VideoMetadataRequest) async -> OperationResponse<VideoMetadata> {
+        getCallCount += 1
+        return mockGet?(request) ?? OperationResponse(response: nil, error: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    var isActiveCallCount = 0
+    var mockIsActive: Bool = false
+    func isActive() -> Bool {
+        isActiveCallCount += 1
+        return mockIsActive
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
-    private func setupAndDisplayFirstView() {
-        Task {
-            if UserStoreImpl.instance.getUser() == nil {
-                AppDelegate.instance.rootViewController.goToLogin()
-            }
-            else {
-                AppDelegate.instance.rootViewController.getFirstPageAndLoadMainView()
-            }
-        }
+    var cancelCallCount = 0
+    func cancel() {
+        cancelCallCount += 1
     }
 }

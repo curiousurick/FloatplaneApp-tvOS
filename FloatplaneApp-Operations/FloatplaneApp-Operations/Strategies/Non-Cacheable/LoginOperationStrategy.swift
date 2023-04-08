@@ -27,18 +27,16 @@ protocol LoginOperationStrategy: InternalOperationStrategy<LoginRequest, LoginRe
 
 /// Attempts to login the user to Floatplane. Takes a username and password and relies on cookies to maintain access to user-level APIs.
 class LoginOperationStrategyImpl: LoginOperationStrategy {
-    
     private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
-    // Used to simulate iOS so we don't need captcha
-    private let userAgent = "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"
+    
     private let headers: HTTPHeaders
+    private let session: Session
     
     var dataRequest: DataRequest?
-    var session: Session
     
     init(session: Session) {
         let headerMap = [
-            "user-agent" : userAgent
+            "user-agent" : OperationConstants.iOSUserAgent
         ]
         headers = HTTPHeaders(headerMap)
         self.session = session
@@ -61,11 +59,8 @@ class LoginOperationStrategyImpl: LoginOperationStrategy {
                     let error = LoginFailedError.error(response: loginFailedResponse)
                     continuation.resume(returning: OperationResponse(response: nil, error: error))
                 }
-                // Generic HTTP Failure
-                else if let httpError = response.error {
-                    let failedResponse = LoginFailedResponse(errors: [], message: httpError.localizedDescription)
-                    let error = LoginFailedError.error(response: failedResponse)
-                    continuation.resume(returning: OperationResponse(response: nil, error: error))
+                else {
+                    continuation.resume(returning: OperationResponse(response: nil, error: response.error))
                 }
             }
         }

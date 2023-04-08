@@ -21,7 +21,12 @@
 
 import Foundation
 
-public struct LoginResponse: Codable {
+public struct LoginResponse: Codable, Equatable {
     public let user: User
     public let needs2FA: Bool
+    
+    public init(user: User, needs2FA: Bool) {
+        self.user = user
+        self.needs2FA = needs2FA
+    }
 }

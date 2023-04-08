@@ -21,30 +21,66 @@
 
 import Foundation
 import Cache
+import FloatplaneApp_Utilities
 
 /// Wrapper for Cache framework's Storage object
 public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
+    private let logger = Log4S()
     
     /// Actual storage
-    private let storage: Storage<Key, Value>?
+    private let storage: Storage<Key, Value>
     
-    @available(*, deprecated, message: "VisibleForTesting")
-    init() {
-        self.storage = nil
-    }
-    
-    init(storage: Storage<Key, Value>) {
+    public init(storage: Storage<Key, Value>) {
         self.storage = storage
     }
     
     /// Reads an object for given key.
-    func readObject(forKey key: Key) -> Value? {
-        return try? storage?.object(forKey: key)
+    public func readObject(forKey key: Key) -> Value? {
+        do {
+            return try storage.object(forKey: key)
+        }
+        catch {
+            logger.info("Unable to read object for key \(String.fromClass(key)). Error \(error)")
+        }
+        return nil
     }
     
     /// Write given object for given key. Expiry indicates when the data will be considered expired.
     /// Note: Storage does not automatically delete object when expired
-    func writeObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) {
-        try? storage?.setObject(object, forKey: key, expiry: expiry)
+    public func writeObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) {
+        do {
+            try storage.setObject(object, forKey: key, expiry: expiry)
+        }
+        catch {
+            logger.info("Unable to write object for key \(String.fromClass(key)). Error \(error)")
+        }
+    }
+    
+    public func isExpiredObject(forKey key: Key) -> Bool {
+        do {
+            return try storage.isExpiredObject(forKey: key)
+        }
+        catch {
+            logger.info("Unable to check if object is expired for key \(String.fromClass(key)). Error \(error)")
+        }
+        return false
+    }
+    
+    public func removeExpiredObjects() {
+        do {
+            try storage.removeExpiredObjects()
+        }
+        catch {
+            logger.info("Unable to remove expired objects. Error \(error)")
+        }
+    }
+    
+    public func removeAll() {
+        do {
+            try storage.removeAll()
+        }
+        catch {
+            logger.info("Unable to removeAll from disk store. Error \(error)")
+        }
     }
 }
