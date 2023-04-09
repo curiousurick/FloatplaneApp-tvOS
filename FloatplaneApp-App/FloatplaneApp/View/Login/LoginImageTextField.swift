@@ -21,10 +21,11 @@
 
 import UIKit
 
-class LoginImageTextView: UIView {
+class LoginImageTextField: UIView {
     
     @IBOutlet var textField: UITextField!
     @IBOutlet var iconImage: UIImageView!
+    @IBOutlet var placeholderLabel: UILabel!
     
     private let focusedScale: CGFloat = 1.05
     private let unfocusedScale: CGFloat = 1.0
@@ -33,6 +34,7 @@ class LoginImageTextView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         iconImage.layer.cornerRadius = slightViewCornerRadius
         iconImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         iconImage.layer.masksToBounds = true
@@ -51,6 +53,11 @@ class LoginImageTextView: UIView {
             self.transform = transform
             self.iconImage.backgroundColor = focused ? UIColor.focusedTextImageColor : UIColor.unfocusedTextImageColor
         })
+    }
+    
+    func updatePlaceholderView() {
+        let hasText = textField.text != nil && !textField.text!.isEmpty
+        placeholderLabel.alpha = hasText ? 0.0 : 1.0
     }
     
 }

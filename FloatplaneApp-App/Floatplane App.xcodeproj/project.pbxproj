@@ -28,7 +28,7 @@
 		5E389A3929D6A12000FC8B4B /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C229D68E8B00D775EB /* Roboto-Medium.ttf */; };
 		5E389A3A29D6A12000FC8B4B /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */; };
 		5E389A3C29D6A52800FC8B4B /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */; };
-		5E389A3E29D6ABE600FC8B4B /* LoginImageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */; };
+		5E389A3E29D6ABE600FC8B4B /* LoginImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3D29D6ABE600FC8B4B /* LoginImageTextField.swift */; };
 		5E389A4029D6BD5A00FC8B4B /* UIFont+Roboto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3F29D6BD5A00FC8B4B /* UIFont+Roboto.swift */; };
 		5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */; };
 		5E389A4629D6CFC000FC8B4B /* UIColor+TextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */; };
@@ -160,7 +160,7 @@
 		5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Utilities.xcodeproj"; path = "../FloatplaneApp-Utilities/FloatplaneApp-Utilities.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
-		5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginImageTextView.swift; sourceTree = "<group>"; };
+		5E389A3D29D6ABE600FC8B4B /* LoginImageTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginImageTextField.swift; sourceTree = "<group>"; };
 		5E389A3F29D6BD5A00FC8B4B /* UIFont+Roboto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Roboto.swift"; sourceTree = "<group>"; };
 		5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Main.swift"; sourceTree = "<group>"; };
 		5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+TextColor.swift"; sourceTree = "<group>"; };
@@ -521,7 +521,7 @@
 				5EC057B529D6848E00D775EB /* ViewController+Border.swift */,
 				5EC057B729D689E700D775EB /* LoginButton.swift */,
 				5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */,
-				5E389A3D29D6ABE600FC8B4B /* LoginImageTextView.swift */,
+				5E389A3D29D6ABE600FC8B4B /* LoginImageTextField.swift */,
 				5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */,
 			);
 			path = Login;
@@ -774,7 +774,7 @@
 				5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */,
 				5EC0576829D54ED400D775EB /* CreatorListView.swift in Sources */,
 				5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */,
-				5E389A3E29D6ABE600FC8B4B /* LoginImageTextView.swift in Sources */,
+				5E389A3E29D6ABE600FC8B4B /* LoginImageTextField.swift in Sources */,
 				5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */,
 				5E1FD6F529DA62B10015AE6F /* SearchContainerViewController.swift in Sources */,
 				5E4CE96029D914F00029110E /* LaunchScreenViewController.swift in Sources */,

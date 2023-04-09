@@ -28,18 +28,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private let loginOp = OperationManagerImpl.instance.loginOperation
     
-    @IBOutlet var usernameField: UITextField!
-    @IBOutlet var passwordField: UITextField!
+    @IBOutlet var usernameField: LoginImageTextField!
+    @IBOutlet var passwordField: LoginImageTextField!
     @IBOutlet var loginButton: LoginButton!
     @IBOutlet var floatPlaneLabel: UILabel!
     
-    private var moveToLoginButton: Bool = false
+    private var viewToFocus: UIFocusEnvironment? {
+        didSet {
+            self.setNeedsFocusUpdate()
+            self.updateFocusIfNeeded()
+        }
+    }
     
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
         get {
-            if moveToLoginButton {
-                moveToLoginButton = false
-                return [loginButton]
+            if let viewToFocus = viewToFocus {
+                self.viewToFocus = nil
+                return [viewToFocus]
             }
             return super.preferredFocusEnvironments
         }
@@ -48,8 +53,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ensurePlaceholderColor()
-        
         let robotoFont: UIFont = .roboto(size: 48, weight: .black)
         floatPlaneLabel.font = UIFontMetrics.default.scaledFont(for: robotoFont)
         floatPlaneLabel.adjustsFontForContentSizeCategory = true
@@ -57,28 +60,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        let navController = UIStoryboard.main.getTopNavigationController()
-//        AppDelegate.instance.replaceRootController(viewController: navController)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        usernameField.updatePlaceholderView()
+        passwordField.updatePlaceholderView()
         // Just finished entering both text fields
-        let username = usernameField.text ?? ""
-        let password = passwordField.text ?? ""
+        let username = usernameField.textField.text ?? ""
+        let password = passwordField.textField.text ?? ""
         if reason == .committed &&
             !username.isEmpty &&
             !password.isEmpty {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now().advanced(by: .milliseconds(500))) {
-                self.moveToLoginButton = true
-                self.setNeedsFocusUpdate()
-                self.updateFocusIfNeeded()
+            // Does not work if you do it immediately.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.viewToFocus = self.loginButton
             }
         }
     }
     
     @IBAction func loginButtonPressed(sender: UIButton!) {
         Task {
-            let request = LoginRequest(username: usernameField.text ?? "", password: passwordField.text ?? "")
+            let username = usernameField.textField.text ?? ""
+            let password = passwordField.textField.text ?? ""
+            let request = LoginRequest(username: username, password: password)
             let opResponse = await loginOp.get(request: request)
             if let user = opResponse.response?.user {
                 UserStoreImpl.instance.setUser(user: user)
@@ -96,27 +100,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.displayLoginFailureAlert(message: message)
             }
         }
-    }
-    
-    func ensurePlaceholderColor() {
-        DispatchQueue.main.async {
-            let textColor = UIColor.loginTextColor
-            self.usernameField.textColor = textColor
-            self.usernameField.attributedPlaceholder = NSAttributedString(
-                string: "Username",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-            )
-            self.passwordField.textColor = textColor
-            self.passwordField.attributedPlaceholder = NSAttributedString(
-                string: "Password",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-            )
-        }
-    }
-    
-    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        super.didUpdateFocus(in: context, with: coordinator)
-        ensurePlaceholderColor()
     }
     
     func displayLoginFailureAlert(message: String? = nil) {

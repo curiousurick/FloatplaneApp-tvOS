@@ -23,10 +23,6 @@ import UIKit
 
 extension UIColor {
     
-    static var loginTextColor: UIColor {
-        return UIColor(red: 0x0c / 255, green: 0x10 / 255, blue: 0x12 / 255, alpha: 1.0)
-    }
-    
     static var focusedTextImageColor: UIColor {
         return UIColor(red: 0x4E / 255, green: 0xAC / 255, blue: 0xE6 / 255, alpha: 1.0)
     }

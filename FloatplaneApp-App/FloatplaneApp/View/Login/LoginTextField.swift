@@ -30,13 +30,13 @@ class LoginTextField: UITextField {
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         if let previousView = context.previouslyFocusedView,
            self == previousView {
-            let superView = self.superview as! LoginImageTextView
+            let superView = self.superview as! LoginImageTextField
             superView.focusAnimation(focused: false)
         }
         
         if let nextView = context.nextFocusedView,
            self == nextView {
-            let superView = self.superview as! LoginImageTextView
+            let superView = self.superview as! LoginImageTextField
             superView.focusAnimation(focused: true)
             
         }

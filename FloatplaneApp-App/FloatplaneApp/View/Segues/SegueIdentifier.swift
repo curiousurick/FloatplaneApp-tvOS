@@ -26,7 +26,6 @@ struct SegueIdentifier {
     
     struct LaunchScreenViewController {
         private init() { }
-        static let showLoginScreen = "ShowLoginScreen"
         static let showMainScreen = "ShowMainScreen"
     }
     struct TopNavigationController {
