@@ -36,8 +36,6 @@
 		5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A5629D7FEA700FC8B4B /* String+UIImage.swift */; };
 		5E389A5929D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A5829D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift */; };
 		5E389A6529D8216D00FC8B4B /* BaseVideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A6429D8216D00FC8B4B /* BaseVideoPlayerController.swift */; };
-		5E4CE95B29D911670029110E /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */; };
-		5E4CE95C29D911670029110E /* FloatplaneApp_DataStores.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5E4CE96029D914F00029110E /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE95F29D914F00029110E /* LaunchScreenViewController.swift */; };
 		5E4CE96329DA053E0029110E /* SegueIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE96229DA053E0029110E /* SegueIdentifier.swift */; };
 		5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BF829CFAD65006751F3 /* AppDelegate.swift */; };
@@ -48,6 +46,14 @@
 		5E507C1129CFAD66006751F3 /* FloatplaneAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1029CFAD66006751F3 /* FloatplaneAppTests.swift */; };
 		5E507C1B29CFAD66006751F3 /* FloatplaneAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1A29CFAD66006751F3 /* FloatplaneAppUITests.swift */; };
 		5E507C1D29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1C29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift */; };
+		5E8C133229E35AB50084F20D /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C130929E35A5D0084F20D /* FloatplaneApp_DataStores.framework */; };
+		5E8C133329E35AB50084F20D /* FloatplaneApp_DataStores.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C130929E35A5D0084F20D /* FloatplaneApp_DataStores.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5E8C133429E35AB50084F20D /* FloatplaneApp_Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C131229E35A640084F20D /* FloatplaneApp_Models.framework */; };
+		5E8C133529E35AB50084F20D /* FloatplaneApp_Models.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C131229E35A640084F20D /* FloatplaneApp_Models.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5E8C133629E35AB50084F20D /* FloatplaneApp_Operations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C131B29E35A690084F20D /* FloatplaneApp_Operations.framework */; };
+		5E8C133729E35AB50084F20D /* FloatplaneApp_Operations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C131B29E35A690084F20D /* FloatplaneApp_Operations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5E8C133829E35AB50084F20D /* FloatplaneApp_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C132429E35A6E0084F20D /* FloatplaneApp_Utilities.framework */; };
+		5E8C133929E35AB50084F20D /* FloatplaneApp_Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C132429E35A6E0084F20D /* FloatplaneApp_Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */; };
 		5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76129D03A9A00F9A83B /* ParallaxView */; };
 		5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76729D0B34D00F9A83B /* AlamofireImage */; };
@@ -68,56 +74,10 @@
 		5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B529D6848E00D775EB /* ViewController+Border.swift */; };
 		5EC057B829D689E700D775EB /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B729D689E700D775EB /* LoginButton.swift */; };
 		5EF5D9EB29E16C7500785396 /* UICKeyChainStore in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF5D9EA29E16C7500785396 /* UICKeyChainStore */; };
-		5EFD927829D8C746007E8374 /* FloatplaneApp_Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389B1929D8B26800FC8B4B /* FloatplaneApp_Models.framework */; };
-		5EFD927929D8C746007E8374 /* FloatplaneApp_Models.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389B1929D8B26800FC8B4B /* FloatplaneApp_Models.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5EFD927A29D8C746007E8374 /* FloatplaneApp_Operations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389B8A29D8B3D600FC8B4B /* FloatplaneApp_Operations.framework */; };
-		5EFD927B29D8C746007E8374 /* FloatplaneApp_Operations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389B8A29D8B3D600FC8B4B /* FloatplaneApp_Operations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD929629D90D15007E8374 /* AVKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5E389B1829D8B26800FC8B4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E389B1329D8B26800FC8B4B /* FloatplaneApp-Models.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5E389AF829D8B1A500FC8B4B;
-			remoteInfo = "FloatplaneApp-Models";
-		};
-		5E389B1A29D8B26800FC8B4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E389B1329D8B26800FC8B4B /* FloatplaneApp-Models.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5E389B0229D8B1A500FC8B4B;
-			remoteInfo = "FloatplaneApp-ModelsTests";
-		};
-		5E389B8929D8B3D600FC8B4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E389B8429D8B3D600FC8B4B /* FloatplaneApp-Operations.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5E389B2A29D8B29800FC8B4B;
-			remoteInfo = "FloatplaneApp-Operations";
-		};
-		5E389B8B29D8B3D600FC8B4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E389B8429D8B3D600FC8B4B /* FloatplaneApp-Operations.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5E389B3429D8B29900FC8B4B;
-			remoteInfo = "FloatplaneApp-OperationsTests";
-		};
-		5E4CE93929D90F3C0029110E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5E4CE91A29D90F330029110E;
-			remoteInfo = "FloatplaneApp-DataStores";
-		};
-		5E4CE93B29D90F3C0029110E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5E4CE92429D90F330029110E;
-			remoteInfo = "FloatplaneApp-DataStoresTests";
-		};
 		5E507C0D29CFAD66006751F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E0C3CCA29CF766700C71A19 /* Project object */;
@@ -132,16 +92,58 @@
 			remoteGlobalIDString = 5E507BF529CFAD65006751F3;
 			remoteInfo = FloatplaneApp;
 		};
-		5E8C12EC29E359140084F20D /* PBXContainerItemProxy */ = {
+		5E8C130829E35A5D0084F20D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */;
+			containerPortal = 5E8C130329E35A5D0084F20D /* FloatplaneApp-DataStores.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E4CE91A29D90F330029110E;
+			remoteInfo = "FloatplaneApp-DataStores";
+		};
+		5E8C130A29E35A5D0084F20D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E8C130329E35A5D0084F20D /* FloatplaneApp-DataStores.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E4CE92429D90F330029110E;
+			remoteInfo = "FloatplaneApp-DataStoresTests";
+		};
+		5E8C131129E35A640084F20D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E8C130C29E35A640084F20D /* FloatplaneApp-Models.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E389AF829D8B1A500FC8B4B;
+			remoteInfo = "FloatplaneApp-Models";
+		};
+		5E8C131329E35A640084F20D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E8C130C29E35A640084F20D /* FloatplaneApp-Models.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E389B0229D8B1A500FC8B4B;
+			remoteInfo = "FloatplaneApp-ModelsTests";
+		};
+		5E8C131A29E35A690084F20D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E8C131529E35A690084F20D /* FloatplaneApp-Operations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E389B2A29D8B29800FC8B4B;
+			remoteInfo = "FloatplaneApp-Operations";
+		};
+		5E8C131C29E35A690084F20D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E8C131529E35A690084F20D /* FloatplaneApp-Operations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E389B3429D8B29900FC8B4B;
+			remoteInfo = "FloatplaneApp-OperationsTests";
+		};
+		5E8C132329E35A6E0084F20D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E8C131E29E35A6E0084F20D /* FloatplaneApp-Utilities.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5E389C0929D8B67900FC8B4B;
 			remoteInfo = "FloatplaneApp-Utilities";
 		};
-		5E8C12EE29E359140084F20D /* PBXContainerItemProxy */ = {
+		5E8C132529E35A6E0084F20D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */;
+			containerPortal = 5E8C131E29E35A6E0084F20D /* FloatplaneApp-Utilities.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5E389C1329D8B67900FC8B4B;
 			remoteInfo = "FloatplaneApp-UtilitiesTests";
@@ -155,9 +157,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5EFD927B29D8C746007E8374 /* FloatplaneApp_Operations.framework in Embed Frameworks */,
-				5EFD927929D8C746007E8374 /* FloatplaneApp_Models.framework in Embed Frameworks */,
-				5E4CE95C29D911670029110E /* FloatplaneApp_DataStores.framework in Embed Frameworks */,
+				5E8C133529E35AB50084F20D /* FloatplaneApp_Models.framework in Embed Frameworks */,
+				5E8C133929E35AB50084F20D /* FloatplaneApp_Utilities.framework in Embed Frameworks */,
+				5E8C133329E35AB50084F20D /* FloatplaneApp_DataStores.framework in Embed Frameworks */,
+				5E8C133729E35AB50084F20D /* FloatplaneApp_Operations.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +174,6 @@
 		5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorDataSource.swift; sourceTree = "<group>"; };
 		5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabConstants.swift; sourceTree = "<group>"; };
 		5E1FD75429DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDeliveryKeyDebuff.swift; sourceTree = "<group>"; };
-		5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Utilities.xcodeproj"; path = "../FloatplaneApp-Utilities/FloatplaneApp-Utilities.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		5E389A3D29D6ABE600FC8B4B /* LoginImageTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginImageTextField.swift; sourceTree = "<group>"; };
@@ -182,10 +184,7 @@
 		5E389A5629D7FEA700FC8B4B /* String+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIImage.swift"; sourceTree = "<group>"; };
 		5E389A5829D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayer+VideoMetadata.swift"; sourceTree = "<group>"; };
 		5E389A6429D8216D00FC8B4B /* BaseVideoPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVideoPlayerController.swift; sourceTree = "<group>"; };
-		5E389B1329D8B26800FC8B4B /* FloatplaneApp-Models.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Models.xcodeproj"; path = "../../FloatplaneApp-Models/FloatplaneApp-Models.xcodeproj"; sourceTree = "<group>"; };
-		5E389B8429D8B3D600FC8B4B /* FloatplaneApp-Operations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Operations.xcodeproj"; path = "../../FloatplaneApp-Operations/FloatplaneApp-Operations.xcodeproj"; sourceTree = "<group>"; };
 		5E389C5429D8C23B00FC8B4B /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-DataStores.xcodeproj"; path = "../../FloatplaneApp-DataStores/FloatplaneApp-DataStores.xcodeproj"; sourceTree = "<group>"; };
 		5E4CE95F29D914F00029110E /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		5E4CE96229DA053E0029110E /* SegueIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifier.swift; sourceTree = "<group>"; };
 		5E507BF629CFAD65006751F3 /* FloatplaneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloatplaneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +199,10 @@
 		5E507C1629CFAD66006751F3 /* FloatplaneAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloatplaneAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E507C1A29CFAD66006751F3 /* FloatplaneAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneAppUITests.swift; sourceTree = "<group>"; };
 		5E507C1C29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5E8C130329E35A5D0084F20D /* FloatplaneApp-DataStores.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-DataStores.xcodeproj"; path = "../FloatplaneApp-DataStores/FloatplaneApp-DataStores.xcodeproj"; sourceTree = "<group>"; };
+		5E8C130C29E35A640084F20D /* FloatplaneApp-Models.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Models.xcodeproj"; path = "../FloatplaneApp-Models/FloatplaneApp-Models.xcodeproj"; sourceTree = "<group>"; };
+		5E8C131529E35A690084F20D /* FloatplaneApp-Operations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Operations.xcodeproj"; path = "../FloatplaneApp-Operations/FloatplaneApp-Operations.xcodeproj"; sourceTree = "<group>"; };
+		5E8C131E29E35A6E0084F20D /* FloatplaneApp-Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Utilities.xcodeproj"; path = "../FloatplaneApp-Utilities/FloatplaneApp-Utilities.xcodeproj"; sourceTree = "<group>"; };
 		5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTabBarController.swift; sourceTree = "<group>"; };
 		5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseReusableHeaderView.swift; sourceTree = "<group>"; };
@@ -237,12 +240,13 @@
 			files = (
 				5E1FD70329DA93D00015AE6F /* Alamofire in Frameworks */,
 				5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */,
-				5EFD927A29D8C746007E8374 /* FloatplaneApp_Operations.framework in Frameworks */,
+				5E8C133629E35AB50084F20D /* FloatplaneApp_Operations.framework in Frameworks */,
 				5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */,
-				5EFD927829D8C746007E8374 /* FloatplaneApp_Models.framework in Frameworks */,
 				5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */,
+				5E8C133829E35AB50084F20D /* FloatplaneApp_Utilities.framework in Frameworks */,
+				5E8C133429E35AB50084F20D /* FloatplaneApp_Models.framework in Frameworks */,
 				5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */,
-				5E4CE95B29D911670029110E /* FloatplaneApp_DataStores.framework in Frameworks */,
+				5E8C133229E35AB50084F20D /* FloatplaneApp_DataStores.framework in Frameworks */,
 				5E1FD72E29DB37ED0015AE6F /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +272,7 @@
 		5E0C3CC929CF766700C71A19 = {
 			isa = PBXGroup;
 			children = (
-				5E389B1229D8B25700FC8B4B /* Internal Dependencies */,
+				5E8C130229E35A520084F20D /* Internal Dependencies */,
 				5E507BF729CFAD65006751F3 /* FloatplaneApp */,
 				5E507C0F29CFAD66006751F3 /* FloatplaneAppTests */,
 				5E507C1929CFAD66006751F3 /* FloatplaneAppUITests */,
@@ -293,44 +297,6 @@
 				5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */,
 			);
 			path = Xibs;
-			sourceTree = "<group>";
-		};
-		5E389B1229D8B25700FC8B4B /* Internal Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */,
-				5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */,
-				5E389B8429D8B3D600FC8B4B /* FloatplaneApp-Operations.xcodeproj */,
-				5E389B1329D8B26800FC8B4B /* FloatplaneApp-Models.xcodeproj */,
-			);
-			path = "Internal Dependencies";
-			sourceTree = "<group>";
-		};
-		5E389B1429D8B26800FC8B4B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5E389B1929D8B26800FC8B4B /* FloatplaneApp_Models.framework */,
-				5E389B1B29D8B26800FC8B4B /* FloatplaneApp-ModelsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5E389B8529D8B3D600FC8B4B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5E389B8A29D8B3D600FC8B4B /* FloatplaneApp_Operations.framework */,
-				5E389B8C29D8B3D600FC8B4B /* FloatplaneApp-OperationsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5E4CE93529D90F3C0029110E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */,
-				5E4CE93C29D90F3C0029110E /* FloatplaneApp-DataStoresTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		5E4CE95D29D9128B0029110E /* UI Configuration */ = {
@@ -443,11 +409,49 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		5E8C12E829E359140084F20D /* Products */ = {
+		5E8C130229E35A520084F20D /* Internal Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				5E8C12ED29E359140084F20D /* FloatplaneApp_Utilities.framework */,
-				5E8C12EF29E359140084F20D /* FloatplaneApp-UtilitiesTests.xctest */,
+				5E8C131E29E35A6E0084F20D /* FloatplaneApp-Utilities.xcodeproj */,
+				5E8C131529E35A690084F20D /* FloatplaneApp-Operations.xcodeproj */,
+				5E8C130C29E35A640084F20D /* FloatplaneApp-Models.xcodeproj */,
+				5E8C130329E35A5D0084F20D /* FloatplaneApp-DataStores.xcodeproj */,
+			);
+			name = "Internal Dependencies";
+			sourceTree = "<group>";
+		};
+		5E8C130429E35A5D0084F20D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C130929E35A5D0084F20D /* FloatplaneApp_DataStores.framework */,
+				5E8C130B29E35A5D0084F20D /* FloatplaneApp-DataStoresTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E8C130D29E35A640084F20D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C131229E35A640084F20D /* FloatplaneApp_Models.framework */,
+				5E8C131429E35A640084F20D /* FloatplaneApp-ModelsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E8C131629E35A690084F20D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C131B29E35A690084F20D /* FloatplaneApp_Operations.framework */,
+				5E8C131D29E35A690084F20D /* FloatplaneApp-OperationsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E8C131F29E35A6E0084F20D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C132429E35A6E0084F20D /* FloatplaneApp_Utilities.framework */,
+				5E8C132629E35A6E0084F20D /* FloatplaneApp-UtilitiesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -681,20 +685,20 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5E4CE93529D90F3C0029110E /* Products */;
-					ProjectRef = 5E4CE93429D90F3C0029110E /* FloatplaneApp-DataStores.xcodeproj */;
+					ProductGroup = 5E8C130429E35A5D0084F20D /* Products */;
+					ProjectRef = 5E8C130329E35A5D0084F20D /* FloatplaneApp-DataStores.xcodeproj */;
 				},
 				{
-					ProductGroup = 5E389B1429D8B26800FC8B4B /* Products */;
-					ProjectRef = 5E389B1329D8B26800FC8B4B /* FloatplaneApp-Models.xcodeproj */;
+					ProductGroup = 5E8C130D29E35A640084F20D /* Products */;
+					ProjectRef = 5E8C130C29E35A640084F20D /* FloatplaneApp-Models.xcodeproj */;
 				},
 				{
-					ProductGroup = 5E389B8529D8B3D600FC8B4B /* Products */;
-					ProjectRef = 5E389B8429D8B3D600FC8B4B /* FloatplaneApp-Operations.xcodeproj */;
+					ProductGroup = 5E8C131629E35A690084F20D /* Products */;
+					ProjectRef = 5E8C131529E35A690084F20D /* FloatplaneApp-Operations.xcodeproj */;
 				},
 				{
-					ProductGroup = 5E8C12E829E359140084F20D /* Products */;
-					ProjectRef = 5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */;
+					ProductGroup = 5E8C131F29E35A6E0084F20D /* Products */;
+					ProjectRef = 5E8C131E29E35A6E0084F20D /* FloatplaneApp-Utilities.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -707,60 +711,60 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5E389B1929D8B26800FC8B4B /* FloatplaneApp_Models.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FloatplaneApp_Models.framework;
-			remoteRef = 5E389B1829D8B26800FC8B4B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5E389B1B29D8B26800FC8B4B /* FloatplaneApp-ModelsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "FloatplaneApp-ModelsTests.xctest";
-			remoteRef = 5E389B1A29D8B26800FC8B4B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5E389B8A29D8B3D600FC8B4B /* FloatplaneApp_Operations.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FloatplaneApp_Operations.framework;
-			remoteRef = 5E389B8929D8B3D600FC8B4B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5E389B8C29D8B3D600FC8B4B /* FloatplaneApp-OperationsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "FloatplaneApp-OperationsTests.xctest";
-			remoteRef = 5E389B8B29D8B3D600FC8B4B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5E4CE93A29D90F3C0029110E /* FloatplaneApp_DataStores.framework */ = {
+		5E8C130929E35A5D0084F20D /* FloatplaneApp_DataStores.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = FloatplaneApp_DataStores.framework;
-			remoteRef = 5E4CE93929D90F3C0029110E /* PBXContainerItemProxy */;
+			remoteRef = 5E8C130829E35A5D0084F20D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5E4CE93C29D90F3C0029110E /* FloatplaneApp-DataStoresTests.xctest */ = {
+		5E8C130B29E35A5D0084F20D /* FloatplaneApp-DataStoresTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "FloatplaneApp-DataStoresTests.xctest";
-			remoteRef = 5E4CE93B29D90F3C0029110E /* PBXContainerItemProxy */;
+			remoteRef = 5E8C130A29E35A5D0084F20D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5E8C12ED29E359140084F20D /* FloatplaneApp_Utilities.framework */ = {
+		5E8C131229E35A640084F20D /* FloatplaneApp_Models.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FloatplaneApp_Models.framework;
+			remoteRef = 5E8C131129E35A640084F20D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5E8C131429E35A640084F20D /* FloatplaneApp-ModelsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FloatplaneApp-ModelsTests.xctest";
+			remoteRef = 5E8C131329E35A640084F20D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5E8C131B29E35A690084F20D /* FloatplaneApp_Operations.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FloatplaneApp_Operations.framework;
+			remoteRef = 5E8C131A29E35A690084F20D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5E8C131D29E35A690084F20D /* FloatplaneApp-OperationsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FloatplaneApp-OperationsTests.xctest";
+			remoteRef = 5E8C131C29E35A690084F20D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5E8C132429E35A6E0084F20D /* FloatplaneApp_Utilities.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = FloatplaneApp_Utilities.framework;
-			remoteRef = 5E8C12EC29E359140084F20D /* PBXContainerItemProxy */;
+			remoteRef = 5E8C132329E35A6E0084F20D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5E8C12EF29E359140084F20D /* FloatplaneApp-UtilitiesTests.xctest */ = {
+		5E8C132629E35A6E0084F20D /* FloatplaneApp-UtilitiesTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "FloatplaneApp-UtilitiesTests.xctest";
-			remoteRef = 5E8C12EE29E359140084F20D /* PBXContainerItemProxy */;
+			remoteRef = 5E8C132529E35A6E0084F20D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
