@@ -132,6 +132,20 @@
 			remoteGlobalIDString = 5E507BF529CFAD65006751F3;
 			remoteInfo = FloatplaneApp;
 		};
+		5E8C12EC29E359140084F20D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E389C0929D8B67900FC8B4B;
+			remoteInfo = "FloatplaneApp-Utilities";
+		};
+		5E8C12EE29E359140084F20D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E389C1329D8B67900FC8B4B;
+			remoteInfo = "FloatplaneApp-UtilitiesTests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -429,6 +443,15 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		5E8C12E829E359140084F20D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C12ED29E359140084F20D /* FloatplaneApp_Utilities.framework */,
+				5E8C12EF29E359140084F20D /* FloatplaneApp-UtilitiesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5EAAE75D29CFD86400F9A83B /* Browse */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,7 +660,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E0C3CCD29CF766700C71A19 /* Build configuration list for PBXProject "Floatplane App" */;
+			buildConfigurationList = 5E0C3CCD29CF766700C71A19 /* Build configuration list for PBXProject "FloatplaneApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -668,6 +691,10 @@
 				{
 					ProductGroup = 5E389B8529D8B3D600FC8B4B /* Products */;
 					ProjectRef = 5E389B8429D8B3D600FC8B4B /* FloatplaneApp-Operations.xcodeproj */;
+				},
+				{
+					ProductGroup = 5E8C12E829E359140084F20D /* Products */;
+					ProjectRef = 5E341AE729E169AA007F7A4F /* FloatplaneApp-Utilities.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -720,6 +747,20 @@
 			fileType = wrapper.cfbundle;
 			path = "FloatplaneApp-DataStoresTests.xctest";
 			remoteRef = 5E4CE93B29D90F3C0029110E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5E8C12ED29E359140084F20D /* FloatplaneApp_Utilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FloatplaneApp_Utilities.framework;
+			remoteRef = 5E8C12EC29E359140084F20D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5E8C12EF29E359140084F20D /* FloatplaneApp-UtilitiesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FloatplaneApp-UtilitiesTests.xctest";
+			remoteRef = 5E8C12EE29E359140084F20D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1101,7 +1142,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E0C3CCD29CF766700C71A19 /* Build configuration list for PBXProject "Floatplane App" */ = {
+		5E0C3CCD29CF766700C71A19 /* Build configuration list for PBXProject "FloatplaneApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E0C3CFA29CF766800C71A19 /* Debug */,
