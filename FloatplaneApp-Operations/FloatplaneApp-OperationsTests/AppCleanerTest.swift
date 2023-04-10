@@ -46,6 +46,15 @@ class AppCleanerTest: XCTestCase {
         )
     }
     
+    func testNoArgInit() {
+        
+        subject = AppCleanerImpl()
+        
+        // Assert
+        XCTAssertNotNil(subject)
+        // NoOp because members are private.
+    }
+    
     func testClean() {
         // Act
         subject.clean()

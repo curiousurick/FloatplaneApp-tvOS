@@ -24,11 +24,8 @@ import XCTest
 import FloatplaneApp_Models
 import Alamofire
 
-class LogoutOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
+class LogoutOperationStrategyTest: OperationStrategyTestBase<LogoutOperationStrategyImpl> {
     private let headerMap = ["user-agent" : "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"]
-    
-    private var subject: LogoutOperationStrategyImpl!
     
     override func setUp() {
         super.setUp()
@@ -38,20 +35,25 @@ class LogoutOperationStrategyTest: OperationStrategyTestBase {
             session: session,
             headers: HTTPHeaders(headerMap)
         )
+        request = TestModelSupplier.logoutRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
     }
     
-    func testGetHappyCase() async throws {
-        // Arrange
-        let request = TestModelSupplier.logoutRequest
-        let response = TestModelSupplier.logoutResponse
-        
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
         try mockGet(
             baseUrl: baseUrl,
             request: request,
             response: response,
+            delayMilliseconds: delayMilliseconds,
             method: .post,
             additionalHeaders: headerMap
         )
+    }
+    
+    func testGetHappyCase() async throws {
+        // Arrange
+        let response = TestModelSupplier.logoutResponse
+        try setupSuccessMock(response: response)
         
         // Act
         let result = await subject.get(request: request)
@@ -63,7 +65,6 @@ class LogoutOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.logoutRequest
         try mockHTTPError(
             baseUrl: baseUrl,
             request: request,

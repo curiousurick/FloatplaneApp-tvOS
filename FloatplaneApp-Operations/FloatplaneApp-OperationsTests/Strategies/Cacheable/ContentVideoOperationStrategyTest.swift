@@ -23,22 +23,24 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class ContentVideoOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
+class ContentVideoOperationStrategyTest: OperationStrategyTestBase<ContentVideoOperationStrategyImpl> {
 
-    private var subject: ContentVideoOperationStrategyImpl!
-    
     override func setUp() {
         super.setUp()
         
         subject = ContentVideoOperationStrategyImpl(session: session)
+        request = TestModelSupplier.contentVideoRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
+    }
+    
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, request: request, response: response, delayMilliseconds: delayMilliseconds)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.contentVideoRequest
         let response = TestModelSupplier.contentVideoResponse
-        try mockGet(baseUrl: baseUrl, request: request, response: response)
+        try setupSuccessMock(response: response)
         
         // Act
         let result = await subject.get(request: request)
@@ -50,7 +52,6 @@ class ContentVideoOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.contentVideoRequest
         try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
         
         // Act
@@ -63,7 +64,6 @@ class ContentVideoOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.contentVideoRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act

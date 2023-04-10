@@ -24,7 +24,7 @@ import Foundation
 import Alamofire
 import FloatplaneApp_Models
 
-class MockInternalOperationStrategy<I: Hashable, O: Codable>: InternalOperationStrategy {
+class MockInternalOperationStrategy<I: OperationRequest, O: Codable>: InternalOperationStrategy {
     typealias Request = I
     typealias Response = O
     

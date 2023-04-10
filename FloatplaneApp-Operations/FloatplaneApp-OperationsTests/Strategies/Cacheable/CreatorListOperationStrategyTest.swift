@@ -23,24 +23,26 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class CreatorListOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
-    
-    private var subject: CreatorListOperationStrategyImpl!
+class CreatorListOperationStrategyTest: OperationStrategyTestBase<CreatorListOperationStrategyImpl> {
     
     override func setUp() {
         super.setUp()
         
         subject = CreatorListOperationStrategyImpl(session: session)
+        request = TestModelSupplier.creatorListRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
+    }
+    
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, response: response, delayMilliseconds: delayMilliseconds)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorListRequest
         let response = TestModelSupplier.creatorListResponse
         let httpResponse = [TestModelSupplier.creatorResponseObject]
+        try setupSuccessMock(response: httpResponse)
         
-        try mockGet(baseUrl: baseUrl, response: httpResponse)
         
         // Act
         let result = await subject.get(request: request)
@@ -52,7 +54,6 @@ class CreatorListOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorListRequest
         try mockHTTPError(baseUrl: baseUrl, statusCode: 403)
         
         // Act
@@ -65,7 +66,6 @@ class CreatorListOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorListRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act

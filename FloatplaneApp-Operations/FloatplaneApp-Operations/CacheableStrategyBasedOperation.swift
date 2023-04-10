@@ -41,7 +41,7 @@ public protocol CacheableStrategyBasedOperation<Request, Response>: StrategyBase
     func clearCache()
 }
 
-class CacheableStrategyBasedOperationImpl<I: Hashable, O: Codable>: CacheableStrategyBasedOperation {
+class CacheableStrategyBasedOperationImpl<I: OperationRequest, O: Codable>: CacheableStrategyBasedOperation {
     typealias Request = I
     typealias Response = O
     

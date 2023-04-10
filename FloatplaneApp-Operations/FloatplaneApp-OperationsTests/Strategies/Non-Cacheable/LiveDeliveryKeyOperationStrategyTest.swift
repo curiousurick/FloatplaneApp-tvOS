@@ -22,23 +22,24 @@
 import XCTest
 @testable import FloatplaneApp_Operations
 
-class LiveDeliveryKeyOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
-    
-    private var subject: LiveDeliveryKeyOperationStrategyImpl!
+class LiveDeliveryKeyOperationStrategyTest: OperationStrategyTestBase<LiveDeliveryKeyOperationStrategyImpl> {
     
     override func setUp() {
         super.setUp()
         
         subject = LiveDeliveryKeyOperationStrategyImpl(session: session)
+        request = TestModelSupplier.liveDeliveryKeyRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
+    }
+    
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, request: request, response: response, delayMilliseconds: delayMilliseconds)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.liveDeliveryKeyRequest
         let response = TestModelSupplier.deliveryKey
-        
-        try mockGet(baseUrl: baseUrl, request: request, response: response)
+        try setupSuccessMock(response: response)
         
         // Act
         let result = await subject.get(request: request)
@@ -50,7 +51,6 @@ class LiveDeliveryKeyOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.liveDeliveryKeyRequest
         try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
         
         // Act
@@ -63,7 +63,6 @@ class LiveDeliveryKeyOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.liveDeliveryKeyRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act

@@ -23,23 +23,24 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class SubscriptionOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
-    
-    private var subject: SubscriptionOperationStrategyImpl!
+class SubscriptionOperationStrategyTest: OperationStrategyTestBase<SubscriptionOperationStrategyImpl> {
     
     override func setUp() {
         super.setUp()
         
         subject = SubscriptionOperationStrategyImpl(session: session)
+        request = TestModelSupplier.subscriptionRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
+    }
+    
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, response: response, delayMilliseconds: delayMilliseconds)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.subscriptionRequest
         let response = TestModelSupplier.subscriptionResponse
-        
-        try mockGet(baseUrl: baseUrl, response: response.subscriptions)
+        try setupSuccessMock(response: response.subscriptions)
         
         // Act
         let result = await subject.get(request: request)
@@ -51,7 +52,6 @@ class SubscriptionOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.subscriptionRequest
         try mockHTTPError(baseUrl: baseUrl, statusCode: 403)
         
         // Act
@@ -64,7 +64,6 @@ class SubscriptionOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.subscriptionRequest
         try mockWrongResponse(baseUrl: baseUrl)
         
         // Act

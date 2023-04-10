@@ -23,22 +23,25 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class CreatorOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
-    
-    private var subject: CreatorOperationStrategyImpl!
+class CreatorOperationStrategyTest: OperationStrategyTestBase<CreatorOperationStrategyImpl> {
     
     override func setUp() {
         super.setUp()
         
         subject = CreatorOperationStrategyImpl(session: session)
+        request = TestModelSupplier.creatorRequest
+        
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
+    }
+    
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, request: request, response: response, delayMilliseconds: delayMilliseconds)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorRequest
         let response = TestModelSupplier.creator
-        try mockGet(baseUrl: baseUrl, request: request, response: [response])
+        try setupSuccessMock(response: [response])
         
         // Act
         let result = await subject.get(request: request)
@@ -50,7 +53,6 @@ class CreatorOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetEmptyArray() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorRequest
         let response: [Creator] = []
         try mockGet(baseUrl: baseUrl, request: request, response: response)
         
@@ -64,7 +66,6 @@ class CreatorOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetMoreThanOneCreator() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorRequest
         let response: [Creator] = [TestModelSupplier.creator, TestModelSupplier.creator]
         try mockGet(baseUrl: baseUrl, request: request, response: response)
         
@@ -78,7 +79,6 @@ class CreatorOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorRequest
         try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
         
         // Act
@@ -91,7 +91,6 @@ class CreatorOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.creatorRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act
@@ -100,6 +99,12 @@ class CreatorOperationStrategyTest: OperationStrategyTestBase {
         // Assert
         XCTAssertNotNil(result.error)
         XCTAssertNil(result.response)
+    }
+    
+    func testIsActive() {
+        
+        subject.cancel()
+        
     }
 
 }

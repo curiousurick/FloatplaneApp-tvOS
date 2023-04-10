@@ -23,23 +23,24 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class VodDeliveryKeyOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
-    
-    private var subject: VodDeliveryKeyOperationStrategyImpl!
+class VodDeliveryKeyOperationStrategyTest: OperationStrategyTestBase<VodDeliveryKeyOperationStrategyImpl> {
     
     override func setUp() {
         super.setUp()
         
         subject = VodDeliveryKeyOperationStrategyImpl(session: session)
+        request = TestModelSupplier.vodDeliveryKeyRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
+    }
+    
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, request: request, response: response, delayMilliseconds: delayMilliseconds)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.vodDeliveryKeyRequest
         let response = TestModelSupplier.deliveryKey
-        
-        try mockGet(baseUrl: baseUrl, request: request, response: response)
+        try setupSuccessMock(response: response)
         
         // Act
         let result = await subject.get(request: request)
@@ -51,7 +52,6 @@ class VodDeliveryKeyOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.vodDeliveryKeyRequest
         try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
         
         // Act
@@ -64,7 +64,6 @@ class VodDeliveryKeyOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.vodDeliveryKeyRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act

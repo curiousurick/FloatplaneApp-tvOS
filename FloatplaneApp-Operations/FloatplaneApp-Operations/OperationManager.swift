@@ -234,19 +234,19 @@ class OperationFactory {
     lazy var logoutStrategy = LogoutOperationStrategyImpl(session: sessionFactory.get())
     
     /// Creates a strategy-based operation for given strategy
-    func createOp<I: Hashable, O: Codable>(strategy: any InternalOperationStrategy<I, O>) -> any StrategyBasedOperation<I, O> {
+    func createOp<I: OperationRequest, O: Codable>(strategy: any InternalOperationStrategy<I, O>) -> any StrategyBasedOperation<I, O> {
         return StrategyBasedOperationImpl(strategy: strategy)
     }
     
     /// Creates a cacheable strategy-based operation for given strategy.
-    func createCachedOp<I: Hashable, O: Codable>(
+    func createCachedOp<I: OperationRequest, O: Codable>(
         strategy: any InternalOperationStrategy<I, O>
     ) -> any CacheableStrategyBasedOperation<I, O> {
         return CacheableStrategyBasedOperationImpl(strategy: strategy)
     }
     
     /// Creates a cacheable strategy-based operation for a given strategy, including countLimit and cacheExpiration for the disk and memory storages.
-    func createCachedOp<I: Hashable, O: Codable>(
+    func createCachedOp<I: OperationRequest, O: Codable>(
         strategy: any InternalOperationStrategy<I, O>,
         countLimit: UInt,
         cacheExpiration: TimeInterval

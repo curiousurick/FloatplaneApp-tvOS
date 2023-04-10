@@ -56,12 +56,10 @@ class VideoMetadataOperationImpl: VideoMetadataOperation {
             let result = VideoMetadata(feedItem: request.feedItem, contentVideoResponse: contentVideo, deliveryKey: deliveryKey)
             return OperationResponse(response: result, error: nil)
         }
-        else {
-            let deliveryKeyError = await deliveryKey.error
-            let contentVideoError = await contentVideo.error
-            let error: Error? = deliveryKeyError ?? contentVideoError
-            return OperationResponse(response: nil, error: error)
-        }
+        let deliveryKeyError = await deliveryKey.error
+        let contentVideoError = await contentVideo.error
+        let error: Error? = deliveryKeyError ?? contentVideoError
+        return OperationResponse(response: nil, error: error)
     }
     
     func isActive() -> Bool {

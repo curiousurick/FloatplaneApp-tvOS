@@ -23,23 +23,25 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class ContentFeedOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
-    
-    private var subject: ContentFeedOperationStrategyImpl!
+class ContentFeedOperationStrategyTest: OperationStrategyTestBase<ContentFeedOperationStrategyImpl> {
     
     override func setUp() {
         super.setUp()
         
         subject = ContentFeedOperationStrategyImpl(session: session)
+        request = TestModelSupplier.contentFeedRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
+    }
+    
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, request: request, response: response, delayMilliseconds: delayMilliseconds)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.contentFeedRequest
         let response = TestModelSupplier.creatorFeed
+        try setupSuccessMock(response: response.items)
         
-        try mockGet(baseUrl: baseUrl, request: request, response: response.items)
         
         // Act
         let result = await subject.get(request: request)
@@ -51,7 +53,6 @@ class ContentFeedOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.contentFeedRequest
         try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
         
         // Act
@@ -64,7 +65,6 @@ class ContentFeedOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.contentFeedRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act

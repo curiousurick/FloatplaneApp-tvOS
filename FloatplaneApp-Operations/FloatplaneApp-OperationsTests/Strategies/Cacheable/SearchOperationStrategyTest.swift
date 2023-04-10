@@ -23,23 +23,24 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class SearchOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
-    
-    private var subject: SearchOperationStrategyImpl!
+class SearchOperationStrategyTest: OperationStrategyTestBase<SearchOperationStrategyImpl> {
     
     override func setUp() {
         super.setUp()
         
         subject = SearchOperationStrategyImpl(session: session)
+        request = TestModelSupplier.searchRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
+    }
+    
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, request: request, response: response, delayMilliseconds: delayMilliseconds)
     }
     
     func testGetHappyCase() async throws {
         // Arrange
-        let request = TestModelSupplier.searchRequest
         let response = TestModelSupplier.searchResponse
-        
-        try mockGet(baseUrl: baseUrl, request: request, response: response.items)
+        try setupSuccessMock(response: response.items)
         
         // Act
         let result = await subject.get(request: request)
@@ -51,10 +52,9 @@ class SearchOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetCanceled() async throws {
         // Arrange
-        let request = TestModelSupplier.searchRequest
         let response = TestModelSupplier.searchResponse
         
-        try mockGet(baseUrl: baseUrl, request: request, response: response.items, delaySeconds: 1)
+        try mockGet(baseUrl: baseUrl, request: request, response: response.items, delayMilliseconds: 1000)
         
         // Act
         async let resultAsync = subject.get(request: request)
@@ -73,7 +73,6 @@ class SearchOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.searchRequest
         try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
         
         // Act
@@ -86,7 +85,6 @@ class SearchOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetSerializationError() async throws {
         // Arrange
-        let request = TestModelSupplier.searchRequest
         try mockWrongResponse(baseUrl: baseUrl, request: request)
         
         // Act

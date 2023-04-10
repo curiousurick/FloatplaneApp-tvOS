@@ -41,7 +41,7 @@ public protocol OperationStrategy {
 /// This protocol adds additional constraints on an OperationStrategy.
 protocol InternalOperationStrategy<Request, Response>: OperationStrategy {
     /// Defines the minimum type requirement of Request will be for the implementation of the strategy.
-    associatedtype Request: Any
+    associatedtype Request: OperationRequest
     /// Defines the minimum type requirement of Response will be for the implementation of the strategy.
     /// Must be Codable.
     associatedtype Response: Codable

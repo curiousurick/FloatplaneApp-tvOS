@@ -125,4 +125,52 @@ class VideoMetadataOperationStrategyTest: XCTestCase {
         XCTAssertEqual(mockContentVideoOperation.getCallCount, 1)
         XCTAssertEqual(mockVodDeliveryKeyOperation.getCallCount, 1)
     }
+    
+    func testIsActive_contentVideoOpActive() {
+        
+        // Arrange
+        mockContentVideoOperation.mockIsActive = true
+        
+        // Act
+        let result = subject.isActive()
+        
+        // Assert
+        XCTAssertTrue(result)
+        XCTAssertEqual(mockContentVideoOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockVodDeliveryKeyOperation.isActiveCallCount, 0)
+    }
+    
+    func testIsActive_deliveryKeyOpIsActive() {
+        
+        // Arrange
+        mockVodDeliveryKeyOperation.mockIsActive = true
+        
+        // Act
+        let result = subject.isActive()
+        
+        // Assert
+        XCTAssertTrue(result)
+        XCTAssertEqual(mockContentVideoOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockVodDeliveryKeyOperation.isActiveCallCount, 1)
+    }
+    
+    func testIsActive_noneActive() {
+        
+        // Act
+        let result = subject.isActive()
+        
+        // Assert
+        XCTAssertFalse(result)
+        XCTAssertEqual(mockContentVideoOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockVodDeliveryKeyOperation.isActiveCallCount, 1)
+    }
+    
+    func testCancel_cancellsAll() {
+        // Act
+        subject.cancel()
+        
+        // Assert
+        XCTAssertEqual(mockContentVideoOperation.cancelCallCount, 1)
+        XCTAssertEqual(mockVodDeliveryKeyOperation.cancelCallCount, 1)
+    }
 }

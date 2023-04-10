@@ -35,7 +35,7 @@
 		5E1FD73B29DCFEAE0015AE6F /* StrategyBasedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD73A29DCFEAE0015AE6F /* StrategyBasedOperation.swift */; };
 		5E1FD73D29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD73C29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift */; };
 		5E1FD75729DDD4190015AE6F /* MockInternalOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75629DDD4190015AE6F /* MockInternalOperationStrategy.swift */; };
-		5E1FD75A29DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75929DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift */; };
+		5E1FD75A29DDD6780015AE6F /* GetFirstPageOperationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75929DDD6780015AE6F /* GetFirstPageOperationTest.swift */; };
 		5E1FD75C29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75B29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift */; };
 		5E1FD75E29DDD8E30015AE6F /* TestModelSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75D29DDD8E30015AE6F /* TestModelSupplier.swift */; };
 		5E1FD76329DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD76229DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift */; };
@@ -159,7 +159,7 @@
 		5E1FD73A29DCFEAE0015AE6F /* StrategyBasedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyBasedOperation.swift; sourceTree = "<group>"; };
 		5E1FD73C29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableStrategyBasedOperation.swift; sourceTree = "<group>"; };
 		5E1FD75629DDD4190015AE6F /* MockInternalOperationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInternalOperationStrategy.swift; sourceTree = "<group>"; };
-		5E1FD75929DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFirstPageOperationStrategyTest.swift; sourceTree = "<group>"; };
+		5E1FD75929DDD6780015AE6F /* GetFirstPageOperationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFirstPageOperationTest.swift; sourceTree = "<group>"; };
 		5E1FD75B29DDD6C50015AE6F /* MockCacheableStrategyBasedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCacheableStrategyBasedOperation.swift; sourceTree = "<group>"; };
 		5E1FD75D29DDD8E30015AE6F /* TestModelSupplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelSupplier.swift; sourceTree = "<group>"; };
 		5E1FD76229DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMetadataOperationStrategyTest.swift; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 		5E1FD75829DDD6670015AE6F /* Compound */ = {
 			isa = PBXGroup;
 			children = (
-				5E1FD75929DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift */,
+				5E1FD75929DDD6780015AE6F /* GetFirstPageOperationTest.swift */,
 				5E1FD76229DE85160015AE6F /* VideoMetadataOperationStrategyTest.swift */,
 			);
 			path = Compound;
@@ -726,7 +726,7 @@
 				5E08F48229E092C1003C3694 /* MockVideoOperation.swift in Sources */,
 				5E56E74629E140470098B302 /* MockDiskStorageWrapper.swift in Sources */,
 				5E1FD77229DE902D0015AE6F /* CreatorOperationStrategyTest.swift in Sources */,
-				5E1FD75A29DDD6780015AE6F /* GetFirstPageOperationStrategyTest.swift in Sources */,
+				5E1FD75A29DDD6780015AE6F /* GetFirstPageOperationTest.swift in Sources */,
 				5E08F46129DE9C11003C3694 /* CreatorListOperationStrategyTest.swift in Sources */,
 				5E1FD75E29DDD8E30015AE6F /* TestModelSupplier.swift in Sources */,
 				5E08F48629E0952E003C3694 /* MockURLCache.swift in Sources */,

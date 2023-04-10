@@ -34,9 +34,13 @@ fileprivate struct UnknownObject: Codable {
     static let defaultVal = UnknownObject(thingy: "thangy", weirdDate: Date.distantFuture, wrongNum: 2, bigNum: 3958395)
 }
 
-class OperationStrategyTestBase: XCTestCase {
+class OperationStrategyTestBase<T: InternalOperationStrategy>: XCTestCase {
     
     var session: Session!
+    
+    var baseUrl: URL!
+    var subject: T!
+    var request: T.Request!
     
     override func setUp() {
         super.setUp()
@@ -46,30 +50,110 @@ class OperationStrategyTestBase: XCTestCase {
         self.session = Session(configuration: configuration)
     }
     
+    func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
+        try mockGet(baseUrl: baseUrl, request: request, response: response, delayMilliseconds: delayMilliseconds)
+    }
+    
+    func testCancel() async throws {
+
+        // Arrange
+        let emptyResponseArray: [T.Response] = []
+        try setupSuccessMock(response: emptyResponseArray, delayMilliseconds: 500)
+        async let unused = subject.get(request: request)
+        let expectation = self.expectation(description: "Canceled data request")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.subject.cancel()
+            
+            // Assert
+            XCTAssertNotNil(self.subject.dataRequest)
+            XCTAssertTrue(self.subject.dataRequest!.isCancelled)
+            expectation.fulfill()
+        }
+        
+        self.wait(for: [expectation], timeout: 2.0)
+        print(await unused)
+    }
+    
+    func testIsActiveWhenActive() async throws {
+
+        // Arrange
+        let emptyResponseArray: [T.Response] = []
+        try setupSuccessMock(response: emptyResponseArray, delayMilliseconds: 500)
+        async let unused = subject.get(request: request)
+        let expectation = self.expectation(description: "Canceled data request")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let result = self.subject.isActive()
+            
+            // Assert
+            XCTAssertTrue(result)
+            expectation.fulfill()
+        }
+        
+        self.wait(for: [expectation], timeout: 2.0)
+        print(await unused)
+    }
+    
+    func testActiveWhenNoDataRequest() async {
+
+        // Arrange
+        let result = self.subject.isActive()
+            
+        // Assert
+        XCTAssertFalse(result)
+    }
+    
+    func testActiveWhenCanceledDataRequest() async throws {
+
+        // Arrange
+        let emptyResponseArray: [T.Response] = []
+        try setupSuccessMock(response: emptyResponseArray, delayMilliseconds: 500)
+        async let unused = subject.get(request: request)
+        let expectation = self.expectation(description: "Canceled data request")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.subject.cancel()
+            let result = self.subject.isActive()
+            
+            // Assert
+            XCTAssertFalse(result)
+            expectation.fulfill()
+        }
+        
+        self.wait(for: [expectation], timeout: 2.0)
+        print(await unused)
+    }
+    
     func mockGet(
-        baseUrl: URL, request: (any OperationRequest)? = nil,
-        response: Codable, delaySeconds: Int? = nil,
+        baseUrl: URL, request: T.Request? = nil,
+        response: Codable?, delayMilliseconds: Int? = nil,
         method: Mock.HTTPMethod = .get,
         additionalHeaders: [String : String] = [:]
     ) throws {
         let urlRequest = try getUrlRequest(baseUrl: baseUrl, method: method, request: request)
-        let jsonData = try FloatplaneEncoder().encode(response)
+        var jsonData: Data?
+        var jsonMap: [Mock.HTTPMethod: Data] = [:]
+        if let response = response {
+            jsonData = try FloatplaneEncoder().encode(response)
+            jsonMap[method] = jsonData
+        }
         var mock = Mock(
             url: urlRequest.url!,
             dataType: .json,
             statusCode: 200,
-            data: [method : jsonData],
+            data: jsonMap,
             additionalHeaders: additionalHeaders
         )
-        if let delay = delaySeconds {
-            mock.delay = DispatchTimeInterval.seconds(delay)
+        if let delayMilliseconds = delayMilliseconds {
+            mock.delay = DispatchTimeInterval.milliseconds(delayMilliseconds)
         }
         mock.register()
     }
     
     func mockHTTPError(
-        baseUrl: URL, request: (any OperationRequest)? = nil,
-        statusCode: Int, delaySeconds: Int? = nil,
+        baseUrl: URL, request: T.Request? = nil,
+        statusCode: Int, delayMilliseconds: Int? = nil,
         method: Mock.HTTPMethod = .get,
         additionalHeaders: [String : String] = [:]
     ) throws {
@@ -83,15 +167,15 @@ class OperationStrategyTestBase: XCTestCase {
             additionalHeaders: additionalHeaders,
             requestError: error
         )
-        if let delay = delaySeconds {
-            mock.delay = DispatchTimeInterval.seconds(delay)
+        if let delayMilliseconds = delayMilliseconds {
+            mock.delay = DispatchTimeInterval.milliseconds(delayMilliseconds)
         }
         mock.register()
     }
     
     func mockWrongResponse(
-        baseUrl: URL, request: (any OperationRequest)? = nil,
-        delaySeconds: Int? = nil,
+        baseUrl: URL, request: T.Request? = nil,
+        delayMilliseconds: Int? = nil,
         method: Mock.HTTPMethod = .get,
         additionalHeaders: [String : String] = [:]
     ) throws {
@@ -105,13 +189,13 @@ class OperationStrategyTestBase: XCTestCase {
             data: [method : jsonData],
             additionalHeaders: additionalHeaders
         )
-        if let delay = delaySeconds {
-            mock.delay = DispatchTimeInterval.seconds(delay)
+        if let delayMilliseconds  = delayMilliseconds {
+            mock.delay = DispatchTimeInterval.milliseconds(delayMilliseconds)
         }
         mock.register()
     }
     
-    private func getUrlRequest(baseUrl: URL, method: Mock.HTTPMethod, request: (any OperationRequest)?) throws -> URLRequest {
+    private func getUrlRequest(baseUrl: URL, method: Mock.HTTPMethod, request: T.Request?) throws -> URLRequest {
         var urlRequest = try URLRequest(url: baseUrl, method: method.toHTTPMethod())
         guard let request = request else {
             return urlRequest
@@ -127,7 +211,7 @@ class OperationStrategyTestBase: XCTestCase {
         return urlRequest
     }
     
-    private func getQueryItems(request: (any OperationRequest)?) -> [URLQueryItem]? {
+    private func getQueryItems(request: T.Request?) -> [URLQueryItem]? {
         guard let request = request else { return nil }
         // We sort the keys first because Alamofire seems to do this and Mocker
         // requires an exact URL match, which is dumb.

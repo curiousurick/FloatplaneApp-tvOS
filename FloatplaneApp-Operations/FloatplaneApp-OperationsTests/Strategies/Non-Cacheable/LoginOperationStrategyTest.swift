@@ -23,30 +23,32 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class LoginOperationStrategyTest: OperationStrategyTestBase {
-    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
+class LoginOperationStrategyTest: OperationStrategyTestBase<LoginOperationStrategyImpl> {
     private let headerMap = ["user-agent" : "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"]
-    
-    private var subject: LoginOperationStrategyImpl!
     
     override func setUp() {
         super.setUp()
         
         subject = LoginOperationStrategyImpl(session: session)
+        request = TestModelSupplier.loginRequest
+        baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
     }
     
-    func testGetHappyCase() async throws {
-        // Arrange
-        let request = TestModelSupplier.loginRequest
-        let response = TestModelSupplier.loginResponse
-        
+    override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
         try mockGet(
             baseUrl: baseUrl,
             request: request,
             response: response,
+            delayMilliseconds: delayMilliseconds,
             method: .post,
             additionalHeaders: headerMap
         )
+    }
+    
+    func testGetHappyCase() async throws {
+        // Arrange
+        let response = TestModelSupplier.loginResponse
+        try setupSuccessMock(response: response)
         
         // Act
         let result = await subject.get(request: request)
@@ -58,7 +60,6 @@ class LoginOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetLoginFailed() async throws {
         // Arrange
-        let request = TestModelSupplier.loginRequest
         let response = TestModelSupplier.loginFailedResponse
         
         try mockGet(
@@ -86,7 +87,6 @@ class LoginOperationStrategyTest: OperationStrategyTestBase {
     
     func testGetHTTPError() async throws {
         // Arrange
-        let request = TestModelSupplier.loginRequest
         try mockHTTPError(
             baseUrl: baseUrl,
             request: request,

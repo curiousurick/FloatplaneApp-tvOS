@@ -23,7 +23,7 @@ import XCTest
 @testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
 
-class GetFirstPageOperationStrategyTest: XCTestCase {
+class GetFirstPageOperationTest: XCTestCase {
     
     private let creatorRequest = TestModelSupplier.creatorRequest
     private let creator = TestModelSupplier.creator
@@ -173,5 +173,72 @@ class GetFirstPageOperationStrategyTest: XCTestCase {
         XCTAssertEqual(mockCreatorListOperation.getCallCount, 1)
         XCTAssertEqual(mockCreatorOperation.getCallCount, 1)
         XCTAssertEqual(mockContentFeedOperation.getCallCount, 1)
+    }
+    
+    func testIsActive_creatorListActive() {
+        
+        // Arrange
+        mockCreatorListOperation.mockIsActive = true
+        
+        // Act
+        let result = subject.isActive()
+        
+        // Assert
+        XCTAssertTrue(result)
+        XCTAssertEqual(mockCreatorListOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockCreatorOperation.isActiveCallCount, 0)
+        XCTAssertEqual(mockContentFeedOperation.isActiveCallCount, 0)
+    }
+    
+    func testIsActive_creatorOpActive() {
+        
+        // Arrange
+        mockCreatorOperation.mockIsActive = true
+        
+        // Act
+        let result = subject.isActive()
+        
+        // Assert
+        XCTAssertTrue(result)
+        XCTAssertEqual(mockCreatorListOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockCreatorOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockContentFeedOperation.isActiveCallCount, 0)
+    }
+    
+    func testIsActive_contentFeedOpIsActive() {
+        
+        // Arrange
+        mockContentFeedOperation.mockIsActive = true
+        
+        // Act
+        let result = subject.isActive()
+        
+        // Assert
+        XCTAssertTrue(result)
+        XCTAssertEqual(mockCreatorListOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockCreatorOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockContentFeedOperation.isActiveCallCount, 1)
+    }
+    
+    func testIsActive_noneActive() {
+        
+        // Act
+        let result = subject.isActive()
+        
+        // Assert
+        XCTAssertFalse(result)
+        XCTAssertEqual(mockCreatorListOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockCreatorOperation.isActiveCallCount, 1)
+        XCTAssertEqual(mockContentFeedOperation.isActiveCallCount, 1)
+    }
+    
+    func testCancel_cancellsAll() {
+        // Act
+        subject.cancel()
+        
+        // Assert
+        XCTAssertEqual(mockCreatorListOperation.cancelCallCount, 1)
+        XCTAssertEqual(mockCreatorOperation.cancelCallCount, 1)
+        XCTAssertEqual(mockContentFeedOperation.cancelCallCount, 1)
     }
 }

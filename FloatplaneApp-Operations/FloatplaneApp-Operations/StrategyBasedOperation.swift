@@ -29,7 +29,7 @@ import FloatplaneApp_Models
 /// Response - Must be codable. This is because strategies will require them to be decodable from HTTP responses.
 public protocol StrategyBasedOperation<Request, Response>: Operation { }
 
-public class StrategyBasedOperationImpl<I: Any, O: Codable>: StrategyBasedOperation {
+public class StrategyBasedOperationImpl<I: OperationRequest, O: Codable>: StrategyBasedOperation {
     public typealias Request = I
     public typealias Response = O
     
