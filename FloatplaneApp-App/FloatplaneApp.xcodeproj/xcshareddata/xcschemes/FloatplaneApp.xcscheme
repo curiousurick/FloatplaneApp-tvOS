@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5E507C0B29CFAD66006751F3"
+               BuildableName = "FloatplaneAppTests.xctest"
+               BlueprintName = "FloatplaneAppTests"
+               ReferencedContainer = "container:FloatplaneApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5E507C1529CFAD66006751F3"
+               BuildableName = "FloatplaneAppUITests.xctest"
+               BlueprintName = "FloatplaneAppUITests"
+               ReferencedContainer = "container:FloatplaneApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
