@@ -19,6 +19,7 @@
 //  THE SOFTWARE.
 //
 
+import UIKit
 import XCTest
 @testable import FloatplaneApp_Utilities
 
@@ -40,7 +41,21 @@ final class StringHTMLTest: XCTestCase {
         let result = htmlDescription.html2AttributedString
         
         // Assert
-        XCTAssertEqual(result?.string, strippedDescription)
+        XCTAssertEqual(result.string, strippedDescription)
     }
-
+    
+    func testDataAttributedString_invalidOptions() {
+        // Arrange
+        let data = Data(htmlDescription.utf8)
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .characterEncoding: "bloop",
+            NSAttributedString.DocumentReadingOptionKey.documentType : Data()
+        ]
+        
+        // Act
+        let result = data.getAttributedString(options: options)
+        
+        // Assert
+        XCTAssertEqual(result.string, "")
+    }
 }

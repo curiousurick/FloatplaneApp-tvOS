@@ -19,7 +19,7 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
 
 /// Request to get search results for a given creator, filtered by the search query.
 public struct SearchRequest: OperationRequest {

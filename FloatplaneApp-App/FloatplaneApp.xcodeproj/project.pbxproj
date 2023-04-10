@@ -54,6 +54,7 @@
 		5E8C133729E35AB50084F20D /* FloatplaneApp_Operations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C131B29E35A690084F20D /* FloatplaneApp_Operations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5E8C133829E35AB50084F20D /* FloatplaneApp_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C132429E35A6E0084F20D /* FloatplaneApp_Utilities.framework */; };
 		5E8C133929E35AB50084F20D /* FloatplaneApp_Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C132429E35A6E0084F20D /* FloatplaneApp_Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5E8C13F629E3E8AA0084F20D /* UIImage+Transparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C13F529E3E8AA0084F20D /* UIImage+Transparency.swift */; };
 		5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */; };
 		5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76129D03A9A00F9A83B /* ParallaxView */; };
 		5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76729D0B34D00F9A83B /* AlamofireImage */; };
@@ -203,6 +204,7 @@
 		5E8C130C29E35A640084F20D /* FloatplaneApp-Models.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Models.xcodeproj"; path = "../FloatplaneApp-Models/FloatplaneApp-Models.xcodeproj"; sourceTree = "<group>"; };
 		5E8C131529E35A690084F20D /* FloatplaneApp-Operations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Operations.xcodeproj"; path = "../FloatplaneApp-Operations/FloatplaneApp-Operations.xcodeproj"; sourceTree = "<group>"; };
 		5E8C131E29E35A6E0084F20D /* FloatplaneApp-Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Utilities.xcodeproj"; path = "../FloatplaneApp-Utilities/FloatplaneApp-Utilities.xcodeproj"; sourceTree = "<group>"; };
+		5E8C13F529E3E8AA0084F20D /* UIImage+Transparency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Transparency.swift"; sourceTree = "<group>"; };
 		5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTabBarController.swift; sourceTree = "<group>"; };
 		5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseReusableHeaderView.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 		5E507BF729CFAD65006751F3 /* FloatplaneApp */ = {
 			isa = PBXGroup;
 			children = (
+				5E8C13F429E3E8A20084F20D /* Extensions */,
 				5E507C2829CFADB5006751F3 /* Config */,
 				5E4CE95D29D9128B0029110E /* UI Configuration */,
 				5E507C2729CFADAB006751F3 /* View */,
@@ -454,6 +457,14 @@
 				5E8C132629E35A6E0084F20D /* FloatplaneApp-UtilitiesTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5E8C13F429E3E8A20084F20D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C13F529E3E8AA0084F20D /* UIImage+Transparency.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		5EAAE75D29CFD86400F9A83B /* Browse */ = {
@@ -841,6 +852,7 @@
 				5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */,
 				5EC0575729D49A7700D775EB /* LiveStreamOfflineViewController.swift in Sources */,
 				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
+				5E8C13F629E3E8AA0084F20D /* UIImage+Transparency.swift in Sources */,
 				5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */,
 				5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */,
 				5E389A5929D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift in Sources */,

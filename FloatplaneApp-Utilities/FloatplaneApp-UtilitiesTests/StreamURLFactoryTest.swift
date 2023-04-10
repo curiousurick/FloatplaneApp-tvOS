@@ -72,5 +72,30 @@ class StreamURLFactoryTest: XCTestCase {
         let expectedUrl = URL(string: "\(cdn)\(path)")!
         XCTAssertEqual(result, expectedUrl)
     }
+    
+    func testCreateWithDeliveryKeyAndQualityLevel_chosenLevelNotFound() {
+        let deliveryKey = TestModelSupplier.realDeliveryKey
+        let cdn = deliveryKey.cdn
+        let uri = deliveryKey.resource.uri
+        let qualityLevel = QualityLevel.Standard.qlLive
+        let dkQualityLevel = DeliveryKeyQualityLevel.vodCases.last
+        let resourceData = deliveryKey.resource.data.getResource(qualitylevelName: dkQualityLevel)!
+        let fileName = resourceData.fileName
+        let accessToken = resourceData.accessToken
+        let fileNameKey = QualityLevelParams.Constants.FileNameKey
+        let accessTokenKey = QualityLevelParams.Constants.AccessTokenKey
+        let path = uri
+            .replacing(fileNameKey, with: fileName)
+            .replacing(accessTokenKey, with: accessToken)
+        
+        // Act
+        let result = subject.create(deliveryKey: deliveryKey, qualityLevel: qualityLevel)
+        
+        // Assert
+        let expectedUrl = URL(string: "\(cdn)\(path)")!
+        XCTAssertEqual(result, expectedUrl)
+        
+        
+    }
 
 }

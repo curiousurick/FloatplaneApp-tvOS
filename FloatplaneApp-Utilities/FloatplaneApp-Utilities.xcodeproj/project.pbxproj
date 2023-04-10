@@ -14,12 +14,12 @@
 		5E389C1A29D8B67900FC8B4B /* FloatplaneApp-Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E389C0C29D8B67900FC8B4B /* FloatplaneApp-Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E389C3229D8B6AB00FC8B4B /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */; };
 		5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2C29D8B68A00FC8B4B /* String+Class.swift */; };
-		5E389C3429D8B6AB00FC8B4B /* UIImage+Transparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */; };
 		5E389C3B29D8B6D800FC8B4B /* Log4S.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C3A29D8B6D800FC8B4B /* Log4S.swift */; };
 		5E7711B629E15CDE002E1883 /* StreamURLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7711B529E15CDE002E1883 /* StreamURLFactory.swift */; };
 		5E7711B829E15D87002E1883 /* StreamURLFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7711B729E15D87002E1883 /* StreamURLFactoryTest.swift */; };
 		5E7711BA29E15FA7002E1883 /* TestModelSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7711B929E15FA7002E1883 /* TestModelSupplier.swift */; };
 		5E8C133D29E35ACD0084F20D /* FloatplaneApp_Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C132F29E35A9F0084F20D /* FloatplaneApp_Models.framework */; };
+		5E8C140029E3EF130084F20D /* Log4STest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C13FF29E3EF130084F20D /* Log4STest.swift */; };
 		5EFD929529D90CA0007E8374 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 5EFD929429D90CA0007E8374 /* Logging */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +56,6 @@
 		5E389C0D29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = "FloatplaneApp-Utilities.docc"; sourceTree = "<group>"; };
 		5E389C1329D8B67900FC8B4B /* FloatplaneApp-UtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FloatplaneApp-UtilitiesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389C2C29D8B68A00FC8B4B /* String+Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Class.swift"; sourceTree = "<group>"; };
-		5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Transparency.swift"; sourceTree = "<group>"; };
 		5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		5E389C3A29D8B6D800FC8B4B /* Log4S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4S.swift; sourceTree = "<group>"; };
 		5E44E6D829E16A0C00DACC58 /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +65,7 @@
 		5E7711B729E15D87002E1883 /* StreamURLFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamURLFactoryTest.swift; sourceTree = "<group>"; };
 		5E7711B929E15FA7002E1883 /* TestModelSupplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelSupplier.swift; sourceTree = "<group>"; };
 		5E8C132929E35A9F0084F20D /* FloatplaneApp-Models.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Models.xcodeproj"; path = "../../FloatplaneApp-Models/FloatplaneApp-Models.xcodeproj"; sourceTree = "<group>"; };
+		5E8C13FF29E3EF130084F20D /* Log4STest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log4STest.swift; sourceTree = "<group>"; };
 		5EF5D9E229E16AEE00785396 /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF5D9E429E16AFB00785396 /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -117,7 +117,6 @@
 				5E389C3A29D8B6D800FC8B4B /* Log4S.swift */,
 				5E7711B529E15CDE002E1883 /* StreamURLFactory.swift */,
 				5E389C2C29D8B68A00FC8B4B /* String+Class.swift */,
-				5E389C2E29D8B68A00FC8B4B /* UIImage+Transparency.swift */,
 				5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */,
 				5E389C0C29D8B67900FC8B4B /* FloatplaneApp-Utilities.h */,
 				5E389C0D29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc */,
@@ -132,6 +131,7 @@
 				5E1FD71629DAB0100015AE6F /* String+ClassTest.swift */,
 				5E1FD71D29DAB6B00015AE6F /* String+HTMLTest.swift */,
 				5E7711B729E15D87002E1883 /* StreamURLFactoryTest.swift */,
+				5E8C13FF29E3EF130084F20D /* Log4STest.swift */,
 			);
 			path = "FloatplaneApp-UtilitiesTests";
 			sourceTree = "<group>";
@@ -318,7 +318,6 @@
 				5E7711B629E15CDE002E1883 /* StreamURLFactory.swift in Sources */,
 				5E389C3229D8B6AB00FC8B4B /* String+HTML.swift in Sources */,
 				5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */,
-				5E389C3429D8B6AB00FC8B4B /* UIImage+Transparency.swift in Sources */,
 				5E389C3B29D8B6D800FC8B4B /* Log4S.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E1FD71E29DAB6B00015AE6F /* String+HTMLTest.swift in Sources */,
+				5E8C140029E3EF130084F20D /* Log4STest.swift in Sources */,
 				5E1FD71729DAB0100015AE6F /* String+ClassTest.swift in Sources */,
 				5E7711B829E15D87002E1883 /* StreamURLFactoryTest.swift in Sources */,
 				5E7711BA29E15FA7002E1883 /* TestModelSupplier.swift in Sources */,

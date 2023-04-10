@@ -19,24 +19,44 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+#if canImport(AppKit)
+    import AppKit
+#elseif canImport(UIKit)
+   import UIKit
+#endif
 
-/// Taken from https://www.hackingwithswift.com/example-code/system/how-to-convert-html-to-an-nsattributedstring
-public extension StringProtocol {
-    var html2AttributedString: NSAttributedString? {
+extension Data {
+    func htmlAttributedString() -> NSAttributedString {
+        getAttributedString(
+            options: [
+                .documentType: NSAttributedString.DocumentType.html,
+                .characterEncoding: String.Encoding.utf8.rawValue
+            ]
+        )
+    }
+    
+    func getAttributedString(
+        options: [NSAttributedString.DocumentReadingOptionKey : Any]
+    ) -> NSAttributedString {
         do {
             return try NSAttributedString(
-                data: Data(utf8),
-                options: [.documentType: NSAttributedString.DocumentType.html,
-                          .characterEncoding: String.Encoding.utf8.rawValue],
+                data: self,
+                options: options,
                 documentAttributes: nil
             )
         } catch {
             Log4S().error("Unable to remove HTML from input")
-            return nil
+            return NSAttributedString()
         }
     }
+}
+
+/// Taken from https://www.hackingwithswift.com/example-code/system/how-to-convert-html-to-an-nsattributedstring
+public extension StringProtocol {
+    var html2AttributedString: NSAttributedString {
+        Data(utf8).htmlAttributedString()
+    }
     var html2String: String {
-        html2AttributedString?.string ?? ""
+        html2AttributedString.string
     }
 }
