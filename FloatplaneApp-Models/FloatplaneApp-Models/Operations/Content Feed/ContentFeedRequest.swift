@@ -27,24 +27,31 @@ public struct ContentFeedRequest: OperationRequest {
     public let fetchAfter: Int
     public let limit: UInt64
     public let creatorId: String
+    public let channel: String?
     private let hasVideo: Bool = true
     private let hasAudio: Bool = false
     private let hasPicture: Bool = false
     private let hasText: Bool = false
     
     /// Simplifier for creating a request to get the first 20 items for a creator.
-    public static func firstPage(for creatorId: String) -> ContentFeedRequest {
-        return ContentFeedRequest(fetchAfter: 0, limit: 20, creatorId: creatorId)
+    public static func firstPage(for creatorId: String, channel: String? = nil) -> ContentFeedRequest {
+        return ContentFeedRequest(fetchAfter: 0, limit: 20, creatorId: creatorId, channel: channel)
     }
     
-    public init(fetchAfter: Int, limit: UInt64, creatorId: String) {
+    public init(
+        fetchAfter: Int,
+        limit: UInt64,
+        creatorId: String,
+        channel: String? = nil
+    ) {
         self.fetchAfter = fetchAfter
         self.limit = limit
         self.creatorId = creatorId
+        self.channel = channel
     }
     
     public var params: [String : Any] {
-        return [
+        var map: [String : Any] = [
             "fetchAfter" : fetchAfter,
             "id" : creatorId,
             "limit" : limit,
@@ -53,6 +60,10 @@ public struct ContentFeedRequest: OperationRequest {
             "hasPicture" : hasPicture.stringValue,
             "hasText" : hasText.stringValue
         ]
+        if let channel = channel {
+            map["channel"] = channel
+        }
+        return map
     }
     
     
