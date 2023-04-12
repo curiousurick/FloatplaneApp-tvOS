@@ -11,10 +11,12 @@
       "scale" : "2x"
     },
     {
+      "filename" : "shelf@1x 1.png",
       "idiom" : "tv-marketing",
       "scale" : "1x"
     },
     {
+      "filename" : "shelf@2x 1.png",
       "idiom" : "tv-marketing",
       "scale" : "2x"
     }

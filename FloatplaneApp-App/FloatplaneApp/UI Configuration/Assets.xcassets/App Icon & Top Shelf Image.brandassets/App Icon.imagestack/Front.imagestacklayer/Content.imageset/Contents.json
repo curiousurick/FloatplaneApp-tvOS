@@ -1,20 +1,22 @@
 {
   "images" : [
     {
-      "filename" : "logo-blue-1x.png",
+      "filename" : "app-icon-400x240.jpg",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
-      "filename" : "logo-blue-2x.png",
+      "filename" : "app-icon-800x480.jpg",
       "idiom" : "tv",
       "scale" : "2x"
     },
     {
+      "filename" : "app-icon-400x240 1.jpg",
       "idiom" : "tv-marketing",
       "scale" : "1x"
     },
     {
+      "filename" : "app-icon-800x480 1.jpg",
       "idiom" : "tv-marketing",
       "scale" : "2x"
     }
