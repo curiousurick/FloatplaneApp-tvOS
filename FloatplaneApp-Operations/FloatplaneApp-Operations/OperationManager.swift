@@ -218,20 +218,21 @@ public class OperationManagerImpl: OperationManager {
 class OperationFactory {
     
     lazy var sessionFactory = SessionFactory()
+    lazy var session = sessionFactory.get()
     
     // Cacheable Operation implementations.
-    lazy var contentFeedStrategy = ContentFeedOperationStrategyImpl(session: sessionFactory.get())
-    lazy var subscriptionStrategy = SubscriptionOperationStrategyImpl(session: sessionFactory.get())
-    lazy var searchStrategy = SearchOperationStrategyImpl(session: sessionFactory.get())
-    lazy var creatorListStrategy = CreatorListOperationStrategyImpl(session: sessionFactory.get())
-    lazy var creatorStrategy = CreatorOperationStrategyImpl(session: sessionFactory.get())
-    lazy var contentVideoStrategy = ContentVideoOperationStrategyImpl(session: sessionFactory.get())
+    lazy var contentFeedStrategy = ContentFeedOperationStrategyImpl(session: session)
+    lazy var subscriptionStrategy = SubscriptionOperationStrategyImpl(session: session)
+    lazy var searchStrategy = SearchOperationStrategyImpl(session: session)
+    lazy var creatorListStrategy = CreatorListOperationStrategyImpl(session: session)
+    lazy var creatorStrategy = CreatorOperationStrategyImpl(session: session)
+    lazy var contentVideoStrategy = ContentVideoOperationStrategyImpl(session: session)
     
     // Non-Cached Operations
-    lazy var vodDeliveryKeyStrategy = VodDeliveryKeyOperationStrategyImpl(session: sessionFactory.get())
-    lazy var liveDeliveryKeyStrategy = LiveDeliveryKeyOperationStrategyImpl(session: sessionFactory.get())
-    lazy var loginStrategy = LoginOperationStrategyImpl(session: sessionFactory.get())
-    lazy var logoutStrategy = LogoutOperationStrategyImpl(session: sessionFactory.get())
+    lazy var vodDeliveryKeyStrategy = VodDeliveryKeyOperationStrategyImpl(session: session)
+    lazy var liveDeliveryKeyStrategy = LiveDeliveryKeyOperationStrategyImpl(session: session)
+    lazy var loginStrategy = LoginOperationStrategyImpl(session: session)
+    lazy var logoutStrategy = LogoutOperationStrategyImpl(session: session)
     
     /// Creates a strategy-based operation for given strategy
     func createOp<I: OperationRequest, O: Codable>(strategy: any InternalOperationStrategy<I, O>) -> any StrategyBasedOperation<I, O> {

@@ -74,6 +74,4 @@ class MockDiskStorageWrapper<K: Hashable & Equatable, V: Codable & Equatable>: D
         removeAllCallCount += 1
         receivedRemoveAllCompletion = completion
     }
-    
-    
 }
