@@ -77,6 +77,7 @@ Below are the features implemented in the app.
 - Add code coverage requirements.
 - Add UI tests to the app target.
 - Add Unit tests to the app target.
+- Pending beta release: Support channels in creator sidebar.
 
 # Thanks
 Thanks so much to Linus Sebastian, Luke Lafreniere, and all of LMG. Special thanks to the entire Floatplane team for building the infrastructure and cloud APIs that made this such an easy project for me.
