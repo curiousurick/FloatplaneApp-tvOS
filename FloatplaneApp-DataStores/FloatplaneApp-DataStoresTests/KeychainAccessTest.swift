@@ -35,6 +35,12 @@ final class KeychainAccessTest: XCTestCase {
         subject = KeychainAccess(keychain: keychainStoreMock)
     }
     
+    func testSingletonAccess() {
+        
+        subject = KeychainAccess.instance
+        
+    }
+    
     func testDataForKey() {
         // Arrange
         let data = Data(bytes: [0x89, 0x80, 0x12], count: 3)

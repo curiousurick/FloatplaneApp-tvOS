@@ -62,13 +62,17 @@ class MockDiskStorageWrapper<K: Hashable & Equatable, V: Codable & Equatable>: D
     }
     
     var removeExpiredObjectsCallCount = 0
-    override func removeExpiredObjects() {
+    var receivedRemoveExpiredObjectCompletion: ((Result<()>) -> Void)?
+    override func removeExpiredObjects(completion: ((Result<()>) -> Void)? = nil) {
         removeExpiredObjectsCallCount += 1
+        receivedRemoveExpiredObjectCompletion = completion
     }
     
     var removeAllCallCount = 0
-    override func removeAll() {
+    var receivedRemoveAllCompletion: ((Result<()>) -> Void)?
+    override func removeAll(completion: ((Result<()>) -> Void)? = nil) {
         removeAllCallCount += 1
+        receivedRemoveAllCompletion = completion
     }
     
     

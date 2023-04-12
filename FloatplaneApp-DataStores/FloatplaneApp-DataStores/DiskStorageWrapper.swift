@@ -41,8 +41,8 @@ public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
         }
         catch {
             logger.info("Unable to read object for key \(String.fromClass(key)). Error \(error)")
+            return nil
         }
-        return nil
     }
     
     /// Write given object for given key. Expiry indicates when the data will be considered expired.
@@ -58,29 +58,24 @@ public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
     
     public func isExpiredObject(forKey key: Key) -> Bool {
         do {
-            return try storage.isExpiredObject(forKey: key)
+            let entry = try storage.entry(forKey: key)
+            return entry.expiry.isExpired
         }
         catch {
             logger.info("Unable to check if object is expired for key \(String.fromClass(key)). Error \(error)")
-        }
-        return false
-    }
-    
-    public func removeExpiredObjects() {
-        do {
-            try storage.removeExpiredObjects()
-        }
-        catch {
-            logger.info("Unable to remove expired objects. Error \(error)")
+            return true
         }
     }
     
-    public func removeAll() {
-        do {
-            try storage.removeAll()
+    public func removeExpiredObjects(completion: ((Result<()>) -> Void)? = nil) {
+        storage.async.removeExpiredObjects { result in
+            completion?(result)
         }
-        catch {
-            logger.info("Unable to removeAll from disk store. Error \(error)")
+    }
+                                           
+    public func removeAll(completion: ((Result<()>) -> Void)? = nil) {
+        storage.async.removeAll { result in
+            completion?(result)
         }
     }
 }

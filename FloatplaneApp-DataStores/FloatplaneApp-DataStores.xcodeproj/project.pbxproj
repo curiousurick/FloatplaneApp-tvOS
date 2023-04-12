@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E093BEA29E5C0810046F679 /* MockJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E093BE929E5C0810046F679 /* MockJSONDecoder.swift */; };
+		5E093BEC29E5C12F0046F679 /* MockJSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E093BEB29E5C12F0046F679 /* MockJSONEncoder.swift */; };
+		5E093BF529E5C5630046F679 /* DiskStorageWrapperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E093BF429E5C5630046F679 /* DiskStorageWrapperTest.swift */; };
 		5E1FD70629DA99B50015AE6F /* KeychainAccessTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70529DA99B50015AE6F /* KeychainAccessTest.swift */; };
 		5E1FD70929DA9A4F0015AE6F /* MockUICKeyChainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70829DA9A4F0015AE6F /* MockUICKeyChainStore.swift */; };
 		5E1FD70B29DA9F440015AE6F /* UserStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD70A29DA9F440015AE6F /* UserStoreTest.swift */; };
@@ -67,6 +70,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E093BE929E5C0810046F679 /* MockJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJSONDecoder.swift; sourceTree = "<group>"; };
+		5E093BEB29E5C12F0046F679 /* MockJSONEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJSONEncoder.swift; sourceTree = "<group>"; };
+		5E093BF429E5C5630046F679 /* DiskStorageWrapperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorageWrapperTest.swift; sourceTree = "<group>"; };
 		5E1FD70529DA99B50015AE6F /* KeychainAccessTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccessTest.swift; sourceTree = "<group>"; };
 		5E1FD70829DA9A4F0015AE6F /* MockUICKeyChainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUICKeyChainStore.swift; sourceTree = "<group>"; };
 		5E1FD70A29DA9F440015AE6F /* UserStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStoreTest.swift; sourceTree = "<group>"; };
@@ -118,6 +124,8 @@
 				5E1FD70829DA9A4F0015AE6F /* MockUICKeyChainStore.swift */,
 				5E1FD70C29DA9F660015AE6F /* MockKeychainAccess.swift */,
 				5E1FD71029DAA2970015AE6F /* MockDiskStorageWrapper.swift */,
+				5E093BE929E5C0810046F679 /* MockJSONDecoder.swift */,
+				5E093BEB29E5C12F0046F679 /* MockJSONEncoder.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -164,6 +172,7 @@
 				5E1FD70A29DA9F440015AE6F /* UserStoreTest.swift */,
 				5E1FD70E29DAA1E40015AE6F /* ProgressStoreTest.swift */,
 				5E1FD71429DAADA80015AE6F /* AppSettingsTest.swift */,
+				5E093BF429E5C5630046F679 /* DiskStorageWrapperTest.swift */,
 			);
 			path = "FloatplaneApp-DataStoresTests";
 			sourceTree = "<group>";
@@ -376,13 +385,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E093BF529E5C5630046F679 /* DiskStorageWrapperTest.swift in Sources */,
 				5E1FD70F29DAA1E40015AE6F /* ProgressStoreTest.swift in Sources */,
 				5E1FD71529DAADA80015AE6F /* AppSettingsTest.swift in Sources */,
+				5E093BEA29E5C0810046F679 /* MockJSONDecoder.swift in Sources */,
 				5E1FD70629DA99B50015AE6F /* KeychainAccessTest.swift in Sources */,
 				5E1FD70B29DA9F440015AE6F /* UserStoreTest.swift in Sources */,
 				5E1FD71129DAA2970015AE6F /* MockDiskStorageWrapper.swift in Sources */,
 				5E1FD70929DA9A4F0015AE6F /* MockUICKeyChainStore.swift in Sources */,
 				5E1FD70D29DA9F660015AE6F /* MockKeychainAccess.swift in Sources */,
+				5E093BEC29E5C12F0046F679 /* MockJSONEncoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

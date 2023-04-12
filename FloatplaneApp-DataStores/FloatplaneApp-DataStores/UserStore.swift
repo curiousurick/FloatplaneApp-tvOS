@@ -38,8 +38,8 @@ public class UserStoreImpl: UserStore {
     private let logger = Log4S()
     private let UserStoreKey = "UserStoreKey"
     // Data is stored as JSON
-    private let encoder = JSONEncoder()
-    private let decoder = JSONDecoder()
+    private let encoder: JSONEncoder
+    private let decoder: JSONDecoder
     
     /// Package-level access to Keychain
     private let keychainAccess: KeychainAccess
@@ -47,13 +47,22 @@ public class UserStoreImpl: UserStore {
     /// Singleton instance of the UserStore.
     public static let instance: UserStore = UserStoreImpl()
 
-    @available(*, deprecated, message: "VisibleForTesting")
-    init(keychainAccess: KeychainAccess) {
+    init(
+        keychainAccess: KeychainAccess,
+        encoder: JSONEncoder,
+        decoder: JSONDecoder
+    ) {
         self.keychainAccess = keychainAccess
+        self.encoder = encoder
+        self.decoder = decoder
     }
     
-    private init() {
-        keychainAccess = KeychainAccess.instance
+    private convenience init() {
+        self.init(
+            keychainAccess: KeychainAccess.instance,
+            encoder: JSONEncoder(),
+            decoder: JSONDecoder()
+        )
     }
     
     /// Returns a User if one exists in keychain.
@@ -68,8 +77,8 @@ public class UserStoreImpl: UserStore {
         }
         catch {
             logger.error("Failed to decode creators from keychain")
+            return nil
         }
-        return nil
     }
     
     /// Returns a ProgressStore instance for the logged-in User.
