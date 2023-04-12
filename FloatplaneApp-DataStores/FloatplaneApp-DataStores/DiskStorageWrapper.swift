@@ -40,7 +40,7 @@ public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
             return try storage.object(forKey: key)
         }
         catch {
-            logger.info("Unable to read object for key \(String.fromClass(key)). Error \(error)")
+            logger.debug("Unable to read object for key \(String.fromClass(key)). Error \(error)")
             return nil
         }
     }
