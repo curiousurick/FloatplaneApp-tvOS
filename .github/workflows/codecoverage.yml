@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Test
         uses: actions/checkout@v1
-      - name: Build and Test Models
+      - name: Run SwiftFormat and test all targets
         run: scripts/build.sh
         
