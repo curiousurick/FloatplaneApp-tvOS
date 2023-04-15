@@ -81,6 +81,7 @@ extension FeedItem: FeedViewItem {
 
 class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     
+    static let defaultDurationText = "0:00"
     static let identifier = "FeeditemCell"
     static let nibName = "FeedItemCollectionViewCell"
     
@@ -88,11 +89,13 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     let typeLabelCornerRadiusValue: CGFloat = 5
     
     @IBOutlet var image: UIImageView!
-    @IBOutlet var title: UILabel!
+    @IBOutlet var title: UITextView!
     @IBOutlet var type: UILabel!
     @IBOutlet var channel: UILabel!
     @IBOutlet var timeSinceRelease: UILabel!
     @IBOutlet var progressBar: FeedItemProgressBarView!
+    @IBOutlet var durationLabel: UILabel!
+    @IBOutlet var clockImage: UIImageView!
     
     var feedItem: FeedViewItem!
     
@@ -103,9 +106,11 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        title.textContainerInset = .init(top: 5.0, left: 0.0, bottom: 0.0, right: 0.0)
+        
         image.clipsToBounds = true
         layer.cornerRadius = imageCornerRadiusValue
-        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        layer.masksToBounds = true
         type.layer.cornerRadius = typeLabelCornerRadiusValue
         type.layer.masksToBounds = true
     }
@@ -133,6 +138,16 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
         type.text = item.typeLabel
         channel.text = item.channelLabel
         timeSinceRelease.text = item.timeSinceReleaseLabel
+        if item.duration > 0 {
+            durationLabel.isHidden = false
+            clockImage.isHidden = false
+            durationLabel.text = DateComponentsFormatter().string(from: item.duration)
+        }
+        else {
+            durationLabel.isHidden = true
+            clockImage.isHidden = true
+        }
         setProgress(progress: item.progress ?? 0)
+        
     }
 }

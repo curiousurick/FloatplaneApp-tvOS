@@ -28,10 +28,13 @@ import FloatplaneApp_DataStores
 final class SearchViewController: UICollectionViewController, UISearchResultsUpdating, DataSourceUpdating {
     struct CollectionConstants {
         static let rowCount: CGFloat = 4
-        static let totalSpacing: CGFloat = 80
+        static let cellSpacing: CGFloat = 40
         
+        static let headerHeight: CGFloat = 340
+        
+        static let sectionTopInset: CGFloat = 40
         static let contentVerticalInset: CGFloat = 10
-        static let contentHorizontalInset: CGFloat = 50
+        static let contentHorizontalInset: CGFloat = 40
     }
     
     private let logger = Log4S()
@@ -50,21 +53,17 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.invalidateLayout()
-        let width = view.bounds.width / CollectionConstants.rowCount - CollectionConstants.totalSpacing
-        let height = width
-        flowLayout.itemSize = CGSize(width: width, height: height)
-        collectionView.collectionViewLayout = flowLayout
-        
-        collectionView?.register(
+        collectionView.register(
             UINib(nibName: FeedItemCollectionViewCell.nibName, bundle: nil),
             forCellWithReuseIdentifier: FeedItemCollectionViewCell.identifier
         )
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        let horizInset = CollectionConstants.cellSpacing
         let vertInset = CollectionConstants.contentVerticalInset
-        let horizInset = CollectionConstants.contentHorizontalInset
-        collectionView?.contentInset = .init(top: vertInset, left:  horizInset, bottom: vertInset, right: horizInset)
+        flowLayout.sectionInset = .init(top: vertInset, left: horizInset, bottom: vertInset, right: horizInset)
+        collectionView.collectionViewLayout = flowLayout
+
         collectionView.alwaysBounceVertical = true
         collectionView.bounces = true
         collectionView.isPrefetchingEnabled = true
@@ -130,13 +129,31 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
     }
 }
 
-extension SearchViewController: UICollectionViewDataSourcePrefetching {
+extension SearchViewController: UICollectionViewDataSourcePrefetching, UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return results?.items.count ?? 0
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CollectionConstants.cellSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let viewWidth = collectionView.frame.width
+        let horizInset = CollectionConstants.cellSpacing
+        // Space between 4 cells (3) + space between edge cells and edge (2)
+        let totalSpacing = ((CollectionConstants.rowCount + 1) * horizInset)
+        // 36 is a random number that we have to reduce from total width of cells before it allows 4 cells per row.
+        // Mathematically, I think it should be (totalWidth - spaceWidth*(cells-1+edges)) / cells.
+        // But in that case, they end up being too wide.
+        // TODO: Figure out why this doesn't work without extra width removed.
+        let width = (viewWidth - (totalSpacing+36)) / CollectionConstants.rowCount
+        let height = width - 20
+        return CGSize(width: width, height: height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

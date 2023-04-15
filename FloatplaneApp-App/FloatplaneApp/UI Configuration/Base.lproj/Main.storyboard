@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Bold.ttf">
+        <array key="Roboto-Black.ttf">
             <string>Roboto-Black</string>
         </array>
         <array key="Roboto-Light.ttf">
@@ -726,7 +726,7 @@
     <resources>
         <image name="account_icon" width="48" height="48"/>
         <image name="banner" width="600" height="360"/>
-        <image name="bg_login" width="1920" height="1080"/>
+        <image name="bg_login" width="1280" height="720"/>
         <image name="key_icon" width="48" height="48"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

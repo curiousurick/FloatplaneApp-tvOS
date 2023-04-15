@@ -27,16 +27,16 @@ import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
 
 class BrowseViewController: UIViewController, UICollectionViewDelegate,
-                            UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+                            UICollectionViewDataSource, UICollectionViewDataSourcePrefetching, UICollectionViewDelegateFlowLayout {
     struct CollectionConstants {
         static let rowCount: CGFloat = 4
-        static let totalSpacing: CGFloat = 100
+        static let cellSpacing: CGFloat = 40
         
         static let headerHeight: CGFloat = 340
         
         static let sectionTopInset: CGFloat = 40
         static let contentVerticalInset: CGFloat = 10
-        static let contentHorizontalInset: CGFloat = 50
+        static let contentHorizontalInset: CGFloat = 40
     }
     
     private let logger = Log4S()
@@ -67,14 +67,12 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate,
         
         let flowLayout = UICollectionViewFlowLayout()
 
-        let viewWidth = view.bounds.width
-        let width = viewWidth / CollectionConstants.rowCount - CollectionConstants.totalSpacing
-        let height = width
+        let viewWidth = videoCollectionView.bounds.width
+        let horizInset = CollectionConstants.cellSpacing
+        let vertInset = CollectionConstants.contentVerticalInset
         
         flowLayout.headerReferenceSize = CGSizeMake(viewWidth, CollectionConstants.headerHeight)
-        flowLayout.itemSize = CGSize(width: width, height: height)
-        let noInset: CGFloat = 0
-        flowLayout.sectionInset = .init(top: CollectionConstants.sectionTopInset, left: noInset, bottom: noInset, right: noInset)
+        flowLayout.sectionInset = .init(top: CollectionConstants.sectionTopInset, left: horizInset, bottom: vertInset, right: horizInset)
         
         videoCollectionView.register(
             UINib(nibName: FeedItemCollectionViewCell.nibName, bundle: nil),
@@ -82,9 +80,6 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate,
         )
         videoCollectionView.collectionViewLayout = flowLayout
         videoCollectionView.remembersLastFocusedIndexPath = true
-        let vertInset = CollectionConstants.contentVerticalInset
-        let horizInset = CollectionConstants.contentHorizontalInset
-        videoCollectionView.contentInset = .init(top: vertInset, left:  horizInset, bottom: vertInset, right: horizInset)
     }
     
     @objc private func getInitialFeed() {
@@ -144,6 +139,24 @@ extension BrowseViewController {
             view.updateUI(item: feed[indexPath.row])
         }
         return view
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CollectionConstants.cellSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let viewWidth = videoCollectionView.frame.width
+        let horizInset = CollectionConstants.cellSpacing
+        // Space between 4 cells (3) + space between edge cells and edge (2)
+        let totalSpacing = ((CollectionConstants.rowCount + 1) * horizInset)
+        // 36 is a random number that we have to reduce from total width of cells before it allows 4 cells per row.
+        // Mathematically, I think it should be (totalWidth - spaceWidth*(cells-1+edges)) / cells.
+        // But in that case, they end up being too wide.
+        // TODO: Figure out why this doesn't work without extra width removed.
+        let width = (viewWidth - (totalSpacing+36)) / CollectionConstants.rowCount
+        let height = width - 20
+        return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
