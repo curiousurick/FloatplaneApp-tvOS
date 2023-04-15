@@ -10,5 +10,8 @@ jobs:
   build:
     runs-on: macOS-latest
     steps:
+      - name: Test
+        uses: actions/checkout@v1
+      - name: Build and Test Models
         run: scripts/build.sh
         
