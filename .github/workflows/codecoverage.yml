@@ -1,4 +1,4 @@
-name: Floatplane-App Demo
+name: Floatplane-App Build Workflow
 
 on:
   push:
