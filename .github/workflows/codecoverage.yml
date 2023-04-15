@@ -9,5 +9,6 @@ on:
 jobs:
   build:
     runs-on: macOS-latest
-    steps: scripts/build.sh
+    steps:
+        run: scripts/build.sh
         
