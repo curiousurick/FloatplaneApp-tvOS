@@ -71,7 +71,7 @@ class DiskStorageWrapperTest: XCTestCase {
         let result = subject.readObject(forKey: key)
 
         // Assert
-        XCTAssertEqual(     result, value)
+        XCTAssertEqual(result, value)
     }
 
     func testReadObject_unknownKey() {
