@@ -23,27 +23,27 @@ import Foundation
 import FloatplaneApp_Models
 
 public protocol StreamURLFactory {
-    
     func create(deliveryKey: DeliveryKey, qualityLevel: QualityLevel) -> URL
-    
 }
 
 public class StreamURLFactoryImpl: StreamURLFactory {
-    
     private let logger = Log4S()
-    
-    public init() { }
-    
+
+    public init() {}
+
     public func create(deliveryKey: DeliveryKey, qualityLevel: QualityLevel) -> URL {
         // If none provided, use the last (highest quality)
         let resourceData = deliveryKey.resource.data
-        let qualityLevelName = DeliveryKeyQualityLevel.vodCases.first { $0.readable ==  qualityLevel.label }
+        let qualityLevelName = DeliveryKeyQualityLevel.vodCases.first { $0.readable == qualityLevel.label }
         var chosenQualityLevel: QualityLevelResourceData!
         if let foundQualityLevel = resourceData.getResource(qualitylevelName: qualityLevelName) {
             chosenQualityLevel = foundQualityLevel
         }
         else {
-            logger.error("Did not find a valid quality level resource for the chosen quality level. \(qualityLevel.label)")
+            logger
+                .error(
+                    "Did not find a valid quality level resource for the chosen quality level. \(qualityLevel.label)"
+                )
             chosenQualityLevel = resourceData.lowestQuality()
         }
 
@@ -55,16 +55,15 @@ public class StreamURLFactoryImpl: StreamURLFactory {
         let path = deliveryKey.resource.uri
             .replacing(fileNameKey, with: fileName)
             .replacing(accessTokenKey, with: token)
-        
+
         let video = "\(cdn)\(path)"
         return URL(string: video)!
     }
-    
+
     public func create(deliveryKey: DeliveryKey) -> URL {
         let cdn = deliveryKey.cdn
         let path = deliveryKey.resource.uri
         let video = "\(cdn)\(path)"
         return URL(string: video)!
     }
-    
 }

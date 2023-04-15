@@ -20,25 +20,24 @@
 //
 
 import Foundation
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class MockVideoMetadataOperation: VideoMetadataOperation {
-    
     var getCallCount = 0
     var mockGet: ((VideoMetadataRequest) -> OperationResponse<VideoMetadata>)?
     func get(request: VideoMetadataRequest) async -> OperationResponse<VideoMetadata> {
         getCallCount += 1
         return mockGet?(request) ?? OperationResponse(response: nil, error: nil)
     }
-    
+
     var isActiveCallCount = 0
     var mockIsActive: Bool = false
     func isActive() -> Bool {
         isActiveCallCount += 1
         return mockIsActive
     }
-    
+
     var cancelCallCount = 0
     func cancel() {
         cancelCallCount += 1

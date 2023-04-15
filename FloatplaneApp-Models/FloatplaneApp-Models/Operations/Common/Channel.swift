@@ -32,7 +32,7 @@ public struct Channel: Hashable, Codable, Equatable {
     public let order: UInt64
     public let title: String
     public let urlname: String
-    
+
     public init(
         about: String, card: String?, cover: String?, creator: String,
         icon: Icon, id: String, order: UInt64, title: String, urlname: String

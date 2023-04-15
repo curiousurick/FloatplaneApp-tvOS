@@ -23,5 +23,5 @@ import Foundation
 
 /// Known types of videos for a feed item.
 public enum VideoType: String, Hashable, Codable, Equatable {
-    case blogPost = "blogPost"
+    case blogPost
 }

@@ -25,13 +25,13 @@ import Foundation
 public struct LiveDeliveryKeyRequest: OperationRequest {
     public let creator: String
     public let type: PostType = .live
-    
+
     public init(creator: String) {
         self.creator = creator
     }
-    
-    public var params: [String : Any] {
-        return [
+
+    public var params: [String: Any] {
+        [
             "type": type.rawValue,
             "creator": creator,
         ]

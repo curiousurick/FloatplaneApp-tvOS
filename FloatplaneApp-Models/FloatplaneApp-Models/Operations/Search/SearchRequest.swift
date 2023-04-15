@@ -31,24 +31,24 @@ public struct SearchRequest: OperationRequest {
     private let hasAudio: Bool = false
     private let hasPicture: Bool = false
     private let hasText: Bool = false
-    
+
     public init(creatorId: String, sort: SortOrder, searchQuery: String, fetchAfter: Int) {
         self.creatorId = creatorId
         self.sort = sort
         self.searchQuery = searchQuery
         self.fetchAfter = fetchAfter
     }
-    
-    public var params: [String : Any] {
-        return [
-            "id" : creatorId,
-            "sort" : sort.rawValue,
-            "hasVideo" : hasVideo.stringValue,
-            "hasAudio" : hasAudio.stringValue,
-            "hasPicture" : hasPicture.stringValue,
-            "hasText" : hasText.stringValue,
-            "search" : searchQuery,
-            "fetchAfter" : fetchAfter
+
+    public var params: [String: Any] {
+        [
+            "id": creatorId,
+            "sort": sort.rawValue,
+            "hasVideo": hasVideo.stringValue,
+            "hasAudio": hasAudio.stringValue,
+            "hasPicture": hasPicture.stringValue,
+            "hasText": hasText.stringValue,
+            "search": searchQuery,
+            "fetchAfter": fetchAfter,
         ]
     }
 }

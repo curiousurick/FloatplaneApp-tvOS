@@ -28,7 +28,7 @@ public struct OperationResponse<T: Decodable> {
     public let response: T?
     /// Error that came from the operation which failed.
     public let error: Error?
-    
+
     public init(response: T?, error: Error?) {
         self.response = response
         self.error = error

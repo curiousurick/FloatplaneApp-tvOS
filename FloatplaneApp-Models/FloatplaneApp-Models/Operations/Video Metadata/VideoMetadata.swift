@@ -21,7 +21,8 @@
 
 import Foundation
 
-/// Contains the metadata for a given video for use in streaming that video and providing information to the user about it.
+/// Contains the metadata for a given video for use in streaming that video and providing information to the user about
+/// it.
 public struct VideoMetadata: Codable, Equatable {
     public let id: String
     public let guid: String
@@ -38,26 +39,26 @@ public struct VideoMetadata: Codable, Equatable {
     public let thumbnail: Icon
     public let levels: [QualityLevel]
     public let deliveryKey: DeliveryKey
-    
+
     public init(
         feedItem: FeedItem,
         contentVideoResponse: ContentVideoResponse,
         deliveryKey: DeliveryKey
     ) {
-        self.id = contentVideoResponse.id
-        self.guid = contentVideoResponse.guid
-        self.title = contentVideoResponse.title
-        self.type = contentVideoResponse.type
-        self.channel = feedItem.channel
-        self.description = feedItem.text
-        self.releaseDate = feedItem.releaseDate
-        self.duration = contentVideoResponse.duration
-        self.creator = feedItem.creator
-        self.likes = contentVideoResponse.likes
-        self.dislikes = contentVideoResponse.dislikes
-        self.score = contentVideoResponse.score
-        self.thumbnail = contentVideoResponse.thumbnail
-        self.levels = contentVideoResponse.levels
+        id = contentVideoResponse.id
+        guid = contentVideoResponse.guid
+        title = contentVideoResponse.title
+        type = contentVideoResponse.type
+        channel = feedItem.channel
+        description = feedItem.text
+        releaseDate = feedItem.releaseDate
+        duration = contentVideoResponse.duration
+        creator = feedItem.creator
+        likes = contentVideoResponse.likes
+        dislikes = contentVideoResponse.dislikes
+        score = contentVideoResponse.score
+        thumbnail = contentVideoResponse.thumbnail
+        levels = contentVideoResponse.levels
         self.deliveryKey = deliveryKey
     }
 }

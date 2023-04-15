@@ -20,8 +20,8 @@
 //
 
 import Foundation
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class MockOperationManager: OperationManager {
     var contentFeedOperation: any CacheableStrategyBasedOperation<ContentFeedRequest, CreatorFeed>
@@ -30,16 +30,16 @@ class MockOperationManager: OperationManager {
     var creatorListOperation: any CacheableStrategyBasedOperation<CreatorListRequest, CreatorListResponse>
     var creatorOperation: any CacheableStrategyBasedOperation<CreatorRequest, Creator>
     var contentVideoOperation: any CacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse>
-    
+
     var vodDeliveryKeyOperation: any StrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey>
     var liveDeliveryKeyOperation: any StrategyBasedOperation<LiveDeliveryKeyRequest, DeliveryKey>
     var loginOperation: any StrategyBasedOperation<LoginRequest, LoginResponse>
     var logoutOperation: any StrategyBasedOperation<LogoutRequest, LogoutResponse>
-    
-    // Compound Operations
+
+    /// Compound Operations
     var videoMetadataOperation: any VideoMetadataOperation
     var getFirstPageOperation: any GetFirstPageOperation
-    
+
     init() {
         contentFeedOperation = MockCacheableStrategyBasedOperation()
         subscriptionOperation = MockCacheableStrategyBasedOperation()
@@ -54,12 +54,12 @@ class MockOperationManager: OperationManager {
         videoMetadataOperation = MockVideoMetadataOperation()
         getFirstPageOperation = MockGetFirstPageOperation()
     }
-    
+
     var clearCacheCallCount = 0
     func clearCache() {
         clearCacheCallCount += 1
     }
-    
+
     var cancelAllOperationsCallCount = 0
     func cancelAllOperations() {
         cancelAllOperationsCallCount += 1

@@ -37,7 +37,7 @@ public struct Subscription: Hashable, Codable, Equatable {
         public let price: String
         public let priceYearly: String
         public let title: String
-        
+
         public init(
             allowGrandfatheredAccess: Bool, currency: String, description: String,
             discordRoles: [String], discordServers: [String], featured: Bool, id: String,
@@ -57,13 +57,13 @@ public struct Subscription: Hashable, Codable, Equatable {
             self.title = title
         }
     }
-    
+
     /// Known options for plan intervals.
     public enum Interval: String, Hashable, Codable, Equatable {
         case month
         case year
     }
-    
+
     public let creator: String
     public let endDate: Date
     public let interval: Interval
@@ -71,7 +71,7 @@ public struct Subscription: Hashable, Codable, Equatable {
     public let paymentID: Int
     public let plan: Plan
     public let startDate: Date
-    
+
     public init(
         creator: String, endDate: Date, interval: Interval, paymentCancelled: Bool,
         paymentID: Int, plan: Plan, startDate: Date
@@ -84,16 +84,13 @@ public struct Subscription: Hashable, Codable, Equatable {
         self.plan = plan
         self.startDate = startDate
     }
-    
 }
 
 /// Response from the SubscriptionOperation containing the list of subscriptions for the user.
 public struct SubscriptionResponse: Codable, Equatable {
-    
     public let subscriptions: [Subscription]
-    
+
     public init(subscriptions: [Subscription]) {
         self.subscriptions = subscriptions
     }
-    
 }

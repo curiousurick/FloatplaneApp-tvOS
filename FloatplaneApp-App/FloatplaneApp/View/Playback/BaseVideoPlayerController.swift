@@ -26,7 +26,7 @@ import FloatplaneApp_DataStores
 class BaseVideoPlayerViewController: AVPlayerViewController, AVPlayerViewControllerDelegate {
     let logger = Log4S()
     private var timeObserverToken: Any?
-    
+
     override var player: AVPlayer? {
         willSet {
             stopObservingPlayer(player)
@@ -35,20 +35,20 @@ class BaseVideoPlayerViewController: AVPlayerViewController, AVPlayerViewControl
             startObservingPlayer(player)
         }
     }
-    
-    func progressUpdate(time: CMTime) { }
-    func playbackFailed() { }
-    
+
+    func progressUpdate(time _: CMTime) {}
+    func playbackFailed() {}
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
+        delegate = self
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopObservingPlayer(player)
     }
-    
+
     private func startObservingPlayer(_ player: AVPlayer?) {
         let timeScale = CMTimeScale(NSEC_PER_SEC)
         let updateInterval = CMTime(seconds: ProgressStore.updateInterval, preferredTimescale: timeScale)
@@ -70,17 +70,16 @@ class BaseVideoPlayerViewController: AVPlayerViewController, AVPlayerViewControl
             self.timeObserverToken = nil
         }
     }
-    
+
     override func observeValue(
         forKeyPath keyPath: String?,
         of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?,
-        context: UnsafeMutableRawPointer?
+        change _: [NSKeyValueChangeKey: Any]?,
+        context _: UnsafeMutableRawPointer?
     ) {
         let playerItem = object as! AVPlayerItem
         if keyPath == "status", playerItem.status == .failed {
             playbackFailed()
         }
     }
-
 }

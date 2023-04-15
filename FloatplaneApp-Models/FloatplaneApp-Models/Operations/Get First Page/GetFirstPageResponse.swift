@@ -29,7 +29,7 @@ public struct GetFirstPageResponse: Codable {
     public var activeCreator: Creator
     /// List of basic metadata for all creators to which the user is subscribed.
     public var baseCreators: [BaseCreator]
-    
+
     public init(firstPage: [FeedItem], activeCreator: Creator, baseCreators: [BaseCreator]) {
         self.firstPage = firstPage
         self.activeCreator = activeCreator

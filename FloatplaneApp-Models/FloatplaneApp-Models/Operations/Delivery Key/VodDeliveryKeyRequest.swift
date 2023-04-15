@@ -25,13 +25,13 @@ import Foundation
 public struct VodDeliveryKeyRequest: OperationRequest {
     public let guid: String
     public let type: PostType = .vod
-    
+
     public init(guid: String) {
         self.guid = guid
     }
-    
-    public var params: [String : Any] {
-        return [
+
+    public var params: [String: Any] {
+        [
             "type": type.rawValue,
             "guid": guid,
         ]

@@ -19,35 +19,33 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-@testable import FloatplaneApp_Operations
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class MockInternalOperationStrategy<I: OperationRequest, O: Codable>: InternalOperationStrategy {
     typealias Request = I
     typealias Response = O
-    
+
     var dataRequest: Alamofire.DataRequest?
-    
+
     var getCallCount = 0
     var mockRequest: ((Request) -> OperationResponse<Response>)?
     func get(request: I) async -> OperationResponse<Response> {
         getCallCount += 1
         return mockRequest?(request) ?? OperationResponse(response: nil, error: nil)
     }
-    
+
     var cancelCallCount = 0
     func cancel() {
         cancelCallCount += 1
     }
-    
+
     var mockIsActive = false
     var isActiveCallCount = 0
     func isActive() -> Bool {
         isActiveCallCount += 1
         return mockIsActive
     }
-    
-    
 }

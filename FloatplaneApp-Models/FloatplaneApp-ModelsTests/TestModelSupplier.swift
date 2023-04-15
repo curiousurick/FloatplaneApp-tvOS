@@ -29,8 +29,7 @@ enum TestingError: Error, Equatable {
     case whyCallMeAnError
 }
 
-class TestModelSupplier {
-    
+enum TestModelSupplier {
     static let about = "about"
     static let categoryString = "category"
     static let height: UInt64 = 720
@@ -54,8 +53,7 @@ class TestModelSupplier {
     )
     static let subscriberCountDisplay = "42000"
     static let urlname = "linustechtips"
-    
-    
+
     static let creatorRequest = CreatorRequest(named: urlname)
     static let creator = Creator(
         about: about, category: categoryString, cover: icon, defaultChannel: defaultChannel,
@@ -63,7 +61,7 @@ class TestModelSupplier {
         incomeDisplay: incomeDisplay, liveStream: liveStream, owner: ownerString,
         subscriberCountDisplay: subscriberCountDisplay, title: title, urlname: urlname
     )
-    
+
     static let fetchAfter = 20
     static let limit: UInt64 = 20
     static let creatorId = "creatorId"
@@ -117,7 +115,7 @@ class TestModelSupplier {
     static let pictureCount: UInt64 = 1
     static let videoCount: UInt64 = 1
     static let videoDuration: UInt64 = 120
-    
+
     static let metadata = Metadata(
         audioCount: audioCount, audioDuration: audioDuration, galleryCount: galleryCount,
         hasAudio: hasAudio, hasGallery: hasGallery, hasPicture: hasPicture, hasVideo: hasVideo,
@@ -140,7 +138,7 @@ class TestModelSupplier {
         videoAttachments: [videoAttachment], wasReleasedSilently: wasReleasedSilently
     )
     static let creatorFeed = CreatorFeed(items: [feedItem])
-    
+
     static let creatorListRequest = CreatorListRequest()
     static let baseCreator = BaseCreator(
         about: about, category: categoryString, cover: icon, defaultChannel: defaultChannel,
@@ -164,7 +162,7 @@ class TestModelSupplier {
         userNotificationSetting: userNotificationSettings
     )
     static let creatorListResponse = CreatorListResponse(responseObjects: [creatorResponseObject])
-    
+
     static let contentVideoRequest = ContentVideoRequest(id: id)
     static let postType = PostType.vod
     static let duration: UInt64 = 39583
@@ -180,7 +178,7 @@ class TestModelSupplier {
         thumbnail: icon, isAccessible: isAccessible, blogPosts: [primaryBlogPost], timelineSprite: icon,
         userInteraction: [userInteraction], levels: [qualityLevel]
     )
-    
+
     static let vodDeliveryKeyRequest = VodDeliveryKeyRequest(guid: guid)
     static let cdn = "cdn"
     static let strategy = "strategy"
@@ -224,49 +222,59 @@ class TestModelSupplier {
         decodedQualityLevel: decodedQualityLevel360, fileName: filename360, accessToken: accessToken360
     )
     static let qualityLevelMap = [
-        DeliveryKeyQualityLevel.ql1080p : qualityLevelResourceData1080,
-        DeliveryKeyQualityLevel.ql720p : qualityLevelResourceData720,
-        DeliveryKeyQualityLevel.ql480p : qualityLevelResourceData480,
-        DeliveryKeyQualityLevel.ql360p : qualityLevelResourceData360
+        DeliveryKeyQualityLevel.ql1080p: qualityLevelResourceData1080,
+        DeliveryKeyQualityLevel.ql720p: qualityLevelResourceData720,
+        DeliveryKeyQualityLevel.ql480p: qualityLevelResourceData480,
+        DeliveryKeyQualityLevel.ql360p: qualityLevelResourceData360,
     ]
-    
+
     static let qualityLevelOptions = [
         DeliveryKeyQualityLevel.ql1080p,
         DeliveryKeyQualityLevel.ql720p,
         DeliveryKeyQualityLevel.ql480p,
-        DeliveryKeyQualityLevel.ql360p
+        DeliveryKeyQualityLevel.ql360p,
     ]
     static let resourceData = ResourceData(qualityLevels: qualityLevelMap, options: qualityLevelOptions)
     static let uri = "uri"
     static let resource = DeliveryKey.Resource(data: resourceData, uri: uri)
     static let deliveryKey = DeliveryKey(cdn: cdn, resource: resource, strategy: strategy)
-    
+
     static let videoMetadataRequest = VideoMetadataRequest(feedItem: feedItem, id: id)
-    static let videoMetadata = VideoMetadata(feedItem: feedItem, contentVideoResponse: contentVideoResponse, deliveryKey: deliveryKey)
-    
+    static let videoMetadata = VideoMetadata(
+        feedItem: feedItem,
+        contentVideoResponse: contentVideoResponse,
+        deliveryKey: deliveryKey
+    )
+
     static let subscriptionRequest = SubscriptionRequest()
-    static let endDate = Date(timeIntervalSince1970: 500100)
-    static let startDate = Date(timeIntervalSince1970: 500000)
+    static let endDate = Date(timeIntervalSince1970: 500_100)
+    static let startDate = Date(timeIntervalSince1970: 500_000)
     static let paymentCancelled = true
     static let paymentID = 1
     static let subscription = Subscription(
         creator: creatorString, endDate: endDate, interval: interval, paymentCancelled: paymentCancelled,
-        paymentID: paymentID, plan: subscriptionPlan, startDate: startDate)
+        paymentID: paymentID, plan: subscriptionPlan, startDate: startDate
+    )
     static let subscriptionResponse = SubscriptionResponse(subscriptions: [subscription])
     static let sortOrder = SortOrder.ascending
     static let searchQuery = "intel"
-    static let searchRequest = SearchRequest(creatorId: creatorId, sort: sortOrder, searchQuery: searchQuery, fetchAfter: fetchAfter)
+    static let searchRequest = SearchRequest(
+        creatorId: creatorId,
+        sort: sortOrder,
+        searchQuery: searchQuery,
+        fetchAfter: fetchAfter
+    )
     static let searchResponse = SearchResponse(items: [feedItem])
-    
+
     static let param1080 = QualityLevelParams.QualityLevelParam(filename: filename1080, accessToken: accessToken1080)
     static let param720 = QualityLevelParams.QualityLevelParam(filename: filename720, accessToken: accessToken720)
     static let param480 = QualityLevelParams.QualityLevelParam(filename: filename480, accessToken: accessToken480)
     static let param360 = QualityLevelParams.QualityLevelParam(filename: filename360, accessToken: accessToken360)
     static let paramMap = [
-        DeliveryKeyQualityLevel.ql1080p.rawValue : param1080,
-        DeliveryKeyQualityLevel.ql720p.rawValue : param720,
-        DeliveryKeyQualityLevel.ql480p.rawValue : param480,
-        DeliveryKeyQualityLevel.ql360p.rawValue : param360,
+        DeliveryKeyQualityLevel.ql1080p.rawValue: param1080,
+        DeliveryKeyQualityLevel.ql720p.rawValue: param720,
+        DeliveryKeyQualityLevel.ql480p.rawValue: param480,
+        DeliveryKeyQualityLevel.ql360p.rawValue: param360,
     ]
     static let qualityLevelParams = QualityLevelParams(params: paramMap)
 }

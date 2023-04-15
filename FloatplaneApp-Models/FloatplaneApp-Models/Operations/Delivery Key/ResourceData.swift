@@ -23,22 +23,22 @@ import Foundation
 
 /// Contains information about the resource. Provides the list of quality levels and information about each level.
 public struct ResourceData: Codable, Equatable {
-    private var qualityLevels: [DeliveryKeyQualityLevel : QualityLevelResourceData] = [:]
+    private var qualityLevels: [DeliveryKeyQualityLevel: QualityLevelResourceData] = [:]
     public var options: [DeliveryKeyQualityLevel] = []
-    
+
     public init(
-        qualityLevels: [DeliveryKeyQualityLevel : QualityLevelResourceData],
+        qualityLevels: [DeliveryKeyQualityLevel: QualityLevelResourceData],
         options: [DeliveryKeyQualityLevel]
     ) {
         self.qualityLevels = qualityLevels
         self.options = options
     }
-    
+
     enum CodingKeys: CodingKey {
         case qualityLevelParams
         case qualityLevels
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ResourceData.CodingKeys.self)
         let qualityLevelParams = try container.decode(QualityLevelParams.self, forKey: .qualityLevelParams)
@@ -56,7 +56,7 @@ public struct ResourceData: Codable, Equatable {
             }
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: ResourceData.CodingKeys.self)
         var qualityLevelParamMap: [String: QualityLevelParams.QualityLevelParam] = [:]
@@ -85,7 +85,7 @@ public extension ResourceData {
         }
         return qualityLevels[qualitylevelName]
     }
-    
+
     func highestQuality() -> QualityLevelResourceData {
         guard let last = options.last,
               let lastLevel = qualityLevels[last] else {
@@ -93,7 +93,7 @@ public extension ResourceData {
         }
         return lastLevel
     }
-    
+
     func lowestQuality() -> QualityLevelResourceData {
         guard let first = options.first,
               let firstLevel = qualityLevels[first] else {

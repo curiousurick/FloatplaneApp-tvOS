@@ -21,14 +21,14 @@
 
 import Foundation
 
-/// Standard encoder for any API Operations whose responses contain a special type that Alamofire cannot encode immediately.
+/// Standard encoder for any API Operations whose responses contain a special type that Alamofire cannot encode
+/// immediately.
 class FloatplaneEncoder: JSONEncoder {
-    
     override init() {
         super.init()
-        self.configureDataEncoding()
+        configureDataEncoding()
     }
-    
+
     /// Configures date format in the way that floatplane APIs return them.
     private func configureDataEncoding() {
         let dateFormatter = DateFormatter()

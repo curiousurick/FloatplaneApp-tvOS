@@ -19,18 +19,19 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
 
 /// These are Alamofire states which indicate that the operation can be canceled.
-fileprivate let activeStates: [DataRequest.State] = [
+private let activeStates: [DataRequest.State] = [
     .initialized,
     .resumed,
-    .suspended
+    .suspended,
 ]
 
-/// The most basic definition of an operation strategy. Defined with only the functions that should be publicly available.
+/// The most basic definition of an operation strategy. Defined with only the functions that should be publicly
+/// available.
 public protocol OperationStrategy {
     /// Cancels the operation
     func cancel()
@@ -45,24 +46,23 @@ protocol InternalOperationStrategy<Request, Response>: OperationStrategy {
     /// Defines the minimum type requirement of Response will be for the implementation of the strategy.
     /// Must be Codable.
     associatedtype Response: Codable
-    
+
     /// An Alamofire DataRequest. This is optional and allows a base implementation of
     /// cancel and isActive to be based on this DataRequest.
     /// Implementations of InternalOperationStrategy may override cancel and isActive.
     var dataRequest: DataRequest? { get }
-    
+
     /// The implementation of getting a response for a given request.
     /// Asynchronous function that may make network calls.
     func get(request: Request) async -> OperationResponse<Response>
 }
 
 extension InternalOperationStrategy {
-    
     /// Base implementation of cancel which cancels the DataRequest.
     func cancel() {
         dataRequest?.cancel()
     }
-    
+
     /// Base implementation of isActive which checks if the DataRequest is in one of the active states.
     func isActive() -> Bool {
         if let dataRequest = dataRequest {

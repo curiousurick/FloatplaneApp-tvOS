@@ -20,37 +20,50 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class OperationManagerTest: XCTestCase {
-    
-    // Mocks
-    private var mockContentFeedOperation: MockCacheableStrategyBasedOperation<ContentFeedRequest, CreatorFeed> = MockCacheableStrategyBasedOperation()
-    private var mockSubscriptionOperation: MockCacheableStrategyBasedOperation<SubscriptionRequest, SubscriptionResponse> = MockCacheableStrategyBasedOperation()
-    private var mockSearchOperation: MockCacheableStrategyBasedOperation<SearchRequest, SearchResponse> = MockCacheableStrategyBasedOperation()
-    private var mockCreatorListOperation: MockCacheableStrategyBasedOperation<CreatorListRequest, CreatorListResponse> = MockCacheableStrategyBasedOperation()
-    private var mockCreatorOperation: MockCacheableStrategyBasedOperation<CreatorRequest, Creator> = MockCacheableStrategyBasedOperation()
-    private var mockContentVideoOperation: MockCacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse> = MockCacheableStrategyBasedOperation()
-    private var mockVodDeliveryKeyOperation: MockStrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey> = MockStrategyBasedOperation()
-    private var mockLiveDeliveryKeyOperation: MockStrategyBasedOperation<LiveDeliveryKeyRequest, DeliveryKey> = MockStrategyBasedOperation()
-    private var mockLoginOperation: MockStrategyBasedOperation<LoginRequest, LoginResponse> = MockStrategyBasedOperation()
-    private var mockLogoutOperation: MockStrategyBasedOperation<LogoutRequest, LogoutResponse> = MockStrategyBasedOperation()
+    /// Mocks
+    private var mockContentFeedOperation: MockCacheableStrategyBasedOperation<ContentFeedRequest, CreatorFeed> =
+        MockCacheableStrategyBasedOperation()
+    private var mockSubscriptionOperation: MockCacheableStrategyBasedOperation<
+        SubscriptionRequest,
+        SubscriptionResponse
+    > = MockCacheableStrategyBasedOperation()
+    private var mockSearchOperation: MockCacheableStrategyBasedOperation<SearchRequest, SearchResponse> =
+        MockCacheableStrategyBasedOperation()
+    private var mockCreatorListOperation: MockCacheableStrategyBasedOperation<CreatorListRequest, CreatorListResponse> =
+        MockCacheableStrategyBasedOperation()
+    private var mockCreatorOperation: MockCacheableStrategyBasedOperation<CreatorRequest, Creator> =
+        MockCacheableStrategyBasedOperation()
+    private var mockContentVideoOperation: MockCacheableStrategyBasedOperation<
+        ContentVideoRequest,
+        ContentVideoResponse
+    > = MockCacheableStrategyBasedOperation()
+    private var mockVodDeliveryKeyOperation: MockStrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey> =
+        MockStrategyBasedOperation()
+    private var mockLiveDeliveryKeyOperation: MockStrategyBasedOperation<LiveDeliveryKeyRequest, DeliveryKey> =
+        MockStrategyBasedOperation()
+    private var mockLoginOperation: MockStrategyBasedOperation<LoginRequest, LoginResponse> =
+        MockStrategyBasedOperation()
+    private var mockLogoutOperation: MockStrategyBasedOperation<LogoutRequest, LogoutResponse> =
+        MockStrategyBasedOperation()
     private var mockVideoMetadataOperation = MockVideoMetadataOperation()
     private var mockGetFirstPageOperation = MockGetFirstPageOperation()
     private var mockOperationFactory: OperationFactory! = OperationFactory()
-    
+
     private var subject: OperationManagerImpl!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         mockContentFeedOperation = MockCacheableStrategyBasedOperation()
         mockSubscriptionOperation = MockCacheableStrategyBasedOperation()
         mockSearchOperation = MockCacheableStrategyBasedOperation()
         mockCreatorListOperation = MockCacheableStrategyBasedOperation()
-        mockCreatorOperation  = MockCacheableStrategyBasedOperation()
-        mockContentVideoOperation  = MockCacheableStrategyBasedOperation()
+        mockCreatorOperation = MockCacheableStrategyBasedOperation()
+        mockContentVideoOperation = MockCacheableStrategyBasedOperation()
         mockVodDeliveryKeyOperation = MockStrategyBasedOperation()
         mockLiveDeliveryKeyOperation = MockStrategyBasedOperation()
         mockLoginOperation = MockStrategyBasedOperation()
@@ -58,7 +71,7 @@ class OperationManagerTest: XCTestCase {
         mockVideoMetadataOperation = MockVideoMetadataOperation()
         mockGetFirstPageOperation = MockGetFirstPageOperation()
         mockOperationFactory = OperationFactory()
-        
+
         subject = OperationManagerImpl(
             operationFactory: mockOperationFactory,
             contentFeedOperation: mockContentFeedOperation,
@@ -75,13 +88,13 @@ class OperationManagerTest: XCTestCase {
             getFirstPageOperation: mockGetFirstPageOperation
         )
     }
-    
+
     func testSingletonInstance() {
         let result = OperationManagerImpl.instance
-        
+
         XCTAssertNotNil(result)
     }
-    
+
     func testSingletonGetOperationsReturnsValidOperations() {
         XCTAssertNotNil(OperationManagerImpl.instance.contentFeedOperation)
         XCTAssertNotNil(OperationManagerImpl.instance.subscriptionOperation)
@@ -96,11 +109,11 @@ class OperationManagerTest: XCTestCase {
         XCTAssertNotNil(OperationManagerImpl.instance.videoMetadataOperation)
         XCTAssertNotNil(OperationManagerImpl.instance.getFirstPageOperation)
     }
-    
+
     func testClearCache() {
         // Act
         subject.clearCache()
-        
+
         // Assert
         XCTAssertEqual(mockContentFeedOperation.clearCacheCallCount, 1)
         XCTAssertEqual(mockSubscriptionOperation.clearCacheCallCount, 1)
@@ -109,11 +122,11 @@ class OperationManagerTest: XCTestCase {
         XCTAssertEqual(mockCreatorOperation.clearCacheCallCount, 1)
         XCTAssertEqual(mockContentVideoOperation.clearCacheCallCount, 1)
     }
-    
+
     func testCancelAllOperations() {
         // Act
         subject.cancelAllOperations()
-        
+
         // Assert
         XCTAssertEqual(mockContentFeedOperation.cancelCallCount, 1)
         XCTAssertEqual(mockSubscriptionOperation.cancelCallCount, 1)
@@ -128,5 +141,4 @@ class OperationManagerTest: XCTestCase {
         XCTAssertEqual(mockVideoMetadataOperation.cancelCallCount, 1)
         XCTAssertEqual(mockGetFirstPageOperation.cancelCallCount, 1)
     }
-
 }

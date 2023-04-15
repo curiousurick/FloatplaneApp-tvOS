@@ -26,7 +26,7 @@ public struct User: Codable, Equatable {
     public let id: String
     public let username: String
     public let profileImage: Icon
-    
+
     public init(id: String, username: String, profileImage: Icon) {
         self.id = id
         self.username = username

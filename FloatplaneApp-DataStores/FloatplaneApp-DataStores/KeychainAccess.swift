@@ -28,29 +28,29 @@ import UICKeyChainStore
 class KeychainAccess {
     /// Singleton access to KeychainAccess
     static let instance = KeychainAccess()
-    
+
     /// Actual keychain implementation
     let keychain: UICKeyChainStore
-    
+
     @available(*, deprecated, message: "VisibleForTesting")
     init(keychain: UICKeyChainStore) {
         self.keychain = keychain
     }
-    
+
     private init() {
         keychain = UICKeyChainStore(service: "org.georgie.Floatplane.Keychain")
     }
-    
+
     /// Returns saved data if found for key
     func data(forKey key: String) -> Data? {
-        return keychain.data(forKey: key)
+        keychain.data(forKey: key)
     }
-    
+
     /// Writes data to keychain for the given key
     func setData(_ data: Data?, forKey key: String) {
         keychain.setData(data, forKey: key)
     }
-    
+
     /// Removes whatever item exists for the given key
     func removeItem(forKey key: String) {
         keychain.removeItem(forKey: key)

@@ -20,13 +20,12 @@
 //
 
 import UIKit
-import FloatplaneApp_Operations
 import FloatplaneApp_Models
-import FloatplaneApp_DataStores
 import FloatplaneApp_Utilities
+import FloatplaneApp_DataStores
+import FloatplaneApp_Operations
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     private let logger = Log4S()
     private let appWiper: AppCleaner = AppCleanerImpl()
     private let logoutOperation = OperationManagerImpl.instance.logoutOperation
@@ -34,7 +33,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     private let logoutRow = 1
     private let totalSettingRows = 2
     private let cellIdentifier = "SettingRowCell"
-    
+
     @IBOutlet var tableView: UITableView!
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,19 +44,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         else if indexPath.row == logoutRow {
             cell.textLabel?.text = "Logout"
         }
-        
+
         return cell
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+
+    func numberOfSections(in _: UITableView) -> Int {
+        1
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return totalSettingRows
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        totalSettingRows
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == changeResolutionRow {
             changeResolution()
         }
@@ -65,13 +64,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             logout()
         }
     }
-    
+
     private func changeResolution() {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: SegueIdentifier.SettingsViewController.showResolutionOptions, sender: nil)
         }
     }
-    
+
     private func logout() {
         Task {
             let opResponse = await logoutOperation.get(request: LogoutRequest())
@@ -82,8 +81,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             AppDelegate.instance.topNavigationController?.clearAndGoToLoginView()
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if segue.identifier == "ShowResolutionOptions" {
             let picker = segue.destination as! PickerViewController
             picker.delegate = self
@@ -98,9 +97,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 }
 
 extension SettingsViewController: PickerDelegate {
-    
     func picker(didSelect row: Int) {
         AppSettings.instance.qualitySettings = DeliveryKeyQualityLevel.vodCases[row]
     }
-    
 }

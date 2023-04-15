@@ -19,24 +19,23 @@
 //  THE SOFTWARE.
 //
 
-import FloatplaneApp_Utilities
-import AlamofireImage
 import UIKit
+import AlamofireImage
+import FloatplaneApp_Utilities
 
 /// Creates the standard configuration for the image cache.
 /// Sets up the limit of the cache based on the number of MB should be usd. 150 MB is the default.
 /// The URLCache is universal so all image calls should result in caching.
 /// But it also sets this on the AlamofireImage ImageDownloader because that's how all the images are retrieved.
 public class ImageCacheConfig {
-    
     public static let instance = ImageCacheConfig()
     private let imageDiskCachePath = "image_disk_cache"
-    
-    private init() { }
-    
+
+    private init() {}
+
     /// Don't allow this to be called for than once.
     private var setup = false
-    
+
     /// Sets up the image cache configuration to set the disk path and capacity of the image cache.
     public func setup(diskSpaceMB: Int = 150) {
         if setup {

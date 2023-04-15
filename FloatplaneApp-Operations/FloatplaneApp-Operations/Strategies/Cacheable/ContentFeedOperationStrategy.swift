@@ -19,25 +19,26 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
 
-/// This gets a page of the ContentFeed for a given creator's ID. Takes other parameters like the limit of results and fetchAfter which indicates the index to start returning for pagination.
+/// This gets a page of the ContentFeed for a given creator's ID. Takes other parameters like the limit of results and
+/// fetchAfter which indicates the index to start returning for pagination.
 /// Note: This API has a max limit of 20 results per call.
-protocol ContentFeedOperationStrategy: InternalOperationStrategy<ContentFeedRequest, CreatorFeed> { }
+protocol ContentFeedOperationStrategy: InternalOperationStrategy<ContentFeedRequest, CreatorFeed> {}
 
-class ContentFeedOperationStrategyImpl: ContentFeedOperationStrategy  {
+class ContentFeedOperationStrategyImpl: ContentFeedOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
-    
+
     private let session: Session
-    
+
     var dataRequest: DataRequest?
-    
+
     init(session: Session) {
         self.session = session
     }
-    
+
     /// Gets a list of FeedItems for a given creator, limit, and fetchAfter.
     func get(request: ContentFeedRequest) async -> OperationResponse<CreatorFeed> {
         let dataRequest = session.request(baseUrl, parameters: request.params)

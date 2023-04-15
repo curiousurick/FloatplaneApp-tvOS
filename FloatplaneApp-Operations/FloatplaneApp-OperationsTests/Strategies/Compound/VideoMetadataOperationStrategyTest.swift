@@ -20,23 +20,25 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class VideoMetadataOperationStrategyTest: XCTestCase {
-    
-    // Mocks
-    private var mockContentVideoOperation: MockCacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse>!
+    /// Mocks
+    private var mockContentVideoOperation: MockCacheableStrategyBasedOperation<
+        ContentVideoRequest,
+        ContentVideoResponse
+    >!
     private var mockVodDeliveryKeyOperation: MockCacheableStrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey>!
-    
+
     private var subject: VideoMetadataOperationImpl!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         mockContentVideoOperation = MockCacheableStrategyBasedOperation()
         mockVodDeliveryKeyOperation = MockCacheableStrategyBasedOperation()
-        
+
         // Default setup for happy case
         let videoMetadataRequest = TestModelSupplier.videoMetadataRequest
         let vodDeliveryRequest = VodDeliveryKeyRequest(guid: videoMetadataRequest.id)
@@ -52,29 +54,29 @@ class VideoMetadataOperationStrategyTest: XCTestCase {
             }
             return OperationResponse(response: nil, error: nil)
         }
-        
+
         subject = VideoMetadataOperationImpl(
             contentVideoOperation: mockContentVideoOperation,
             vodDeliveryKeyOperation: mockVodDeliveryKeyOperation
         )
     }
-    
+
     func testGetHappyCase() async {
         // Act
         let videoMetadataRequest = TestModelSupplier.videoMetadataRequest
         let result = await subject.get(request: videoMetadataRequest)
-        
+
         // Assert
         XCTAssertNil(result.error)
         XCTAssertNotNil(result.response)
         let response = result.response!
         let expectedResponse = TestModelSupplier.videoMetadata
         XCTAssertEqual(response, expectedResponse)
-        
+
         XCTAssertEqual(mockContentVideoOperation.getCallCount, 1)
         XCTAssertEqual(mockVodDeliveryKeyOperation.getCallCount, 1)
     }
-    
+
     func testGetContentVideoOpFails() async {
         // Arrange
         let error = TestingError.reallyBad
@@ -84,22 +86,22 @@ class VideoMetadataOperationStrategyTest: XCTestCase {
             }
             return OperationResponse(response: nil, error: nil)
         }
-        
+
         // Act
         let videoMetadataRequest = TestModelSupplier.videoMetadataRequest
         let result = await subject.get(request: videoMetadataRequest)
-        
+
         // Assert
         XCTAssertNotNil(result.error)
         XCTAssertNil(result.response)
         XCTAssertTrue(result.error is TestingError)
         let resultantError = result.error as! TestingError
         XCTAssertEqual(resultantError, error)
-        
+
         XCTAssertEqual(mockContentVideoOperation.getCallCount, 1)
         XCTAssertEqual(mockVodDeliveryKeyOperation.getCallCount, 1)
     }
-    
+
     func testGetDeliveryKeyOpFails() async {
         // Arrange
         let error = TestingError.reallyBad
@@ -111,64 +113,61 @@ class VideoMetadataOperationStrategyTest: XCTestCase {
             }
             return OperationResponse(response: nil, error: nil)
         }
-        
+
         // Act
         let result = await subject.get(request: videoMetadataRequest)
-        
+
         // Assert
         XCTAssertNotNil(result.error)
         XCTAssertNil(result.response)
         XCTAssertTrue(result.error is TestingError)
         let resultantError = result.error as! TestingError
         XCTAssertEqual(resultantError, error)
-        
+
         XCTAssertEqual(mockContentVideoOperation.getCallCount, 1)
         XCTAssertEqual(mockVodDeliveryKeyOperation.getCallCount, 1)
     }
-    
+
     func testIsActive_contentVideoOpActive() {
-        
         // Arrange
         mockContentVideoOperation.mockIsActive = true
-        
+
         // Act
         let result = subject.isActive()
-        
+
         // Assert
         XCTAssertTrue(result)
         XCTAssertEqual(mockContentVideoOperation.isActiveCallCount, 1)
         XCTAssertEqual(mockVodDeliveryKeyOperation.isActiveCallCount, 0)
     }
-    
+
     func testIsActive_deliveryKeyOpIsActive() {
-        
         // Arrange
         mockVodDeliveryKeyOperation.mockIsActive = true
-        
+
         // Act
         let result = subject.isActive()
-        
+
         // Assert
         XCTAssertTrue(result)
         XCTAssertEqual(mockContentVideoOperation.isActiveCallCount, 1)
         XCTAssertEqual(mockVodDeliveryKeyOperation.isActiveCallCount, 1)
     }
-    
+
     func testIsActive_noneActive() {
-        
         // Act
         let result = subject.isActive()
-        
+
         // Assert
         XCTAssertFalse(result)
         XCTAssertEqual(mockContentVideoOperation.isActiveCallCount, 1)
         XCTAssertEqual(mockVodDeliveryKeyOperation.isActiveCallCount, 1)
     }
-    
+
     func testCancel_cancellsAll() {
         // Act
         subject.cancel()
-        
+
         // Assert
         XCTAssertEqual(mockContentVideoOperation.cancelCallCount, 1)
         XCTAssertEqual(mockVodDeliveryKeyOperation.cancelCallCount, 1)

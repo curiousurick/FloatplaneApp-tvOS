@@ -19,24 +19,25 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Cache
-import FloatplaneApp_Utilities
+import Foundation
 import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
 
-/// Inherits from StrategyBasedOperation but also uses Disk and Memory caching to replace strategy implementations with usage of said cache.
-/// Users of this operation can defined a limit of items to be stored for the request type as well as time before expiration of the object.
+/// Inherits from StrategyBasedOperation but also uses Disk and Memory caching to replace strategy implementations with
+/// usage of said cache.
+/// Users of this operation can defined a limit of items to be stored for the request type as well as time before
+/// expiration of the object.
 ///
 /// Uses a DispatchQueue for thread-safe access to the Storage object.
 public protocol CacheableStrategyBasedOperation<Request, Response>: StrategyBasedOperation {
-    
     /// Uses either cache or strategy to get a response for the given request.
     ///
     /// request - The request metadata used to dynamically get a response. Used a the cache key.
     /// invalidateCache - Allows callers to explicitly use the strategy and remove the old cache.
     func get(request: Request, invalidateCache: Bool) async -> OperationResponse<Response>
-    
+
     /// Clears the storage of cached data.
     func clearCache()
 }
@@ -44,16 +45,16 @@ public protocol CacheableStrategyBasedOperation<Request, Response>: StrategyBase
 class CacheableStrategyBasedOperationImpl<I: OperationRequest, O: Codable>: CacheableStrategyBasedOperation {
     typealias Request = I
     typealias Response = O
-    
+
     private let logger = Log4S()
     private let cacheQueueLabel = "com.georgie.cacheQueue"
-    
+
     private let storage: DiskStorageWrapper<Request, Response>
     private let cacheQueue: DispatchQueue
-    
+
     /// The implementation of the operation.
     let strategy: any InternalOperationStrategy<Request, Response>
-    
+
     convenience init(
         strategy: any InternalOperationStrategy<Request, Response>,
         countLimit: UInt = 50,
@@ -65,9 +66,9 @@ class CacheableStrategyBasedOperationImpl<I: OperationRequest, O: Codable>: Cach
         let memoryConfig = MemoryConfig(expiry: expiry, countLimit: countLimit, totalCostLimit: 0)
 
         let storage: Storage<Request, Response> = try! Storage(
-          diskConfig: diskConfig,
-          memoryConfig: memoryConfig,
-          transformer: TransformerFactory.forCodable(ofType: Response.self)
+            diskConfig: diskConfig,
+            memoryConfig: memoryConfig,
+            transformer: TransformerFactory.forCodable(ofType: Response.self)
         )
         let storageWrapper = DiskStorageWrapper(storage: storage)
         self.init(
@@ -75,7 +76,7 @@ class CacheableStrategyBasedOperationImpl<I: OperationRequest, O: Codable>: Cach
             storage: storageWrapper
         )
     }
-    
+
     init(
         strategy: any InternalOperationStrategy<Request, Response>,
         storage: DiskStorageWrapper<Request, Response>
@@ -85,38 +86,40 @@ class CacheableStrategyBasedOperationImpl<I: OperationRequest, O: Codable>: Cach
         self.strategy = strategy
         self.storage = storage
     }
-    
+
     /// The actual API consumers will use to get a parameterized response.
-    /// request - This is the request whose type is determined by the Request generics paramters of the final implementation.
+    /// request - This is the request whose type is determined by the Request generics paramters of the final
+    /// implementation.
     public func get(request: Request) async -> OperationResponse<Response> {
-        return await get(request: request, invalidateCache: false)
+        await get(request: request, invalidateCache: false)
     }
-    
+
     /// The actual API consumers will use to get a parameterized response.
-    /// request - This is the request whose type is determined by the Request generics paramters of the final implementation.
+    /// request - This is the request whose type is determined by the Request generics paramters of the final
+    /// implementation.
     /// invalidateCache - This is an optional parameter that lets caller explicitly make the actual network call.
     public func get(request: Request, invalidateCache: Bool) async -> OperationResponse<Response> {
         if let cache = getCache(request: request, invalidateCache: invalidateCache) {
             return cache
         }
         // No cache available. Make network call.
-        let result = await self.strategy.get(request: request)
+        let result = await strategy.get(request: request)
         if let response = result.response {
-            self.setCache(request: request, response: response)
+            setCache(request: request, response: response)
         }
         return result
     }
-    
+
     /// Tells the strategy to cancel
     public func cancel() {
         strategy.cancel()
     }
-    
+
     /// Checks if the strategy of the operation is active.
     public func isActive() -> Bool {
-        return strategy.isActive()
+        strategy.isActive()
     }
-    
+
     /// Clears the storage cache of all data for this API.
     func clearCache() {
         cacheQueue.sync {
@@ -126,7 +129,8 @@ class CacheableStrategyBasedOperationImpl<I: OperationRequest, O: Codable>: Cach
 }
 
 // MARK: Caching functions
-fileprivate extension CacheableStrategyBasedOperationImpl {
+
+private extension CacheableStrategyBasedOperationImpl {
     /// Gets response from cache if available.
     private func getCache(request: Request, invalidateCache: Bool) -> OperationResponse<Response>? {
         cacheQueue.sync {
@@ -142,9 +146,10 @@ fileprivate extension CacheableStrategyBasedOperationImpl {
             return nil
         }
     }
-    
+
     /// Writes to the cache where key is the hashable request and response is the operation's response.
-    /// TODO: Investigate if this function should throw or return a boolean so the implementation can act on failure to write.
+    /// TODO: Investigate if this function should throw or return a boolean so the implementation can act on failure to
+    /// write.
     private func setCache(request: Request, response: Response) {
         cacheQueue.async {
             self.storage.writeObject(response, forKey: request)

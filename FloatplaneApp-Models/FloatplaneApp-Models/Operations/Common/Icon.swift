@@ -27,7 +27,7 @@ public struct Icon: Hashable, Codable, Equatable {
     public let height: UInt64
     public let path: URL
     public let width: UInt64
-    
+
     public init(childImages: [Icon], height: UInt64, path: URL, width: UInt64) {
         self.childImages = childImages
         self.height = height

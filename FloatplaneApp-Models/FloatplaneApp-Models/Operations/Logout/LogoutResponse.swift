@@ -23,5 +23,5 @@ import Foundation
 
 /// Typed response from logging out a user.
 public struct LogoutResponse: Codable, Equatable {
-    public init() { }
+    public init() {}
 }

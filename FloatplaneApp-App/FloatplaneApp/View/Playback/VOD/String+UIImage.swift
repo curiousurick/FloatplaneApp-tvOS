@@ -22,7 +22,6 @@
 import UIKit
 
 extension String {
-    
     /// Generates a `UIImage` instance from this string using a specified
     /// attributes and size.
     ///
@@ -34,11 +33,12 @@ extension String {
     func image(
         attributes: [NSAttributedString.Key: Any]? = nil,
         size: CGSize? = nil
-    ) -> UIImage? {
+    )
+        -> UIImage? {
         let attributes: [NSAttributedString.Key: Any] = [
             .backgroundColor: UIColor.clear,
             // Randomly high size because the image will be resized
-            .font: UIFont.boldSystemFont(ofSize: 50.0)
+            .font: UIFont.boldSystemFont(ofSize: 50.0),
         ]
         let size = size ?? (self as NSString).size(withAttributes: attributes)
         return UIGraphicsImageRenderer(size: size).image { _ in
@@ -46,5 +46,4 @@ extension String {
                                     withAttributes: attributes)
         }
     }
-    
 }

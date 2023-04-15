@@ -20,32 +20,32 @@
 //
 
 import UIKit
-import FloatplaneApp_Operations
-import FloatplaneApp_Utilities
 import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
+import FloatplaneApp_Operations
 
 final class SearchViewController: UICollectionViewController, UISearchResultsUpdating, DataSourceUpdating {
-    struct CollectionConstants {
+    enum CollectionConstants {
         static let rowCount: CGFloat = 4
         static let cellSpacing: CGFloat = 40
-        
+
         static let headerHeight: CGFloat = 340
-        
+
         static let sectionTopInset: CGFloat = 40
         static let contentVerticalInset: CGFloat = 10
         static let contentHorizontalInset: CGFloat = 40
     }
-    
+
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
     private let searchOperation = OperationManagerImpl.instance.searchOperation
     private let minimumQueryLength = 3
-    
+
     private var searchString: String?
     private var results: SearchResponse?
     private let dataSource = DataSource.instance
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         dataSource.registerDelegate(delegate: self)
@@ -57,7 +57,7 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
             UINib(nibName: FeedItemCollectionViewCell.nibName, bundle: nil),
             forCellWithReuseIdentifier: FeedItemCollectionViewCell.identifier
         )
-        
+
         let flowLayout = UICollectionViewFlowLayout()
         let horizInset = CollectionConstants.cellSpacing
         let vertInset = CollectionConstants.contentVerticalInset
@@ -68,30 +68,30 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
         collectionView.bounces = true
         collectionView.isPrefetchingEnabled = true
     }
-    
+
     func updateSearchResults(for searchController: UISearchController) {
         let newSearchString = searchController.searchBar.text
         guard let newSearchString = newSearchString else {
             return
         }
-        if let searchString = self.searchString, searchString == newSearchString {
+        if let searchString = searchString, searchString == newSearchString {
             return
         }
-        self.searchString = newSearchString
+        searchString = newSearchString
         if newSearchString.count >= minimumQueryLength {
             getInitialFeed(searchString: newSearchString)
         }
         else {
-            self.results = nil
-            self.collectionView.reloadData()
+            results = nil
+            collectionView.reloadData()
         }
     }
-    
+
     @objc private func getInitialFeed(searchString: String) {
-        self.results = nil
+        results = nil
         getNextPage(searchString: searchString)
     }
-    
+
     private func getNextPage(searchString: String) {
         logger.debug("Fetching next page of content for feed")
         guard let creator = dataSource.activeCreator else {
@@ -130,19 +130,29 @@ final class SearchViewController: UICollectionViewController, UISearchResultsUpd
 }
 
 extension SearchViewController: UICollectionViewDataSourcePrefetching, UICollectionViewDelegateFlowLayout {
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return results?.items.count ?? 0
+    override func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        results?.items.count ?? 0
     }
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+
+    override func numberOfSections(in _: UICollectionView) -> Int {
         1
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CollectionConstants.cellSpacing
+
+    func collectionView(
+        _: UICollectionView,
+        layout _: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt _: Int
+    )
+        -> CGFloat {
+        CollectionConstants.cellSpacing
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout _: UICollectionViewLayout,
+        sizeForItemAt _: IndexPath
+    )
+        -> CGSize {
         let viewWidth = collectionView.frame.width
         let horizInset = CollectionConstants.cellSpacing
         // Space between 4 cells (3) + space between edge cells and edge (2)
@@ -151,27 +161,38 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching, UICollect
         // Mathematically, I think it should be (totalWidth - spaceWidth*(cells-1+edges)) / cells.
         // But in that case, they end up being too wide.
         // TODO: Figure out why this doesn't work without extra width removed.
-        let width = (viewWidth - (totalSpacing+36)) / CollectionConstants.rowCount
+        let width = (viewWidth - (totalSpacing + 36)) / CollectionConstants.rowCount
         let height = width - 20
         return CGSize(width: width, height: height)
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+    override func collectionView(
+        _: UICollectionView,
+        willDisplay _: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
         if let results = results, let searchString = searchString,
-           indexPath.row == results.items.count - 4 && !searchOperation.isActive() {
+           indexPath.row == results.items.count - 4, !searchOperation.isActive() {
             getNextPage(searchString: searchString)
         }
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = FeedItemCollectionViewCell.dequeueFromCollectionView(collectionView: collectionView, indexPath: indexPath)
+
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    )
+        -> UICollectionViewCell {
+        let cell = FeedItemCollectionViewCell.dequeueFromCollectionView(
+            collectionView: collectionView,
+            indexPath: indexPath
+        )
         cell.setFeedViewItem(item: results!.items[indexPath.row])
-        
+
         return cell
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let items = self.results?.items else {
+
+    override func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let items = results?.items else {
             logger.error("Clicked on result item while there are no results")
             return
         }
@@ -180,20 +201,19 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching, UICollect
         vodPlayerViewController.vodDelegate = self
         present(vodPlayerViewController, animated: true)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+
+    func collectionView(_: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         // Begin asynchronously fetching data for the requested index paths.
         guard let results = results else { return }
-        let imageRequests = indexPaths.map { $0.row }
+        let imageRequests = indexPaths.map(\.row)
             .map { results.items[$0] }
-            .map { $0.imageViewUrl }
+            .map(\.imageViewUrl)
             .map { URLRequest(url: $0) }
         UIImageView.af.sharedImageDownloader.download(imageRequests)
     }
 }
 
 extension SearchViewController: VODPlayerViewDelegate {
-    
     func videoDidEnd(guid: String) {
         guard let progressStore = UserStoreImpl.instance.getProgressStore(),
               let progress = progressStore.getProgress(for: guid) else {
@@ -205,5 +225,4 @@ extension SearchViewController: VODPlayerViewDelegate {
             cell.setProgress(progress: progress)
         }
     }
-    
 }

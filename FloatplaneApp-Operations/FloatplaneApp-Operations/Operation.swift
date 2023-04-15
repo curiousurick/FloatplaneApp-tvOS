@@ -24,21 +24,20 @@ import FloatplaneApp_Models
 
 /// A basic public protocol that allows the OperationManager to cancel ops and check if they are active.
 /// This is done as a workaround to allow the OperationManager to collect all of them despite generics.
-/// As of Swift 5.5, Arrays can not collect objects of different types that belong to the same protocol, but not if they have generic parameters.
+/// As of Swift 5.5, Arrays can not collect objects of different types that belong to the same protocol, but not if they
+/// have generic parameters.
 public protocol Operation<Request, Response> {
-    
     associatedtype Request: Any
     associatedtype Response: Codable
-    
+
     /// The actual API consumers will use to get a parameterized response.
-    /// request - This is the request whose type is determined by the Request generics paramters of the final implementation.
+    /// request - This is the request whose type is determined by the Request generics paramters of the final
+    /// implementation.
     func get(request: Request) async -> OperationResponse<Response>
-    
+
     /// Returns whether or not the Alamofire operation is in an active state.
     func isActive() -> Bool
-    
+
     /// Cancels whatever asynchronous operation is active.
     func cancel()
-    
-    
 }

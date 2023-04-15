@@ -20,36 +20,33 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Utilities
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Utilities
 
 class StreamURLFactoryTest: XCTestCase {
-    
     private var subject: StreamURLFactoryImpl!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         subject = StreamURLFactoryImpl()
     }
-    
+
     func testCreateWithDeliveryKey() {
-        
         // Arrange
         let deliveryKey = TestModelSupplier.deliveryKey
         let cdn = deliveryKey.cdn
         let uri = deliveryKey.resource.uri
-        
+
         // Act
         let result = subject.create(deliveryKey: deliveryKey)
-        
+
         // Assert
         let expectedUrl = URL(string: "\(cdn)\(uri)")!
         XCTAssertEqual(result, expectedUrl)
     }
-    
+
     func testCreateWithDeliveryKeyAndQualityLevel() {
-        
         // Arrange
         let deliveryKey = TestModelSupplier.realDeliveryKey
         let cdn = deliveryKey.cdn
@@ -64,15 +61,15 @@ class StreamURLFactoryTest: XCTestCase {
         let path = uri
             .replacing(fileNameKey, with: fileName)
             .replacing(accessTokenKey, with: accessToken)
-        
+
         // Act
         let result = subject.create(deliveryKey: deliveryKey, qualityLevel: qualityLevel)
-        
+
         // Assert
         let expectedUrl = URL(string: "\(cdn)\(path)")!
         XCTAssertEqual(result, expectedUrl)
     }
-    
+
     func testCreateWithDeliveryKeyAndQualityLevel_chosenLevelNotFound() {
         let deliveryKey = TestModelSupplier.realDeliveryKey
         let cdn = deliveryKey.cdn
@@ -87,15 +84,12 @@ class StreamURLFactoryTest: XCTestCase {
         let path = uri
             .replacing(fileNameKey, with: fileName)
             .replacing(accessTokenKey, with: accessToken)
-        
+
         // Act
         let result = subject.create(deliveryKey: deliveryKey, qualityLevel: qualityLevel)
-        
+
         // Assert
         let expectedUrl = URL(string: "\(cdn)\(path)")!
         XCTAssertEqual(result, expectedUrl)
-        
-        
     }
-
 }

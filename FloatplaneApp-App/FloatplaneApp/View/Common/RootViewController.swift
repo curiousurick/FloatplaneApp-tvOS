@@ -20,77 +20,81 @@
 //
 
 import UIKit
-import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
+import FloatplaneApp_Operations
 
 class RootViewController: UIViewController {
     private let logger = Log4S()
     private let getFirstPageOperation = OperationManagerImpl.instance.getFirstPageOperation
     private let dataSource = DataSource.instance
-    
+
     var topNavigationController: TopNavigationController?
-    
+
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
-        
-        self.children.forEach { child in
+
+        children.forEach { child in
             if let restorationIdentifier = child.restorationIdentifier {
                 coder.encode(child, forKey: restorationIdentifier)
             }
         }
     }
-    
+
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
-        
+
         if let mainViewController = topNavigationController {
-            self.addChild(mainViewController)
+            addChild(mainViewController)
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
-        let registerViewController = self.children.first(where: { $0 is LaunchScreenViewController })
-        let mainViewController = self.children.first(where: { $0 is TopNavigationController })
-        
+        let registerViewController = children.first(where: { $0 is LaunchScreenViewController })
+        let mainViewController = children.first(where: { $0 is TopNavigationController })
+
         switch (registerViewController, mainViewController) {
-        case (let registerViewController?, let mainViewController?):
+        case let (registerViewController?, mainViewController?):
             self.switch(source: registerViewController, destination: mainViewController)
         default:
             break
         }
-        
+
         super.viewDidLayoutSubviews()
     }
 
     private func `switch`(source: UIViewController, destination: UIViewController) {
-        
         source.willMove(toParent: nil)
-        
-        destination.view.frame = self.view.bounds
-        self.view.addSubview(destination.view)
-        
+
+        destination.view.frame = view.bounds
+        view.addSubview(destination.view)
+
         source.view.removeFromSuperview()
         source.removeFromParent()
-        
+
         destination.didMove(toParent: self)
     }
 
     private func transition(from: UIViewController, to: UIViewController) {
         from.willMove(toParent: nil)
-        self.addChild(to)
+        addChild(to)
         to.view.alpha = 0.0
         from.view.alpha = 1.0
-        self.transition(from: from, to: to, duration: 0.4, options: [.allowAnimatedContent, .allowUserInteraction], animations: {
-            to.view.alpha = 1.0
-            from.view.alpha = 0.0
-            
-        }) { (finished) in
+        transition(
+            from: from,
+            to: to,
+            duration: 0.4,
+            options: [.allowAnimatedContent, .allowUserInteraction],
+            animations: {
+                to.view.alpha = 1.0
+                from.view.alpha = 0.0
+            }
+        ) { _ in
             from.removeFromParent()
             to.didMove(toParent: self)
         }
     }
-    
+
     func goToLogin() {
         let loginScreen = UIStoryboard.main.instantiateViewController(withIdentifier: "LoginViewController")
         DispatchQueue.main.async {
@@ -98,10 +102,10 @@ class RootViewController: UIViewController {
         }
     }
 
-    @IBAction func unwindToRootViewController(_ segue: UIStoryboardSegue) {
-        self.getFirstPageAndLoadMainView()
+    @IBAction func unwindToRootViewController(_: UIStoryboardSegue) {
+        getFirstPageAndLoadMainView()
     }
-    
+
     func getFirstPageAndLoadMainView() {
         Task {
             let getFirstPageResponse = await getFirstPageOperation.get(request: GetFirstPageRequest())
@@ -121,16 +125,15 @@ class RootViewController: UIViewController {
             }
         }
     }
-    
+
     func switchToMainView() {
-        if let launchViewController = self.children.first(where: { $0 is LaunchScreenViewController }),
+        if let launchViewController = children.first(where: { $0 is LaunchScreenViewController }),
            let topNavigationController = topNavigationController {
-            self.transition(from: launchViewController, to: topNavigationController)
+            transition(from: launchViewController, to: topNavigationController)
         }
-        else if let loginViewController = self.children.first(where: { $0 is LoginViewController }),
+        else if let loginViewController = children.first(where: { $0 is LoginViewController }),
                 let topNavigationController = topNavigationController {
-            self.transition(from: loginViewController, to: topNavigationController)
+            transition(from: loginViewController, to: topNavigationController)
         }
     }
-    
 }

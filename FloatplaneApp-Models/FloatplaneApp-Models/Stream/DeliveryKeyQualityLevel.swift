@@ -28,69 +28,65 @@ public protocol Readable {
 
 /// Known quality levels for vods and livestreams.
 public enum DeliveryKeyQualityLevel: String, Codable, Equatable, Readable {
-    // Used for vod
+    /// Used for vod
     case ql360p = "360-avc1"
     case ql480p = "480-avc1"
     case ql720p = "720-avc1"
     case ql1080p = "1080-avc1"
-    // Used for live streams
+    /// Used for live streams
     case liveAbr = "live-abr"
-    
+
     public static let defaultLevel = ql720p
-    
+
     /// Known vod quality levels
     public static let vodCases: [DeliveryKeyQualityLevel] = [
         .ql360p,
         .ql480p,
         .ql720p,
-        .ql1080p
+        .ql1080p,
     ]
-    
+
     /// Known livestream quality levels
     static let liveCases: [DeliveryKeyQualityLevel] = [
-        .liveAbr
+        .liveAbr,
     ]
     static let allCases: [DeliveryKeyQualityLevel] = [
         .ql360p,
         .ql480p,
         .ql720p,
         .ql1080p,
-        .liveAbr
+        .liveAbr,
     ]
-    
+
     /// Variable to get the struct for a QualityLevel including a label for it.
     public var toQualityLevel: QualityLevel {
-        get {
-            switch self {
-            case .ql360p:
-                return QualityLevel.Standard.ql360p
-            case .ql480p:
-                return QualityLevel.Standard.ql480p
-            case .ql720p:
-                return QualityLevel.Standard.ql720p
-            case .ql1080p:
-                return QualityLevel.Standard.ql1080p
-            case .liveAbr:
-                return QualityLevel.Standard.qlLive
-            }
+        switch self {
+        case .ql360p:
+            return QualityLevel.Standard.ql360p
+        case .ql480p:
+            return QualityLevel.Standard.ql480p
+        case .ql720p:
+            return QualityLevel.Standard.ql720p
+        case .ql1080p:
+            return QualityLevel.Standard.ql1080p
+        case .liveAbr:
+            return QualityLevel.Standard.qlLive
         }
     }
-    
+
     /// A readable text for the quality level
     public var readable: String {
-        get {
-            switch self {
-            case .ql360p:
-                return "360p"
-            case .ql480p:
-                return "480p"
-            case .ql720p:
-                return "720p"
-            case .ql1080p:
-                return "1080p"
-            case .liveAbr:
-                return "Live"
-            }
+        switch self {
+        case .ql360p:
+            return "360p"
+        case .ql480p:
+            return "480p"
+        case .ql720p:
+            return "720p"
+        case .ql1080p:
+            return "1080p"
+        case .liveAbr:
+            return "Live"
         }
     }
 }

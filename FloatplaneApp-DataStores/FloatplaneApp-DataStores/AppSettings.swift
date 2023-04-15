@@ -25,16 +25,15 @@ import FloatplaneApp_Models
 /// Basic App settings access. Use this for non-restricted data.
 /// Currently used for default quality level settings. Do not put personal or private data here.
 public class AppSettings {
-    
     private let QualitySettingsKey = "com.georgie.floatplane.QualitySettings"
     /// Data is stored in UserDefaults
     private let userDefaults = UserDefaults.standard
-    
+
     /// Singleton access to UserSettings
     public static let instance = AppSettings()
-    
-    private init() { }
-    
+
+    private init() {}
+
     /// This is used as the default quality level settings when starting a new video.
     /// If never selected, the default value is returned of 720p.
     public var qualitySettings: DeliveryKeyQualityLevel {
@@ -51,6 +50,4 @@ public class AppSettings {
             userDefaults.set(newValue.rawValue, forKey: QualitySettingsKey)
         }
     }
-    
-    
 }

@@ -22,16 +22,14 @@
 import UIKit
 
 class FeedItemProgressBarView: UIView {
-    
     @IBOutlet var widthConstraint: NSLayoutConstraint!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
     func updateWidth(width: CGFloat) {
         widthConstraint.constant = width
         layoutIfNeeded()
     }
-
 }

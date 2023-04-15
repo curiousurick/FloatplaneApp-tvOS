@@ -20,36 +20,36 @@
 //
 
 import UIKit
-import FloatplaneApp_DataStores
-import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
+import FloatplaneApp_DataStores
+import FloatplaneApp_Operations
 
 class LaunchScreenViewController: UIViewController {
     private let logger = Log4S()
-    
+
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var floatPlaneLabel: UILabel!
-    
+
     private let getFirstPageOperation = OperationManagerImpl.instance.getFirstPageOperation
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupAndDisplayFirstView()
+        setupAndDisplayFirstView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
-    
+
     private func setupAndDisplayFirstView() {
         Task {
             if UserStoreImpl.instance.getUser() == nil {

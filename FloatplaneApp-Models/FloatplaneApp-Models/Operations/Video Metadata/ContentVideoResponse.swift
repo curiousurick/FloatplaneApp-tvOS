@@ -42,7 +42,7 @@ public struct ContentVideoResponse: Codable, Equatable {
     public let timelineSprite: Icon?
     public let userInteraction: [String]
     public let levels: [QualityLevel]
-    
+
     public init(
         id: String, guid: String, title: String, type: PostType, description: String,
         releaseDate: Date?, duration: UInt64, creator: String, likes: UInt64, dislikes: UInt64,
@@ -70,5 +70,4 @@ public struct ContentVideoResponse: Codable, Equatable {
         self.userInteraction = userInteraction
         self.levels = levels
     }
-    
 }

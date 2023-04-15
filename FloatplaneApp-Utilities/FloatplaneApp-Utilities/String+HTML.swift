@@ -22,7 +22,7 @@
 #if canImport(AppKit)
     import AppKit
 #elseif canImport(UIKit)
-   import UIKit
+    import UIKit
 #endif
 
 extension Data {
@@ -30,21 +30,23 @@ extension Data {
         getAttributedString(
             options: [
                 .documentType: NSAttributedString.DocumentType.html,
-                .characterEncoding: String.Encoding.utf8.rawValue
+                .characterEncoding: String.Encoding.utf8.rawValue,
             ]
         )
     }
-    
+
     func getAttributedString(
-        options: [NSAttributedString.DocumentReadingOptionKey : Any]
-    ) -> NSAttributedString {
+        options: [NSAttributedString.DocumentReadingOptionKey: Any]
+    )
+        -> NSAttributedString {
         do {
             return try NSAttributedString(
                 data: self,
                 options: options,
                 documentAttributes: nil
             )
-        } catch {
+        }
+        catch {
             Log4S().error("Unable to remove HTML from input")
             return NSAttributedString()
         }
@@ -56,6 +58,7 @@ public extension StringProtocol {
     var html2AttributedString: NSAttributedString {
         Data(utf8).htmlAttributedString()
     }
+
     var html2String: String {
         html2AttributedString.string
     }

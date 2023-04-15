@@ -23,11 +23,10 @@ import Foundation
 @testable import FloatplaneApp_DataStores
 
 class MockKeychainAccess: KeychainAccess {
-    
     init() {
         super.init(keychain: MockUICKeyChainStore())
     }
-    
+
     var mockDataForKey: (String, Data?)?
     var dataForKeyCallCount = 0
     override func data(forKey key: String) -> Data? {
@@ -38,14 +37,14 @@ class MockKeychainAccess: KeychainAccess {
         }
         return nil
     }
-    
+
     var setDataForKeyCallCount = 0
-    override func setData(_ data: Data?, forKey key: String) {
+    override func setData(_: Data?, forKey _: String) {
         setDataForKeyCallCount += 1
     }
-    
+
     var removeItemCallCount = 0
-    override func removeItem(forKey key: String) {
+    override func removeItem(forKey _: String) {
         removeItemCallCount += 1
     }
 }

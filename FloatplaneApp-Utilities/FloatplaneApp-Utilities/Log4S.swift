@@ -19,15 +19,17 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Logging
+import Foundation
 
-/// Simple wrapping for Apple's Logging framework. Instead of having the log level as a parameter, you explicitly call the log function for a given level.
+/// Simple wrapping for Apple's Logging framework. Instead of having the log level as a parameter, you explicitly call
+/// the log function for a given level.
 /// It will print to console if the log level is less severe than the function severity.
 /// For example Log4S().error("Message") will be logged only if the log level is set to a lower severity than error.
 ///
 /// Severity level in order (from Apple documentation
-/// trace - Appropriate for messages that contain information normally of use only when tracing the execution of a program.
+/// trace - Appropriate for messages that contain information normally of use only when tracing the execution of a
+/// program.
 ///
 /// debug - Appropriate for messages that contain information normally of use only when debugging a program.
 ///
@@ -45,12 +47,12 @@ import Logging
 /// debugging.
 public class Log4S {
     private var logger: Logger
-    
+
     public init(file: String = #file) {
         let label = URL(fileURLWithPath: file).deletingPathExtension().lastPathComponent
-        self.logger = Logger(label: label)
+        logger = Logger(label: label)
     }
-    
+
     /// Sets the minimum severity level for logging.
     /// If the logLevel is higher severity than the log function, it will not log.
     /// Default logLevel is info
@@ -59,25 +61,26 @@ public class Log4S {
             logger.logLevel = logLevel
         }
     }
-    
+
     /// Logs if logLevel is less severe than .debug
     public func debug(
         _ message: @autoclosure () -> Logger.Message,
         metadata: @autoclosure () -> Logger.Metadata? = nil,
         file: String = #fileID,
         function: String = #function,
-        line: UInt = #line) {
-            logger.log(
-                level: .debug,
-                message(),
-                metadata: metadata(),
-                source: nil,
-                file: file,
-                function: function,
-                line: line
-            )
+        line: UInt = #line
+    ) {
+        logger.log(
+            level: .debug,
+            message(),
+            metadata: metadata(),
+            source: nil,
+            file: file,
+            function: function,
+            line: line
+        )
     }
-    
+
     /// Logs if logLevel is less severe than .info
     public func info(
         _ message: @autoclosure () -> Logger.Message,
@@ -96,7 +99,7 @@ public class Log4S {
             line: line
         )
     }
-    
+
     /// Logs if logLevel is less severe than .notice
     public func notice(
         _ message: @autoclosure () -> Logger.Message,
@@ -115,7 +118,7 @@ public class Log4S {
             line: line
         )
     }
-    
+
     /// Logs if logLevel is less severe than .error
     public func error(
         _ message: @autoclosure () -> Logger.Message,
@@ -134,7 +137,7 @@ public class Log4S {
             line: line
         )
     }
-    
+
     /// Logs if logLevel is less severe than .trace
     public func trace(
         _ message: @autoclosure () -> Logger.Message,
@@ -153,7 +156,7 @@ public class Log4S {
             line: line
         )
     }
-    
+
     /// Logs if logLevel is less severe than .warn
     public func warn(
         _ message: @autoclosure () -> Logger.Message,
@@ -172,7 +175,7 @@ public class Log4S {
             line: line
         )
     }
-    
+
     /// Logs if logLevel is less severe than .critical
     public func critical(
         _ message: @autoclosure () -> Logger.Message,

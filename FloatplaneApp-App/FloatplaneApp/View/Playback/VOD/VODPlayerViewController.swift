@@ -21,38 +21,36 @@
 
 import AVKit
 import SwiftDate
-import FloatplaneApp_Operations
 import FloatplaneApp_Models
-import FloatplaneApp_DataStores
 import FloatplaneApp_Utilities
+import FloatplaneApp_DataStores
+import FloatplaneApp_Operations
 
 protocol VODPlayerViewDelegate {
-    
     func videoDidEnd(guid: String)
-    
 }
 
 class VODPlayerViewController: BaseVideoPlayerViewController {
     private var progressStore: ProgressStore? {
-        return UserStoreImpl.instance.getProgressStore()
+        UserStoreImpl.instance.getProgressStore()
     }
+
     private let videoMetadataOperation = OperationManagerImpl.instance.videoMetadataOperation
     private let streamURLFactory = StreamURLFactoryImpl()
     private let closeEnoughToFinishToRestart = 0.95
-    
+
     var vodDelegate: VODPlayerViewDelegate?
-    
+
     var customMenu: UIMenu?
     var feedItem: FeedItem!
     var guid: String {
-        get {
-            return feedItem.videoAttachments[0]
-        }
+        feedItem.videoAttachments[0]
     }
+
     var videoMetadata: VideoMetadata?
-    // Initialize with default quality level
+    /// Initialize with default quality level
     var selectedQualityLevel: QualityLevel = AppSettings.instance.qualitySettings.toQualityLevel
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
@@ -77,27 +75,32 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
         }
         vodDelegate?.videoDidEnd(guid: guid)
     }
-    
+
     override func progressUpdate(time: CMTime) {
         let seconds = time.seconds
-        self.progressStore?.setProgress(for: self.guid, progress: seconds)
+        progressStore?.setProgress(for: guid, progress: seconds)
     }
-    
+
     @objc func videoEnded() {
         DispatchQueue.main.async {
             self.dismiss(animated: true)
         }
     }
-    
+
     private func startVideo(videoMetadata: VideoMetadata) {
         let url = streamURLFactory.create(deliveryKey: videoMetadata.deliveryKey, qualityLevel: selectedQualityLevel)
         let playerItem = AVPlayerItem(url: url)
-        
+
         let progress = getStartTime(videoMetadata: videoMetadata)
         let player = getOrCreatePlayer(playerItem: playerItem)
         playerItem.seek(to: progress, completionHandler: { success in
             self.player!.play()
-            NotificationCenter.default.addObserver(self, selector: #selector(self.videoEnded), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(self.videoEnded),
+                name: Notification.Name.AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
             if success {
                 self.logger.debug("Started at position \(progress)")
             }
@@ -105,13 +108,13 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
                 self.logger.error("Tried to seek to position \(progress) but it failed. Will start from zero")
             }
         })
-        
+
         player.updateItemMetadata(video: videoMetadata)
-        self.logger.debug("Started playing video \(url)")
+        logger.debug("Started playing video \(url)")
     }
-    
+
     private func getOrCreatePlayer(playerItem: AVPlayerItem) -> AVPlayer {
-        if let player = self.player {
+        if let player = player {
             player.replaceCurrentItem(with: playerItem)
             return player
         }
@@ -121,10 +124,10 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
             return player
         }
     }
-    
+
     private func getStartTime(videoMetadata: VideoMetadata) -> CMTime {
         // Replacing video in progress with new stream.
-        if let player = self.player {
+        if let player = player {
             return player.currentTime()
         }
         // Starting video that was watched before and we have its progress
@@ -157,7 +160,7 @@ extension VODPlayerViewController {
                 self.startVideo(videoMetadata: videoMetadata)
             }
         }
-        self.customMenu = UIMenu(children: [qualityMenu])
+        customMenu = UIMenu(children: [qualityMenu])
         DispatchQueue.main.async {
             self.transportBarCustomMenuItems = self.customMenu?.children ?? []
             self.showsPlaybackControls = true
@@ -167,10 +170,14 @@ extension VODPlayerViewController {
 
 extension VODPlayerViewController {
     private func showPlaybackError() {
-        let action = UIAlertAction(title: "OK", style: .default) { action in
+        let action = UIAlertAction(title: "OK", style: .default) { _ in
             self.dismiss(animated: true)
         }
-        let alert = UIAlertController(title: "Unable to start playback", message: "Something went wrong while trying to get the video. Please try again later", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Unable to start playback",
+            message: "Something went wrong while trying to get the video. Please try again later",
+            preferredStyle: .alert
+        )
         alert.addAction(action)
         DispatchQueue.main.async {
             self.present(alert, animated: true)

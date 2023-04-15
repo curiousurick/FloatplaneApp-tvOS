@@ -25,11 +25,11 @@ import Foundation
 public enum LoginFailedError: Error {
     /// Should remain the only option
     case error(response: LoginFailedResponse)
-    
+
     /// Extracts the response because Swift errors are weird.
     public var response: LoginFailedResponse {
         switch self {
-        case .error(let response):
+        case let .error(response):
             return response
         }
     }
@@ -42,17 +42,17 @@ public struct LoginFailedResponse: Codable, Equatable {
         /// Readable info about the error that occurred while logging in. Will be displayed to customer.
         public let message: String
         public let name: String
-        
+
         public init(id: String, message: String, name: String) {
             self.id = id
             self.message = message
             self.name = name
         }
     }
-    
+
     public let errors: [LoginError]
     public let message: String
-    
+
     public init(errors: [LoginError], message: String) {
         self.errors = errors
         self.message = message

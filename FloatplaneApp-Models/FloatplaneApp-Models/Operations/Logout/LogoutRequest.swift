@@ -23,10 +23,9 @@ import Foundation
 
 /// Typed request to logout the user.
 public struct LogoutRequest: OperationRequest {
-    
-    public init() { }
-    
-    public var params: [String : Any] {
+    public init() {}
+
+    public var params: [String: Any] {
         [:]
     }
 }

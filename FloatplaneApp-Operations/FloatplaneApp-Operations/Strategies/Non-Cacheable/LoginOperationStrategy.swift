@@ -19,30 +19,32 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
 
-/// Attempts to login the user to Floatplane. Takes a username and password and relies on cookies to maintain access to user-level APIs.
-protocol LoginOperationStrategy: InternalOperationStrategy<LoginRequest, LoginResponse> { }
+/// Attempts to login the user to Floatplane. Takes a username and password and relies on cookies to maintain access to
+/// user-level APIs.
+protocol LoginOperationStrategy: InternalOperationStrategy<LoginRequest, LoginResponse> {}
 
 class LoginOperationStrategyImpl: LoginOperationStrategy {
-    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
-    
+    private let baseUrl: URL = .init(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/login")!
+
     private let headers: HTTPHeaders
     private let session: Session
-    
+
     var dataRequest: DataRequest?
-    
+
     init(session: Session) {
         let headerMap = [
-            "user-agent" : OperationConstants.iOSUserAgent
+            "user-agent": OperationConstants.iOSUserAgent,
         ]
         headers = HTTPHeaders(headerMap)
         self.session = session
     }
-    
-    /// Attempts a login. If login fails, it returns a LoginFailedResponse containing the reason for failure, which also includes a clear message on the failure.
+
+    /// Attempts a login. If login fails, it returns a LoginFailedResponse containing the reason for failure, which also
+    /// includes a clear message on the failure.
     func get(request: LoginRequest) async -> OperationResponse<LoginResponse> {
         let dataRequest = session.request(baseUrl, method: .post, parameters: request, headers: headers)
         self.dataRequest = dataRequest
@@ -50,7 +52,7 @@ class LoginOperationStrategyImpl: LoginOperationStrategy {
             dataRequest.response { response in
                 // Login successful
                 if let data = response.data,
-                    let loginSuccessResponse = try? JSONDecoder().decode(LoginResponse.self, from: data) {
+                   let loginSuccessResponse = try? JSONDecoder().decode(LoginResponse.self, from: data) {
                     continuation.resume(returning: OperationResponse(response: loginSuccessResponse, error: nil))
                 }
                 // Failure response from server.

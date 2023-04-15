@@ -19,37 +19,37 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
 import AVKit
-import FloatplaneApp_Operations
+import UIKit
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
+import FloatplaneApp_Operations
 
 class BrowseViewController: UIViewController, UICollectionViewDelegate,
-                            UICollectionViewDataSource, UICollectionViewDataSourcePrefetching, UICollectionViewDelegateFlowLayout {
-    struct CollectionConstants {
+    UICollectionViewDataSource, UICollectionViewDataSourcePrefetching, UICollectionViewDelegateFlowLayout {
+    enum CollectionConstants {
         static let rowCount: CGFloat = 4
         static let cellSpacing: CGFloat = 40
-        
+
         static let headerHeight: CGFloat = 340
-        
+
         static let sectionTopInset: CGFloat = 40
         static let contentVerticalInset: CGFloat = 10
         static let contentHorizontalInset: CGFloat = 40
     }
-    
+
     private let logger = Log4S()
     private let pageLimit: UInt64 = 20
     private let contentFeedOperation = OperationManagerImpl.instance.contentFeedOperation
     private let dataSource = DataSource.instance
-    
+
     @IBOutlet var videoCollectionView: UICollectionView!
     @IBOutlet var creatorListView: CreatorListView!
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.dataSource.registerDelegate(delegate: self)
+        dataSource.registerDelegate(delegate: self)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(getInitialFeed),
@@ -57,23 +57,28 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate,
             object: nil
         )
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let flowLayout = UICollectionViewFlowLayout()
 
         let viewWidth = videoCollectionView.bounds.width
         let horizInset = CollectionConstants.cellSpacing
         let vertInset = CollectionConstants.contentVerticalInset
-        
+
         flowLayout.headerReferenceSize = CGSizeMake(viewWidth, CollectionConstants.headerHeight)
-        flowLayout.sectionInset = .init(top: CollectionConstants.sectionTopInset, left: horizInset, bottom: vertInset, right: horizInset)
-        
+        flowLayout.sectionInset = .init(
+            top: CollectionConstants.sectionTopInset,
+            left: horizInset,
+            bottom: vertInset,
+            right: horizInset
+        )
+
         videoCollectionView.register(
             UINib(nibName: FeedItemCollectionViewCell.nibName, bundle: nil),
             forCellWithReuseIdentifier: FeedItemCollectionViewCell.identifier
@@ -81,12 +86,12 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate,
         videoCollectionView.collectionViewLayout = flowLayout
         videoCollectionView.remembersLastFocusedIndexPath = true
     }
-    
+
     @objc private func getInitialFeed() {
-        self.dataSource.feed = nil
+        dataSource.feed = nil
         getNextPage()
     }
-    
+
     private func getNextPage() {
         logger.debug("Fetching next page of content for feed")
         guard let creator = dataSource.activeCreator, !contentFeedOperation.isActive() else {
@@ -120,32 +125,42 @@ class BrowseViewController: UIViewController, UICollectionViewDelegate,
 // MARK: CollectionView Delegate and DataSource
 
 extension BrowseViewController {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         1
     }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    )
+        -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {
             return UICollectionReusableView()
         }
-        
+
         let view: BrowseReusableHeaderView = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
             withReuseIdentifier: BrowseReusableHeaderView.identifier,
             for: indexPath
         ) as! BrowseReusableHeaderView
-        
+
         if let feed = dataSource.feed {
             view.updateUI(item: feed[indexPath.row])
         }
         return view
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CollectionConstants.cellSpacing
+
+    func collectionView(
+        _: UICollectionView,
+        layout _: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt _: Int
+    )
+        -> CGFloat {
+        CollectionConstants.cellSpacing
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         let viewWidth = videoCollectionView.frame.width
         let horizInset = CollectionConstants.cellSpacing
         // Space between 4 cells (3) + space between edge cells and edge (2)
@@ -154,34 +169,41 @@ extension BrowseViewController {
         // Mathematically, I think it should be (totalWidth - spaceWidth*(cells-1+edges)) / cells.
         // But in that case, they end up being too wide.
         // TODO: Figure out why this doesn't work without extra width removed.
-        let width = (viewWidth - (totalSpacing+36)) / CollectionConstants.rowCount
+        let width = (viewWidth - (totalSpacing + 36)) / CollectionConstants.rowCount
         let height = width - 20
         return CGSize(width: width, height: height)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == dataSource.feed!.count - 4 && !self.contentFeedOperation.isActive() {
+
+    func collectionView(_: UICollectionView, willDisplay _: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == dataSource.feed!.count - 4, !contentFeedOperation.isActive() {
             getNextPage()
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.feed?.count ?? 0
+
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        dataSource.feed?.count ?? 0
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    )
+        -> UICollectionViewCell {
         guard let feed = dataSource.feed else {
             return UICollectionViewCell()
         }
-        
-        let cell = FeedItemCollectionViewCell.dequeueFromCollectionView(collectionView: collectionView, indexPath: indexPath)
+
+        let cell = FeedItemCollectionViewCell.dequeueFromCollectionView(
+            collectionView: collectionView,
+            indexPath: indexPath
+        )
         let item = feed[indexPath.row]
         cell.setFeedViewItem(item: item)
-        
+
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let feed = dataSource.feed else {
             logger.error("Selected item while feed was nil")
             return
@@ -191,20 +213,19 @@ extension BrowseViewController {
         vodPlayerViewController.vodDelegate = self
         present(vodPlayerViewController, animated: true)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+
+    func collectionView(_: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         // Begin asynchronously fetching data for the requested index paths.
         guard let feed = dataSource.feed else { return }
-        let imageRequests = indexPaths.map { $0.row }
+        let imageRequests = indexPaths.map(\.row)
             .map { feed[$0] }
-            .map { $0.imageViewUrl }
+            .map(\.imageViewUrl)
             .map { URLRequest(url: $0) }
         UIImageView.af.sharedImageDownloader.download(imageRequests)
     }
 }
 
 extension BrowseViewController: VODPlayerViewDelegate {
-    
     func videoDidEnd(guid: String) {
         guard let progressStore = UserStoreImpl.instance.getProgressStore(),
               let progress = progressStore.getProgress(for: guid) else {
@@ -216,12 +237,10 @@ extension BrowseViewController: VODPlayerViewDelegate {
             cell.setProgress(progress: progress)
         }
     }
-    
 }
 
 extension BrowseViewController: DataSourceUpdating {
-    
-    func feedUpdated(feed: [FeedItem]?) {
+    func feedUpdated(feed _: [FeedItem]?) {
         DispatchQueue.main.async {
             self.videoCollectionView?.reloadData()
         }

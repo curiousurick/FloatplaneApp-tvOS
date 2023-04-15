@@ -24,7 +24,7 @@ import Foundation
 /// The basic metadata about a given creator. Used in the CreatorListOperation.
 public struct BaseCreator: Codable, Equatable {
     public let about: String
-    // Note: This looks to be a bug in v2 API.
+    /// Note: This looks to be a bug in v2 API.
     public let category: String
     public let cover: Icon?
     public let defaultChannel: String
@@ -39,7 +39,7 @@ public struct BaseCreator: Codable, Equatable {
     public var subscriptionPlans: [Subscription.Plan]?
     public let title: String
     public let urlname: String
-    
+
     public init(
         about: String, category: String, cover: Icon?, defaultChannel: String,
         description: String, discoverable: Bool, icon: Icon, id: String, incomeDisplay: Bool,

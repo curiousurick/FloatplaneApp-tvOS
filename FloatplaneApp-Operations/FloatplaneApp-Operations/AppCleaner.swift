@@ -25,17 +25,15 @@ import FloatplaneApp_DataStores
 /// This class is the central component to clear the app of data which should only live through a User lifecyle.
 /// When the user is logged out, this class should be invoked to clean the app of user data.
 public protocol AppCleaner {
-    
     /// Cleans the app of
     func clean()
 }
 
 public class AppCleanerImpl: AppCleaner {
-    
     private let userStore: UserStore
     private let operationManager: OperationManager
     private let urlCache: URLCache
-    
+
     public convenience init() {
         self.init(
             userStore: UserStoreImpl.instance,
@@ -43,7 +41,7 @@ public class AppCleanerImpl: AppCleaner {
             urlCache: URLCache.shared
         )
     }
-    
+
     init(
         userStore: UserStore,
         operationManager: OperationManager,
@@ -53,15 +51,15 @@ public class AppCleanerImpl: AppCleaner {
         self.operationManager = operationManager
         self.urlCache = urlCache
     }
-    
+
     public func clean() {
         // Removes user from keychain.
-        self.userStore.removeUser()
+        userStore.removeUser()
         // Cancels all network calls
-        self.operationManager.cancelAllOperations()
+        operationManager.cancelAllOperations()
         // Clears all URL cache from disk cache.
-        self.operationManager.clearCache()
+        operationManager.clearCache()
         // Clears all URL cache from iOS's URLCache.
-        self.urlCache.removeAllCachedResponses()
+        urlCache.removeAllCachedResponses()
     }
 }

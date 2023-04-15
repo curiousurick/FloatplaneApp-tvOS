@@ -29,8 +29,7 @@ enum TestingError: Error, Equatable {
     case whyCallMeAnError
 }
 
-class TestModelSupplier {
-    
+enum TestModelSupplier {
     static let about = "about"
     static let categoryString = "category"
     static let height: UInt64 = 720
@@ -54,8 +53,7 @@ class TestModelSupplier {
     )
     static let subscriberCountDisplay = "42000"
     static let urlname = "linustechtips"
-    
-    
+
     static let creatorRequest = CreatorRequest(named: urlname)
     static let creator = Creator(
         about: about, category: categoryString, cover: icon, defaultChannel: defaultChannel,
@@ -63,7 +61,7 @@ class TestModelSupplier {
         incomeDisplay: incomeDisplay, liveStream: liveStream, owner: ownerString,
         subscriberCountDisplay: subscriberCountDisplay, title: title, urlname: urlname
     )
-    
+
     static let fetchAfter = 20
     static let limit: UInt64 = 20
     static let creatorId = "creatorId"
@@ -117,7 +115,7 @@ class TestModelSupplier {
     static let pictureCount: UInt64 = 1
     static let videoCount: UInt64 = 1
     static let videoDuration: UInt64 = 120
-    
+
     static let metadata = Metadata(
         audioCount: audioCount, audioDuration: audioDuration, galleryCount: galleryCount,
         hasAudio: hasAudio, hasGallery: hasGallery, hasPicture: hasPicture, hasVideo: hasVideo,
@@ -140,7 +138,7 @@ class TestModelSupplier {
         videoAttachments: [videoAttachment], wasReleasedSilently: wasReleasedSilently
     )
     static let creatorFeed = CreatorFeed(items: [feedItem])
-    
+
     static let creatorListRequest = CreatorListRequest()
     static let baseCreator = BaseCreator(
         about: about, category: categoryString, cover: icon, defaultChannel: defaultChannel,
@@ -164,7 +162,7 @@ class TestModelSupplier {
         userNotificationSetting: userNotificationSettings
     )
     static let creatorListResponse = CreatorListResponse(responseObjects: [creatorResponseObject])
-    
+
     static let contentVideoRequest = ContentVideoRequest(id: id)
     static let postType = PostType.vod
     static let duration: UInt64 = 39583
@@ -180,7 +178,7 @@ class TestModelSupplier {
         thumbnail: icon, isAccessible: isAccessible, blogPosts: [primaryBlogPost], timelineSprite: icon,
         userInteraction: [userInteraction], levels: [qualityLevel]
     )
-    
+
     static let liveDeliveryKeyRequest = LiveDeliveryKeyRequest(creator: creatorString)
     static let vodDeliveryKeyRequest = VodDeliveryKeyRequest(guid: guid)
     static let cdn = "cdn"
@@ -198,29 +196,39 @@ class TestModelSupplier {
     static let qualityLevelResourceData = QualityLevelResourceData(
         decodedQualityLevel: decodedQualityLevel, fileName: fileName, accessToken: accessToken
     )
-    static let qualityLevelMap = [DeliveryKeyQualityLevel.ql1080p : qualityLevelResourceData]
+    static let qualityLevelMap = [DeliveryKeyQualityLevel.ql1080p: qualityLevelResourceData]
     static let resourceData = ResourceData(qualityLevels: qualityLevelMap, options: [deliveryKeyQualityLevelName])
     static let uri = "uri"
     static let resource = DeliveryKey.Resource(data: resourceData, uri: uri)
     static let deliveryKey = DeliveryKey(cdn: cdn, resource: resource, strategy: strategy)
-    
+
     static let videoMetadataRequest = VideoMetadataRequest(feedItem: feedItem, id: id)
-    static let videoMetadata = VideoMetadata(feedItem: feedItem, contentVideoResponse: contentVideoResponse, deliveryKey: deliveryKey)
-    
+    static let videoMetadata = VideoMetadata(
+        feedItem: feedItem,
+        contentVideoResponse: contentVideoResponse,
+        deliveryKey: deliveryKey
+    )
+
     static let subscriptionRequest = SubscriptionRequest()
-    static let endDate = Date(timeIntervalSince1970: 500100)
-    static let startDate = Date(timeIntervalSince1970: 500000)
+    static let endDate = Date(timeIntervalSince1970: 500_100)
+    static let startDate = Date(timeIntervalSince1970: 500_000)
     static let paymentCancelled = true
     static let paymentID = 1
     static let subscription = Subscription(
         creator: creatorString, endDate: endDate, interval: interval, paymentCancelled: paymentCancelled,
-        paymentID: paymentID, plan: subscriptionPlan, startDate: startDate)
+        paymentID: paymentID, plan: subscriptionPlan, startDate: startDate
+    )
     static let subscriptionResponse = SubscriptionResponse(subscriptions: [subscription])
     static let sortOrder = SortOrder.ascending
     static let searchQuery = "intel"
-    static let searchRequest = SearchRequest(creatorId: creatorId, sort: sortOrder, searchQuery: searchQuery, fetchAfter: fetchAfter)
+    static let searchRequest = SearchRequest(
+        creatorId: creatorId,
+        sort: sortOrder,
+        searchQuery: searchQuery,
+        fetchAfter: fetchAfter
+    )
     static let searchResponse = SearchResponse(items: [feedItem])
-    
+
     static let password = "mySuperS3cretPassword"
     static let loginRequest = LoginRequest(username: username, password: password)
     static let user = User(id: userString, username: username, profileImage: icon)
@@ -231,7 +239,7 @@ class TestModelSupplier {
     static let errorId = "403"
     static let loginError = LoginFailedResponse.LoginError(id: errorId, message: errorMessage, name: errorName)
     static let loginFailedResponse = LoginFailedResponse(errors: [loginError], message: errorMessage)
-    
+
     static let logoutRequest = LogoutRequest()
     static let logoutResponse = LogoutResponse()
 }

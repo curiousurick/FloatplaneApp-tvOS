@@ -19,26 +19,26 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
 
 /// This gets the full metadata for a given Video ID.
 /// It includes additional metadata not included in a FeedItem, such as quality levels.
 /// NOTE: This is a CacheableAPIOperation and uses the default expiry and capacity limits
-protocol ContentVideoOperationStrategy: InternalOperationStrategy<ContentVideoRequest, ContentVideoResponse> { }
+protocol ContentVideoOperationStrategy: InternalOperationStrategy<ContentVideoRequest, ContentVideoResponse> {}
 
 class ContentVideoOperationStrategyImpl: ContentVideoOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/video")!
-    
+
     private let session: Session
-    
+
     var dataRequest: DataRequest?
-    
+
     init(session: Session) {
         self.session = session
     }
-    
+
     /// Gets the full metadata for a given video ID.
     func get(request: ContentVideoRequest) async -> OperationResponse<ContentVideoResponse> {
         let dataRequest = session.request(baseUrl, parameters: request.params)

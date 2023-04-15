@@ -19,28 +19,28 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
-import FloatplaneApp_Utilities
+import Foundation
 import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 
 /// Performs a search on a given creator for a given query.
 /// Today, this search is basic and limited to videos because this is for tvOS.
 /// TODO: Determine if tvOS makes sense to support image and text posts.
-protocol SearchOperationStrategy: InternalOperationStrategy<SearchRequest, SearchResponse> { }
+protocol SearchOperationStrategy: InternalOperationStrategy<SearchRequest, SearchResponse> {}
 
 class SearchOperationStrategyImpl: SearchOperationStrategy {
     private let logger = Log4S()
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/content/creator")!
-    
+
     private let session: Session
-    
+
     var dataRequest: DataRequest?
-    
+
     init(session: Session) {
         self.session = session
     }
-    
+
     /// Performs search for a given creator and query string.
     /// Includes pagination through fetchAfter field,
     /// Includes order through sortOrder field.

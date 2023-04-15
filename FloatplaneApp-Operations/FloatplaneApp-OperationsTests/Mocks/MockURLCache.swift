@@ -22,10 +22,8 @@
 import Foundation
 
 class MockURLCache: URLCache {
-    
     var removeAllCachedResponsesCallCount = 0
     override func removeAllCachedResponses() {
         removeAllCachedResponsesCallCount += 1
     }
-    
 }

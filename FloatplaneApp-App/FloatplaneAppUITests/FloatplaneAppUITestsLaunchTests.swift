@@ -22,7 +22,6 @@
 import XCTest
 
 final class FloatplaneAppUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

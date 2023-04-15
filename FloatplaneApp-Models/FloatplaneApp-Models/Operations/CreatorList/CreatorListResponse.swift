@@ -23,21 +23,19 @@ import Foundation
 
 /// The list of BaseCreators. Contains basic info about all creators to which the user is subscribed.
 public struct CreatorListResponse: Codable, Equatable {
-    
     public struct CreatorResponseObject: Codable, Equatable {
         public let creator: BaseCreator
         public let userNotificationSetting: UserNotificationSetting
-        
+
         public init(creator: BaseCreator, userNotificationSetting: UserNotificationSetting) {
             self.creator = creator
             self.userNotificationSetting = userNotificationSetting
         }
     }
-    
+
     public let creators: [BaseCreator]
-    
+
     public init(responseObjects: [CreatorResponseObject]) {
-        self.creators = responseObjects.map { $0.creator }
+        creators = responseObjects.map(\.creator)
     }
-    
 }

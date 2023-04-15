@@ -20,12 +20,11 @@
 //
 
 import AVKit
-import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
+import FloatplaneApp_Operations
 
 extension AVPlayer {
-    
     func updateItemMetadata(video: VideoMetadata) {
         let channelArt = video.channel.icon.path
         let channelName = video.channel.title
@@ -37,21 +36,24 @@ extension AVPlayer {
             .iTunesMetadataTrackSubTitle: channelName,
             .commonIdentifierDescription: description,
         ]
-        let metadata = mapping.compactMap { self.createMetadataItem(for:$0, value:$1) }
+        let metadata = mapping.compactMap { self.createMetadataItem(for: $0, value: $1) }
         DispatchQueue.main.async {
             self.currentItem?.externalMetadata = metadata
         }
         ImageGrabber.instance.grab(url: channelArt) { data in
             mapping[.commonIdentifierArtwork] = data as Any
-            let metadata = mapping.compactMap { self.createMetadataItem(for:$0, value:$1) }
+            let metadata = mapping.compactMap { self.createMetadataItem(for: $0, value: $1) }
             DispatchQueue.main.async {
                 self.currentItem?.externalMetadata = metadata
             }
         }
     }
-    
-    private func createMetadataItem(for identifier: AVMetadataIdentifier,
-                                    value: Any) -> AVMetadataItem {
+
+    private func createMetadataItem(
+        for identifier: AVMetadataIdentifier,
+        value: Any
+    )
+        -> AVMetadataItem {
         let item = AVMutableMetadataItem()
         item.identifier = identifier
         item.value = value as? NSCopying & NSObjectProtocol

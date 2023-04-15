@@ -22,10 +22,9 @@
 import Foundation
 
 class MockJSONEncoder: JSONEncoder {
-    
     var mockDataResult: ((Decodable) -> Data)?
     var mockThrownError: Error?
-    override func encode<T>(_ value: T) throws -> Data where T : Encodable {
+    override func encode<T>(_ value: T) throws -> Data where T: Encodable {
         if let mockThrownError = mockThrownError {
             throw mockThrownError
         }
@@ -34,5 +33,4 @@ class MockJSONEncoder: JSONEncoder {
         }
         return Data()
     }
-    
 }

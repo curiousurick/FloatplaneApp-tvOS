@@ -19,32 +19,37 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
 
-/// Gets the list of basic creator metadata. Essentially treated as the Subscriptions for the customer to be displayed on the browse view's sidebar.
-/// This is not sufficient to keep track of the active creator because it does not include livestream or subscription information.
+/// Gets the list of basic creator metadata. Essentially treated as the Subscriptions for the customer to be displayed
+/// on the browse view's sidebar.
+/// This is not sufficient to keep track of the active creator because it does not include livestream or subscription
+/// information.
 /// It also gets an object called UserNotificationSetting for each creator but its not really utilized on tvOS.
-protocol CreatorListOperationStrategy: InternalOperationStrategy<CreatorListRequest, CreatorListResponse> { }
+protocol CreatorListOperationStrategy: InternalOperationStrategy<CreatorListRequest, CreatorListResponse> {}
 
 class CreatorListOperationStrategyImpl: CreatorListOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/notification/list")!
-    
+
     private let session: Session
-    
+
     var dataRequest: DataRequest?
-    
+
     init(session: Session) {
         self.session = session
     }
-    
+
     /// Gets the list of BaseCreator information for every creator the user is subscribed to.
-    func get(request: CreatorListRequest) async -> OperationResponse<CreatorListResponse> {
+    func get(request _: CreatorListRequest) async -> OperationResponse<CreatorListResponse> {
         let dataRequest = session.request(baseUrl)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
-            dataRequest.responseDecodable(of: [CreatorListResponse.CreatorResponseObject].self, decoder: FloatplaneDecoder()) { response in
+            dataRequest.responseDecodable(
+                of: [CreatorListResponse.CreatorResponseObject].self,
+                decoder: FloatplaneDecoder()
+            ) { response in
                 if let value = response.value {
                     let creatorListResponse = CreatorListResponse(responseObjects: value)
                     continuation.resume(returning: OperationResponse(response: creatorListResponse, error: nil))
@@ -54,6 +59,5 @@ class CreatorListOperationStrategyImpl: CreatorListOperationStrategy {
                 }
             }
         }
-        
     }
 }

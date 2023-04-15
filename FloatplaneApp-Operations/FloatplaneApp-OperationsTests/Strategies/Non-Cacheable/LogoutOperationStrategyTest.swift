@@ -20,17 +20,17 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Operations
-import FloatplaneApp_Models
 import Alamofire
+import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class LogoutOperationStrategyTest: OperationStrategyTestBase<LogoutOperationStrategyImpl> {
-    private let headerMap = ["user-agent" : "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"]
-    
+    private let headerMap = ["user-agent": "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"]
+
     override func setUp() {
         super.setUp()
-        
-        let headerMap = ["user-agent" : OperationConstants.iOSUserAgent]
+
+        let headerMap = ["user-agent": OperationConstants.iOSUserAgent]
         subject = LogoutOperationStrategyImpl(
             session: session,
             headers: HTTPHeaders(headerMap)
@@ -38,7 +38,7 @@ class LogoutOperationStrategyTest: OperationStrategyTestBase<LogoutOperationStra
         request = TestModelSupplier.logoutRequest
         baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
     }
-    
+
     override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
         try mockGet(
             baseUrl: baseUrl,
@@ -49,20 +49,20 @@ class LogoutOperationStrategyTest: OperationStrategyTestBase<LogoutOperationStra
             additionalHeaders: headerMap
         )
     }
-    
+
     func testGetHappyCase() async throws {
         // Arrange
         let response = TestModelSupplier.logoutResponse
         try setupSuccessMock(response: response)
-        
+
         // Act
         let result = await subject.get(request: request)
-        
+
         // Assert
         XCTAssertNil(result.error)
         XCTAssertEqual(result.response, response)
     }
-    
+
     func testGetHTTPError() async throws {
         // Arrange
         try mockHTTPError(
@@ -72,10 +72,10 @@ class LogoutOperationStrategyTest: OperationStrategyTestBase<LogoutOperationStra
             method: .post,
             additionalHeaders: headerMap
         )
-        
+
         // Act
         let result = await subject.get(request: request)
-        
+
         // Assert
         XCTAssertNotNil(result.error)
         XCTAssertNil(result.response)

@@ -20,28 +20,26 @@
 //
 
 import Foundation
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class MockGetFirstPageOperation: GetFirstPageOperation {
-    
     var getCallCount = 0
     var mockGet: ((GetFirstPageRequest) -> OperationResponse<GetFirstPageResponse>)?
     func get(request: GetFirstPageRequest) async -> OperationResponse<GetFirstPageResponse> {
         getCallCount += 1
         return mockGet?(request) ?? OperationResponse(response: nil, error: nil)
     }
-    
+
     var isActiveCallCount = 0
     var mockIsActive: Bool = false
     func isActive() -> Bool {
         isActiveCallCount += 1
         return mockIsActive
     }
-    
+
     var cancelCallCount = 0
     func cancel() {
         cancelCallCount += 1
     }
-    
 }

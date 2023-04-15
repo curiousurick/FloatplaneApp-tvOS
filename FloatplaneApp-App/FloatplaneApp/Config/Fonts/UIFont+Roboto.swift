@@ -22,7 +22,6 @@
 import UIKit
 
 extension UIFont {
-    
     enum RobotoWeight: String {
         case bold = "Roboto-Bold"
         case black = "Roboto-Black"
@@ -38,9 +37,8 @@ extension UIFont {
         case thin = "Roboto-Thin"
         case thinItalic = "Roboto-ThinItalic"
     }
-    
+
     static func roboto(size: CGFloat, weight: RobotoWeight) -> UIFont {
-        return UIFont(name: weight.rawValue, size: size)!
+        UIFont(name: weight.rawValue, size: size)!
     }
-    
 }

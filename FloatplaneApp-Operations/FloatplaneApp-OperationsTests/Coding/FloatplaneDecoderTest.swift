@@ -23,20 +23,17 @@ import XCTest
 @testable import FloatplaneApp_Operations
 
 class FloatplaneDecoderTest: XCTestCase {
-    
     private let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-    
+
     func testDateFormatter() {
-        
         let subject = FloatplaneDecoder()
-        
+
         // Assert date formatter
-        if case JSONDecoder.DateDecodingStrategy.formatted(let dateFormatter) = subject.dateDecodingStrategy {
+        if case let JSONDecoder.DateDecodingStrategy.formatted(dateFormatter) = subject.dateDecodingStrategy {
             XCTAssertEqual(dateFormat, dateFormatter.dateFormat)
         }
         else {
             XCTFail()
         }
     }
-
 }

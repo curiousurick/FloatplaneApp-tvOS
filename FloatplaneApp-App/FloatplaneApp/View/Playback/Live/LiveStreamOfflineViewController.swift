@@ -20,24 +20,24 @@
 //
 
 import UIKit
+import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 import FloatplaneApp_Operations
-import FloatplaneApp_Models
 
 class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
     private let logger = Log4S()
     private let liveDeliveryKeyOperation = OperationManagerImpl.instance.liveDeliveryKeyOperation
     private let dataSource = DataSource.instance
     private let liveDeliveryKeyDebuff = LiveDeliveryKeyDebuffImpl.instance
-    
+
     @IBOutlet var offlineThumbnailView: UIImageView!
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateThumbnailView()
         checkIfVideoOnline()
     }
-    
+
     func checkIfVideoOnline() {
         guard let activeCreator = dataSource.activeCreator else {
             logger.error("Cannot start live stream because liveSream is nil")
@@ -61,13 +61,13 @@ class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
             }
         }
     }
-    
-    func activeCreatorUpdated(activeCreator: Creator) {
+
+    func activeCreatorUpdated(activeCreator _: Creator) {
         updateThumbnailView()
     }
-    
+
     func updateThumbnailView() {
-        if let offlineThumbnailView = self.offlineThumbnailView,
+        if let offlineThumbnailView = offlineThumbnailView,
            let activeCreator = dataSource.activeCreator {
             DispatchQueue.main.async {
                 if let url = activeCreator.liveStream.offline?.thumbnail.path {

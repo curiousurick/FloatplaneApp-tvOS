@@ -23,31 +23,29 @@ import XCTest
 @testable import FloatplaneApp_Models
 
 class ResourceDataTest: XCTestCase {
-
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-    
+
     func testEncode() throws {
         // Arrange
         let resourceData = TestModelSupplier.resourceData
-        
+
         // Act
         let result = try encoder.encode(resourceData)
-        
+
         // Assert
         XCTAssertNotNil(result)
     }
-    
+
     func testDecode() throws {
         // Arrange
         let resourceData = TestModelSupplier.resourceData
-        
+
         // Act
         let data = try encoder.encode(resourceData)
         let decoded = try decoder.decode(ResourceData.self, from: data)
-        
+
         // Assert
         XCTAssertEqual(decoded, resourceData)
     }
-
 }

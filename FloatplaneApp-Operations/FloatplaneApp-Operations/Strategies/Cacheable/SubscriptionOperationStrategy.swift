@@ -19,28 +19,29 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
 
 /// Looks up user subscriptions. Includes information about the subscription itself.
 /// May need to use this in the future to determine if the user has access to a given video.
-/// TODO: Investigate if ContentFeed returns videos that user does not have access to. Maybe need to do client-side limiting to avoid CX cliff.
-protocol SubscriptionOperationStrategy: InternalOperationStrategy<SubscriptionRequest, SubscriptionResponse> { }
+/// TODO: Investigate if ContentFeed returns videos that user does not have access to. Maybe need to do client-side
+/// limiting to avoid CX cliff.
+protocol SubscriptionOperationStrategy: InternalOperationStrategy<SubscriptionRequest, SubscriptionResponse> {}
 
 class SubscriptionOperationStrategyImpl: SubscriptionOperationStrategy {
     private let baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v3/user/subscriptions")!
 
     private let session: Session
-    
+
     var dataRequest: DataRequest?
-    
+
     init(session: Session) {
         self.session = session
     }
 
     /// Looks up subscription data for the user, including the level of support for each subscribed creator.
-    func get(request: SubscriptionRequest) async -> OperationResponse<SubscriptionResponse> {
+    func get(request _: SubscriptionRequest) async -> OperationResponse<SubscriptionResponse> {
         let dataRequest = session.request(baseUrl)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in

@@ -21,37 +21,37 @@
 
 import UIKit
 
-fileprivate let LivePlayerViewStoryboardID = "LivePlayerViewController"
-fileprivate let LiveStreamOfflineViewStoryboardID = "LiveStreamOfflineViewController"
-fileprivate let BrowseViewControllerStoryboardID = "BrowseViewController"
-fileprivate let SearchViewControllerStoryboardID = "SearchViewController"
-fileprivate let SettingsViewControllerStoryboardID = "SettingsViewController"
-fileprivate let VodPlayerViewControllerStoryboardID = "VODPlayerViewController"
-fileprivate let TopNavigationControllerStoryboardID = "TopNavigationController"
-fileprivate let RootViewControllerStoryboardID = "RootViewController"
+private let LivePlayerViewStoryboardID = "LivePlayerViewController"
+private let LiveStreamOfflineViewStoryboardID = "LiveStreamOfflineViewController"
+private let BrowseViewControllerStoryboardID = "BrowseViewController"
+private let SearchViewControllerStoryboardID = "SearchViewController"
+private let SettingsViewControllerStoryboardID = "SettingsViewController"
+private let VodPlayerViewControllerStoryboardID = "VODPlayerViewController"
+private let TopNavigationControllerStoryboardID = "TopNavigationController"
+private let RootViewControllerStoryboardID = "RootViewController"
 
 extension UIStoryboard {
     private static let mainID = "Main"
-    
+
     static var main: UIStoryboard = .init(name: UIStoryboard.mainID, bundle: nil)
-    
+
     func getRootViewController() -> RootViewController {
-        return self.instantiateViewController(withIdentifier: RootViewControllerStoryboardID) as! RootViewController
+        instantiateViewController(withIdentifier: RootViewControllerStoryboardID) as! RootViewController
     }
-    
+
     func getTopNavigationController() -> TopNavigationController {
-        return self.instantiateViewController(withIdentifier: TopNavigationControllerStoryboardID) as! TopNavigationController
+        instantiateViewController(withIdentifier: TopNavigationControllerStoryboardID) as! TopNavigationController
     }
-    
+
     func getBrowseViewController() -> BrowseViewController {
-        return self.instantiateViewController(withIdentifier: BrowseViewControllerStoryboardID) as! BrowseViewController
+        instantiateViewController(withIdentifier: BrowseViewControllerStoryboardID) as! BrowseViewController
     }
-    
+
     /// Private because cosumers should grab the UISearchContainerViewController
     private func getSearchViewController() -> SearchViewController {
-        return self.instantiateViewController(withIdentifier: SearchViewControllerStoryboardID) as! SearchViewController
+        instantiateViewController(withIdentifier: SearchViewControllerStoryboardID) as! SearchViewController
     }
-    
+
     func getSearchContainerViewController() -> SearchContainerViewController {
         let searchViewController = getSearchViewController()
         let searchController = UISearchController(searchResultsController: searchViewController)
@@ -59,21 +59,20 @@ extension UIStoryboard {
         searchController.searchResultsUpdater = searchViewController
         return searchContainerController
     }
-    
+
     func getSettingsViewController() -> SettingsViewController {
-        return self.instantiateViewController(withIdentifier: SettingsViewControllerStoryboardID) as! SettingsViewController
+        instantiateViewController(withIdentifier: SettingsViewControllerStoryboardID) as! SettingsViewController
     }
-    
+
     func getLivePlayerViewController() -> LivePlayerViewController {
-        return self.instantiateViewController(withIdentifier: LivePlayerViewStoryboardID) as! LivePlayerViewController
+        instantiateViewController(withIdentifier: LivePlayerViewStoryboardID) as! LivePlayerViewController
     }
-    
+
     func getLiveStreamOfflineViewController() -> LiveStreamOfflineViewController {
-        return self.instantiateViewController(withIdentifier: LiveStreamOfflineViewStoryboardID) as! LiveStreamOfflineViewController
+        instantiateViewController(withIdentifier: LiveStreamOfflineViewStoryboardID) as! LiveStreamOfflineViewController
     }
-    
+
     func getVodPlayerViewController() -> VODPlayerViewController {
-        return self.instantiateViewController(withIdentifier: VodPlayerViewControllerStoryboardID) as! VODPlayerViewController
+        instantiateViewController(withIdentifier: VodPlayerViewControllerStoryboardID) as! VODPlayerViewController
     }
-    
 }

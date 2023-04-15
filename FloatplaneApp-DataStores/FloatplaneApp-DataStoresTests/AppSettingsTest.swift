@@ -20,46 +20,44 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_DataStores
 import FloatplaneApp_Models
+@testable import FloatplaneApp_DataStores
 
-fileprivate let QualitySettingsKey = "com.georgie.floatplane.QualitySettings"
+private let QualitySettingsKey = "com.georgie.floatplane.QualitySettings"
 
-fileprivate extension AppSettings {
+private extension AppSettings {
     func reset() {
         UserDefaults.standard.removeObject(forKey: QualitySettingsKey)
     }
 }
 
 final class AppSettingsTest: XCTestCase {
-    
     private var subject: AppSettings!
-    
+
     override func setUp() {
         super.setUp()
         subject = AppSettings.instance
         subject.reset()
     }
-    
+
     func testSetAndGetQualitySettings() {
         // Act
         subject.qualitySettings = .ql1080p
-        
+
         // Assert
         XCTAssertEqual(subject.qualitySettings, .ql1080p)
     }
-    
+
     func testGetDefaultQualityLevel() {
         // Assert
         XCTAssertEqual(subject.qualitySettings, DeliveryKeyQualityLevel.defaultLevel)
     }
-    
+
     func testGetWhenSavedIsNotValidQualityLevel() {
         // Arrange
         UserDefaults.standard.set("Blah", forKey: QualitySettingsKey)
-        
+
         // Assert
         XCTAssertEqual(subject.qualitySettings, DeliveryKeyQualityLevel.defaultLevel)
     }
-
 }

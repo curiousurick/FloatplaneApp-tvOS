@@ -23,7 +23,6 @@ import Foundation
 import FloatplaneApp_Models
 
 protocol LiveDeliveryKeyDebuff {
-    
     /// If this request has been made in the last minute, it's not allowed.
     /// This is because the LiveStream View and Offline View both check
     /// if the stream is happening. If the status changes, the view will switch
@@ -33,19 +32,17 @@ protocol LiveDeliveryKeyDebuff {
     /// until an AVPlayer attempts to play.
     /// TODO: Find a better solution that just stopping the request from being made again.
     func isAllowedToCheckForLiveStream(request: LiveDeliveryKeyRequest) -> Bool
-    
 }
 
 class LiveDeliveryKeyDebuffImpl {
-    
     static let instance = LiveDeliveryKeyDebuffImpl()
-    
-    private init() { }
-    
-    // 1 minute
+
+    private init() {}
+
+    /// 1 minute
     let timeBetweenLiveStreamChecks: TimeInterval = 60 * 1
-    var lastCheck: [LiveDeliveryKeyRequest : Date] = [:]
-    
+    var lastCheck: [LiveDeliveryKeyRequest: Date] = [:]
+
     func isAllowedToCheckForLiveStream(request: LiveDeliveryKeyRequest) -> Bool {
         if let lastCheck = lastCheck[request] {
             return Date().timeIntervalSince(lastCheck) > timeBetweenLiveStreamChecks

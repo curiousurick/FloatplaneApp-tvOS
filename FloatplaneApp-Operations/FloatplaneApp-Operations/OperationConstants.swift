@@ -25,7 +25,7 @@ import Foundation
 struct OperationConstants {
     /// Standard domain url for floatplane APIs.
     static let domainBaseUrl = "https://www.floatplane.com"
-    
+
     /// User-Agent which enables captcha-free login/logout.
     static let iOSUserAgent = "floatplane/59 CFNetwork/1404.0.5 Darwin/22.3.0"
 }

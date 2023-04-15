@@ -23,23 +23,23 @@ import UIKit
 import FloatplaneApp_Models
 
 extension UIMenu {
-    
     convenience init(children: [UIMenuElement]) {
         self.init(title: "", children: children)
     }
-    
+
     static func getQualityMenu(
         selectedQualityLevel: QualityLevel,
         videoMetadata: VideoMetadata,
         optionSelected: @escaping ((QualityLevel) -> Void)
-    ) -> UIMenu {
-        let optionActions = videoMetadata.levels.enumerated().map { (index, level) in
+    )
+        -> UIMenu {
+        let optionActions = videoMetadata.levels.enumerated().map { _, level in
             let isSelected = selectedQualityLevel == level
             let state: UIAction.State = isSelected ? .on : .off
             return UIAction(
                 title: level.label,
                 state: state,
-                handler: { action in
+                handler: { _ in
                     optionSelected(level)
                 }
             )
@@ -52,5 +52,4 @@ extension UIMenu {
             children: optionActions
         )
     }
-    
 }

@@ -19,43 +19,40 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
 import AVKit
-import FloatplaneApp_Operations
+import UIKit
 import FloatplaneApp_Utilities
+import FloatplaneApp_Operations
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private let logger = Log4S()
 
     var window: UIWindow?
-    
+
     static var instance: AppDelegate {
-        get {
-            UIApplication.shared.delegate as! AppDelegate
-        }
+        UIApplication.shared.delegate as! AppDelegate
     }
-    
+
     var rootViewController: RootViewController!
     var topNavigationController: TopNavigationController? {
-        get {
-            return rootViewController.topNavigationController
-        }
+        rootViewController.topNavigationController
     }
 
     func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {
+        _: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
+    )
+        -> Bool {
         setupAVSession()
         setupFonts()
         ImageCacheConfig.instance.setup()
-        
-        self.rootViewController = self.window?.rootViewController as? RootViewController
+
+        rootViewController = window?.rootViewController as? RootViewController
 
         return true
     }
-    
+
     private func setupAVSession() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
@@ -66,28 +63,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             logger.error("Unable to activate AVAudioSession which means videos won't be able to play")
         }
     }
-    
+
     private func setupFonts() {
         let fonts = Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: nil)
-        fonts?.forEach({ url in
+        fonts?.forEach { url in
             CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
-        })
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        }
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
+    func applicationWillResignActive(_: UIApplication) {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of
+        // temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the
+        // application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should
+        // use this method to pause the game.
     }
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
+    func applicationDidEnterBackground(_: UIApplication) {}
+
+    func applicationWillEnterForeground(_: UIApplication) {
         NotificationCenter().post(Notification(name: .NSExtensionHostWillEnterForeground))
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    func applicationDidBecomeActive(_: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the
+        // application was previously in the background, optionally refresh the user interface.
     }
 }
-

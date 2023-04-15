@@ -20,27 +20,27 @@
 //
 
 import Foundation
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class MockStrategyBasedOperation<I: Hashable, O: Codable>: StrategyBasedOperation {
     typealias Request = I
     typealias Response = O
-    
+
     var getCallCount = 0
     var mockGet: ((Request) -> OperationResponse<Response>)?
     func get(request: Request) async -> OperationResponse<Response> {
         getCallCount += 1
         return mockGet?(request) ?? OperationResponse(response: nil, error: nil)
     }
-    
+
     var isActiveCallCount = 0
     var mockIsActive: Bool = false
     func isActive() -> Bool {
         isActiveCallCount += 1
         return mockIsActive
     }
-    
+
     var cancelCallCount = 0
     func cancel() {
         cancelCallCount += 1

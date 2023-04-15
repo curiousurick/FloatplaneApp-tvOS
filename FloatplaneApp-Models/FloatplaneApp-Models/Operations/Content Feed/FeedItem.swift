@@ -45,7 +45,7 @@ public struct FeedItem: Hashable, Codable, Equatable {
     public let type: VideoType
     public let videoAttachments: [String]
     public let wasReleasedSilently: Bool
-    
+
     public init(
         attachmentOrder: [String], audioAttachments: [String], channel: Channel,
         comments: UInt64, creator: ContentCreator, dislikes: UInt64,

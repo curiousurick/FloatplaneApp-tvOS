@@ -24,16 +24,14 @@ import Foundation
 /// Request to get the full metadata for the named Creator.
 public struct CreatorRequest: OperationRequest {
     public let named: String
-    
+
     public init(named: String) {
         self.named = named
     }
-    
-    public var params: [String : Any] {
-        return [
-            "creatorURL[0]" : named
+
+    public var params: [String: Any] {
+        [
+            "creatorURL[0]": named,
         ]
     }
-    
-    
 }

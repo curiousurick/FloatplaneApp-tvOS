@@ -20,8 +20,8 @@
 //
 
 import UIKit
-import ParallaxView
 import SwiftDate
+import ParallaxView
 import FloatplaneApp_Models
 import FloatplaneApp_DataStores
 
@@ -37,57 +37,47 @@ protocol FeedViewItem {
 
 extension FeedItem: FeedViewItem {
     var imageViewUrl: URL {
-        get {
-            self.thumbnail.path
-        }
+        thumbnail.path
     }
-    
+
     var titleLabel: String {
-        get {
-            title
-        }
+        title
     }
-    
+
     var typeLabel: String {
-        get {
-            " Video "
-        }
+        " Video "
     }
-    
+
     var channelLabel: String {
-        get {
-            self.channel.title
-        }
+        channel.title
     }
-    
+
     var timeSinceReleaseLabel: String {
         releaseDate.toRelative(since: nil, dateTimeStyle: .numeric, unitsStyle: .full)
     }
-    
+
     var progress: TimeInterval? {
-        if videoAttachments.count > 0,
+        if !videoAttachments.isEmpty,
            let progressStore = UserStoreImpl.instance.getProgressStore() {
             let videoGuid = videoAttachments[0]
             return progressStore.getProgress(for: videoGuid)
         }
         return nil
     }
-    
+
     var duration: TimeInterval {
-        TimeInterval(self.metadata.videoDuration)
+        TimeInterval(metadata.videoDuration)
     }
-    
 }
 
 class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
-    
     static let defaultDurationText = "0:00"
     static let identifier = "FeeditemCell"
     static let nibName = "FeedItemCollectionViewCell"
-    
+
     let imageCornerRadiusValue: CGFloat = 20
     let typeLabelCornerRadiusValue: CGFloat = 5
-    
+
     @IBOutlet var image: UIImageView!
     @IBOutlet var title: UITextView!
     @IBOutlet var type: UILabel!
@@ -96,27 +86,34 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     @IBOutlet var progressBar: FeedItemProgressBarView!
     @IBOutlet var durationLabel: UILabel!
     @IBOutlet var clockImage: UIImageView!
-    
+
     var feedItem: FeedViewItem!
-    
-    static func dequeueFromCollectionView(collectionView: UICollectionView, indexPath: IndexPath) -> FeedItemCollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: FeedItemCollectionViewCell.identifier, for: indexPath) as! FeedItemCollectionViewCell
+
+    static func dequeueFromCollectionView(
+        collectionView: UICollectionView,
+        indexPath: IndexPath
+    )
+        -> FeedItemCollectionViewCell {
+        collectionView.dequeueReusableCell(
+            withReuseIdentifier: FeedItemCollectionViewCell.identifier,
+            for: indexPath
+        ) as! FeedItemCollectionViewCell
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         title.textContainerInset = .init(top: 5.0, left: 0.0, bottom: 0.0, right: 0.0)
-        
+
         image.clipsToBounds = true
         layer.cornerRadius = imageCornerRadiusValue
         layer.masksToBounds = true
         type.layer.cornerRadius = typeLabelCornerRadiusValue
         type.layer.masksToBounds = true
     }
-    
+
     func setProgress(progress: TimeInterval) {
-        if progress != 0 && feedItem.duration != 0 {
+        if progress != 0, feedItem.duration != 0 {
             let percent = (progress / feedItem.duration)
             // Sometimes progress goes just over duration.
             // Bar width becomes progress proportion of
@@ -129,9 +126,9 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
             progressBar.isHidden = true
         }
     }
-    
+
     func setFeedViewItem(item: FeedViewItem) {
-        self.feedItem = item
+        feedItem = item
         image.image = nil
         image.af.setImage(withURL: item.imageViewUrl)
         title.text = item.titleLabel
@@ -148,6 +145,5 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
             clockImage.isHidden = true
         }
         setProgress(progress: item.progress ?? 0)
-        
     }
 }

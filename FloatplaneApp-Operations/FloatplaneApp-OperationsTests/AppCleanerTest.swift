@@ -20,50 +20,47 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_DataStores
+@testable import FloatplaneApp_Operations
 
 class AppCleanerTest: XCTestCase {
-    
-    // Mocks
+    /// Mocks
     private var mockUserStore: MockUserStore!
     private var mockOperationManager: MockOperationManager!
     private var mockUrlCache: MockURLCache!
-    
+
     private var subject: AppCleanerImpl!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         mockUserStore = MockUserStore()
         mockOperationManager = MockOperationManager()
         mockUrlCache = MockURLCache()
-        
+
         subject = AppCleanerImpl(
             userStore: mockUserStore,
             operationManager: mockOperationManager,
             urlCache: mockUrlCache
         )
     }
-    
+
     func testNoArgInit() {
-        
         subject = AppCleanerImpl()
-        
+
         // Assert
         XCTAssertNotNil(subject)
         // NoOp because members are private.
     }
-    
+
     func testClean() {
         // Act
         subject.clean()
-        
+
         // Assert
         XCTAssertEqual(mockUserStore.removeUserCallCount, 1)
         XCTAssertEqual(mockOperationManager.cancelAllOperationsCallCount, 1)
         XCTAssertEqual(mockOperationManager.clearCacheCallCount, 1)
         XCTAssertEqual(mockUrlCache.removeAllCachedResponsesCallCount, 1)
     }
-
 }

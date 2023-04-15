@@ -19,19 +19,20 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
 
 /// Gets the full video metadata wrapper object for a given feed item.
-/// This is a compound API operation which gets a DeliveryKey and full ContentVideoResponse and wraps it in VideoMetadata with the given FeedItem.
+/// This is a compound API operation which gets a DeliveryKey and full ContentVideoResponse and wraps it in
+/// VideoMetadata with the given FeedItem.
 /// Note: DeliveryKey will not be cached but ContentVideoOperation is a CacheableAPIOperation
-public protocol VideoMetadataOperation: Operation<VideoMetadataRequest, VideoMetadata> { }
+public protocol VideoMetadataOperation: Operation<VideoMetadataRequest, VideoMetadata> {}
 
 class VideoMetadataOperationImpl: VideoMetadataOperation {
     private let contentVideoOperation: any CacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse>
     private let vodDeliveryKeyOperation: any StrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey>
-    
+
     init(
         contentVideoOperation: any CacheableStrategyBasedOperation<ContentVideoRequest, ContentVideoResponse>,
         vodDeliveryKeyOperation: any StrategyBasedOperation<VodDeliveryKeyRequest, DeliveryKey>
@@ -39,9 +40,9 @@ class VideoMetadataOperationImpl: VideoMetadataOperation {
         self.contentVideoOperation = contentVideoOperation
         self.vodDeliveryKeyOperation = vodDeliveryKeyOperation
     }
-    
+
     var dataRequest: Alamofire.DataRequest?
-    
+
     /// Takes a feedItem and the video's GUID and returns a wrapper object with more full metadata with:
     /// 1. The video including quality levels
     /// 2. The delivery key for the video.
@@ -53,7 +54,11 @@ class VideoMetadataOperationImpl: VideoMetadataOperation {
         async let contentVideo = await contentVideoOperation.get(request: contentVideoRequest)
         if let deliveryKey = await deliveryKey.response,
            let contentVideo = await contentVideo.response {
-            let result = VideoMetadata(feedItem: request.feedItem, contentVideoResponse: contentVideo, deliveryKey: deliveryKey)
+            let result = VideoMetadata(
+                feedItem: request.feedItem,
+                contentVideoResponse: contentVideo,
+                deliveryKey: deliveryKey
+            )
             return OperationResponse(response: result, error: nil)
         }
         let deliveryKeyError = await deliveryKey.error
@@ -61,12 +66,12 @@ class VideoMetadataOperationImpl: VideoMetadataOperation {
         let error: Error? = deliveryKeyError ?? contentVideoError
         return OperationResponse(response: nil, error: error)
     }
-    
+
     func isActive() -> Bool {
-        return contentVideoOperation.isActive() ||
-        vodDeliveryKeyOperation.isActive()
+        contentVideoOperation.isActive() ||
+            vodDeliveryKeyOperation.isActive()
     }
-    
+
     func cancel() {
         contentVideoOperation.cancel()
         vodDeliveryKeyOperation.cancel()

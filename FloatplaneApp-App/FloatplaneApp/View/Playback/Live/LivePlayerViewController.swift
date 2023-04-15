@@ -19,11 +19,11 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
 import AVKit
-import FloatplaneApp_Operations
+import UIKit
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
+import FloatplaneApp_Operations
 
 class LivePlayerViewController: BaseVideoPlayerViewController {
     private var menuPressRecognizer: UITapGestureRecognizer?
@@ -34,32 +34,32 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
     private var registeredForLiveStreamEndNotification = false
     private let liveDeliveryKeyDebuff = LiveDeliveryKeyDebuffImpl.instance
     private let streamURLFactory = StreamURLFactoryImpl()
-    
+
     var deliveryKey: DeliveryKey?
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
         setupMenuButtonPress()
         startVideo()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if let menuPressRecognizer = menuPressRecognizer {
-            self.view.removeGestureRecognizer(menuPressRecognizer)
+            view.removeGestureRecognizer(menuPressRecognizer)
         }
         menuPressRecognizer = nil
-        self.tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
         if let player = player {
             player.pause()
         }
     }
-    
+
     override func playbackFailed() {
         cleanupAndExit()
     }
-    
+
     private func startVideo() {
         // You're being presented when you already have an active stream going.
         if let player = player {
@@ -98,14 +98,19 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
             }
         }
     }
-    
+
     private func startVideo(deliveryKey: DeliveryKey) {
         let url = streamURLFactory.create(deliveryKey: deliveryKey)
         let player = AVPlayer(url: url)
         self.player = player
         player.play()
         if !registeredForLiveStreamEndNotification {
-            NotificationCenter.default.addObserver(self, selector: #selector(liveStreamEnded(notification:)), name: liveStreamEndNotification, object: nil)
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(liveStreamEnded(notification:)),
+                name: liveStreamEndNotification,
+                object: nil
+            )
             registeredForLiveStreamEndNotification = true
         }
         logger.debug("Started playing video \(url)")
@@ -113,17 +118,18 @@ class LivePlayerViewController: BaseVideoPlayerViewController {
 }
 
 // MARK: Menu Button Press Behavior
+
 extension LivePlayerViewController {
     private func setupMenuButtonPress() {
         menuPressRecognizer = UITapGestureRecognizer()
         if let menuPressRecognizer = menuPressRecognizer {
             menuPressRecognizer.addTarget(self, action: #selector(menuButtonAction(recognizer:)))
             menuPressRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.menu.rawValue)]
-            self.view.addGestureRecognizer(menuPressRecognizer)
+            view.addGestureRecognizer(menuPressRecognizer)
         }
     }
-    
-    @objc func menuButtonAction(recognizer: UITapGestureRecognizer) {
+
+    @objc func menuButtonAction(recognizer _: UITapGestureRecognizer) {
         guard let tabBarController = tabBarController as? FPTabBarController else {
             logger.error("LivePlayerViewController's tabBarController is not the FPTabBarController")
             return
@@ -133,14 +139,15 @@ extension LivePlayerViewController {
 }
 
 // MARK: End of stream behavior
+
 extension LivePlayerViewController {
-    @objc private func liveStreamEnded(notification: Notification) {
+    @objc private func liveStreamEnded(notification _: Notification) {
         cleanupAndExit()
     }
-    
+
     private func cleanupAndExit() {
         registeredForLiveStreamEndNotification = false
-        self.player = nil
+        player = nil
         NotificationCenter.default.removeObserver(self, name: liveStreamEndNotification, object: nil)
         guard let tabBarController = tabBarController as? FPTabBarController else {
             logger.error("LivePlayerViewController's tabBarController is not the FPTabBarController")

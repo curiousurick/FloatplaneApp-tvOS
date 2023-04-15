@@ -19,27 +19,27 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import FloatplaneApp_Models
 
 /// This operation retrieves a delivery key for the active creator's live stream.
 /// The delivery key contains a set of streams, parameterized by quality level.
 /// However, the delivery key looks different for VOD and Live so the responses are different.
 /// The result of this operation is not cached.
-protocol LiveDeliveryKeyOperationStrategy: InternalOperationStrategy<LiveDeliveryKeyRequest, DeliveryKey> { }
+protocol LiveDeliveryKeyOperationStrategy: InternalOperationStrategy<LiveDeliveryKeyRequest, DeliveryKey> {}
 
 class LiveDeliveryKeyOperationStrategyImpl: LiveDeliveryKeyOperationStrategy {
-    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
-    
+    private let baseUrl: URL = .init(string: "\(OperationConstants.domainBaseUrl)/api/v2/cdn/delivery")!
+
     private let session: Session
-    
+
     var dataRequest: DataRequest?
-    
+
     init(session: Session) {
         self.session = session
     }
-    
+
     /// Gets a DeliveryKey for a livestream for a given creator.
     func get(request: LiveDeliveryKeyRequest) async -> OperationResponse<DeliveryKey> {
         let dataRequest = session.request(baseUrl, parameters: request.params)

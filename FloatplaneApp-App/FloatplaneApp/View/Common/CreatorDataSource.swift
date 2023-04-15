@@ -29,21 +29,22 @@ protocol DataSourceUpdating: AnyObject, Hashable {
     func activeCreator(activeCreator: Creator?)
     func activeBaseCreator(activeBaseCreator: BaseCreator?)
 }
+
 extension DataSourceUpdating {
-    func feedUpdated(feed: [FeedItem]?) { }
-    func baseCreatorsUpdated(baseCreators: [BaseCreator]?) { }
-    func activeCreator(activeCreator: Creator?) { }
-    func activeBaseCreator(activeBaseCreator: BaseCreator?) { }
+    func feedUpdated(feed _: [FeedItem]?) {}
+    func baseCreatorsUpdated(baseCreators _: [BaseCreator]?) {}
+    func activeCreator(activeCreator _: Creator?) {}
+    func activeBaseCreator(activeBaseCreator _: BaseCreator?) {}
 }
 
-fileprivate class DataSourceUpdatingSet {
+private class DataSourceUpdatingSet {
     private var delegates: Set<AnyHashable> = []
-    
+
     func insert(delegate: any DataSourceUpdating) {
-        let _ = delegates.insert(delegate)
+        _ = delegates.insert(delegate)
     }
-    
-    func iterate( doing: (any DataSourceUpdating) -> Void ) {
+
+    func iterate(doing: (any DataSourceUpdating) -> Void) {
         for item in delegates {
             doing(item as! any DataSourceUpdating)
         }
@@ -52,42 +53,45 @@ fileprivate class DataSourceUpdatingSet {
 
 class DataSource {
     private let logger = Log4S()
-    
+
     static let instance = DataSource()
-    
-    private init() { }
-    
+
+    private init() {}
+
     var feed: [FeedItem]? {
         didSet {
             delegates.iterate { $0.feedUpdated(feed: feed) }
         }
     }
+
     var baseCreators: [BaseCreator]? {
         didSet {
             delegates.iterate { $0.baseCreatorsUpdated(baseCreators: baseCreators) }
         }
     }
+
     var activeCreator: Creator? {
         didSet {
             delegates.iterate { $0.activeCreator(activeCreator: activeCreator) }
         }
     }
+
     var activeBaseCreator: BaseCreator? {
         didSet {
             delegates.iterate { $0.activeBaseCreator(activeBaseCreator: activeBaseCreator) }
         }
     }
-    
-    private var delegates: DataSourceUpdatingSet = DataSourceUpdatingSet()
-    
+
+    private var delegates: DataSourceUpdatingSet = .init()
+
     func registerDelegate(delegate: any DataSourceUpdating) {
         delegates.insert(delegate: delegate)
     }
-    
+
     func clearData() {
-        self.baseCreators = nil
-        self.activeCreator = nil
-        self.activeBaseCreator = nil
-        self.feed = nil
+        baseCreators = nil
+        activeCreator = nil
+        activeBaseCreator = nil
+        feed = nil
     }
 }

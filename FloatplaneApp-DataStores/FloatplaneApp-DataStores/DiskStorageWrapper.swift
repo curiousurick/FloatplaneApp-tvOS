@@ -19,21 +19,21 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Cache
+import Foundation
 import FloatplaneApp_Utilities
 
 /// Wrapper for Cache framework's Storage object
 public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
     private let logger = Log4S()
-    
+
     /// Actual storage
     private let storage: Storage<Key, Value>
-    
+
     public init(storage: Storage<Key, Value>) {
         self.storage = storage
     }
-    
+
     /// Reads an object for given key.
     public func readObject(forKey key: Key) -> Value? {
         do {
@@ -44,7 +44,7 @@ public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
             return nil
         }
     }
-    
+
     /// Write given object for given key. Expiry indicates when the data will be considered expired.
     /// Note: Storage does not automatically delete object when expired
     public func writeObject(_ object: Value, forKey key: Key, expiry: Expiry? = nil) {
@@ -55,7 +55,7 @@ public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
             logger.info("Unable to write object for key \(String.fromClass(key)). Error \(error)")
         }
     }
-    
+
     public func isExpiredObject(forKey key: Key) -> Bool {
         do {
             let entry = try storage.entry(forKey: key)
@@ -66,14 +66,14 @@ public class DiskStorageWrapper<Key: Hashable, Value: Codable> {
             return true
         }
     }
-    
-    public func removeExpiredObjects(completion: ((Result<()>) -> Void)? = nil) {
+
+    public func removeExpiredObjects(completion: ((Result<Void>) -> Void)? = nil) {
         storage.async.removeExpiredObjects { result in
             completion?(result)
         }
     }
-                                           
-    public func removeAll(completion: ((Result<()>) -> Void)? = nil) {
+
+    public func removeAll(completion: ((Result<Void>) -> Void)? = nil) {
         storage.async.removeAll { result in
             completion?(result)
         }

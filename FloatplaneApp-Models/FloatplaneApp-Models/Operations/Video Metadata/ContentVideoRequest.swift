@@ -23,17 +23,15 @@ import Foundation
 
 /// The request for the ContentVideoOperation by video ID.
 public struct ContentVideoRequest: OperationRequest {
-    
     public let id: String
-    
+
     public init(id: String) {
         self.id = id
     }
-    
-    public var params: [String : Any] {
-        return [
-            "id" : id
+
+    public var params: [String: Any] {
+        [
+            "id": id,
         ]
     }
-    
 }

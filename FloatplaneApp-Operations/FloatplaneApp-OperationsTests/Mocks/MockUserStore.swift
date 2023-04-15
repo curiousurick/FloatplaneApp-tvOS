@@ -19,37 +19,37 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import FloatplaneApp_DataStores
-import FloatplaneApp_Models
 import XCTest
+import Foundation
+import FloatplaneApp_Models
+import FloatplaneApp_DataStores
 
 class MockUserStore: UserStore {
-    
     var getUserCallCount = 0
     var mockUser: User?
     func getUser() -> User? {
         getUserCallCount += 1
         return mockUser
     }
-    
+
     var getProgressStoreCallCount = 0
     var mockProgressStore: ProgressStore?
     func getProgressStore() -> ProgressStore? {
         getProgressStoreCallCount += 1
         return mockProgressStore
     }
-    
+
     var setUserCallCount = 0
     private var setUserInputs: [User] = []
     func verifySetUserInput(user: User) {
         XCTAssertTrue(setUserInputs.contains { $0 == user })
     }
+
     func setUser(user: User) {
         setUserCallCount += 1
         setUserInputs.append(user)
     }
-    
+
     var removeUserCallCount = 0
     func removeUser() {
         removeUserCallCount += 1

@@ -23,19 +23,18 @@ import Foundation
 
 /// Request to login the user given a username and password.
 public struct LoginRequest: OperationRequest {
-    
     public let username: String
     public let password: String
-    
+
     public init(username: String, password: String) {
         self.username = username
         self.password = password
     }
-    
-    public var params: [String : Any] {
-        return [
-            "username" : username,
-            "password" : password
+
+    public var params: [String: Any] {
+        [
+            "username": username,
+            "password": password,
         ]
     }
 }

@@ -28,13 +28,14 @@ public struct LiveStream: Hashable, Codable, Equatable {
         public let description: String
         public let thumbnail: Icon
         public let title: String
-        
+
         public init(description: String, thumbnail: Icon, title: String) {
             self.description = description
             self.thumbnail = thumbnail
             self.title = title
         }
     }
+
     public let channel: String
     public let description: String
     public let id: String
@@ -43,7 +44,7 @@ public struct LiveStream: Hashable, Codable, Equatable {
     public let streamPath: String
     public let thumbnail: Icon
     public let title: String
-    
+
     public init(
         channel: String, description: String, id: String, offline: Offline?,
         owner: String, streamPath: String, thumbnail: Icon, title: String

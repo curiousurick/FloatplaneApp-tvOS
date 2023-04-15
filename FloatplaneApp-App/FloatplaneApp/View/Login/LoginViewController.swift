@@ -20,65 +20,62 @@
 //
 
 import UIKit
-import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_DataStores
+import FloatplaneApp_Operations
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-    
     private let loginOp = OperationManagerImpl.instance.loginOperation
-    
+
     @IBOutlet var usernameField: LoginImageTextField!
     @IBOutlet var passwordField: LoginImageTextField!
     @IBOutlet var loginButton: LoginButton!
     @IBOutlet var floatPlaneLabel: UILabel!
-    
+
     private var viewToFocus: UIFocusEnvironment? {
         didSet {
             self.setNeedsFocusUpdate()
             self.updateFocusIfNeeded()
         }
     }
-    
+
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        get {
-            if let viewToFocus = viewToFocus {
-                self.viewToFocus = nil
-                return [viewToFocus]
-            }
-            return super.preferredFocusEnvironments
+        if let viewToFocus = viewToFocus {
+            self.viewToFocus = nil
+            return [viewToFocus]
         }
+        return super.preferredFocusEnvironments
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let robotoFont: UIFont = .roboto(size: 48, weight: .black)
         floatPlaneLabel.font = UIFontMetrics.default.scaledFont(for: robotoFont)
         floatPlaneLabel.adjustsFontForContentSizeCategory = true
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
+
+    override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+
+    func textFieldDidEndEditing(_: UITextField, reason: UITextField.DidEndEditingReason) {
         usernameField.updatePlaceholderView()
         passwordField.updatePlaceholderView()
         // Just finished entering both text fields
         let username = usernameField.textField.text ?? ""
         let password = passwordField.textField.text ?? ""
-        if reason == .committed &&
-            !username.isEmpty &&
-            !password.isEmpty {
+        if reason == .committed,
+           !username.isEmpty,
+           !password.isEmpty {
             // Does not work if you do it immediately.
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.viewToFocus = self.loginButton
             }
         }
     }
-    
-    @IBAction func loginButtonPressed(sender: UIButton!) {
+
+    @IBAction func loginButtonPressed(sender _: UIButton!) {
         Task {
             let username = usernameField.textField.text ?? ""
             let password = passwordField.textField.text ?? ""
@@ -101,7 +98,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+
     func displayLoginFailureAlert(message: String? = nil) {
         let title = "Sorry, we had trouble logging you in"
         let defaultErrorMessage = "Your Floatplane username or password could not be verified. Please try again."
@@ -113,4 +110,3 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-

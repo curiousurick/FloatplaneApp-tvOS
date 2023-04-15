@@ -23,13 +23,9 @@ import Foundation
 
 /// Typed request to get the first page of content.
 public struct GetFirstPageRequest: OperationRequest {
-    
-    public init() { }
-    
-    public var params: [String : Any] {
-        get {
-            [:]
-        }
+    public init() {}
+
+    public var params: [String: Any] {
+        [:]
     }
 }
-

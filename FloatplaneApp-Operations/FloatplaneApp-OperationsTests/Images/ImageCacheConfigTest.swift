@@ -24,32 +24,30 @@ import AlamofireImage
 @testable import FloatplaneApp_Operations
 
 final class ImageCacheConfigTest: XCTestCase {
-    
     private var subject: ImageCacheConfig!
-    
+
     override func setUp() {
         subject = ImageCacheConfig.instance
     }
-    
+
     func testSetup() {
         // Act
         subject.setup(diskSpaceMB: 50)
-        
+
         // Assert
         let expectedCapacity = 50 * 1024 * 1024
         assertCacheSize(expectedCapacity: expectedCapacity)
-        
+
         // Test that it doesn't change if setup again
         subject.setup(diskSpaceMB: 1500)
         assertCacheSize(expectedCapacity: expectedCapacity)
-        
     }
-    
+
     private func assertCacheSize(expectedCapacity: Int) {
         let urlCache = UIImageView.af.sharedImageDownloader.session.sessionConfiguration.urlCache
         let diskCapacity = urlCache?.diskCapacity
         let memoryCapacity = urlCache?.memoryCapacity
-        
+
         XCTAssertEqual(diskCapacity, expectedCapacity)
         XCTAssertEqual(memoryCapacity, expectedCapacity)
     }

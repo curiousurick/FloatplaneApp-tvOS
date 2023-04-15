@@ -24,25 +24,26 @@ import Foundation
 /// The parameters for constructing a stream URL for a given quality level.
 /// Maps a quality level to the filename and access token
 public struct QualityLevelParams: Codable, Equatable {
-    public struct Constants {
+    public enum Constants {
         public static let FileNameKey = "{qualityLevelParams.2}"
         public static let AccessTokenKey = "{qualityLevelParams.4}"
     }
-    
+
     /// The filename and access token for a given quality level.
     struct QualityLevelParam: Equatable {
         let filename: String
         let accessToken: String
     }
+
     let params: [String: QualityLevelParam]
-    
+
     init(params: [String: QualityLevelParam]) {
         self.params = params
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ParamsKey.self)
-        
+
         var params: [String: QualityLevelParam] = [:]
         for key in container.allKeys {
             let nested = try container.nestedContainer(keyedBy: ParamsKey.self, forKey: key)
@@ -52,7 +53,7 @@ public struct QualityLevelParams: Codable, Equatable {
         }
         self.params = params
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: ParamsKey.self)
         for param in params {
@@ -62,15 +63,16 @@ public struct QualityLevelParams: Codable, Equatable {
             try nested.encode(param.value.accessToken, forKey: .accessToken)
         }
     }
-    
+
     struct ParamsKey: CodingKey {
         var stringValue: String
         init(stringValue: String) {
             self.stringValue = stringValue
         }
-        var intValue: Int? { return nil }
-        init?(intValue: Int) { return nil }
-        
+
+        var intValue: Int? { nil }
+        init?(intValue _: Int) { nil }
+
         static let fileName = ParamsKey(stringValue: "2")
         static let accessToken = ParamsKey(stringValue: "4")
     }

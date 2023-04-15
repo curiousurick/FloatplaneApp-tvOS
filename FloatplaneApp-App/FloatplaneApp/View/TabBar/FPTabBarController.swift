@@ -19,8 +19,8 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import UIKit
+import Foundation
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 import FloatplaneApp_Operations
@@ -30,19 +30,19 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
     private let updateLiveTabQueue = OperationQueue()
     private let creatorOperation = OperationManagerImpl.instance.creatorOperation
     private let creatorDataSourceManager = DataSource.instance
-    
+
     private var livePlayerViewController: LivePlayerViewController!
     private var liveStreamOfflineViewController: LiveStreamOfflineViewController!
     private var browseViewController: BrowseViewController!
     private var searchViewController: SearchContainerViewController!
     private var settingsViewConroller: SettingsViewController!
-    
+
     var lastFocusedIndex: Int?
     var viewToFocus: UIFocusEnvironment? = nil {
         didSet {
             if viewToFocus != nil {
-                self.setNeedsFocusUpdate();
-                self.updateFocusIfNeeded();
+                self.setNeedsFocusUpdate()
+                self.updateFocusIfNeeded()
             }
         }
     }
@@ -51,61 +51,62 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
         if let viewToFocus = viewToFocus {
             self.viewToFocus = nil
             return [viewToFocus]
-        } else {
-            return super.preferredFocusEnvironments;
+        }
+        else {
+            return super.preferredFocusEnvironments
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
-        
+        delegate = self
+
         let storyboard = UIStoryboard.main
-        
+
         // Setup Live Tab
         livePlayerViewController = storyboard.getLivePlayerViewController()
         liveStreamOfflineViewController = storyboard.getLiveStreamOfflineViewController()
         let liveTab = UITabBarItem(title: TabConstants.liveName, image: nil, tag: TabConstants.liveId)
         liveStreamOfflineViewController.tabBarItem = liveTab
         livePlayerViewController.tabBarItem = liveTab
-        
+
         // Setup Browse ViewController
-        self.browseViewController = storyboard.getBrowseViewController()
+        browseViewController = storyboard.getBrowseViewController()
         let browseTab = UITabBarItem(title: TabConstants.browseName, image: nil, tag: TabConstants.browseId)
         browseViewController.tabBarItem = browseTab
 
         // Setup Search ViewController
         searchViewController = storyboard.getSearchContainerViewController()
-        
+
         let searchTab = UITabBarItem(title: TabConstants.searchName, image: nil, tag: TabConstants.searchId)
         searchViewController.tabBarItem = searchTab
-        
+
         // Setup Settings ViewController
-        self.settingsViewConroller = storyboard.getSettingsViewController()
-        
+        settingsViewConroller = storyboard.getSettingsViewController()
+
         let settingsTab = UITabBarItem(title: TabConstants.settingsName, image: nil, tag: TabConstants.settingsId)
         settingsViewConroller.tabBarItem = settingsTab
 
-        self.viewControllers = [
+        viewControllers = [
             livePlayerViewController,
             browseViewController,
             searchViewController,
-            settingsViewConroller
+            settingsViewConroller,
         ]
-        self.resetView()
+        resetView()
     }
-    
+
     func resetView() {
         guard isViewLoaded else {
             logger.info("Data was collected before view had a chance to load.")
             return
         }
-        self.selectedViewController = self.viewControllers?[1]
+        selectedViewController = viewControllers?[1]
         DispatchQueue.main.async {
             self.viewToFocus = self.tabBar
         }
     }
-    
+
     func updateLiveTab(online: Bool, deliverKey: DeliveryKey? = nil) {
         DispatchQueue.main.async {
             guard let viewControllers = self.viewControllers else {
@@ -127,26 +128,26 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
             self.toggleHidden(selectedViewController: selectedViewController)
         }
     }
-    
+
     func toggleHidden(selectedViewController: UIViewController) {
         if selectedViewController == livePlayerViewController {
-            self.tabBar.isHidden = true
+            tabBar.isHidden = true
         }
         else {
-            self.tabBar.isHidden = false
+            tabBar.isHidden = false
         }
     }
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+
+    func tabBarController(_: UITabBarController, didSelect viewController: UIViewController) {
         // If switching to search view, focus its search bar
-        if viewController == viewControllers?[TabConstants.searchIndex] &&
-            lastFocusedIndex != TabConstants.searchIndex {
-            self.viewToFocus = searchViewController.view
+        if viewController == viewControllers?[TabConstants.searchIndex],
+           lastFocusedIndex != TabConstants.searchIndex {
+            viewToFocus = searchViewController.view
         }
-        
+
         lastFocusedIndex = viewControllers?.firstIndex(of: viewController)
     }
-    
+
     func updateCreatorInfo() {
         guard let activeCreator = creatorDataSourceManager.activeCreator else {
             return

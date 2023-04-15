@@ -21,17 +21,17 @@
 
 import UIKit
 import ParallaxView
-import FloatplaneApp_Operations
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
+import FloatplaneApp_Operations
 
 class CreatorListViewCell: ParallaxCollectionViewCell {
     private let logger = Log4S()
-    
+
     static let identifier = "CreatorListViewCell"
-    
+
     @IBOutlet var creatorIconView: UIImageView!
-    
+
     func updateImage(creator: BaseCreator?) {
         guard let creator = creator else {
             creatorIconView.image = nil
@@ -50,4 +50,3 @@ class CreatorListViewCell: ParallaxCollectionViewCell {
         }
     }
 }
-

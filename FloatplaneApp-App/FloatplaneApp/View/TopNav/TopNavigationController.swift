@@ -20,32 +20,32 @@
 //
 
 import UIKit
-import FloatplaneApp_Operations
-import FloatplaneApp_Utilities
 import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
+import FloatplaneApp_Operations
 
 class TopNavigationController: UINavigationController {
     private let creatorOperation = OperationManagerImpl.instance.creatorOperation
     private let contentFeedOperation = OperationManagerImpl.instance.contentFeedOperation
-    // Main data for viewing
+    /// Main data for viewing
     private let dataSource = DataSource.instance
     private let logger = Log4S()
 
     private var fpTabBarController: FPTabBarController? {
-        return self.viewControllers[0] as? FPTabBarController
+        viewControllers[0] as? FPTabBarController
     }
-    
+
     func clearAndGoToLoginView() {
-        self.dataSource.clearData()
-        self.fpTabBarController?.resetView()
+        dataSource.clearData()
+        fpTabBarController?.resetView()
         AppDelegate.instance.rootViewController.goToLogin()
     }
-    
+
     func updateChildViewData() {
-        self.fpTabBarController?.resetView()
+        fpTabBarController?.resetView()
     }
-    
+
     func changeSelectedCreator(baseCreator: BaseCreator) {
         guard let baseCreators = dataSource.baseCreators,
               baseCreators.contains(where: { $0 == baseCreator }) else {
@@ -55,7 +55,7 @@ class TopNavigationController: UINavigationController {
         if let activeCreator = dataSource.activeCreator,
            baseCreator.id == activeCreator.id {
             logger.debug("Asked to change to already active creator.")
-            self.updateChildViewData()
+            updateChildViewData()
             return
         }
         let urlName = baseCreator.urlname

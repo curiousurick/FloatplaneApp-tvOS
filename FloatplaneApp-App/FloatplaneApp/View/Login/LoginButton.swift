@@ -22,28 +22,25 @@
 import UIKit
 
 class LoginButton: UIButton {
-    
     let unfocusedBorderWidth: CGFloat = 1
     let focusedBorderWidth: CGFloat = 0
     let focusAnimationDuration: TimeInterval = 0.5
-    
+
     func focusAnimation(focused: Bool) {
-        UIView.animate(withDuration: focusAnimationDuration, animations: { () -> Void in
+        UIView.animate(withDuration: focusAnimationDuration, animations: { () in
             self.borderWidth = focused ? self.focusedBorderWidth : self.unfocusedBorderWidth
         })
     }
-    
-    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with _: UIFocusAnimationCoordinator) {
         if let previousView = context.previouslyFocusedView,
            self == previousView {
-            self.focusAnimation(focused: false)
+            focusAnimation(focused: false)
         }
-        
+
         if let nextView = context.nextFocusedView,
            self == nextView {
-            self.focusAnimation(focused: true)
-            
+            focusAnimation(focused: true)
         }
     }
-    
 }

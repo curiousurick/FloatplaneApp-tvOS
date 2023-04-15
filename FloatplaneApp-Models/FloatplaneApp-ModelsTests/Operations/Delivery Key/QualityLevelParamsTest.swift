@@ -23,33 +23,29 @@ import XCTest
 @testable import FloatplaneApp_Models
 
 final class QualityLevelParamsTest: XCTestCase {
-    
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-    
+
     func testEncode() throws {
         // Arrange
         let qualityLevelParams = TestModelSupplier.qualityLevelParams
-        
+
         // Act
         let result = try encoder.encode(qualityLevelParams)
-        
+
         // Assert
         XCTAssertNotNil(result)
     }
-    
+
     func testDecode() throws {
         // Arrange
         let qualityLevelParams = TestModelSupplier.qualityLevelParams
-        
+
         // Act
         let data = try encoder.encode(qualityLevelParams)
         let decoded = try decoder.decode(QualityLevelParams.self, from: data)
-        
+
         // Assert
         XCTAssertEqual(decoded, qualityLevelParams)
     }
-    
-    
-
 }

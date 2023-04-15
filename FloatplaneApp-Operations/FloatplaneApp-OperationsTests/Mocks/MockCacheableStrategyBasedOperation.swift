@@ -20,43 +20,41 @@
 //
 
 import Foundation
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class MockCacheableStrategyBasedOperation<I: Hashable, O: Codable>: CacheableStrategyBasedOperation {
     typealias Request = I
     typealias Response = O
-    
+
     var getWithInvalidateCallCount = 0
     var mockGetWithInvalidate: ((Request, Bool) -> OperationResponse<Response>)?
     func get(request: Request, invalidateCache: Bool) async -> OperationResponse<Response> {
         getWithInvalidateCallCount += 1
         return mockGetWithInvalidate?(request, invalidateCache) ?? OperationResponse(response: nil, error: nil)
     }
-    
+
     var clearCacheCallCount = 0
     func clearCache() {
         clearCacheCallCount += 1
     }
-    
+
     var getCallCount = 0
     var mockGet: ((Request) -> OperationResponse<Response>)?
     func get(request: Request) async -> OperationResponse<Response> {
         getCallCount += 1
         return mockGet?(request) ?? OperationResponse(response: nil, error: nil)
     }
-    
+
     var isActiveCallCount = 0
     var mockIsActive: Bool = false
     func isActive() -> Bool {
         isActiveCallCount += 1
         return mockIsActive
     }
-    
+
     var cancelCallCount = 0
     func cancel() {
         cancelCallCount += 1
     }
-    
-    
 }

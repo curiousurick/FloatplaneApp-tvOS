@@ -40,7 +40,7 @@ public struct ContentCreator: Hashable, Codable, Equatable {
     public let subscriptionPlans: [Subscription.Plan]
     public let title: String
     public let urlname: String
-    
+
     public init(
         about: String, card: Icon, category: Category?, channels: [String],
         cover: Icon, defaultChannel: String, description: String, discoverable: Bool,

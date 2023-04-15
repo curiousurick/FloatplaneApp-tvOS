@@ -24,6 +24,6 @@ import Foundation
 /// Simple extension to make it so we can use a boolean as a request parameters.
 public extension Bool {
     var stringValue: String {
-        return self ? "true" : "false"
+        self ? "true" : "false"
     }
 }

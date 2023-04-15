@@ -21,22 +21,24 @@
 
 import Foundation
 
-/// Contains the info needed to start watching a video. The URL where you can get the stream with options for different quality levels.
+/// Contains the info needed to start watching a video. The URL where you can get the stream with options for different
+/// quality levels.
 public struct DeliveryKey: Codable, Equatable {
     /// Contains the Resource information like the quality levels and URLs where you can get those streams.
     public struct Resource: Codable, Equatable {
         public let data: ResourceData
         public let uri: String
-        
+
         public init(data: ResourceData, uri: String) {
             self.data = data
             self.uri = uri
         }
     }
+
     public let cdn: String
     public let resource: Resource
     public let strategy: String
-    
+
     public init(cdn: String, resource: Resource, strategy: String) {
         self.cdn = cdn
         self.resource = resource

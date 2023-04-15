@@ -22,14 +22,12 @@
 import Foundation
 
 class MockJSONDecoder: JSONDecoder {
-    
     var mockDecodeResult: ((Data) -> Decodable)?
     var mockThrownError: Error?
-    override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T : Decodable {
+    override func decode<T>(_: T.Type, from data: Data) throws -> T where T: Decodable {
         if let mockThrownError = mockThrownError {
             throw mockThrownError
         }
         return mockDecodeResult?(data) as! T
     }
-    
 }

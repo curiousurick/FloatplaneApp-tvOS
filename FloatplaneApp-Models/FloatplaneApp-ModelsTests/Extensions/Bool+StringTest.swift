@@ -23,20 +23,18 @@ import XCTest
 @testable import FloatplaneApp_Models
 
 class BoolStringValueTest: XCTestCase {
-    
     func testStringValueTrue() {
         // Act
         let trueString = true.stringValue
         // Assert
         XCTAssertEqual("true", trueString)
     }
-    
+
     func testStringValueFalse() {
         // Act
         let trueString = false.stringValue
-        
+
         // Assert
         XCTAssertEqual("false", trueString)
     }
-    
 }

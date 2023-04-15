@@ -25,52 +25,59 @@ import FloatplaneApp_Utilities
 
 class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, DataSourceUpdating {
     private let dataSource = DataSource.instance
-    
+
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
-    
+
     private let backgroundAlpha: CGFloat = 0.20
-    
-    private struct CollectionConstants {
+
+    private enum CollectionConstants {
         static let totalSpacing: CGFloat = 10
         static let minimumLineSpacing: CGFloat = 20
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.dataSource.registerDelegate(delegate: self)
+        dataSource.registerDelegate(delegate: self)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = UIColor.darkGray.withAlphaComponent(backgroundAlpha)
-        
+
         let flowLayout = UICollectionViewFlowLayout()
         let width = bounds.width - CollectionConstants.totalSpacing
         let height = width
-        
+
         flowLayout.itemSize = CGSize(width: width, height: height)
         flowLayout.minimumLineSpacing = CollectionConstants.minimumLineSpacing
         collectionView.remembersLastFocusedIndexPath = true
-        
+
         collectionView.collectionViewLayout = flowLayout
     }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.baseCreators?.count ?? 0
+
+    func numberOfSections(in _: UICollectionView) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatorListViewCell.identifier, for: indexPath) as! CreatorListViewCell
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        dataSource.baseCreators?.count ?? 0
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    )
+        -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CreatorListViewCell.identifier,
+            for: indexPath
+        ) as! CreatorListViewCell
         cell.updateImage(creator: dataSource.baseCreators![indexPath.row])
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedBaseCreator = dataSource.baseCreators![indexPath.row]
         let navController = AppDelegate.instance.topNavigationController
         navController?.changeSelectedCreator(baseCreator: selectedBaseCreator)

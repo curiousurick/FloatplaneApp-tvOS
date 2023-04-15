@@ -22,13 +22,11 @@
 import UIKit
 
 extension UIColor {
-    
     static var focusedTextImageColor: UIColor {
-        return UIColor(red: 0x4E / 255, green: 0xAC / 255, blue: 0xE6 / 255, alpha: 1.0)
+        UIColor(red: 0x4E / 255, green: 0xAC / 255, blue: 0xE6 / 255, alpha: 1.0)
     }
-    
+
     static var unfocusedTextImageColor: UIColor {
-        return UIColor(red: 0x60 / 255, green: 0x95 / 255, blue: 0xAE / 255, alpha: 1.0)
+        UIColor(red: 0x60 / 255, green: 0x95 / 255, blue: 0xAE / 255, alpha: 1.0)
     }
-    
 }

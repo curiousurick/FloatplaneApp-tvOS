@@ -19,22 +19,21 @@
 //  THE SOFTWARE.
 //
 
+import Cache
 import XCTest
 @testable import FloatplaneApp_DataStores
-import Cache
 
 final class ProgressStoreTest: XCTestCase {
-    
     private let VideoKey = "VideoKey"
     private let ProgressValue: TimeInterval = 10.0
-    
+
     private var mockDiskStorageWrapper: MockDiskStorageWrapper<String, TimeInterval>!
-    
+
     private var subject: ProgressStore!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         let storage: Storage<String, TimeInterval> = try! Storage(
             diskConfig: DiskConfig(name: "FakeDiskConfig"),
             memoryConfig: MemoryConfig(),
@@ -43,40 +42,39 @@ final class ProgressStoreTest: XCTestCase {
         mockDiskStorageWrapper = MockDiskStorageWrapper(storage: storage)
         subject = ProgressStore(storage: mockDiskStorageWrapper)
     }
-    
+
     func testGetProgress() {
         // Arrange
         mockDiskStorageWrapper.mockReadObject[VideoKey] = ProgressValue
-        
+
         // Act
         let result = subject.getProgress(for: VideoKey)
-        
+
         // Assert
         XCTAssertEqual(result, ProgressValue)
         XCTAssertEqual(mockDiskStorageWrapper.readObjectCallCount, 1)
         mockDiskStorageWrapper.verifyReadObject(key: VideoKey)
     }
-    
+
     func testGetProgressNotFound() {
         // Arrange
         mockDiskStorageWrapper.mockReadObject[VideoKey] = nil
-        
+
         // Act
         let result = subject.getProgress(for: VideoKey)
-        
+
         // Assert
         XCTAssertNil(result)
         XCTAssertEqual(mockDiskStorageWrapper.readObjectCallCount, 1)
         mockDiskStorageWrapper.verifyReadObject(key: VideoKey)
     }
-    
+
     func testSetProgress() {
         // Act
         subject.setProgress(for: VideoKey, progress: ProgressValue)
-        
+
         // Assert
         XCTAssertEqual(mockDiskStorageWrapper.writeObjectCallCount, 1)
         mockDiskStorageWrapper.verifyWriteObject(value: ProgressValue, key: VideoKey, expiry: nil)
     }
-
 }

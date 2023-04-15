@@ -19,17 +19,16 @@
 //  THE SOFTWARE.
 //
 
-import FloatplaneApp_Utilities
 import FloatplaneApp_Models
+import FloatplaneApp_Utilities
 
 public protocol UserStore {
-    
     func getUser() -> User?
-    
+
     func getProgressStore() -> ProgressStore?
-    
+
     func setUser(user: User)
-    
+
     func removeUser()
 }
 
@@ -37,13 +36,13 @@ public protocol UserStore {
 public class UserStoreImpl: UserStore {
     private let logger = Log4S()
     private let UserStoreKey = "UserStoreKey"
-    // Data is stored as JSON
+    /// Data is stored as JSON
     private let encoder: JSONEncoder
     private let decoder: JSONDecoder
-    
+
     /// Package-level access to Keychain
     private let keychainAccess: KeychainAccess
-    
+
     /// Singleton instance of the UserStore.
     public static let instance: UserStore = UserStoreImpl()
 
@@ -56,7 +55,7 @@ public class UserStoreImpl: UserStore {
         self.encoder = encoder
         self.decoder = decoder
     }
-    
+
     private convenience init() {
         self.init(
             keychainAccess: KeychainAccess.instance,
@@ -64,7 +63,7 @@ public class UserStoreImpl: UserStore {
             decoder: JSONDecoder()
         )
     }
-    
+
     /// Returns a User if one exists in keychain.
     /// If nil returned, that means the user is not logged in.
     public func getUser() -> User? {
@@ -80,7 +79,7 @@ public class UserStoreImpl: UserStore {
             return nil
         }
     }
-    
+
     /// Returns a ProgressStore instance for the logged-in User.
     /// Returns nil if the user is not logged in.
     public func getProgressStore() -> ProgressStore? {
@@ -90,7 +89,7 @@ public class UserStoreImpl: UserStore {
         }
         return nil
     }
-    
+
     /// Saved user to keychain.
     public func setUser(user: User) {
         do {
@@ -101,10 +100,9 @@ public class UserStoreImpl: UserStore {
             logger.error("Failed to save creators to keychain")
         }
     }
-    
+
     /// Removes saved user from keychain upon logout
     public func removeUser() {
         keychainAccess.removeItem(forKey: UserStoreKey)
     }
-
 }

@@ -19,19 +19,18 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import XCTest
+import Foundation
 @testable import FloatplaneApp_Utilities
 
 class Log4STest: XCTestCase {
-    
     private var subject: Log4S!
-    
+
     override func setUp() {
         super.setUp()
         subject = Log4S()
     }
-    
+
     func testLogLevel() {
         subject.logLevel = .debug
         subject.logLevel = .trace
@@ -41,40 +40,39 @@ class Log4STest: XCTestCase {
         subject.logLevel = .error
         subject.logLevel = .critical
     }
-    
+
     func testDebug() {
         let variable = "My input"
         subject.debug("My cool message \(variable)")
     }
-    
+
     func testTrace() {
         let variable = "My input"
         subject.trace("My cool message \(variable)")
     }
-    
+
     func testWarn() {
         let variable = "My input"
         subject.warn("My cool message \(variable)")
     }
-    
+
     func testInfo() {
         let variable = "My input"
         subject.info("My cool message \(variable)")
     }
-    
+
     func testNotice() {
         let variable = "My input"
         subject.notice("My cool message \(variable)")
     }
-    
+
     func testCritical() {
         let variable = "My input"
         subject.critical("My cool message \(variable)")
     }
-    
+
     func testError() {
         let variable = "My input"
         subject.error("My cool message \(variable)")
     }
-    
 }

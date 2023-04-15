@@ -31,7 +31,7 @@ public class DecodedQualityLevel: Codable, Equatable {
     public let name: DeliveryKeyQualityLevel
     public let order: UInt64
     public let width: UInt64?
-    
+
     public init(
         codecs: String?,
         height: UInt64?,
@@ -49,15 +49,15 @@ public class DecodedQualityLevel: Codable, Equatable {
         self.order = order
         self.width = width
     }
-    
+
     public static func == (lhs: DecodedQualityLevel, rhs: DecodedQualityLevel) -> Bool {
-        return lhs.codecs == rhs.codecs &&
-        lhs.height == rhs.height &&
-        lhs.label == rhs.label &&
-        lhs.mimeType == rhs.mimeType &&
-        lhs.name == rhs.name &&
-        lhs.order == rhs.order &&
-        lhs.width == rhs.width
+        lhs.codecs == rhs.codecs &&
+            lhs.height == rhs.height &&
+            lhs.label == rhs.label &&
+            lhs.mimeType == rhs.mimeType &&
+            lhs.name == rhs.name &&
+            lhs.order == rhs.order &&
+            lhs.width == rhs.width
     }
 }
 
@@ -65,7 +65,7 @@ public class DecodedQualityLevel: Codable, Equatable {
 public class QualityLevelResourceData: DecodedQualityLevel {
     public let fileName: String
     public let accessToken: String
-    
+
     public init(
         decodedQualityLevel: DecodedQualityLevel,
         fileName: String,
@@ -83,20 +83,20 @@ public class QualityLevelResourceData: DecodedQualityLevel {
             width: decodedQualityLevel.width
         )
     }
-    
+
     public static func == (lhs: QualityLevelResourceData, rhs: QualityLevelResourceData) -> Bool {
-        return lhs.codecs == rhs.codecs &&
-        lhs.height == rhs.height &&
-        lhs.label == rhs.label &&
-        lhs.mimeType == rhs.mimeType &&
-        lhs.name == rhs.name &&
-        lhs.order == rhs.order &&
-        lhs.width == rhs.width &&
-        lhs.fileName == rhs.fileName &&
-        lhs.accessToken == rhs.accessToken
+        lhs.codecs == rhs.codecs &&
+            lhs.height == rhs.height &&
+            lhs.label == rhs.label &&
+            lhs.mimeType == rhs.mimeType &&
+            lhs.name == rhs.name &&
+            lhs.order == rhs.order &&
+            lhs.width == rhs.width &&
+            lhs.fileName == rhs.fileName &&
+            lhs.accessToken == rhs.accessToken
     }
-    
-    required init(from decoder: Decoder) throws {
+
+    required init(from _: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }
 }

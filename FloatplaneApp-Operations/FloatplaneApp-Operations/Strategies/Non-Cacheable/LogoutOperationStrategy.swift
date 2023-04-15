@@ -19,32 +19,32 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import Foundation
+import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 import FloatplaneApp_DataStores
-import FloatplaneApp_Models
 
 /// Attemps a Logout.
-protocol LogoutOperationStrategy: InternalOperationStrategy<LogoutRequest, LogoutResponse> { }
+protocol LogoutOperationStrategy: InternalOperationStrategy<LogoutRequest, LogoutResponse> {}
 
 class LogoutOperationStrategyImpl: LogoutOperationStrategy {
     private let logger = Log4S()
-    private let baseUrl: URL = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
-    
+    private let baseUrl: URL = .init(string: "\(OperationConstants.domainBaseUrl)/api/v2/auth/logout")!
+
     private let session: Session
     private let headers: HTTPHeaders
 
     var dataRequest: DataRequest?
-    
+
     convenience init(session: Session) {
-        let headerMap = ["user-agent" : OperationConstants.iOSUserAgent]
+        let headerMap = ["user-agent": OperationConstants.iOSUserAgent]
         self.init(
             session: session,
             headers: HTTPHeaders(headerMap)
         )
     }
-    
+
     /// Available for testing purposes.
     init(
         session: Session,
@@ -53,14 +53,14 @@ class LogoutOperationStrategyImpl: LogoutOperationStrategy {
         self.headers = headers
         self.session = session
     }
-    
+
     /// Performs a logout and then clears all caches upon success.
     /// TODO: Investigate if we should clear the cache even if the call fails.
-    func get(request: LogoutRequest) async -> OperationResponse<LogoutResponse> {
+    func get(request _: LogoutRequest) async -> OperationResponse<LogoutResponse> {
         let dataRequest = session.request(baseUrl, method: .post, headers: headers)
         self.dataRequest = dataRequest
         return await withCheckedContinuation { continuation in
-            dataRequest.response() { response in
+            dataRequest.response { response in
                 if response.response?.statusCode == 200 {
                     self.logger.info("Successfully logged out")
                     continuation.resume(returning: OperationResponse(response: LogoutResponse(), error: nil))

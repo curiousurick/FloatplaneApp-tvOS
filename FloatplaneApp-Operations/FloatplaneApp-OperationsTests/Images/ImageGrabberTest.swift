@@ -23,16 +23,18 @@ import XCTest
 @testable import FloatplaneApp_Operations
 
 final class ImageGrabberTest: XCTestCase {
-    
     private var subject: ImageGrabber!
-    
+
     override func setUp() {
         super.setUp()
         subject = ImageGrabber.instance
     }
-    
+
     func testGrab() {
-        let url = URL(string: "https://fastly.picsum.photos/id/798/200/300.jpg?hmac=yFyrzP0X505Qku3jZc0D4qL6MX_xXeHRP4K_006XD9M")!
+        let url =
+            URL(
+                string: "https://fastly.picsum.photos/id/798/200/300.jpg?hmac=yFyrzP0X505Qku3jZc0D4qL6MX_xXeHRP4K_006XD9M"
+            )!
         let expectsCompletion = expectation(description: "Should call completion block")
         subject.grab(url: url) { data in
             XCTAssertNotNil(data)
@@ -42,7 +44,7 @@ final class ImageGrabberTest: XCTestCase {
         }
         wait(for: [expectsCompletion], timeout: 10.0)
     }
-    
+
     func testGrab_badURL() {
         let url = URL(string: "https://eatmyshorts.com/fakeimage.jpg")!
         let expectsCompletion = expectation(description: "Should call completion block")
@@ -53,5 +55,4 @@ final class ImageGrabberTest: XCTestCase {
         }
         wait(for: [expectsCompletion], timeout: 10.0)
     }
-
 }

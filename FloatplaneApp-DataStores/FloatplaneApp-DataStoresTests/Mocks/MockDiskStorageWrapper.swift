@@ -19,58 +19,59 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Cache
 import XCTest
+import Foundation
 @testable import FloatplaneApp_DataStores
 
 extension Expiry: Equatable {
     public static func == (lhs: Expiry, rhs: Expiry) -> Bool {
-        return lhs.date == rhs.date
+        lhs.date == rhs.date
     }
 }
 
 class MockDiskStorageWrapper<K: Hashable & Equatable, V: Codable & Equatable>: DiskStorageWrapper<K, V> {
-    
     private var writeObjectCalledParams: [(V, K, Expiry?)] = []
     func verifyWriteObject(value: V, key: K, expiry: Expiry?) {
         XCTAssertTrue(writeObjectCalledParams.contains { $0 == (value, key, expiry) })
     }
+
     var writeObjectCallCount = 0
     override func writeObject(_ object: V, forKey key: K, expiry: Expiry? = nil) {
         writeObjectCallCount += 1
         writeObjectCalledParams.append((object, key, expiry))
     }
-    
+
     private var readObjectCalledParams: [K] = []
     func verifyReadObject(key: K) {
         XCTAssertTrue(readObjectCalledParams.contains { $0 == key })
     }
+
     var readObjectCallCount = 0
-    var mockReadObject: [K : V] = [:]
+    var mockReadObject: [K: V] = [:]
     override func readObject(forKey key: K) -> V? {
         readObjectCallCount += 1
         readObjectCalledParams.append(key)
         return mockReadObject[key]
     }
-    
+
     var mockIsExpiredObject = false
     var isExpiredObjectCallCount = 0
-    override func isExpiredObject(forKey key: K) -> Bool {
+    override func isExpiredObject(forKey _: K) -> Bool {
         isExpiredObjectCallCount += 1
         return mockIsExpiredObject
     }
-    
+
     var removeExpiredObjectsCallCount = 0
-    var receivedRemoveExpiredObjectCompletion: ((Result<()>) -> Void)?
-    override func removeExpiredObjects(completion: ((Result<()>) -> Void)? = nil) {
+    var receivedRemoveExpiredObjectCompletion: ((Result<Void>) -> Void)?
+    override func removeExpiredObjects(completion: ((Result<Void>) -> Void)? = nil) {
         removeExpiredObjectsCallCount += 1
         receivedRemoveExpiredObjectCompletion = completion
     }
-    
+
     var removeAllCallCount = 0
-    var receivedRemoveAllCompletion: ((Result<()>) -> Void)?
-    override func removeAll(completion: ((Result<()>) -> Void)? = nil) {
+    var receivedRemoveAllCompletion: ((Result<Void>) -> Void)?
+    override func removeAll(completion: ((Result<Void>) -> Void)? = nil) {
         removeAllCallCount += 1
         receivedRemoveAllCompletion = completion
     }

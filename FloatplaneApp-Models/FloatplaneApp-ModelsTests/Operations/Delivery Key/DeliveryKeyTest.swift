@@ -23,33 +23,29 @@ import XCTest
 @testable import FloatplaneApp_Models
 
 class DeliveryKeyTest: XCTestCase {
-    
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-    
+
     func testEncode() throws {
         // Arrange
         let deliveryKey = TestModelSupplier.deliveryKey
-        
+
         // Act
         let result = try encoder.encode(deliveryKey)
-        
+
         // Assert
         XCTAssertNotNil(result)
     }
-    
+
     func testDecode() throws {
         // Arrange
         let deliveryKey = TestModelSupplier.deliveryKey
-        
+
         // Act
         let data = try encoder.encode(deliveryKey)
         let decoded = try decoder.decode(DeliveryKey.self, from: data)
-        
+
         // Assert
         XCTAssertEqual(decoded, deliveryKey)
     }
-    
-    
-
 }

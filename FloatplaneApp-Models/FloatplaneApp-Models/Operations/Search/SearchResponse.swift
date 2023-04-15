@@ -24,15 +24,14 @@ import Foundation
 /// Results for a search request. The same items as the browse page.
 public struct SearchResponse: Codable, Equatable {
     public let items: [FeedItem]
-    
+
     public init(items: [FeedItem]) {
         self.items = items
     }
-    
+
     public func combine(with items: [FeedItem]) -> SearchResponse {
         var combined = self.items
         combined += items
         return SearchResponse(items: combined)
-        
     }
 }

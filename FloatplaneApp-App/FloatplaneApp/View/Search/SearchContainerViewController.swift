@@ -22,6 +22,4 @@
 import UIKit
 import FloatplaneApp_Models
 
-class SearchContainerViewController: UISearchContainerViewController {
-    
-}
+class SearchContainerViewController: UISearchContainerViewController {}

@@ -20,27 +20,26 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class StrategyBasedOperationTest: XCTestCase {
-    
     private var mockStrategy: MockInternalOperationStrategy<SearchRequest, SearchResponse>!
     private var searchRequest: SearchRequest!
     private var searchResponse: SearchResponse!
-    
+
     private var subject: StrategyBasedOperationImpl<SearchRequest, SearchResponse>!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         searchRequest = TestModelSupplier.searchRequest
         searchResponse = TestModelSupplier.searchResponse
         mockStrategy = MockInternalOperationStrategy()
-        
+
         subject = StrategyBasedOperationImpl(strategy: mockStrategy)
     }
-    
+
     func testGet() async {
         // Arrange
         mockStrategy.mockRequest = { request in
@@ -49,45 +48,44 @@ class StrategyBasedOperationTest: XCTestCase {
             }
             return OperationResponse(response: nil, error: nil)
         }
-        
+
         // Act
         let result = await subject.get(request: searchRequest)
-        
+
         // Assert
         XCTAssertNil(result.error)
         XCTAssertEqual(result.response, searchResponse)
     }
-    
+
     func testCancel() {
         // Act
         subject.cancel()
-        
+
         // Assert
         XCTAssertEqual(mockStrategy.cancelCallCount, 1)
     }
-    
+
     func testCancelTrueFromStrategy() {
         // Arrange
         mockStrategy.mockIsActive = true
-        
+
         // Act
         let result = subject.isActive()
-        
+
         // Assert
         XCTAssertTrue(result)
         XCTAssertEqual(mockStrategy.isActiveCallCount, 1)
     }
-    
+
     func testCancelFalseFromStrategy() {
         // Arrange
         mockStrategy.mockIsActive = false
-        
+
         // Act
         let result = subject.isActive()
-        
+
         // Assert
         XCTAssertFalse(result)
         XCTAssertEqual(mockStrategy.isActiveCallCount, 1)
     }
-
 }

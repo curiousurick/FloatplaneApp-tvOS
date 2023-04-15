@@ -22,37 +22,39 @@
 import Foundation
 import FloatplaneApp_Models
 
-/// Operation which takes a strategy to perform the defined operation. Generics used to indicate the request and response type.
+/// Operation which takes a strategy to perform the defined operation. Generics used to indicate the request and
+/// response type.
 /// The strategy is used to define the types.
 ///
 /// Request - Can be anything. Strategy may add further requirements.
 /// Response - Must be codable. This is because strategies will require them to be decodable from HTTP responses.
-public protocol StrategyBasedOperation<Request, Response>: Operation { }
+public protocol StrategyBasedOperation<Request, Response>: Operation {}
 
 public class StrategyBasedOperationImpl<I: OperationRequest, O: Codable>: StrategyBasedOperation {
     public typealias Request = I
     public typealias Response = O
-    
+
     /// Strategy used to execute get.
     let strategy: any InternalOperationStrategy<Request, Response>
-    
+
     init(strategy: any InternalOperationStrategy<Request, Response>) {
         self.strategy = strategy
     }
-    
+
     /// The actual API consumers will use to get a parameterized response. Relies on strategy to provide response
-    /// request - This is the request whose type is determined by the Request generics paramters of the final implementation.
+    /// request - This is the request whose type is determined by the Request generics paramters of the final
+    /// implementation.
     public func get(request: Request) async -> OperationResponse<Response> {
-        return await strategy.get(request: request)
+        await strategy.get(request: request)
     }
-    
+
     /// Cancel's the strategy in progress.
     public func cancel() {
-        return strategy.cancel()
+        strategy.cancel()
     }
-    
+
     /// Checks if the strategy is active.
     public func isActive() -> Bool {
-        return strategy.isActive()
+        strategy.isActive()
     }
 }

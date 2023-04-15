@@ -20,91 +20,87 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Operations
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Operations
 
 class CreatorOperationStrategyTest: OperationStrategyTestBase<CreatorOperationStrategyImpl> {
-    
     override func setUp() {
         super.setUp()
-        
+
         subject = CreatorOperationStrategyImpl(session: session)
         request = TestModelSupplier.creatorRequest
-        
+
         baseUrl = URL(string: "\(OperationConstants.domainBaseUrl)/api/v2/creator/named")!
     }
-    
+
     override func setupSuccessMock(response: Codable, delayMilliseconds: Int = 0) throws {
         try mockGet(baseUrl: baseUrl, request: request, response: response, delayMilliseconds: delayMilliseconds)
     }
-    
+
     func testGetHappyCase() async throws {
         // Arrange
         let response = TestModelSupplier.creator
         try setupSuccessMock(response: [response])
-        
+
         // Act
         let result = await subject.get(request: request)
-        
+
         // Assert
         XCTAssertNil(result.error)
         XCTAssertEqual(result.response, response)
     }
-    
+
     func testGetEmptyArray() async throws {
         // Arrange
         let response: [Creator] = []
         try mockGet(baseUrl: baseUrl, request: request, response: response)
-        
+
         // Act
         let result = await subject.get(request: request)
-        
+
         // Assert
         XCTAssertNil(result.error)
         XCTAssertNil(result.response)
     }
-    
+
     func testGetMoreThanOneCreator() async throws {
         // Arrange
         let response: [Creator] = [TestModelSupplier.creator, TestModelSupplier.creator]
         try mockGet(baseUrl: baseUrl, request: request, response: response)
-        
+
         // Act
         let result = await subject.get(request: request)
-        
+
         // Assert
         XCTAssertNil(result.error)
         XCTAssertNil(result.response)
     }
-    
+
     func testGetHTTPError() async throws {
         // Arrange
         try mockHTTPError(baseUrl: baseUrl, request: request, statusCode: 403)
-        
+
         // Act
         let result = await subject.get(request: request)
-        
+
         // Assert
         XCTAssertNotNil(result.error)
         XCTAssertNil(result.response)
     }
-    
+
     func testGetSerializationError() async throws {
         // Arrange
         try mockWrongResponse(baseUrl: baseUrl, request: request)
-        
+
         // Act
         let result = await subject.get(request: request)
-        
+
         // Assert
         XCTAssertNotNil(result.error)
         XCTAssertNil(result.response)
     }
-    
-    func testIsActive() {
-        
-        subject.cancel()
-        
-    }
 
+    func testIsActive() {
+        subject.cancel()
+    }
 }

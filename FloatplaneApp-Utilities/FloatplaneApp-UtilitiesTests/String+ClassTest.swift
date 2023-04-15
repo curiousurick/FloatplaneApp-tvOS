@@ -20,41 +20,39 @@
 //
 
 import XCTest
-@testable import FloatplaneApp_Utilities
 import FloatplaneApp_Models
+@testable import FloatplaneApp_Utilities
 
 final class StringClassTest: XCTestCase {
-    
     func testStringForObject() {
         // Arrange
         let request = ContentFeedRequest(fetchAfter: 20, limit: 20, creatorId: "CreatorId")
-        
+
         // Act
         let result = String.fromClass(request)
-        
+
         // Assert
         XCTAssertEqual(result, "ContentFeedRequest")
     }
-    
+
     /// Unfortunately, I haven't found a way to get the type of a nil value.
     /// The best we can do now is to describe that it's nil
     func testStringForNilObject() {
         // Arrange
         let request: ContentFeedRequest? = nil
-        
+
         // Act
         let result = String.fromClass(request)
-        
+
         // Assert
         XCTAssertEqual(result, "Optional<Any>(nil)")
     }
-    
+
     func testStringForClass() {
         // Act
         let result = String.fromClass(ContentFeedRequest.self)
-        
+
         // Assert
         XCTAssertEqual(result, "ContentFeedRequest")
     }
-
 }
