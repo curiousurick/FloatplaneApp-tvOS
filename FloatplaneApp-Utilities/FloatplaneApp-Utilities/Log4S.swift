@@ -64,17 +64,14 @@ public class Log4S {
 
     /// Logs if logLevel is less severe than .debug
     public func debug(
-        _ message: @autoclosure () -> Logger.Message,
-        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        _ message: Logger.Message,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) {
-        logger.log(
+        logMessage(
             level: .debug,
-            message(),
-            metadata: metadata(),
-            source: nil,
+            message: message,
             file: file,
             function: function,
             line: line
@@ -83,17 +80,14 @@ public class Log4S {
 
     /// Logs if logLevel is less severe than .info
     public func info(
-        _ message: @autoclosure () -> Logger.Message,
-        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        _ message: Logger.Message,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) {
-        logger.log(
+        logMessage(
             level: .info,
-            message(),
-            metadata: metadata(),
-            source: nil,
+            message: message,
             file: file,
             function: function,
             line: line
@@ -102,17 +96,14 @@ public class Log4S {
 
     /// Logs if logLevel is less severe than .notice
     public func notice(
-        _ message: @autoclosure () -> Logger.Message,
-        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        _ message: Logger.Message,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) {
-        logger.log(
+        logMessage(
             level: .notice,
-            message(),
-            metadata: metadata(),
-            source: nil,
+            message: message,
             file: file,
             function: function,
             line: line
@@ -121,17 +112,14 @@ public class Log4S {
 
     /// Logs if logLevel is less severe than .error
     public func error(
-        _ message: @autoclosure () -> Logger.Message,
-        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        _ message: Logger.Message,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) {
-        logger.log(
+        logMessage(
             level: .error,
-            message(),
-            metadata: metadata(),
-            source: nil,
+            message: message,
             file: file,
             function: function,
             line: line
@@ -140,17 +128,14 @@ public class Log4S {
 
     /// Logs if logLevel is less severe than .trace
     public func trace(
-        _ message: @autoclosure () -> Logger.Message,
-        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        _ message: Logger.Message,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) {
-        logger.log(
+        logMessage(
             level: .trace,
-            message(),
-            metadata: metadata(),
-            source: nil,
+            message: message,
             file: file,
             function: function,
             line: line
@@ -159,17 +144,14 @@ public class Log4S {
 
     /// Logs if logLevel is less severe than .warn
     public func warn(
-        _ message: @autoclosure () -> Logger.Message,
-        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        _ message: Logger.Message,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) {
-        logger.log(
+        logMessage(
             level: .warning,
-            message(),
-            metadata: metadata(),
-            source: nil,
+            message: message,
             file: file,
             function: function,
             line: line
@@ -178,16 +160,31 @@ public class Log4S {
 
     /// Logs if logLevel is less severe than .critical
     public func critical(
-        _ message: @autoclosure () -> Logger.Message,
-        metadata: @autoclosure () -> Logger.Metadata? = nil,
+        _ message: Logger.Message,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        logMessage(
+            level: .critical,
+            message: message,
+            file: file,
+            function: function,
+            line: line
+        )
+    }
+
+    private func logMessage(
+        level: Logger.Level,
+        message: Logger.Message,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) {
         logger.log(
-            level: .critical,
-            message(),
-            metadata: metadata(),
+            level: level,
+            message,
+            metadata: nil,
             source: nil,
             file: file,
             function: function,
