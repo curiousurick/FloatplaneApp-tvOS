@@ -8,5 +8,6 @@ on:
 
 jobs:
   build:
-    run: scripts/build.sh
     runs-on: macOS-latest
+    steps: scripts/build.sh
+        
