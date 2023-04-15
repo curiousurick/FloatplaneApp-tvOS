@@ -20,7 +20,6 @@
 		5E1FD75329DD4CE30015AE6F /* LogoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75229DD4CE30015AE6F /* LogoutResponse.swift */; };
 		5E389B0329D8B1A500FC8B4B /* FloatplaneApp_Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389AF829D8B1A500FC8B4B /* FloatplaneApp_Models.framework */; };
 		5E389B0829D8B1A500FC8B4B /* FloatplaneApp_ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B0729D8B1A500FC8B4B /* FloatplaneApp_ModelsTests.swift */; };
-		5E389B0929D8B1A500FC8B4B /* FloatplaneApp_Models.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E389AFB29D8B1A500FC8B4B /* FloatplaneApp_Models.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E389BD429D8B5A300FC8B4B /* DeliveryKeyQualityLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B9F29D8B5A300FC8B4B /* DeliveryKeyQualityLevel.swift */; };
 		5E389BD629D8B5A300FC8B4B /* ContentCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BA329D8B5A300FC8B4B /* ContentCreator.swift */; };
 		5E389BD729D8B5A300FC8B4B /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389BA429D8B5A300FC8B4B /* Creator.swift */; };
@@ -87,7 +86,6 @@
 		5E1FD75029DD4CCB0015AE6F /* LogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRequest.swift; sourceTree = "<group>"; };
 		5E1FD75229DD4CE30015AE6F /* LogoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResponse.swift; sourceTree = "<group>"; };
 		5E389AF829D8B1A500FC8B4B /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E389AFB29D8B1A500FC8B4B /* FloatplaneApp_Models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloatplaneApp_Models.h; sourceTree = "<group>"; };
 		5E389AFC29D8B1A500FC8B4B /* FloatplaneApp_Models.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = FloatplaneApp_Models.docc; sourceTree = "<group>"; };
 		5E389B0229D8B1A500FC8B4B /* FloatplaneApp-ModelsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FloatplaneApp-ModelsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389B0729D8B1A500FC8B4B /* FloatplaneApp_ModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatplaneApp_ModelsTests.swift; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 				5E08F49829E135D8003C3694 /* Extensions */,
 				5E389BA129D8B5A300FC8B4B /* Operations */,
 				5E389B9D29D8B5A300FC8B4B /* Stream */,
-				5E389AFB29D8B1A500FC8B4B /* FloatplaneApp_Models.h */,
 				5E389AFC29D8B1A500FC8B4B /* FloatplaneApp_Models.docc */,
 			);
 			path = "FloatplaneApp-Models";
@@ -393,7 +390,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E389B0929D8B1A500FC8B4B /* FloatplaneApp_Models.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

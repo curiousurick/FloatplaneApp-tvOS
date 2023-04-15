@@ -19,6 +19,7 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
 import FloatplaneApp_Models
 import FloatplaneApp_Utilities
 

@@ -11,7 +11,6 @@
 		5E1FD71E29DAB6B00015AE6F /* String+HTMLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD71D29DAB6B00015AE6F /* String+HTMLTest.swift */; };
 		5E389C0E29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc in Resources */ = {isa = PBXBuildFile; fileRef = 5E389C0D29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc */; };
 		5E389C1429D8B67900FC8B4B /* FloatplaneApp_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389C0929D8B67900FC8B4B /* FloatplaneApp_Utilities.framework */; };
-		5E389C1A29D8B67900FC8B4B /* FloatplaneApp-Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E389C0C29D8B67900FC8B4B /* FloatplaneApp-Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E389C3229D8B6AB00FC8B4B /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */; };
 		5E389C3329D8B6AB00FC8B4B /* String+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C2C29D8B68A00FC8B4B /* String+Class.swift */; };
 		5E389C3B29D8B6D800FC8B4B /* Log4S.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C3A29D8B6D800FC8B4B /* Log4S.swift */; };
@@ -52,7 +51,6 @@
 		5E1FD71629DAB0100015AE6F /* String+ClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ClassTest.swift"; sourceTree = "<group>"; };
 		5E1FD71D29DAB6B00015AE6F /* String+HTMLTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLTest.swift"; sourceTree = "<group>"; };
 		5E389C0929D8B67900FC8B4B /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E389C0C29D8B67900FC8B4B /* FloatplaneApp-Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FloatplaneApp-Utilities.h"; sourceTree = "<group>"; };
 		5E389C0D29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = "FloatplaneApp-Utilities.docc"; sourceTree = "<group>"; };
 		5E389C1329D8B67900FC8B4B /* FloatplaneApp-UtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FloatplaneApp-UtilitiesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389C2C29D8B68A00FC8B4B /* String+Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Class.swift"; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 				5E7711B529E15CDE002E1883 /* StreamURLFactory.swift */,
 				5E389C2C29D8B68A00FC8B4B /* String+Class.swift */,
 				5E389C2F29D8B68A00FC8B4B /* String+HTML.swift */,
-				5E389C0C29D8B67900FC8B4B /* FloatplaneApp-Utilities.h */,
 				5E389C0D29D8B67900FC8B4B /* FloatplaneApp-Utilities.docc */,
 			);
 			path = "FloatplaneApp-Utilities";
@@ -182,7 +179,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E389C1A29D8B67900FC8B4B /* FloatplaneApp-Utilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,7 +42,6 @@
 		5E1FD77229DE902D0015AE6F /* CreatorOperationStrategyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD77129DE902D0015AE6F /* CreatorOperationStrategyTest.swift */; };
 		5E1FD77529DE914B0015AE6F /* SessionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD77429DE914B0015AE6F /* SessionFactory.swift */; };
 		5E389B3529D8B29900FC8B4B /* FloatplaneApp_Operations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E389B2A29D8B29800FC8B4B /* FloatplaneApp_Operations.framework */; };
-		5E389B3B29D8B29900FC8B4B /* FloatplaneApp_Operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E389B7029D8B34B00FC8B4B /* CreatorOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5629D8B34B00FC8B4B /* CreatorOperationStrategy.swift */; };
 		5E389B7129D8B34B00FC8B4B /* VodDeliveryKeyOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5829D8B34B00FC8B4B /* VodDeliveryKeyOperationStrategy.swift */; };
 		5E389B7229D8B34B00FC8B4B /* LiveDeliveryKeyOperationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389B5929D8B34B00FC8B4B /* LiveDeliveryKeyOperationStrategy.swift */; };
@@ -166,7 +165,6 @@
 		5E1FD77129DE902D0015AE6F /* CreatorOperationStrategyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorOperationStrategyTest.swift; sourceTree = "<group>"; };
 		5E1FD77429DE914B0015AE6F /* SessionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFactory.swift; sourceTree = "<group>"; };
 		5E389B2A29D8B29800FC8B4B /* FloatplaneApp_Operations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatplaneApp_Operations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloatplaneApp_Operations.h; sourceTree = "<group>"; };
 		5E389B2E29D8B29800FC8B4B /* FloatplaneApp_Operations.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = FloatplaneApp_Operations.docc; sourceTree = "<group>"; };
 		5E389B3429D8B29900FC8B4B /* FloatplaneApp-OperationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FloatplaneApp-OperationsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E389B5629D8B34B00FC8B4B /* CreatorOperationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorOperationStrategy.swift; sourceTree = "<group>"; };
@@ -401,7 +399,6 @@
 				5E1FD73C29DCFFB10015AE6F /* CacheableStrategyBasedOperation.swift */,
 				5E389B6029D8B34B00FC8B4B /* OperationManager.swift */,
 				5E389C4C29D8BE0D00FC8B4B /* OperationConstants.swift */,
-				5E389B2D29D8B29800FC8B4B /* FloatplaneApp_Operations.h */,
 				5E389B2E29D8B29800FC8B4B /* FloatplaneApp_Operations.docc */,
 			);
 			path = "FloatplaneApp-Operations";
@@ -490,7 +487,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E389B3B29D8B29900FC8B4B /* FloatplaneApp_Operations.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
