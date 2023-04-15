@@ -72,8 +72,6 @@ Below are the features implemented in the app.
 - Animate and expand sidebar for creators to show the name of the creators when customer moves focus to the sidebar.
 - Support non-video type posts. Audio, Image, Text posts.
 - Consider support for filters and sort order in search tab
-- Add video duration to the browse and search cell.
-- Add support for lint and swift format.
 - Add code coverage requirements.
 - Add UI tests to the app target.
 - Add Unit tests to the app target.

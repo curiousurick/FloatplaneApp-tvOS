@@ -236,6 +236,7 @@
 		5EEF777E29EB32B4008AF7FB /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		5EEF777F29EB3602008AF7FB /* swiftformat.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = swiftformat.sh; sourceTree = "<group>"; };
 		5EEF778029EB3CA9008AF7FB /* codecoverage.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = codecoverage.yml; path = ../.github/workflows/codecoverage.yml; sourceTree = "<group>"; };
+		5EEF778D29EB488B008AF7FB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5EFD929629D90D15007E8374 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -593,6 +594,7 @@
 		5EEF777C29EB312B008AF7FB /* scripts */ = {
 			isa = PBXGroup;
 			children = (
+				5EEF778D29EB488B008AF7FB /* README.md */,
 				5EEF778029EB3CA9008AF7FB /* codecoverage.yml */,
 				5EEF777D29EB312B008AF7FB /* xcodebuilds.sh */,
 				5EEF777E29EB32B4008AF7FB /* build.sh */,
