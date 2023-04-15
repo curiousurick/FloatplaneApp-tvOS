@@ -76,7 +76,7 @@ class DiskStorageWrapperTest: XCTestCase {
 
     func testReadObject_unknownKey() {
         // Act
-        let result = subject.readObject(    forKey: "UnknownKey")
+        let result = subject.readObject(forKey: "UnknownKey")
 
         // Assert
         XCTAssertNil(result)
