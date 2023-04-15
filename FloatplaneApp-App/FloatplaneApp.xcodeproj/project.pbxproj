@@ -232,6 +232,10 @@
 		5EC057C329D68E8B00D775EB /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		5EC057C429D68E8B00D775EB /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		5EC057C529D68E8B00D775EB /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		5EEF777D29EB312B008AF7FB /* xcodebuilds.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = xcodebuilds.sh; sourceTree = "<group>"; };
+		5EEF777E29EB32B4008AF7FB /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		5EEF777F29EB3602008AF7FB /* swiftformat.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = swiftformat.sh; sourceTree = "<group>"; };
+		5EEF778029EB3CA9008AF7FB /* codecoverage.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = codecoverage.yml; path = ../.github/workflows/codecoverage.yml; sourceTree = "<group>"; };
 		5EFD929629D90D15007E8374 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -274,6 +278,7 @@
 		5E0C3CC929CF766700C71A19 = {
 			isa = PBXGroup;
 			children = (
+				5EEF777C29EB312B008AF7FB /* scripts */,
 				5E8C130229E35A520084F20D /* Internal Dependencies */,
 				5E507BF729CFAD65006751F3 /* FloatplaneApp */,
 				5E507C0F29CFAD66006751F3 /* FloatplaneAppTests */,
@@ -583,6 +588,18 @@
 				5E389A3F29D6BD5A00FC8B4B /* UIFont+Roboto.swift */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		5EEF777C29EB312B008AF7FB /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				5EEF778029EB3CA9008AF7FB /* codecoverage.yml */,
+				5EEF777D29EB312B008AF7FB /* xcodebuilds.sh */,
+				5EEF777E29EB32B4008AF7FB /* build.sh */,
+				5EEF777F29EB3602008AF7FB /* swiftformat.sh */,
+			);
+			name = scripts;
+			path = ../scripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
