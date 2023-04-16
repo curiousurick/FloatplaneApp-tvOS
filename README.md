@@ -1,10 +1,10 @@
 # FloatplaneApp-tvOS
 My tvOS app for floatplane. This app was written by George Urick but is completely open to anyone who has the source code to use it for whatever purpose they want, barring any restrictions imposed by Floatplane Media Inc. I offer, for no cost, this code and reasonable level of support requested to Floatplane Media Inc. in the case they would like to bring this app to customers.
 
-| ![image](https://github.com/curiousurick/FloatplaneApp-tvOS/blob/main/Assets/Browse_Screenshot.png) | ![image](https://github.com/curiousurick/FloatplaneApp-tvOS/blob/main/Assets/LiveOffline_Screenshot.png) |
+| ![image](Assets/Browse_Screenshot.png) | ![image](Assets/LiveOffline_Screenshot.png) |
 | --- | --- |
 
-| ![image](https://github.com/curiousurick/FloatplaneApp-tvOS/blob/main/Assets/Search_Screenshot.png) | ![image](https://github.com/curiousurick/FloatplaneApp-tvOS/blob/main/Assets/Login_Screenshot.png) |
+| ![image](Assets/Search_Screenshot.png) | ![image](Assets/Login_Screenshot.png) |
 | --- | --- |
 
 # Setup
