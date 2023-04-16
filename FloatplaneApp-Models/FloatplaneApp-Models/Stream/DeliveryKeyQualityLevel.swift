@@ -59,19 +59,8 @@ public enum DeliveryKeyQualityLevel: String, Codable, Equatable, Readable {
     ]
 
     /// Variable to get the struct for a QualityLevel including a label for it.
-    public var toQualityLevel: QualityLevel {
-        switch self {
-        case .ql360p:
-            return QualityLevel.Standard.ql360p
-        case .ql480p:
-            return QualityLevel.Standard.ql480p
-        case .ql720p:
-            return QualityLevel.Standard.ql720p
-        case .ql1080p:
-            return QualityLevel.Standard.ql1080p
-        case .liveAbr:
-            return QualityLevel.Standard.qlLive
-        }
+    public var toQualityLevel: QualityLevel? {
+        QualityLevel.knownLevels[readable]
     }
 
     /// A readable text for the quality level

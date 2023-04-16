@@ -29,17 +29,28 @@ public struct QualityLevel: Codable, Equatable {
     public let label: String
     public let order: UInt
 
+    public init(name: String, width: UInt, height: UInt, label: String, order: UInt) {
+        self.name = name
+        self.width = width
+        self.height = height
+        self.label = label
+        self.order = order
+        QualityLevel.knownLevels[label] = self
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        width = try container.decode(UInt.self, forKey: .width)
+        height = try container.decode(UInt.self, forKey: .height)
+        label = try container.decode(String.self, forKey: .label)
+        order = try container.decode(UInt.self, forKey: .order)
+        QualityLevel.knownLevels[label] = self
+    }
+
     public var resolution: CGSize {
         CGSize(width: CGFloat(width), height: CGFloat(height))
     }
 
-    public struct Standard {
-        private init() {}
-        public static let ql360p = QualityLevel(name: "360", width: 640, height: 360, label: "360p", order: 0)
-        public static let ql480p = QualityLevel(name: "480", width: 848, height: 478, label: "480p", order: 1)
-        public static let ql720p = QualityLevel(name: "720", width: 1280, height: 720, label: "720p", order: 2)
-        public static let ql1080p = QualityLevel(name: "1080", width: 1920, height: 1080, label: "1080p", order: 3)
-        /// Live will adjust quality as needed
-        public static let qlLive = QualityLevel(name: "Live", width: 0, height: 0, label: "Live", order: 4)
-    }
+    public static var knownLevels: [String: QualityLevel] = [:]
 }

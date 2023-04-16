@@ -49,7 +49,7 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
 
     var videoMetadata: VideoMetadata?
     /// Initialize with default quality level
-    var selectedQualityLevel: QualityLevel = AppSettings.instance.qualitySettings.toQualityLevel
+    lazy var selectedQualityLevel: QualityLevel? = AppSettings.instance.qualitySettings.toQualityLevel
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +88,7 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
     }
 
     private func startVideo(videoMetadata: VideoMetadata) {
+        let selectedQualityLevel = selectedQualityLevel ?? videoMetadata.levels[0]
         let url = streamURLFactory.create(deliveryKey: videoMetadata.deliveryKey, qualityLevel: selectedQualityLevel)
         let playerItem = AVPlayerItem(url: url)
 
@@ -146,6 +147,7 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
 
 extension VODPlayerViewController {
     private func setupMenu(videoMetadata: VideoMetadata) {
+        let selectedQualityLevel = selectedQualityLevel ?? videoMetadata.levels[0]
         let qualityMenu = UIMenu.getQualityMenu(
             selectedQualityLevel: selectedQualityLevel,
             videoMetadata: videoMetadata
