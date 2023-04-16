@@ -37,8 +37,7 @@ extension Data {
 
     func getAttributedString(
         options: [NSAttributedString.DocumentReadingOptionKey: Any]
-    )
-        -> NSAttributedString {
+    ) -> NSAttributedString {
         do {
             return try NSAttributedString(
                 data: self,

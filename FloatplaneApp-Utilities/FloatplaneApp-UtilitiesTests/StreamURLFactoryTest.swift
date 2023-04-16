@@ -51,7 +51,7 @@ class StreamURLFactoryTest: XCTestCase {
         let deliveryKey = TestModelSupplier.realDeliveryKey
         let cdn = deliveryKey.cdn
         let uri = deliveryKey.resource.uri
-        let qualityLevel = QualityLevel.Standard.ql1080p
+        let qualityLevel = QualityLevel(name: "1080p", width: 1920, height: 1080, label: "1080p", order: 4)
         let dkQualityLevel = DeliveryKeyQualityLevel.vodCases.first { $0.readable == qualityLevel.label }
         let resourceData = deliveryKey.resource.data.getResource(qualitylevelName: dkQualityLevel)!
         let fileName = resourceData.fileName
@@ -74,7 +74,7 @@ class StreamURLFactoryTest: XCTestCase {
         let deliveryKey = TestModelSupplier.realDeliveryKey
         let cdn = deliveryKey.cdn
         let uri = deliveryKey.resource.uri
-        let qualityLevel = QualityLevel.Standard.qlLive
+        let qualityLevel = QualityLevel(name: "live-abr", width: 1920, height: 1080, label: "live-abr", order: 5)
         let dkQualityLevel = DeliveryKeyQualityLevel.vodCases.last
         let resourceData = deliveryKey.resource.data.getResource(qualitylevelName: dkQualityLevel)!
         let fileName = resourceData.fileName

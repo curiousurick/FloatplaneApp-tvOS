@@ -121,8 +121,7 @@ class BrowseCollectionManager: NSObject, UICollectionViewDelegate, UICollectionV
         _ collectionView: UICollectionView,
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
-    )
-        -> UICollectionReusableView {
+    ) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {
             return UICollectionReusableView()
         }
@@ -141,8 +140,7 @@ class BrowseCollectionManager: NSObject, UICollectionViewDelegate, UICollectionV
         _: UICollectionView,
         layout _: UICollectionViewLayout,
         minimumLineSpacingForSectionAt _: Int
-    )
-        -> CGFloat {
+    ) -> CGFloat {
         CollectionConstants.cellSpacing
     }
 
@@ -181,8 +179,7 @@ class BrowseCollectionManager: NSObject, UICollectionViewDelegate, UICollectionV
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
-    )
-        -> UICollectionViewCell {
+    ) -> UICollectionViewCell {
         let cell = FeedItemCollectionViewCell.dequeueFromCollectionView(
             collectionView: collectionView,
             indexPath: indexPath

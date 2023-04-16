@@ -67,8 +67,7 @@ class CreatorListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
-    )
-        -> UICollectionViewCell {
+    ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: CreatorListViewCell.identifier,
             for: indexPath

@@ -53,6 +53,9 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        speeds = PlaybackSpeed.allCases.map {
+            AVPlaybackSpeed(rate: $0.value, localizedName: $0.readable)
+        }
         Task {
             let request = VideoMetadataRequest(feedItem: feedItem, id: guid)
             let videoMetadataOpResponse = await videoMetadataOperation.get(request: request)

@@ -170,7 +170,7 @@ enum TestModelSupplier {
     static let primaryBlogPost = "primaryBlogPost"
     static let isAccessible = true
     static let userInteraction = "userInteraction"
-    static let qualityLevel = QualityLevel.Standard.ql1080p
+    static let qualityLevel = QualityLevel(name: "1080p", width: 1920, height: 1080, label: "1080p", order: 4)
     static let contentVideoResponse = ContentVideoResponse(
         id: id, guid: guid, title: title, type: postType, description: description,
         releaseDate: releaseDate, duration: duration, creator: creatorString, likes: likes,

@@ -92,8 +92,7 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     static func dequeueFromCollectionView(
         collectionView: UICollectionView,
         indexPath: IndexPath
-    )
-        -> FeedItemCollectionViewCell {
+    ) -> FeedItemCollectionViewCell {
         collectionView.dequeueReusableCell(
             withReuseIdentifier: FeedItemCollectionViewCell.identifier,
             for: indexPath

@@ -39,7 +39,8 @@ private struct ErroneousEncodable: Codable {
     }
 
     func encode(to _: Encoder) throws {
-        throw EncodingError.invalidValue([], .init(codingPath: [], debugDescription: "OH NO"))
+        let emptyArray: [String] = []
+        throw EncodingError.invalidValue(emptyArray, .init(codingPath: [], debugDescription: "OH NO"))
     }
 }
 

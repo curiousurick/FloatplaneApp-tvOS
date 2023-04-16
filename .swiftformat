@@ -75,7 +75,7 @@
 --wrapeffects preserve
 --wrapenumcases always
 --wrapparameters before-first
---wrapreturntype if-multiline
+--wrapreturntype preserve
 --wrapternary default
 --wraptypealiases preserve
 --xcodeindentation disabled

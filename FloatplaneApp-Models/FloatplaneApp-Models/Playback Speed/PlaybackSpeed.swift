@@ -19,30 +19,27 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
 
-extension String {
-    /// Generates a `UIImage` instance from this string using a specified
-    /// attributes and size.
-    ///
-    /// - Parameters:
-    ///     - attributes: to draw this string with. Default is `nil`.
-    ///     - size: of the image to return.
-    /// - Returns: a `UIImage` instance from this string using a specified
-    /// attributes and size, or `nil` if the operation fails.
-    func image(
-        attributes: [NSAttributedString.Key: Any]? = nil,
-        size: CGSize? = nil
-    ) -> UIImage? {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .backgroundColor: UIColor.clear,
-            // Randomly high size because the image will be resized
-            .font: UIFont.boldSystemFont(ofSize: 50.0),
-        ]
-        let size = size ?? (self as NSString).size(withAttributes: attributes)
-        return UIGraphicsImageRenderer(size: size).image { _ in
-            (self as NSString).draw(in: CGRect(origin: .zero, size: size),
-                                    withAttributes: attributes)
-        }
-    }
+public struct PlaybackSpeed: Equatable {
+    public let value: Float
+    public let readable: String
+
+    public static let zeroPoint5 = PlaybackSpeed(value: 0.5, readable: "0.5x")
+    public static let zeroPoint75 = PlaybackSpeed(value: 0.75, readable: "0.75x")
+    public static let normal = PlaybackSpeed(value: 1.0, readable: "1x")
+    public static let onePoint25 = PlaybackSpeed(value: 1.25, readable: "1.25x")
+    public static let onePoint5 = PlaybackSpeed(value: 1.5, readable: "1.5x")
+    public static let onePoint75 = PlaybackSpeed(value: 1.75, readable: "1.75x")
+    public static let twoPoint0 = PlaybackSpeed(value: 2.0, readable: "2x")
+
+    public static let allCases: [PlaybackSpeed] = [
+        .zeroPoint5,
+        .zeroPoint75,
+        .normal,
+        .onePoint25,
+        .onePoint5,
+        .onePoint75,
+        .twoPoint0,
+    ]
 }

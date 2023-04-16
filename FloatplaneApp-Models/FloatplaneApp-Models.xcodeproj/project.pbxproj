@@ -61,6 +61,7 @@
 		5E389C4929D8BBBE00FC8B4B /* QualityLevelResourceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C4829D8BBBE00FC8B4B /* QualityLevelResourceData.swift */; };
 		5E389C4B29D8BDC600FC8B4B /* ResourceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389C4A29D8BDC600FC8B4B /* ResourceData.swift */; };
 		5E4CE96E29DA0C1B0029110E /* GetFirstPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE96D29DA0C1A0029110E /* GetFirstPageResponse.swift */; };
+		5ECCD48329EC6817004EA76C /* PlaybackSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECCD48229EC6817004EA76C /* PlaybackSpeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		5E389C4829D8BBBE00FC8B4B /* QualityLevelResourceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityLevelResourceData.swift; sourceTree = "<group>"; };
 		5E389C4A29D8BDC600FC8B4B /* ResourceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceData.swift; sourceTree = "<group>"; };
 		5E4CE96D29DA0C1A0029110E /* GetFirstPageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFirstPageResponse.swift; sourceTree = "<group>"; };
+		5ECCD48229EC6817004EA76C /* PlaybackSpeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackSpeed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 		5E389AFA29D8B1A500FC8B4B /* FloatplaneApp-Models */ = {
 			isa = PBXGroup;
 			children = (
+				5ECCD48129EC680B004EA76C /* Playback Speed */,
 				5E08F49829E135D8003C3694 /* Extensions */,
 				5E389BA129D8B5A300FC8B4B /* Operations */,
 				5E389B9D29D8B5A300FC8B4B /* Stream */,
@@ -383,6 +386,14 @@
 			path = "Get First Page";
 			sourceTree = "<group>";
 		};
+		5ECCD48129EC680B004EA76C /* Playback Speed */ = {
+			isa = PBXGroup;
+			children = (
+				5ECCD48229EC6817004EA76C /* PlaybackSpeed.swift */,
+			);
+			path = "Playback Speed";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -531,6 +542,7 @@
 				5E1FD75129DD4CCB0015AE6F /* LogoutRequest.swift in Sources */,
 				5E389BF829D8B5A300FC8B4B /* FeedItem.swift in Sources */,
 				5E4CE96E29DA0C1B0029110E /* GetFirstPageResponse.swift in Sources */,
+				5ECCD48329EC6817004EA76C /* PlaybackSpeed.swift in Sources */,
 				5E389BF229D8B5A300FC8B4B /* SortOrder.swift in Sources */,
 				5E389BF329D8B5A300FC8B4B /* PostType.swift in Sources */,
 				5E389C4929D8BBBE00FC8B4B /* QualityLevelResourceData.swift in Sources */,

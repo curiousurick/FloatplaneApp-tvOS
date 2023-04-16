@@ -52,8 +52,7 @@ extension AVPlayer {
     private func createMetadataItem(
         for identifier: AVMetadataIdentifier,
         value: Any
-    )
-        -> AVMetadataItem {
+    ) -> AVMetadataItem {
         let item = AVMutableMetadataItem()
         item.identifier = identifier
         item.value = value as? NSCopying & NSObjectProtocol

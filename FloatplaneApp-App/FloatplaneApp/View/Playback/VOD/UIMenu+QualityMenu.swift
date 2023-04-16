@@ -31,8 +31,7 @@ extension UIMenu {
         selectedQualityLevel: QualityLevel,
         videoMetadata: VideoMetadata,
         optionSelected: @escaping ((QualityLevel) -> Void)
-    )
-        -> UIMenu {
+    ) -> UIMenu {
         let optionActions = videoMetadata.levels.enumerated().map { _, level in
             let isSelected = selectedQualityLevel == level
             let state: UIAction.State = isSelected ? .on : .off
