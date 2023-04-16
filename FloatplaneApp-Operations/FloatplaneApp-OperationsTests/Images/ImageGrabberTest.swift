@@ -45,12 +45,33 @@ final class ImageGrabberTest: XCTestCase {
         wait(for: [expectsCompletion], timeout: 10.0)
     }
 
+    func testGrab_twice() {
+        let url =
+            URL(
+                string: "https://fastly.picsum.photos/id/798/200/300.jpg?hmac=yFyrzP0X505Qku3jZc0D4qL6MX_xXeHRP4K_006XD9M"
+            )!
+        let expectsCompletionFirst = expectation(description: "Should call completion block 1st time")
+        let expectsCompletionSecond = expectation(description: "Should call completion block 2nd time")
+        subject.grab(url: url) { data in
+            XCTAssertNotNil(data)
+            let image = UIImage(data: data!)
+            XCTAssertNotNil(image)
+            expectsCompletionFirst.fulfill()
+        }
+        subject.grab(url: url) { data in
+            XCTAssertNotNil(data)
+            let image = UIImage(data: data!)
+            XCTAssertNotNil(image)
+            expectsCompletionSecond.fulfill()
+        }
+        wait(for: [expectsCompletionFirst, expectsCompletionSecond], timeout: 10.0)
+    }
+
     func testGrab_badURL() {
         let url = URL(string: "https://eatmyshorts.com/fakeimage.jpg")!
         let expectsCompletion = expectation(description: "Should call completion block")
         subject.grab(url: url) { data in
-            let image = UIImage(data: data!)
-            XCTAssertNil(image)
+            XCTAssertNil(data)
             expectsCompletion.fulfill()
         }
         wait(for: [expectsCompletion], timeout: 10.0)

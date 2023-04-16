@@ -21,10 +21,13 @@
 
 import Foundation
 import AlamofireImage
+import FloatplaneApp_Utilities
 
 /// Wrapper for ImageDownloader to make it easier to get images from a URL
 public class ImageGrabber {
     public static let instance = ImageGrabber()
+
+    private let logger = Log4S()
 
     private init() {}
 
@@ -33,7 +36,10 @@ public class ImageGrabber {
     /// TODO: Add logging for errors
     public func grab(url: URL, completion: @escaping ((Data?) -> Void)) {
         _ = try? ImageDownloader.default.download(URLRequest(url: url, method: .get), completion: { response in
-            completion(response.data)
+            if response.value == nil {
+                self.logger.error("Unable to download image for url \(url)")
+            }
+            completion(response.value?.pngData())
         })
     }
 }
