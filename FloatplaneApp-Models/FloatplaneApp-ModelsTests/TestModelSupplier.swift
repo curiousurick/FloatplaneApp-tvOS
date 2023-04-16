@@ -262,7 +262,8 @@ enum TestModelSupplier {
         creatorId: creatorId,
         sort: sortOrder,
         searchQuery: searchQuery,
-        fetchAfter: fetchAfter
+        fetchAfter: fetchAfter,
+        limit: Int(limit)
     )
     static let searchResponse = SearchResponse(items: [feedItem])
 

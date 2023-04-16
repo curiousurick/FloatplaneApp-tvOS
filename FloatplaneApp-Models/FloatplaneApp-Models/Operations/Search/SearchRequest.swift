@@ -27,16 +27,24 @@ public struct SearchRequest: OperationRequest {
     public let sort: SortOrder
     public let searchQuery: String
     public let fetchAfter: Int
+    public let limit: Int
     private let hasVideo: Bool = true
     private let hasAudio: Bool = false
     private let hasPicture: Bool = false
     private let hasText: Bool = false
 
-    public init(creatorId: String, sort: SortOrder, searchQuery: String, fetchAfter: Int) {
+    public init(
+        creatorId: String,
+        sort: SortOrder,
+        searchQuery: String,
+        fetchAfter: Int,
+        limit: Int
+    ) {
         self.creatorId = creatorId
         self.sort = sort
         self.searchQuery = searchQuery
         self.fetchAfter = fetchAfter
+        self.limit = limit
     }
 
     public var params: [String: Any] {
@@ -49,6 +57,7 @@ public struct SearchRequest: OperationRequest {
             "hasText": hasText.stringValue,
             "search": searchQuery,
             "fetchAfter": fetchAfter,
+            "limit": limit,
         ]
     }
 }

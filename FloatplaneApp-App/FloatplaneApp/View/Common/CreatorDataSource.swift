@@ -25,16 +25,22 @@ import FloatplaneApp_Utilities
 
 protocol DataSourceUpdating: AnyObject, Hashable {
     func feedUpdated(feed: [FeedItem]?)
+    func feedAppended(feed: [FeedItem])
     func baseCreatorsUpdated(baseCreators: [BaseCreator]?)
     func activeCreator(activeCreator: Creator?)
     func activeBaseCreator(activeBaseCreator: BaseCreator?)
+    func searchResultsUpdated(results: [FeedItem]?)
+    func searchResultsAppended(results: [FeedItem])
 }
 
 extension DataSourceUpdating {
     func feedUpdated(feed _: [FeedItem]?) {}
+    func feedAppended(feed _: [FeedItem]) {}
     func baseCreatorsUpdated(baseCreators _: [BaseCreator]?) {}
     func activeCreator(activeCreator _: Creator?) {}
     func activeBaseCreator(activeBaseCreator _: BaseCreator?) {}
+    func searchResultsUpdated(results _: [FeedItem]?) {}
+    func searchResultsAppended(results _: [FeedItem]) {}
 }
 
 private class DataSourceUpdatingSet {
@@ -60,7 +66,15 @@ class DataSource {
 
     var feed: [FeedItem]? {
         didSet {
-            delegates.iterate { $0.feedUpdated(feed: feed) }
+            if let feed = feed, let oldValue = oldValue,
+               feed.contains(oldValue) {
+                var newStuff = feed
+                newStuff.removeSubrange(0 ..< oldValue.count)
+                delegates.iterate { $0.feedAppended(feed: newStuff) }
+            }
+            else {
+                delegates.iterate { $0.feedUpdated(feed: feed) }
+            }
         }
     }
 
@@ -79,6 +93,20 @@ class DataSource {
     var activeBaseCreator: BaseCreator? {
         didSet {
             delegates.iterate { $0.activeBaseCreator(activeBaseCreator: activeBaseCreator) }
+        }
+    }
+
+    var searchResults: [FeedItem]? {
+        didSet {
+            if let searchResults = searchResults, let oldValue = oldValue,
+               searchResults.contains(oldValue) {
+                var newStuff = searchResults
+                newStuff.removeSubrange(0 ..< oldValue.count)
+                delegates.iterate { $0.searchResultsAppended(results: newStuff) }
+            }
+            else {
+                delegates.iterate { $0.searchResultsUpdated(results: searchResults) }
+            }
         }
     }
 

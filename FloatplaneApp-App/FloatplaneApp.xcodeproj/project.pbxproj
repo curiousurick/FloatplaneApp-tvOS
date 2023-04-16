@@ -74,6 +74,8 @@
 		5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057A529D603D400D775EB /* LoginViewController.swift */; };
 		5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B529D6848E00D775EB /* ViewController+Border.swift */; };
 		5EC057B829D689E700D775EB /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B729D689E700D775EB /* LoginButton.swift */; };
+		5EEF783529EB6090008AF7FB /* BrowseCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF783429EB6090008AF7FB /* BrowseCollectionManager.swift */; };
+		5EEF783C29EB714B008AF7FB /* AsyncObjects in Frameworks */ = {isa = PBXBuildFile; productRef = 5EEF783B29EB714B008AF7FB /* AsyncObjects */; };
 		5EF5D9EB29E16C7500785396 /* UICKeyChainStore in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF5D9EA29E16C7500785396 /* UICKeyChainStore */; };
 		5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD929629D90D15007E8374 /* AVKit.framework */; };
 /* End PBXBuildFile section */
@@ -237,6 +239,7 @@
 		5EEF777F29EB3602008AF7FB /* swiftformat.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = swiftformat.sh; sourceTree = "<group>"; };
 		5EEF778029EB3CA9008AF7FB /* codecoverage.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = codecoverage.yml; path = ../.github/workflows/codecoverage.yml; sourceTree = "<group>"; };
 		5EEF778D29EB488B008AF7FB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		5EEF783429EB6090008AF7FB /* BrowseCollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCollectionManager.swift; sourceTree = "<group>"; };
 		5EFD929629D90D15007E8374 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -249,6 +252,7 @@
 				5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */,
 				5E8C133629E35AB50084F20D /* FloatplaneApp_Operations.framework in Frameworks */,
 				5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */,
+				5EEF783C29EB714B008AF7FB /* AsyncObjects in Frameworks */,
 				5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */,
 				5E8C133829E35AB50084F20D /* FloatplaneApp_Utilities.framework in Frameworks */,
 				5E8C133429E35AB50084F20D /* FloatplaneApp_Models.framework in Frameworks */,
@@ -383,8 +387,7 @@
 				5EAAE76C29D0BF1E00F9A83B /* TabBar */,
 				5EC057A429D603C900D775EB /* Login */,
 				5EAAE79A29D159E900F9A83B /* Playback */,
-				5EAAE75D29CFD86400F9A83B /* Browse */,
-				5E692E0E29D2D93E00239196 /* Search */,
+				5EEF783329EB6067008AF7FB /* Browse */,
 				5EAAE79029D13E2400F9A83B /* Settings */,
 			);
 			path = View;
@@ -473,7 +476,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		5EAAE75D29CFD86400F9A83B /* Browse */ = {
+		5EAAE75D29CFD86400F9A83B /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				5EC0576929D551C700D775EB /* Creator List */,
@@ -482,7 +485,7 @@
 				5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */,
 				5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */,
 			);
-			path = Browse;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		5EAAE76C29D0BF1E00F9A83B /* TabBar */ = {
@@ -604,6 +607,16 @@
 			path = ../scripts;
 			sourceTree = "<group>";
 		};
+		5EEF783329EB6067008AF7FB /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE75D29CFD86400F9A83B /* Home */,
+				5E692E0E29D2D93E00239196 /* Search */,
+				5EEF783429EB6090008AF7FB /* BrowseCollectionManager.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -627,6 +640,7 @@
 				5EAAE76A29D0B56B00F9A83B /* SwiftDate */,
 				5E1FD70229DA93D00015AE6F /* Alamofire */,
 				5E1FD72D29DB37ED0015AE6F /* Cache */,
+				5EEF783B29EB714B008AF7FB /* AsyncObjects */,
 			);
 			productName = FloatplaneApp;
 			productReference = 5E507BF629CFAD65006751F3 /* FloatplaneApp.app */;
@@ -710,6 +724,7 @@
 				5EAAE76929D0B56B00F9A83B /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				5EAAE77929D12B6300F9A83B /* XCRemoteSwiftPackageReference "Cache" */,
 				5EC0578529D559CF00D775EB /* XCRemoteSwiftPackageReference "UICKeyChainStore" */,
+				5EEF783A29EB714B008AF7FB /* XCRemoteSwiftPackageReference "AsyncObjects" */,
 			);
 			productRefGroup = 5E0C3CD329CF766700C71A19 /* Products */;
 			projectDirPath = "";
@@ -873,6 +888,7 @@
 				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
 				5E8C13F629E3E8AA0084F20D /* UIImage+Transparency.swift in Sources */,
 				5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */,
+				5EEF783529EB6090008AF7FB /* BrowseCollectionManager.swift in Sources */,
 				5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */,
 				5E389A5929D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift in Sources */,
 				5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */,
@@ -1266,6 +1282,14 @@
 				kind = branch;
 			};
 		};
+		5EEF783A29EB714B008AF7FB /* XCRemoteSwiftPackageReference "AsyncObjects" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyLab/AsyncObjects.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1293,6 +1317,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5EAAE76929D0B56B00F9A83B /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
+		};
+		5EEF783B29EB714B008AF7FB /* AsyncObjects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EEF783A29EB714B008AF7FB /* XCRemoteSwiftPackageReference "AsyncObjects" */;
+			productName = AsyncObjects;
 		};
 		5EF5D9EA29E16C7500785396 /* UICKeyChainStore */ = {
 			isa = XCSwiftPackageProductDependency;
