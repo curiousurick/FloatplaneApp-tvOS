@@ -74,14 +74,5 @@ Below are the features implemented in the app.
         - Default video quality, 360p, 480p, 720p, and 1080p.
         - Logout
 
-# Backlog
-- Animate and expand sidebar for creators to show the name of the creators when customer moves focus to the sidebar.
-- Support non-video type posts. Audio, Image, Text posts.
-- Consider support for filters and sort order in search tab
-- Add code coverage requirements.
-- Add UI tests to the app target.
-- Add Unit tests to the app target.
-- Pending beta release: Support channels in creator sidebar.
-
 # Thanks
 Thanks so much to Linus Sebastian, Luke Lafreniere, and all of LMG. Special thanks to the entire Floatplane team for building the infrastructure and cloud APIs that made this such an easy project for me.
