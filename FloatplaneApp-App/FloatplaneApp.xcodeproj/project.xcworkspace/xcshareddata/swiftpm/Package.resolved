@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "floatplaneapp-models",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/curiousurick/FloatplaneApp-Models.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e8b4beb8edb6614143bec2015d857e2c0aa5dce3"
+      }
+    },
+    {
       "identity" : "mocker",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WeTransfer/Mocker.git",

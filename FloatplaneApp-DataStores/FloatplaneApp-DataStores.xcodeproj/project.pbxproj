@@ -26,7 +26,7 @@
 		5E4CE94A29D90F880029110E /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE93E29D90F560029110E /* ProgressStore.swift */; };
 		5E4CE94D29D90FAB0029110E /* UICKeyChainStore in Frameworks */ = {isa = PBXBuildFile; productRef = 5E4CE94C29D90FAB0029110E /* UICKeyChainStore */; };
 		5E4CE95829D90FE00029110E /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 5E4CE95729D90FE00029110E /* Cache */; };
-		5E8C135429E35B220084F20D /* FloatplaneApp_Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C134729E35B0C0084F20D /* FloatplaneApp_Models.framework */; };
+		5E81C70E29EE498C009BB58B /* FloatplaneApp-Models in Frameworks */ = {isa = PBXBuildFile; productRef = 5E81C70D29EE498C009BB58B /* FloatplaneApp-Models */; };
 		5E8C135629E35B220084F20D /* FloatplaneApp_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C135129E35B150084F20D /* FloatplaneApp_Utilities.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,20 +37,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5E4CE91929D90F330029110E;
 			remoteInfo = "FloatplaneApp-DataStores";
-		};
-		5E8C134629E35B0C0084F20D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E8C134129E35B0C0084F20D /* FloatplaneApp-Models.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5E389AF829D8B1A500FC8B4B;
-			remoteInfo = "FloatplaneApp-Models";
-		};
-		5E8C134829E35B0C0084F20D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E8C134129E35B0C0084F20D /* FloatplaneApp-Models.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5E389B0229D8B1A500FC8B4B;
-			remoteInfo = "FloatplaneApp-ModelsTests";
 		};
 		5E8C135029E35B150084F20D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -89,7 +75,6 @@
 		5E4CE94229D90F560029110E /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
 		5E4CE94F29D90FBD0029110E /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4CE95329D90FC30029110E /* FloatplaneApp_Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E8C134129E35B0C0084F20D /* FloatplaneApp-Models.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Models.xcodeproj"; path = "../FloatplaneApp-Models/FloatplaneApp-Models.xcodeproj"; sourceTree = "<group>"; };
 		5E8C134A29E35B150084F20D /* FloatplaneApp-Utilities.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FloatplaneApp-Utilities.xcodeproj"; path = "../FloatplaneApp-Utilities/FloatplaneApp-Utilities.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,10 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E81C70E29EE498C009BB58B /* FloatplaneApp-Models in Frameworks */,
 				5E4CE94D29D90FAB0029110E /* UICKeyChainStore in Frameworks */,
 				5E8C135629E35B220084F20D /* FloatplaneApp_Utilities.framework in Frameworks */,
 				5E4CE95829D90FE00029110E /* Cache in Frameworks */,
-				5E8C135429E35B220084F20D /* FloatplaneApp_Models.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,18 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				5E8C134A29E35B150084F20D /* FloatplaneApp-Utilities.xcodeproj */,
-				5E8C134129E35B0C0084F20D /* FloatplaneApp-Models.xcodeproj */,
 			);
 			name = "Internal Dependencies";
-			sourceTree = "<group>";
-		};
-		5E8C134229E35B0C0084F20D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5E8C134729E35B0C0084F20D /* FloatplaneApp_Models.framework */,
-				5E8C134929E35B0C0084F20D /* FloatplaneApp-ModelsTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		5E8C134B29E35B150084F20D /* Products */ = {
@@ -240,6 +215,7 @@
 			packageProductDependencies = (
 				5E4CE94C29D90FAB0029110E /* UICKeyChainStore */,
 				5E4CE95729D90FE00029110E /* Cache */,
+				5E81C70D29EE498C009BB58B /* FloatplaneApp-Models */,
 			);
 			productName = "FloatplaneApp-DataStores";
 			productReference = 5E4CE91A29D90F330029110E /* FloatplaneApp_DataStores.framework */;
@@ -294,14 +270,11 @@
 			packageReferences = (
 				5E4CE94B29D90FAB0029110E /* XCRemoteSwiftPackageReference "UICKeyChainStore" */,
 				5E4CE95629D90FE00029110E /* XCRemoteSwiftPackageReference "Cache" */,
+				5E81C70C29EE498C009BB58B /* XCRemoteSwiftPackageReference "FloatplaneApp-Models" */,
 			);
 			productRefGroup = 5E4CE91B29D90F330029110E /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 5E8C134229E35B0C0084F20D /* Products */;
-					ProjectRef = 5E8C134129E35B0C0084F20D /* FloatplaneApp-Models.xcodeproj */;
-				},
 				{
 					ProductGroup = 5E8C134B29E35B150084F20D /* Products */;
 					ProjectRef = 5E8C134A29E35B150084F20D /* FloatplaneApp-Utilities.xcodeproj */;
@@ -316,20 +289,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5E8C134729E35B0C0084F20D /* FloatplaneApp_Models.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FloatplaneApp_Models.framework;
-			remoteRef = 5E8C134629E35B0C0084F20D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5E8C134929E35B0C0084F20D /* FloatplaneApp-ModelsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "FloatplaneApp-ModelsTests.xctest";
-			remoteRef = 5E8C134829E35B0C0084F20D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		5E8C135129E35B150084F20D /* FloatplaneApp_Utilities.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -706,6 +665,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		5E81C70C29EE498C009BB58B /* XCRemoteSwiftPackageReference "FloatplaneApp-Models" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/curiousurick/FloatplaneApp-Models.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -718,6 +685,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5E4CE95629D90FE00029110E /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		5E81C70D29EE498C009BB58B /* FloatplaneApp-Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E81C70C29EE498C009BB58B /* XCRemoteSwiftPackageReference "FloatplaneApp-Models" */;
+			productName = "FloatplaneApp-Models";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
