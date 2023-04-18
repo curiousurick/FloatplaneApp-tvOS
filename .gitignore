@@ -1,6 +1,6 @@
 *.DS_Store
-FloatplaneApp/Config/UserConfiguration.swift
-
+FloatplaneApp-DataStores.xcodeproj/project.xcworkspace/xcuserdata
+.swiftpm/xcode
 
 # Xcode
 #
