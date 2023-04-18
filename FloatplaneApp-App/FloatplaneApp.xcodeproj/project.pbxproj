@@ -46,13 +46,10 @@
 		5E507C1129CFAD66006751F3 /* FloatplaneAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1029CFAD66006751F3 /* FloatplaneAppTests.swift */; };
 		5E507C1B29CFAD66006751F3 /* FloatplaneAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1A29CFAD66006751F3 /* FloatplaneAppUITests.swift */; };
 		5E507C1D29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1C29CFAD66006751F3 /* FloatplaneAppUITestsLaunchTests.swift */; };
+		5E51554329EE7153009B68EA /* FloatplaneApp-Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = 5E51554229EE7153009B68EA /* FloatplaneApp-Utilities */; };
+		5E51554629EE7162009B68EA /* FloatplaneApp-DataStores in Frameworks */ = {isa = PBXBuildFile; productRef = 5E51554529EE7162009B68EA /* FloatplaneApp-DataStores */; };
+		5E51554929EE7174009B68EA /* FloatplaneApp-Operations in Frameworks */ = {isa = PBXBuildFile; productRef = 5E51554829EE7174009B68EA /* FloatplaneApp-Operations */; };
 		5E81C70229EE4952009BB58B /* FloatplaneApp-Models in Frameworks */ = {isa = PBXBuildFile; productRef = 5E81C70129EE4952009BB58B /* FloatplaneApp-Models */; };
-		5E8C133229E35AB50084F20D /* FloatplaneApp_DataStores.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C130929E35A5D0084F20D /* FloatplaneApp_DataStores.framework */; };
-		5E8C133329E35AB50084F20D /* FloatplaneApp_DataStores.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C130929E35A5D0084F20D /* FloatplaneApp_DataStores.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5E8C133629E35AB50084F20D /* FloatplaneApp_Operations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C131B29E35A690084F20D /* FloatplaneApp_Operations.framework */; };
-		5E8C133729E35AB50084F20D /* FloatplaneApp_Operations.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C131B29E35A690084F20D /* FloatplaneApp_Operations.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5E8C133829E35AB50084F20D /* FloatplaneApp_Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C132429E35A6E0084F20D /* FloatplaneApp_Utilities.framework */; };
-		5E8C133929E35AB50084F20D /* FloatplaneApp_Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C132429E35A6E0084F20D /* FloatplaneApp_Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5E8C13F629E3E8AA0084F20D /* UIImage+Transparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C13F529E3E8AA0084F20D /* UIImage+Transparency.swift */; };
 		5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */; };
 		5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */ = {isa = PBXBuildFile; productRef = 5EAAE76129D03A9A00F9A83B /* ParallaxView */; };
@@ -138,22 +135,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		5EFD927E29D8C746007E8374 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				5E8C133929E35AB50084F20D /* FloatplaneApp_Utilities.framework in Embed Frameworks */,
-				5E8C133329E35AB50084F20D /* FloatplaneApp_DataStores.framework in Embed Frameworks */,
-				5E8C133729E35AB50084F20D /* FloatplaneApp_Operations.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		5E1FD6F229DA35C60015AE6F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -231,16 +212,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E51554929EE7174009B68EA /* FloatplaneApp-Operations in Frameworks */,
 				5E1FD70329DA93D00015AE6F /* Alamofire in Frameworks */,
 				5EAAE76B29D0B56B00F9A83B /* SwiftDate in Frameworks */,
-				5E8C133629E35AB50084F20D /* FloatplaneApp_Operations.framework in Frameworks */,
+				5E51554329EE7153009B68EA /* FloatplaneApp-Utilities in Frameworks */,
 				5EAAE76229D03A9A00F9A83B /* ParallaxView in Frameworks */,
 				5EEF783C29EB714B008AF7FB /* AsyncObjects in Frameworks */,
 				5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */,
-				5E8C133829E35AB50084F20D /* FloatplaneApp_Utilities.framework in Frameworks */,
 				5EAAE76829D0B34D00F9A83B /* AlamofireImage in Frameworks */,
-				5E8C133229E35AB50084F20D /* FloatplaneApp_DataStores.framework in Frameworks */,
 				5E81C70229EE4952009BB58B /* FloatplaneApp-Models in Frameworks */,
+				5E51554629EE7162009B68EA /* FloatplaneApp-DataStores in Frameworks */,
 				5E1FD72E29DB37ED0015AE6F /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,7 +581,6 @@
 				5E507BF229CFAD65006751F3 /* Sources */,
 				5E507BF329CFAD65006751F3 /* Frameworks */,
 				5E507BF429CFAD65006751F3 /* Resources */,
-				5EFD927E29D8C746007E8374 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -615,6 +595,9 @@
 				5E1FD72D29DB37ED0015AE6F /* Cache */,
 				5EEF783B29EB714B008AF7FB /* AsyncObjects */,
 				5E81C70129EE4952009BB58B /* FloatplaneApp-Models */,
+				5E51554229EE7153009B68EA /* FloatplaneApp-Utilities */,
+				5E51554529EE7162009B68EA /* FloatplaneApp-DataStores */,
+				5E51554829EE7174009B68EA /* FloatplaneApp-Operations */,
 			);
 			productName = FloatplaneApp;
 			productReference = 5E507BF629CFAD65006751F3 /* FloatplaneApp.app */;
@@ -700,6 +683,9 @@
 				5EC0578529D559CF00D775EB /* XCRemoteSwiftPackageReference "UICKeyChainStore" */,
 				5EEF783A29EB714B008AF7FB /* XCRemoteSwiftPackageReference "AsyncObjects" */,
 				5E81C70029EE4952009BB58B /* XCRemoteSwiftPackageReference "FloatplaneApp-Models" */,
+				5E51554129EE7153009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-Utilities" */,
+				5E51554429EE7162009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-DataStores" */,
+				5E51554729EE7174009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-Operations" */,
 			);
 			productRefGroup = 5E0C3CD329CF766700C71A19 /* Products */;
 			projectDirPath = "";
@@ -1199,6 +1185,30 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		5E51554129EE7153009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-Utilities" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/curiousurick/FloatplaneApp-Utilities.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5E51554429EE7162009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-DataStores" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/curiousurick/FloatplaneApp-DataStores.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5E51554729EE7174009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-Operations" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/curiousurick/FloatplaneApp-Operations.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		5E81C70029EE4952009BB58B /* XCRemoteSwiftPackageReference "FloatplaneApp-Models" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/curiousurick/FloatplaneApp-Models.git";
@@ -1267,6 +1277,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5EAAE77929D12B6300F9A83B /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		5E51554229EE7153009B68EA /* FloatplaneApp-Utilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E51554129EE7153009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-Utilities" */;
+			productName = "FloatplaneApp-Utilities";
+		};
+		5E51554529EE7162009B68EA /* FloatplaneApp-DataStores */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E51554429EE7162009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-DataStores" */;
+			productName = "FloatplaneApp-DataStores";
+		};
+		5E51554829EE7174009B68EA /* FloatplaneApp-Operations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E51554729EE7174009B68EA /* XCRemoteSwiftPackageReference "FloatplaneApp-Operations" */;
+			productName = "FloatplaneApp-Operations";
 		};
 		5E81C70129EE4952009BB58B /* FloatplaneApp-Models */ = {
 			isa = XCSwiftPackageProductDependency;

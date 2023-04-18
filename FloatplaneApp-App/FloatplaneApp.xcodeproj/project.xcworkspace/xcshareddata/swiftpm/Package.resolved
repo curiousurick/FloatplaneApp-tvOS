@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/AlamofireImage.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "af1c41645ef2d3ab48ffb3fb3a11941c71e5f9a0"
+        "revision" : "98cbb00ce0ec5fc8e52a5b50a6bfc08d3e5aee10",
+        "version" : "4.2.0"
       }
     },
     {
@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "floatplaneapp-datastores",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/curiousurick/FloatplaneApp-DataStores.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "39077a4e6ed5eed4c124e17d67fc1d79b6423d81"
+      }
+    },
+    {
       "identity" : "floatplaneapp-models",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/curiousurick/FloatplaneApp-Models.git",
@@ -46,12 +55,21 @@
       }
     },
     {
-      "identity" : "mocker",
+      "identity" : "floatplaneapp-operations",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/WeTransfer/Mocker.git",
+      "location" : "https://github.com/curiousurick/FloatplaneApp-Operations.git",
       "state" : {
-        "revision" : "4384e015cae4916a6828252467a4437173c7ae17",
-        "version" : "3.0.1"
+        "branch" : "main",
+        "revision" : "1d6084a4d21b8acd2c32ebf2127a175e01cc72cb"
+      }
+    },
+    {
+      "identity" : "floatplaneapp-utilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/curiousurick/FloatplaneApp-Utilities.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d20dc45fce966c41f0b5ea734e455cf39dfc56b1"
       }
     },
     {
