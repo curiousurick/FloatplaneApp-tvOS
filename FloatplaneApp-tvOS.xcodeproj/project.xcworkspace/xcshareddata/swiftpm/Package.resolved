@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyLab/AsyncObjects.git",
       "state" : {
-        "revision" : "93aacfba87d738ac94fb50c2a6768c43ec9d42eb",
-        "version" : "2.1.0"
+        "branch" : "main",
+        "revision" : "8fa6219a5b9b76325d4eff7afcf4c60b50f3af8d"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/curiousurick/FloatplaneApp-DataStores.git",
       "state" : {
         "branch" : "main",
-        "revision" : "39077a4e6ed5eed4c124e17d67fc1d79b6423d81"
+        "revision" : "90633a03b92509252a41f1fe1f08bcdefe571991"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "https://github.com/curiousurick/FloatplaneApp-Models.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e8b4beb8edb6614143bec2015d857e2c0aa5dce3"
+        "revision" : "cd63181c47bfdeb14da2f726f9fc32e39a98a9da"
       }
     },
     {
@@ -60,7 +60,7 @@
       "location" : "https://github.com/curiousurick/FloatplaneApp-Operations.git",
       "state" : {
         "branch" : "main",
-        "revision" : "1d6084a4d21b8acd2c32ebf2127a175e01cc72cb"
+        "revision" : "ff748ba6d04e64c6146546001a9bf316cf7e70e1"
       }
     },
     {
@@ -69,7 +69,7 @@
       "location" : "https://github.com/curiousurick/FloatplaneApp-Utilities.git",
       "state" : {
         "branch" : "main",
-        "revision" : "d20dc45fce966c41f0b5ea734e455cf39dfc56b1"
+        "revision" : "bbe3478ecb78387d96234d58986c7b16a0588bef"
       }
     },
     {

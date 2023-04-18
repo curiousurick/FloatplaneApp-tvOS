@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5E507BF529CFAD65006751F3"
-               BuildableName = "FloatplaneApp.app"
-               BlueprintName = "FloatplaneApp"
-               ReferencedContainer = "container:FloatplaneApp.xcodeproj">
+               BuildableName = "FloatplaneApp-tvOS.app"
+               BlueprintName = "FloatplaneApp-tvOS"
+               ReferencedContainer = "container:FloatplaneApp-tvOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5E507BF529CFAD65006751F3"
-            BuildableName = "FloatplaneApp.app"
-            BlueprintName = "FloatplaneApp"
-            ReferencedContainer = "container:FloatplaneApp.xcodeproj">
+            BuildableName = "FloatplaneApp-tvOS.app"
+            BlueprintName = "FloatplaneApp-tvOS"
+            ReferencedContainer = "container:FloatplaneApp-tvOS.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -44,9 +44,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5E507C0B29CFAD66006751F3"
-               BuildableName = "FloatplaneAppTests.xctest"
-               BlueprintName = "FloatplaneAppTests"
-               ReferencedContainer = "container:FloatplaneApp.xcodeproj">
+               BuildableName = "FloatplaneApp-tvOSTests.xctest"
+               BlueprintName = "FloatplaneApp-tvOSTests"
+               ReferencedContainer = "container:FloatplaneApp-tvOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -54,9 +54,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5E507C1529CFAD66006751F3"
-               BuildableName = "FloatplaneAppUITests.xctest"
-               BlueprintName = "FloatplaneAppUITests"
-               ReferencedContainer = "container:FloatplaneApp.xcodeproj">
+               BuildableName = "FloatplaneApp-tvOSUITests.xctest"
+               BlueprintName = "FloatplaneApp-tvOSUITests"
+               ReferencedContainer = "container:FloatplaneApp-tvOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5E507BF529CFAD65006751F3"
-            BuildableName = "FloatplaneApp.app"
-            BlueprintName = "FloatplaneApp"
-            ReferencedContainer = "container:FloatplaneApp.xcodeproj">
+            BuildableName = "FloatplaneApp-tvOS.app"
+            BlueprintName = "FloatplaneApp-tvOS"
+            ReferencedContainer = "container:FloatplaneApp-tvOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -93,9 +93,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5E507BF529CFAD65006751F3"
-            BuildableName = "FloatplaneApp.app"
-            BlueprintName = "FloatplaneApp"
-            ReferencedContainer = "container:FloatplaneApp.xcodeproj">
+            BuildableName = "FloatplaneApp-tvOS.app"
+            BlueprintName = "FloatplaneApp-tvOS"
+            ReferencedContainer = "container:FloatplaneApp-tvOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
