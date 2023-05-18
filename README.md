@@ -1,5 +1,5 @@
 # FloatplaneApp-tvOS
-My tvOS app for floatplane. This app was written by George Urick but is completely open to anyone who has the source code to use it for whatever purpose they want, barring any restrictions imposed by Floatplane Media Inc.
+My UNOFFICIAL tvOS app for floatplane. This app was written by George Urick but is completely open to anyone who has the source code to use it for whatever purpose they want, barring any restrictions imposed by Floatplane Media Inc.
 
 | ![image](Assets/Browse_Screenshot.png) | ![image](Assets/LiveOffline_Screenshot.png) |
 | --- | --- |
