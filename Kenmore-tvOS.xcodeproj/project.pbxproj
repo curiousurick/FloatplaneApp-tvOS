@@ -1,0 +1,1140 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E0E516A29D3F6B3006744E4 /* FeedItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */; };
+		5E1FD6F329DA35C60015AE6F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F229DA35C60015AE6F /* RootViewController.swift */; };
+		5E1FD6F529DA62B10015AE6F /* SearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */; };
+		5E1FD6F729DA65A80015AE6F /* CreatorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */; };
+		5E1FD6F929DA7F8A0015AE6F /* TabConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */; };
+		5E1FD75529DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FD75429DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift */; };
+		5E389A2E29D6A12000FC8B4B /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C529D68E8B00D775EB /* Roboto-BlackItalic.ttf */; };
+		5E389A2F29D6A12000FC8B4B /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BD29D68E8B00D775EB /* Roboto-Thin.ttf */; };
+		5E389A3029D6A12000FC8B4B /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C129D68E8B00D775EB /* Roboto-Black.ttf */; };
+		5E389A3229D6A12000FC8B4B /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C429D68E8B00D775EB /* Roboto-Italic.ttf */; };
+		5E389A3329D6A12000FC8B4B /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BE29D68E8B00D775EB /* Roboto-MediumItalic.ttf */; };
+		5E389A3429D6A12000FC8B4B /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BA29D68E8B00D775EB /* Roboto-Light.ttf */; };
+		5E389A3529D6A12000FC8B4B /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C329D68E8B00D775EB /* Roboto-ThinItalic.ttf */; };
+		5E389A3629D6A12000FC8B4B /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BB29D68E8B00D775EB /* Roboto-LightItalic.ttf */; };
+		5E389A3729D6A12000FC8B4B /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C029D68E8B00D775EB /* Roboto-BoldItalic.ttf */; };
+		5E389A3829D6A12000FC8B4B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057BF29D68E8B00D775EB /* Roboto-Regular.ttf */; };
+		5E389A3929D6A12000FC8B4B /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EC057C229D68E8B00D775EB /* Roboto-Medium.ttf */; };
+		5E389A3A29D6A12000FC8B4B /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */; };
+		5E389A3C29D6A52800FC8B4B /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */; };
+		5E389A3E29D6ABE600FC8B4B /* LoginImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3D29D6ABE600FC8B4B /* LoginImageTextField.swift */; };
+		5E389A4029D6BD5A00FC8B4B /* UIFont+Roboto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A3F29D6BD5A00FC8B4B /* UIFont+Roboto.swift */; };
+		5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */; };
+		5E389A4629D6CFC000FC8B4B /* UIColor+TextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */; };
+		5E389A5529D7FDD200FC8B4B /* UIMenu+QualityMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A5429D7FDD200FC8B4B /* UIMenu+QualityMenu.swift */; };
+		5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A5629D7FEA700FC8B4B /* String+UIImage.swift */; };
+		5E389A5929D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A5829D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift */; };
+		5E389A6529D8216D00FC8B4B /* BaseVideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E389A6429D8216D00FC8B4B /* BaseVideoPlayerController.swift */; };
+		5E4CE96029D914F00029110E /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE95F29D914F00029110E /* LaunchScreenViewController.swift */; };
+		5E4CE96329DA053E0029110E /* SegueIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CE96229DA053E0029110E /* SegueIdentifier.swift */; };
+		5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BF829CFAD65006751F3 /* AppDelegate.swift */; };
+		5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */; };
+		5E507BFE29CFAD65006751F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507BFC29CFAD65006751F3 /* Main.storyboard */; };
+		5E507C0329CFAD66006751F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E507C0229CFAD66006751F3 /* Assets.xcassets */; };
+		5E507C0629CFAD66006751F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */; };
+		5E507C1B29CFAD66006751F3 /* KenmoreAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1A29CFAD66006751F3 /* KenmoreAppUITests.swift */; };
+		5E507C1D29CFAD66006751F3 /* KenmoreAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E507C1C29CFAD66006751F3 /* KenmoreAppUITestsLaunchTests.swift */; };
+		5E5155E129EE7FB4009B68EA /* AsyncObjects in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5155E029EE7FB4009B68EA /* AsyncObjects */; };
+		5E5155EB29EE7FB4009B68EA /* ParallaxView in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5155EA29EE7FB4009B68EA /* ParallaxView */; };
+		5E5155ED29EE7FB4009B68EA /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5155EC29EE7FB4009B68EA /* SwiftDate */; };
+		5E5155EF29EE7FB4009B68EA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5155EE29EE7FB4009B68EA /* Alamofire */; };
+		5E5155F129EE7FB4009B68EA /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5155F029EE7FB4009B68EA /* AlamofireImage */; };
+		5E8C13F629E3E8AA0084F20D /* UIImage+Transparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C13F529E3E8AA0084F20D /* UIImage+Transparency.swift */; };
+		5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */; };
+		5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */; };
+		5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */; };
+		5EAAE79229D13E3A00F9A83B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */; };
+		5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79329D141D700F9A83B /* PickerViewController.swift */; };
+		5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */; };
+		5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */; };
+		5EBA28322A15E10E00F673BC /* Kenmore-Models in Frameworks */ = {isa = PBXBuildFile; productRef = 5EBA28312A15E10E00F673BC /* Kenmore-Models */; };
+		5EBA28352A15E11900F673BC /* Kenmore-Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = 5EBA28342A15E11900F673BC /* Kenmore-Utilities */; };
+		5EBA28382A15E12700F673BC /* Kenmore-DataStores in Frameworks */ = {isa = PBXBuildFile; productRef = 5EBA28372A15E12700F673BC /* Kenmore-DataStores */; };
+		5EBA283B2A15E14000F673BC /* Kenmore-Operations in Frameworks */ = {isa = PBXBuildFile; productRef = 5EBA283A2A15E14000F673BC /* Kenmore-Operations */; };
+		5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0574C29D4089C00D775EB /* SearchViewController.swift */; };
+		5EC0574F29D41C9A00D775EB /* LivePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0574E29D41C9A00D775EB /* LivePlayerViewController.swift */; };
+		5EC0575729D49A7700D775EB /* LiveStreamOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0575629D49A7700D775EB /* LiveStreamOfflineViewController.swift */; };
+		5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0575E29D53DC400D775EB /* TopNavigationController.swift */; };
+		5EC0576829D54ED400D775EB /* CreatorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0576729D54ED400D775EB /* CreatorListView.swift */; };
+		5EC0576B29D551DD00D775EB /* CreatorListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0576A29D551DD00D775EB /* CreatorListViewCell.swift */; };
+		5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057A529D603D400D775EB /* LoginViewController.swift */; };
+		5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B529D6848E00D775EB /* ViewController+Border.swift */; };
+		5EC057B829D689E700D775EB /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC057B729D689E700D775EB /* LoginButton.swift */; };
+		5EEF783529EB6090008AF7FB /* BrowseCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF783429EB6090008AF7FB /* BrowseCollectionManager.swift */; };
+		5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD929629D90D15007E8374 /* AVKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5E507C0D29CFAD66006751F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E0C3CCA29CF766700C71A19 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E507BF529CFAD65006751F3;
+			remoteInfo = FloatplaneApp;
+		};
+		5E507C1729CFAD66006751F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E0C3CCA29CF766700C71A19 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E507BF529CFAD65006751F3;
+			remoteInfo = FloatplaneApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		5E1FD6F229DA35C60015AE6F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContainerViewController.swift; sourceTree = "<group>"; };
+		5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorDataSource.swift; sourceTree = "<group>"; };
+		5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabConstants.swift; sourceTree = "<group>"; };
+		5E1FD75429DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDeliveryKeyDebuff.swift; sourceTree = "<group>"; };
+		5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
+		5E389A3D29D6ABE600FC8B4B /* LoginImageTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginImageTextField.swift; sourceTree = "<group>"; };
+		5E389A3F29D6BD5A00FC8B4B /* UIFont+Roboto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Roboto.swift"; sourceTree = "<group>"; };
+		5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Main.swift"; sourceTree = "<group>"; };
+		5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+TextColor.swift"; sourceTree = "<group>"; };
+		5E389A5429D7FDD200FC8B4B /* UIMenu+QualityMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIMenu+QualityMenu.swift"; sourceTree = "<group>"; };
+		5E389A5629D7FEA700FC8B4B /* String+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIImage.swift"; sourceTree = "<group>"; };
+		5E389A5829D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayer+VideoMetadata.swift"; sourceTree = "<group>"; };
+		5E389A6429D8216D00FC8B4B /* BaseVideoPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVideoPlayerController.swift; sourceTree = "<group>"; };
+		5E389C5429D8C23B00FC8B4B /* FloatplaneApp_Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatplaneApp_Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E4CE95F29D914F00029110E /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		5E4CE96229DA053E0029110E /* SegueIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifier.swift; sourceTree = "<group>"; };
+		5E507BF629CFAD65006751F3 /* Kenmore-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kenmore-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E507BF829CFAD65006751F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
+		5E507BFD29CFAD65006751F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5E507C0229CFAD66006751F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E507C0529CFAD66006751F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5E507C0729CFAD66006751F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E507C0C29CFAD66006751F3 /* Kenmore-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kenmore-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E507C1629CFAD66006751F3 /* Kenmore-tvOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kenmore-tvOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E507C1A29CFAD66006751F3 /* KenmoreAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KenmoreAppUITests.swift; sourceTree = "<group>"; };
+		5E507C1C29CFAD66006751F3 /* KenmoreAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KenmoreAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5E5155D229EE7DAB009B68EA /* swiftformat.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = swiftformat.sh; sourceTree = "<group>"; };
+		5E5155D329EE7DAB009B68EA /* xcodebuilds.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = xcodebuilds.sh; sourceTree = "<group>"; };
+		5E5155D429EE7DAB009B68EA /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		5E5155D529EE7DBB009B68EA /* codecoverage.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = codecoverage.yml; path = .github/workflows/codecoverage.yml; sourceTree = SOURCE_ROOT; };
+		5E5155D629EE7DC4009B68EA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		5E8C13F529E3E8AA0084F20D /* UIImage+Transparency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Transparency.swift"; sourceTree = "<group>"; };
+		5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTabBarController.swift; sourceTree = "<group>"; };
+		5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseReusableHeaderView.swift; sourceTree = "<group>"; };
+		5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5EAAE79329D141D700F9A83B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VODPlayerViewController.swift; sourceTree = "<group>"; };
+		5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemProgressBarView.swift; sourceTree = "<group>"; };
+		5EC0574C29D4089C00D775EB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		5EC0574E29D41C9A00D775EB /* LivePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlayerViewController.swift; sourceTree = "<group>"; };
+		5EC0575629D49A7700D775EB /* LiveStreamOfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamOfflineViewController.swift; sourceTree = "<group>"; };
+		5EC0575E29D53DC400D775EB /* TopNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationController.swift; sourceTree = "<group>"; };
+		5EC0576729D54ED400D775EB /* CreatorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorListView.swift; sourceTree = "<group>"; };
+		5EC0576A29D551DD00D775EB /* CreatorListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorListViewCell.swift; sourceTree = "<group>"; };
+		5EC057A529D603D400D775EB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5EC057B529D6848E00D775EB /* ViewController+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Border.swift"; sourceTree = "<group>"; };
+		5EC057B729D689E700D775EB /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		5EC057BA29D68E8B00D775EB /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		5EC057BB29D68E8B00D775EB /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		5EC057BD29D68E8B00D775EB /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		5EC057BE29D68E8B00D775EB /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		5EC057BF29D68E8B00D775EB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		5EC057C029D68E8B00D775EB /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		5EC057C129D68E8B00D775EB /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		5EC057C229D68E8B00D775EB /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		5EC057C329D68E8B00D775EB /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		5EC057C429D68E8B00D775EB /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		5EC057C529D68E8B00D775EB /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		5EEF783429EB6090008AF7FB /* BrowseCollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCollectionManager.swift; sourceTree = "<group>"; };
+		5EFD929629D90D15007E8374 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E507BF329CFAD65006751F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EBA28382A15E12700F673BC /* Kenmore-DataStores in Frameworks */,
+				5E5155EF29EE7FB4009B68EA /* Alamofire in Frameworks */,
+				5E5155EB29EE7FB4009B68EA /* ParallaxView in Frameworks */,
+				5E5155E129EE7FB4009B68EA /* AsyncObjects in Frameworks */,
+				5EBA28352A15E11900F673BC /* Kenmore-Utilities in Frameworks */,
+				5E5155ED29EE7FB4009B68EA /* SwiftDate in Frameworks */,
+				5EBA283B2A15E14000F673BC /* Kenmore-Operations in Frameworks */,
+				5EBA28322A15E10E00F673BC /* Kenmore-Models in Frameworks */,
+				5E5155F129EE7FB4009B68EA /* AlamofireImage in Frameworks */,
+				5EFD929729D90D15007E8374 /* AVKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E507C0929CFAD66006751F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E507C1329CFAD66006751F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5E0C3CC929CF766700C71A19 = {
+			isa = PBXGroup;
+			children = (
+				5E5155D129EE7DAB009B68EA /* scripts */,
+				5E507BF729CFAD65006751F3 /* Kenmore-tvOS */,
+				5E507C0F29CFAD66006751F3 /* Kenmore-tvOSTests */,
+				5E507C1929CFAD66006751F3 /* Kenmore-tvOSUITests */,
+				5E0C3CD329CF766700C71A19 /* Products */,
+				5E507C2C29CFB0FE006751F3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5E0C3CD329CF766700C71A19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E507BF629CFAD65006751F3 /* Kenmore-tvOS.app */,
+				5E507C0C29CFAD66006751F3 /* Kenmore-tvOSTests.xctest */,
+				5E507C1629CFAD66006751F3 /* Kenmore-tvOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E0E516829D3F630006744E4 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				5E0E516929D3F6B3006744E4 /* FeedItemCollectionViewCell.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		5E4CE95D29D9128B0029110E /* UI Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				5E507BFC29CFAD65006751F3 /* Main.storyboard */,
+				5E507C0229CFAD66006751F3 /* Assets.xcassets */,
+				5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */,
+			);
+			path = "UI Configuration";
+			sourceTree = "<group>";
+		};
+		5E4CE95E29D914E40029110E /* Launch Screen */ = {
+			isa = PBXGroup;
+			children = (
+				5E4CE95F29D914F00029110E /* LaunchScreenViewController.swift */,
+			);
+			path = "Launch Screen";
+			sourceTree = "<group>";
+		};
+		5E4CE96129DA05340029110E /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				5E4CE96229DA053E0029110E /* SegueIdentifier.swift */,
+			);
+			path = Segues;
+			sourceTree = "<group>";
+		};
+		5E4CE96429DA08CE0029110E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5E389A4329D6C63B00FC8B4B /* UIStoryboard+Main.swift */,
+				5E1FD6F229DA35C60015AE6F /* RootViewController.swift */,
+				5E1FD6F629DA65A80015AE6F /* CreatorDataSource.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5E507BF729CFAD65006751F3 /* Kenmore-tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C13F429E3E8A20084F20D /* Extensions */,
+				5E507C2829CFADB5006751F3 /* Config */,
+				5E4CE95D29D9128B0029110E /* UI Configuration */,
+				5E507C2729CFADAB006751F3 /* View */,
+			);
+			path = "Kenmore-tvOS";
+			sourceTree = "<group>";
+		};
+		5E507C0F29CFAD66006751F3 /* Kenmore-tvOSTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Kenmore-tvOSTests";
+			sourceTree = "<group>";
+		};
+		5E507C1929CFAD66006751F3 /* Kenmore-tvOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5E507C1A29CFAD66006751F3 /* KenmoreAppUITests.swift */,
+				5E507C1C29CFAD66006751F3 /* KenmoreAppUITestsLaunchTests.swift */,
+			);
+			path = "Kenmore-tvOSUITests";
+			sourceTree = "<group>";
+		};
+		5E507C2729CFADAB006751F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5E4CE96429DA08CE0029110E /* Common */,
+				5E4CE96129DA05340029110E /* Segues */,
+				5E4CE95E29D914E40029110E /* Launch Screen */,
+				5E0E516829D3F630006744E4 /* Xibs */,
+				5EC0576029D53DCA00D775EB /* TopNav */,
+				5EAAE76C29D0BF1E00F9A83B /* TabBar */,
+				5EC057A429D603C900D775EB /* Login */,
+				5EAAE79A29D159E900F9A83B /* Playback */,
+				5EEF783329EB6067008AF7FB /* Browse */,
+				5EAAE79029D13E2400F9A83B /* Settings */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5E507C2829CFADB5006751F3 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5EC057B929D68E6A00D775EB /* Fonts */,
+				5E507BF829CFAD65006751F3 /* AppDelegate.swift */,
+				5E507C0729CFAD66006751F3 /* Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		5E507C2C29CFB0FE006751F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5EFD929629D90D15007E8374 /* AVKit.framework */,
+				5E389C5429D8C23B00FC8B4B /* FloatplaneApp_Utilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E5155D129EE7DAB009B68EA /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				5E5155D629EE7DC4009B68EA /* README.md */,
+				5E5155D229EE7DAB009B68EA /* swiftformat.sh */,
+				5E5155D329EE7DAB009B68EA /* xcodebuilds.sh */,
+				5E5155D529EE7DBB009B68EA /* codecoverage.yml */,
+				5E5155D429EE7DAB009B68EA /* build.sh */,
+			);
+			path = scripts;
+			sourceTree = "<group>";
+		};
+		5E692E0E29D2D93E00239196 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5EC0574C29D4089C00D775EB /* SearchViewController.swift */,
+				5E1FD6F429DA62B10015AE6F /* SearchContainerViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		5E8C13F429E3E8A20084F20D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C13F529E3E8AA0084F20D /* UIImage+Transparency.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5EAAE75D29CFD86400F9A83B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5EC0576929D551C700D775EB /* Creator List */,
+				5E507BFA29CFAD65006751F3 /* BrowseViewController.swift */,
+				5EAAE75E29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift */,
+				5EAAE76F29D0C2B700F9A83B /* BrowseReusableHeaderView.swift */,
+				5EAAE79D29D1642100F9A83B /* FeedItemProgressBarView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		5EAAE76C29D0BF1E00F9A83B /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE76D29D0BF2D00F9A83B /* FPTabBarController.swift */,
+				5E1FD6F829DA7F8A0015AE6F /* TabConstants.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		5EAAE79029D13E2400F9A83B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE79129D13E3A00F9A83B /* SettingsViewController.swift */,
+				5EAAE79329D141D700F9A83B /* PickerViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5EAAE79A29D159E900F9A83B /* Playback */ = {
+			isa = PBXGroup;
+			children = (
+				5E389A6429D8216D00FC8B4B /* BaseVideoPlayerController.swift */,
+				5EC0576129D5428400D775EB /* VOD */,
+				5EC0575529D49A6800D775EB /* Live */,
+			);
+			path = Playback;
+			sourceTree = "<group>";
+		};
+		5EC0575529D49A6800D775EB /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				5EC0574E29D41C9A00D775EB /* LivePlayerViewController.swift */,
+				5EC0575629D49A7700D775EB /* LiveStreamOfflineViewController.swift */,
+				5E1FD75429DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
+		5EC0576029D53DCA00D775EB /* TopNav */ = {
+			isa = PBXGroup;
+			children = (
+				5EC0575E29D53DC400D775EB /* TopNavigationController.swift */,
+			);
+			path = TopNav;
+			sourceTree = "<group>";
+		};
+		5EC0576129D5428400D775EB /* VOD */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE79B29D159FB00F9A83B /* VODPlayerViewController.swift */,
+				5E389A5429D7FDD200FC8B4B /* UIMenu+QualityMenu.swift */,
+				5E389A5629D7FEA700FC8B4B /* String+UIImage.swift */,
+				5E389A5829D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift */,
+			);
+			path = VOD;
+			sourceTree = "<group>";
+		};
+		5EC0576929D551C700D775EB /* Creator List */ = {
+			isa = PBXGroup;
+			children = (
+				5EC0576729D54ED400D775EB /* CreatorListView.swift */,
+				5EC0576A29D551DD00D775EB /* CreatorListViewCell.swift */,
+			);
+			path = "Creator List";
+			sourceTree = "<group>";
+		};
+		5EC057A429D603C900D775EB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5EC057A529D603D400D775EB /* LoginViewController.swift */,
+				5EC057B529D6848E00D775EB /* ViewController+Border.swift */,
+				5EC057B729D689E700D775EB /* LoginButton.swift */,
+				5E389A3B29D6A52800FC8B4B /* LoginTextField.swift */,
+				5E389A3D29D6ABE600FC8B4B /* LoginImageTextField.swift */,
+				5E389A4529D6CFC000FC8B4B /* UIColor+TextColor.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5EC057B929D68E6A00D775EB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5E389A2D29D69F2900FC8B4B /* Roboto-Bold.ttf */,
+				5EC057C129D68E8B00D775EB /* Roboto-Black.ttf */,
+				5EC057C529D68E8B00D775EB /* Roboto-BlackItalic.ttf */,
+				5EC057C029D68E8B00D775EB /* Roboto-BoldItalic.ttf */,
+				5EC057C429D68E8B00D775EB /* Roboto-Italic.ttf */,
+				5EC057BA29D68E8B00D775EB /* Roboto-Light.ttf */,
+				5EC057BB29D68E8B00D775EB /* Roboto-LightItalic.ttf */,
+				5EC057C229D68E8B00D775EB /* Roboto-Medium.ttf */,
+				5EC057BE29D68E8B00D775EB /* Roboto-MediumItalic.ttf */,
+				5EC057BF29D68E8B00D775EB /* Roboto-Regular.ttf */,
+				5EC057BD29D68E8B00D775EB /* Roboto-Thin.ttf */,
+				5EC057C329D68E8B00D775EB /* Roboto-ThinItalic.ttf */,
+				5E389A3F29D6BD5A00FC8B4B /* UIFont+Roboto.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		5EEF783329EB6067008AF7FB /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				5EAAE75D29CFD86400F9A83B /* Home */,
+				5E692E0E29D2D93E00239196 /* Search */,
+				5EEF783429EB6090008AF7FB /* BrowseCollectionManager.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5E507BF529CFAD65006751F3 /* Kenmore-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E507C1E29CFAD66006751F3 /* Build configuration list for PBXNativeTarget "Kenmore-tvOS" */;
+			buildPhases = (
+				5E507BF229CFAD65006751F3 /* Sources */,
+				5E507BF329CFAD65006751F3 /* Frameworks */,
+				5E507BF429CFAD65006751F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Kenmore-tvOS";
+			packageProductDependencies = (
+				5E5155E029EE7FB4009B68EA /* AsyncObjects */,
+				5E5155EA29EE7FB4009B68EA /* ParallaxView */,
+				5E5155EC29EE7FB4009B68EA /* SwiftDate */,
+				5E5155EE29EE7FB4009B68EA /* Alamofire */,
+				5E5155F029EE7FB4009B68EA /* AlamofireImage */,
+				5EBA28312A15E10E00F673BC /* Kenmore-Models */,
+				5EBA28342A15E11900F673BC /* Kenmore-Utilities */,
+				5EBA28372A15E12700F673BC /* Kenmore-DataStores */,
+				5EBA283A2A15E14000F673BC /* Kenmore-Operations */,
+			);
+			productName = FloatplaneApp;
+			productReference = 5E507BF629CFAD65006751F3 /* Kenmore-tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5E507C0B29CFAD66006751F3 /* Kenmore-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E507C2129CFAD66006751F3 /* Build configuration list for PBXNativeTarget "Kenmore-tvOSTests" */;
+			buildPhases = (
+				5E507C0829CFAD66006751F3 /* Sources */,
+				5E507C0929CFAD66006751F3 /* Frameworks */,
+				5E507C0A29CFAD66006751F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E507C0E29CFAD66006751F3 /* PBXTargetDependency */,
+			);
+			name = "Kenmore-tvOSTests";
+			packageProductDependencies = (
+			);
+			productName = FloatplaneAppTests;
+			productReference = 5E507C0C29CFAD66006751F3 /* Kenmore-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5E507C1529CFAD66006751F3 /* Kenmore-tvOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E507C2429CFAD66006751F3 /* Build configuration list for PBXNativeTarget "Kenmore-tvOSUITests" */;
+			buildPhases = (
+				5E507C1229CFAD66006751F3 /* Sources */,
+				5E507C1329CFAD66006751F3 /* Frameworks */,
+				5E507C1429CFAD66006751F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E507C1829CFAD66006751F3 /* PBXTargetDependency */,
+			);
+			name = "Kenmore-tvOSUITests";
+			productName = FloatplaneAppUITests;
+			productReference = 5E507C1629CFAD66006751F3 /* Kenmore-tvOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E0C3CCA29CF766700C71A19 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					5E507BF529CFAD65006751F3 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					5E507C0B29CFAD66006751F3 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 5E507BF529CFAD65006751F3;
+					};
+					5E507C1529CFAD66006751F3 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 5E507BF529CFAD65006751F3;
+					};
+				};
+			};
+			buildConfigurationList = 5E0C3CCD29CF766700C71A19 /* Build configuration list for PBXProject "Kenmore-tvOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5E0C3CC929CF766700C71A19;
+			packageReferences = (
+				5E5155D729EE7E58009B68EA /* XCRemoteSwiftPackageReference "AsyncObjects" */,
+				5E5155DC29EE7EB1009B68EA /* XCRemoteSwiftPackageReference "ParallaxView" */,
+				5E5155DD29EE7EC5009B68EA /* XCRemoteSwiftPackageReference "SwiftDate" */,
+				5E5155DE29EE7ED3009B68EA /* XCRemoteSwiftPackageReference "Alamofire" */,
+				5E5155DF29EE7EE0009B68EA /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				5EBA28302A15E10E00F673BC /* XCRemoteSwiftPackageReference "Kenmore-Models" */,
+				5EBA28332A15E11900F673BC /* XCRemoteSwiftPackageReference "Kenmore-Utilities" */,
+				5EBA28362A15E12700F673BC /* XCRemoteSwiftPackageReference "Kenmore-DataStores" */,
+				5EBA28392A15E14000F673BC /* XCRemoteSwiftPackageReference "Kenmore-Operations" */,
+			);
+			productRefGroup = 5E0C3CD329CF766700C71A19 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E507BF529CFAD65006751F3 /* Kenmore-tvOS */,
+				5E507C0B29CFAD66006751F3 /* Kenmore-tvOSTests */,
+				5E507C1529CFAD66006751F3 /* Kenmore-tvOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5E507BF429CFAD65006751F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E389A2F29D6A12000FC8B4B /* Roboto-Thin.ttf in Resources */,
+				5E0E516A29D3F6B3006744E4 /* FeedItemCollectionViewCell.xib in Resources */,
+				5E389A3829D6A12000FC8B4B /* Roboto-Regular.ttf in Resources */,
+				5E389A3929D6A12000FC8B4B /* Roboto-Medium.ttf in Resources */,
+				5E389A3629D6A12000FC8B4B /* Roboto-LightItalic.ttf in Resources */,
+				5E389A3729D6A12000FC8B4B /* Roboto-BoldItalic.ttf in Resources */,
+				5E389A3429D6A12000FC8B4B /* Roboto-Light.ttf in Resources */,
+				5E389A2E29D6A12000FC8B4B /* Roboto-BlackItalic.ttf in Resources */,
+				5E389A3029D6A12000FC8B4B /* Roboto-Black.ttf in Resources */,
+				5E507C0629CFAD66006751F3 /* LaunchScreen.storyboard in Resources */,
+				5E389A3229D6A12000FC8B4B /* Roboto-Italic.ttf in Resources */,
+				5E507C0329CFAD66006751F3 /* Assets.xcassets in Resources */,
+				5E389A3A29D6A12000FC8B4B /* Roboto-Bold.ttf in Resources */,
+				5E389A3329D6A12000FC8B4B /* Roboto-MediumItalic.ttf in Resources */,
+				5E507BFE29CFAD65006751F3 /* Main.storyboard in Resources */,
+				5E389A3529D6A12000FC8B4B /* Roboto-ThinItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E507C0A29CFAD66006751F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E507C1429CFAD66006751F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E507BF229CFAD65006751F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E389A3C29D6A52800FC8B4B /* LoginTextField.swift in Sources */,
+				5E1FD6F929DA7F8A0015AE6F /* TabConstants.swift in Sources */,
+				5EAAE75F29CFD86F00F9A83B /* FeedItemCollectionViewCell.swift in Sources */,
+				5EC0576829D54ED400D775EB /* CreatorListView.swift in Sources */,
+				5EAAE76E29D0BF2D00F9A83B /* FPTabBarController.swift in Sources */,
+				5E389A3E29D6ABE600FC8B4B /* LoginImageTextField.swift in Sources */,
+				5E389A4429D6C63B00FC8B4B /* UIStoryboard+Main.swift in Sources */,
+				5E1FD6F529DA62B10015AE6F /* SearchContainerViewController.swift in Sources */,
+				5E4CE96029D914F00029110E /* LaunchScreenViewController.swift in Sources */,
+				5E507BFB29CFAD65006751F3 /* BrowseViewController.swift in Sources */,
+				5E507BF929CFAD65006751F3 /* AppDelegate.swift in Sources */,
+				5EC0576B29D551DD00D775EB /* CreatorListViewCell.swift in Sources */,
+				5E389A4629D6CFC000FC8B4B /* UIColor+TextColor.swift in Sources */,
+				5EAAE77029D0C2B700F9A83B /* BrowseReusableHeaderView.swift in Sources */,
+				5E4CE96329DA053E0029110E /* SegueIdentifier.swift in Sources */,
+				5EC057B829D689E700D775EB /* LoginButton.swift in Sources */,
+				5EAAE79C29D159FB00F9A83B /* VODPlayerViewController.swift in Sources */,
+				5E1FD75529DDCFD70015AE6F /* LiveDeliveryKeyDebuff.swift in Sources */,
+				5E389A4029D6BD5A00FC8B4B /* UIFont+Roboto.swift in Sources */,
+				5EC0574F29D41C9A00D775EB /* LivePlayerViewController.swift in Sources */,
+				5EC0575F29D53DC400D775EB /* TopNavigationController.swift in Sources */,
+				5E1FD6F729DA65A80015AE6F /* CreatorDataSource.swift in Sources */,
+				5EC057B629D6848E00D775EB /* ViewController+Border.swift in Sources */,
+				5E1FD6F329DA35C60015AE6F /* RootViewController.swift in Sources */,
+				5E389A5729D7FEA700FC8B4B /* String+UIImage.swift in Sources */,
+				5EC0575729D49A7700D775EB /* LiveStreamOfflineViewController.swift in Sources */,
+				5EAAE79E29D1642100F9A83B /* FeedItemProgressBarView.swift in Sources */,
+				5E8C13F629E3E8AA0084F20D /* UIImage+Transparency.swift in Sources */,
+				5EC0574D29D4089C00D775EB /* SearchViewController.swift in Sources */,
+				5EEF783529EB6090008AF7FB /* BrowseCollectionManager.swift in Sources */,
+				5EC057A629D603D400D775EB /* LoginViewController.swift in Sources */,
+				5E389A5929D7FF8600FC8B4B /* AVPlayer+VideoMetadata.swift in Sources */,
+				5EAAE79429D141D700F9A83B /* PickerViewController.swift in Sources */,
+				5E389A6529D8216D00FC8B4B /* BaseVideoPlayerController.swift in Sources */,
+				5EAAE79229D13E3A00F9A83B /* SettingsViewController.swift in Sources */,
+				5E389A5529D7FDD200FC8B4B /* UIMenu+QualityMenu.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E507C0829CFAD66006751F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E507C1229CFAD66006751F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E507C1D29CFAD66006751F3 /* KenmoreAppUITestsLaunchTests.swift in Sources */,
+				5E507C1B29CFAD66006751F3 /* KenmoreAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5E507C0E29CFAD66006751F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E507BF529CFAD65006751F3 /* Kenmore-tvOS */;
+			targetProxy = 5E507C0D29CFAD66006751F3 /* PBXContainerItemProxy */;
+		};
+		5E507C1829CFAD66006751F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E507BF529CFAD65006751F3 /* Kenmore-tvOS */;
+			targetProxy = 5E507C1729CFAD66006751F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5E507BFC29CFAD65006751F3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E507BFD29CFAD65006751F3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5E507C0429CFAD66006751F3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E507C0529CFAD66006751F3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5E0C3CFA29CF766800C71A19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
+			};
+			name = Debug;
+		};
+		5E0C3CFB29CF766800C71A19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = appletvos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5E507C1F29CFAD66006751F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = EM3SMK3DU7;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Kenmore-tvOS/Config/Info.plist";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.georgie.FloatplaneApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		5E507C2029CFAD66006751F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = EM3SMK3DU7;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Kenmore-tvOS/Config/Info.plist";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.georgie.FloatplaneApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
+		};
+		5E507C2229CFAD66006751F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.georgie.FloatplaneAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kenmore-tvOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kenmore-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 16.1;
+			};
+			name = Debug;
+		};
+		5E507C2329CFAD66006751F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.georgie.FloatplaneAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kenmore-tvOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kenmore-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 16.1;
+			};
+			name = Release;
+		};
+		5E507C2529CFAD66006751F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.georgie.FloatplaneAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TEST_TARGET_NAME = FloatplaneApp;
+			};
+			name = Debug;
+		};
+		5E507C2629CFAD66006751F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.georgie.FloatplaneAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TEST_TARGET_NAME = FloatplaneApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E0C3CCD29CF766700C71A19 /* Build configuration list for PBXProject "Kenmore-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E0C3CFA29CF766800C71A19 /* Debug */,
+				5E0C3CFB29CF766800C71A19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E507C1E29CFAD66006751F3 /* Build configuration list for PBXNativeTarget "Kenmore-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E507C1F29CFAD66006751F3 /* Debug */,
+				5E507C2029CFAD66006751F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E507C2129CFAD66006751F3 /* Build configuration list for PBXNativeTarget "Kenmore-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E507C2229CFAD66006751F3 /* Debug */,
+				5E507C2329CFAD66006751F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E507C2429CFAD66006751F3 /* Build configuration list for PBXNativeTarget "Kenmore-tvOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E507C2529CFAD66006751F3 /* Debug */,
+				5E507C2629CFAD66006751F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5E5155D729EE7E58009B68EA /* XCRemoteSwiftPackageReference "AsyncObjects" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyLab/AsyncObjects.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5E5155DC29EE7EB1009B68EA /* XCRemoteSwiftPackageReference "ParallaxView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PGSSoft/ParallaxView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		5E5155DD29EE7EC5009B68EA /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		5E5155DE29EE7ED3009B68EA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		5E5155DF29EE7EE0009B68EA /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		5EBA28302A15E10E00F673BC /* XCRemoteSwiftPackageReference "Kenmore-Models" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:curiousurick/Kenmore-Models.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5EBA28332A15E11900F673BC /* XCRemoteSwiftPackageReference "Kenmore-Utilities" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:curiousurick/Kenmore-Utilities.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5EBA28362A15E12700F673BC /* XCRemoteSwiftPackageReference "Kenmore-DataStores" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:curiousurick/Kenmore-DataStores.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5EBA28392A15E14000F673BC /* XCRemoteSwiftPackageReference "Kenmore-Operations" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:curiousurick/Kenmore-Operations.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5E5155E029EE7FB4009B68EA /* AsyncObjects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E5155D729EE7E58009B68EA /* XCRemoteSwiftPackageReference "AsyncObjects" */;
+			productName = AsyncObjects;
+		};
+		5E5155EA29EE7FB4009B68EA /* ParallaxView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E5155DC29EE7EB1009B68EA /* XCRemoteSwiftPackageReference "ParallaxView" */;
+			productName = ParallaxView;
+		};
+		5E5155EC29EE7FB4009B68EA /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E5155DD29EE7EC5009B68EA /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
+		5E5155EE29EE7FB4009B68EA /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E5155DE29EE7ED3009B68EA /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		5E5155F029EE7FB4009B68EA /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E5155DF29EE7EE0009B68EA /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+		5EBA28312A15E10E00F673BC /* Kenmore-Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EBA28302A15E10E00F673BC /* XCRemoteSwiftPackageReference "Kenmore-Models" */;
+			productName = "Kenmore-Models";
+		};
+		5EBA28342A15E11900F673BC /* Kenmore-Utilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EBA28332A15E11900F673BC /* XCRemoteSwiftPackageReference "Kenmore-Utilities" */;
+			productName = "Kenmore-Utilities";
+		};
+		5EBA28372A15E12700F673BC /* Kenmore-DataStores */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EBA28362A15E12700F673BC /* XCRemoteSwiftPackageReference "Kenmore-DataStores" */;
+			productName = "Kenmore-DataStores";
+		};
+		5EBA283A2A15E14000F673BC /* Kenmore-Operations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EBA28392A15E14000F673BC /* XCRemoteSwiftPackageReference "Kenmore-Operations" */;
+			productName = "Kenmore-Operations";
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 5E0C3CCA29CF766700C71A19 /* Project object */;
+}

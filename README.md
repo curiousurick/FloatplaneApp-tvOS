@@ -1,4 +1,4 @@
-# FloatplaneApp-tvOS
+# Kenmore-tvOS
 My UNOFFICIAL tvOS app for floatplane. This app was written by George Urick but is completely open to anyone who has the source code to use it for whatever purpose they want, barring any restrictions imposed by Floatplane Media Inc.
 
 | ![image](Assets/Browse_Screenshot.png) | ![image](Assets/LiveOffline_Screenshot.png) |
@@ -10,7 +10,7 @@ My UNOFFICIAL tvOS app for floatplane. This app was written by George Urick but 
 # Setup
 Follow these instructions to get this app installed on your Apple TV or tvOS simulator.
 1. Clone this repo on a Mac running Monterey or later.
-2. Open FloatplaneApp-App/Floatplane.xcodeproj in Xcode 14.
+2. Open Kenmore-App/Floatplane.xcodeproj in Xcode 14.
 3. Wait for the Swift Package process to automatically download dependencies.
 4. Select the scheme "FloatplaneApp"
 5. Go to the project file and change the team to your team. Change the bundleID by a little bit because the selected one is already registered to George Urick's team.
