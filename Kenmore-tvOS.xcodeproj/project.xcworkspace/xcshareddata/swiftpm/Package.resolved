@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
-        "version" : "5.6.4"
+        "revision" : "bc268c28fb170f494de9e9927c371b8342979ece",
+        "version" : "5.7.1"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "git@github.com:curiousurick/Kenmore-Models.git",
       "state" : {
         "branch" : "main",
-        "revision" : "eae4a343c12be17f7d8b6e153e29525775a570f3"
+        "revision" : "73d37c2d0b1ef94e731cf8c666dc29972c52a7b3"
       }
     },
     {

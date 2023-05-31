@@ -70,7 +70,7 @@ class LiveStreamOfflineViewController: UIViewController, DataSourceUpdating {
         if let offlineThumbnailView = offlineThumbnailView,
            let activeCreator = dataSource.activeCreator {
             DispatchQueue.main.async {
-                if let url = activeCreator.liveStream.offline?.thumbnail.path {
+                if let url = activeCreator.liveStream.offline?.thumbnail?.path {
                     offlineThumbnailView.af.setImage(withURL: url)
                 }
                 else {

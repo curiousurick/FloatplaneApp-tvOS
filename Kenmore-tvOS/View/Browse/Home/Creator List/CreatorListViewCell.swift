@@ -31,7 +31,7 @@ class CreatorListViewCell: ParallaxCollectionViewCell {
     static let identifier = "CreatorListViewCell"
 
     @IBOutlet var creatorIconView: UIImageView!
-
+    
     func updateImage(creator: BaseCreator?) {
         guard let creator = creator else {
             creatorIconView.image = nil
@@ -45,7 +45,10 @@ class CreatorListViewCell: ParallaxCollectionViewCell {
                 return
             }
             DispatchQueue.main.async {
-                self.creatorIconView.image = image.imageByMakingWhiteBackgroundTransparent()
+                let radius = self.creatorIconView.frame.width / 2
+                self.creatorIconView.layer.cornerRadius = radius
+                self.creatorIconView.layer.masksToBounds = true
+                self.creatorIconView.image = image
             }
         }
     }
