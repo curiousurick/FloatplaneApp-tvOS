@@ -31,7 +31,7 @@ class CreatorListViewCell: ParallaxCollectionViewCell {
     static let identifier = "CreatorListViewCell"
 
     @IBOutlet var creatorIconView: UIImageView!
-    
+
     func updateImage(creator: BaseCreator?) {
         guard let creator = creator else {
             creatorIconView.image = nil
