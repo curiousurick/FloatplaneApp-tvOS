@@ -73,6 +73,7 @@ class TopNavigationController: UINavigationController {
             self.dataSource.activeCreator = activeCreator
             self.dataSource.feed = firstPage.items
             self.updateChildViewData()
+            AppSettings.instance.firstCreatorId = activeCreator.id
         }
     }
 }

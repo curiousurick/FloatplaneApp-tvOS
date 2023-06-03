@@ -23,6 +23,7 @@ import UIKit
 import Kenmore_Models
 import Kenmore_Utilities
 import Kenmore_Operations
+import Kenmore_DataStores
 
 class RootViewController: UIViewController {
     private let logger = Log4S()
@@ -108,7 +109,8 @@ class RootViewController: UIViewController {
 
     func getFirstPageAndLoadMainView() {
         Task {
-            let getFirstPageResponse = await getFirstPageOperation.get(request: GetFirstPageRequest())
+            let request = GetFirstPageRequest(activeCreatorId: AppSettings.instance.firstCreatorId)
+            let getFirstPageResponse = await getFirstPageOperation.get(request: request)
             if let result = getFirstPageResponse.response {
                 // Don't replace navigation controller if you have it.
                 dataSource.feed = result.firstPage

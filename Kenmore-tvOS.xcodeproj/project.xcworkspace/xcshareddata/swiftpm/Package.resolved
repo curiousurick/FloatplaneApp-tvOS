@@ -42,7 +42,7 @@
       "location" : "git@github.com:curiousurick/Kenmore-DataStores.git",
       "state" : {
         "branch" : "main",
-        "revision" : "8f2fc1c1b986f125980e9bf5f57ac93bb5a08031"
+        "revision" : "a2090f56bd738223700c4b7ab3686d29b5a9d566"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "git@github.com:curiousurick/Kenmore-Models.git",
       "state" : {
         "branch" : "main",
-        "revision" : "73d37c2d0b1ef94e731cf8c666dc29972c52a7b3"
+        "revision" : "5afe7670b5a9562c9eb121766e982777365e6dde"
       }
     },
     {
@@ -60,7 +60,7 @@
       "location" : "git@github.com:curiousurick/Kenmore-Operations.git",
       "state" : {
         "branch" : "main",
-        "revision" : "7512887a19dc82b49cfa4d7a5f711d9f34605def"
+        "revision" : "c5ee778d2444878b116be9a1a89136a67aed1a28"
       }
     },
     {

@@ -147,17 +147,4 @@ class FPTabBarController: UITabBarController, UITabBarControllerDelegate {
 
         lastFocusedIndex = viewControllers?.firstIndex(of: viewController)
     }
-
-    func updateCreatorInfo() {
-        guard let activeCreator = creatorDataSourceManager.activeCreator else {
-            return
-        }
-        Task {
-            let request = CreatorRequest(named: activeCreator.urlname)
-            let opResponse = await creatorOperation.get(request: request, invalidateCache: true)
-            if let response = opResponse.response {
-                self.creatorDataSourceManager.activeCreator = response
-            }
-        }
-    }
 }
