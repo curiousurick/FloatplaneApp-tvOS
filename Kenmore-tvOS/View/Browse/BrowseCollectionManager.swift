@@ -132,7 +132,14 @@ class BrowseCollectionManager: NSObject, UICollectionViewDelegate, UICollectionV
             for: indexPath
         ) as! BrowseReusableHeaderView
 
-        view.updateUI(item: feed[indexPath.row])
+        let item = feed[indexPath.row]
+        if let available = item.availableItem {
+            view.updateUI(item: available.creator)
+        }
+        else if let locked = item.lockedItem {
+            view.updateUI(item: locked.creator)
+        }
+
         return view
     }
 
@@ -185,7 +192,12 @@ class BrowseCollectionManager: NSObject, UICollectionViewDelegate, UICollectionV
             indexPath: indexPath
         )
         let item = feed[indexPath.row]
-        cell.setFeedViewItem(item: item)
+        if let available = item.availableItem {
+            cell.setFeedViewItem(item: available)
+        }
+        else if let locked = item.lockedItem {
+            cell.setFeedViewItem(item: locked)
+        }
 
         return cell
     }
@@ -198,6 +210,7 @@ class BrowseCollectionManager: NSObject, UICollectionViewDelegate, UICollectionV
         // Begin asynchronously fetching data for the requested index paths.
         let imageRequests = indexPaths.map(\.row)
             .map { feed[$0] }
+            .map { $0.getViewItem() }
             .map(\.imageViewUrl)
             .map { URLRequest(url: $0) }
         UIImageView.af.sharedImageDownloader.download(imageRequests)

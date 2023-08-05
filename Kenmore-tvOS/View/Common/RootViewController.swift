@@ -20,6 +20,7 @@
 //
 
 import UIKit
+import Alamofire
 import Kenmore_Models
 import Kenmore_Utilities
 import Kenmore_Operations
@@ -105,6 +106,20 @@ class RootViewController: UIViewController {
 
     @IBAction func unwindToRootViewController(_: UIStoryboardSegue) {
         getFirstPageAndLoadMainView()
+    }
+
+    class FloatplaneDecoder: JSONDecoder {
+        override init() {
+            super.init()
+            configureDataDecoding()
+        }
+
+        /// Configures date format in the way that floatplane APIs return them.
+        private func configureDataDecoding() {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            dateDecodingStrategy = .formatted(dateFormatter)
+        }
     }
 
     func getFirstPageAndLoadMainView() {

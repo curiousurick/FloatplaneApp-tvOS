@@ -42,7 +42,7 @@ class VODPlayerViewController: BaseVideoPlayerViewController {
     var vodDelegate: VODPlayerViewDelegate?
 
     var customMenu: UIMenu?
-    var feedItem: FeedItem!
+    var feedItem: AvailableFeedItem!
     var guid: String {
         feedItem.videoAttachments[0]
     }

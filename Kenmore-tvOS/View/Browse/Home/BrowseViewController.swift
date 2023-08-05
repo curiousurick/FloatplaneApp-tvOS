@@ -113,9 +113,21 @@ extension BrowseViewController: ContentFeedDelegate {
 
     func videoSelected(feedItem: FeedItem) {
         let vodPlayerViewController = UIStoryboard.main.getVodPlayerViewController()
-        vodPlayerViewController.feedItem = feedItem
-        vodPlayerViewController.vodDelegate = self
-        present(vodPlayerViewController, animated: true)
+        if let availableItem = feedItem.availableItem {
+            vodPlayerViewController.feedItem = availableItem
+            vodPlayerViewController.vodDelegate = self
+            present(vodPlayerViewController, animated: true)
+        }
+        else {
+            let alert = UIAlertController(
+                title: "Video Unavailable",
+                message: "Head to floatplane.com to unlock this video",
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(okAction)
+            present(alert, animated: true)
+        }
     }
 }
 

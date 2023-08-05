@@ -32,8 +32,8 @@ class BrowseReusableHeaderView: UICollectionReusableView {
         super.awakeFromNib()
     }
 
-    func updateUI(item: FeedItem) {
-        let coverUrl = item.creator.cover.path
+    func updateUI(item: ContentCreator) {
+        let coverUrl = item.cover.path
         imageView.af.setImage(withURL: coverUrl)
     }
 }

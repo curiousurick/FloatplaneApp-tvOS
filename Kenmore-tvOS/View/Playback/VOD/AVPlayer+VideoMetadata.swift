@@ -26,14 +26,23 @@ import Kenmore_Operations
 
 extension AVPlayer {
     func updateItemMetadata(video: VideoMetadata) {
-        let channelArt = video.channel.icon.path
-        let channelName = video.channel.title
+        var channelArt: URL!
+        var channelName: String!
+        if let channel = video.channel {
+            channelArt = channel.icon.path
+            channelName = channel.title
+        }
+        else {
+            channelArt = video.creator.cover.path
+            channelName = video.creator.title
+        }
+
         // Small optimization to avoid channel name sitting just above title prefix.
-        let title = video.title.replacing("\(channelName): ", with: "")
+        let title = video.title.replacing("\(channelName!): ", with: "")
         let description = video.description.html2String
         var mapping: [AVMetadataIdentifier: Any] = [
             .commonIdentifierTitle: title,
-            .iTunesMetadataTrackSubTitle: channelName,
+            .iTunesMetadataTrackSubTitle: channelName!,
             .commonIdentifierDescription: description,
         ]
         let metadata = mapping.compactMap { self.createMetadataItem(for: $0, value: $1) }

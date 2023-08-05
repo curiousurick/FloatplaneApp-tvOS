@@ -33,9 +33,16 @@ protocol FeedViewItem {
     var timeSinceReleaseLabel: String { get }
     var progress: TimeInterval? { get }
     var duration: TimeInterval { get }
+    var isAvailable: Bool { get }
 }
 
-extension FeedItem: FeedViewItem {
+extension FeedItem {
+    func getViewItem() -> FeedViewItem {
+        availableItem ?? lockedItem!
+    }
+}
+
+extension AvailableFeedItem: FeedViewItem {
     var imageViewUrl: URL {
         thumbnail.path
     }
@@ -68,6 +75,44 @@ extension FeedItem: FeedViewItem {
     var duration: TimeInterval {
         TimeInterval(metadata.videoDuration)
     }
+
+    var isAvailable: Bool {
+        true
+    }
+}
+
+extension LockedFeedItem: FeedViewItem {
+    var imageViewUrl: URL {
+        thumbnail.path
+    }
+
+    var titleLabel: String {
+        title
+    }
+
+    var typeLabel: String {
+        " Video "
+    }
+
+    var channelLabel: String {
+        creator.title
+    }
+
+    var timeSinceReleaseLabel: String {
+        releaseDate.toRelative(since: nil, dateTimeStyle: .numeric, unitsStyle: .full)
+    }
+
+    var progress: TimeInterval? {
+        nil
+    }
+
+    var duration: TimeInterval {
+        TimeInterval(metadata.videoDuration)
+    }
+
+    var isAvailable: Bool {
+        false
+    }
 }
 
 class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
@@ -86,6 +131,7 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
     @IBOutlet var progressBar: FeedItemProgressBarView!
     @IBOutlet var durationLabel: UILabel!
     @IBOutlet var clockImage: UIImageView!
+    @IBOutlet var lockOverlay: UIView!
 
     var feedItem: FeedViewItem!
 
@@ -128,6 +174,7 @@ class FeedItemCollectionViewCell: ParallaxCollectionViewCell {
 
     func setFeedViewItem(item: FeedViewItem) {
         feedItem = item
+        lockOverlay.isHidden = item.isAvailable
         image.image = nil
         image.af.setImage(withURL: item.imageViewUrl)
         title.text = item.titleLabel
