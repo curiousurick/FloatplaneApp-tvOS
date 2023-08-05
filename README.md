@@ -32,6 +32,9 @@ Below are the features implemented in the app.
 - Browse your subscribed creators' videos.
 - Search for videos by your active creator.
 
+## Guide Viewers to Floatplane to unlock videos
+- When customers encounter a video they don't have access to, a helpful prompt tells them they can unlock it on floatplane.com
+
 ## Watching videos
 - Watch VOD videos with video metadata in the build-in now playing bar.
 - Change video quality of VOD videos during playback.
