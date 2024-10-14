@@ -108,7 +108,7 @@ class RootViewController: UIViewController {
         getFirstPageAndLoadMainView()
     }
 
-    class FloatplaneDecoder: JSONDecoder {
+    class FloatplaneDecoder: JSONDecoder, @unchecked Sendable {
         override init() {
             super.init()
             configureDataDecoding()

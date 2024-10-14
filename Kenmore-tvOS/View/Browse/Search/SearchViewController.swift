@@ -88,12 +88,15 @@ final class SearchViewController: UIViewController, UISearchResultsUpdating, Con
     }
 
     func search(searchString: String) {
-        searchOperationQueue.addTask {
-            self.logger.info("urickg Getting results for \(searchString)")
+        searchOperationQueue.addTask { [weak self] in
+            guard let self = self else {
+                return
+            }
+            await self.logger.info("Getting results for \(searchString)")
             self.dataSource.searchResults = nil
             let results = await self.fetchVideos(fetchAfter: 0, limit: self.collectionManager.pageLimit)
             if let results = results {
-                self.logger.info("urickg Results for \(searchString) got \(results.count) results")
+                await self.logger.info("Results for \(searchString) got \(results.count) results")
                 await self.collectionManager.setFeed(feed: results)
             }
         }
