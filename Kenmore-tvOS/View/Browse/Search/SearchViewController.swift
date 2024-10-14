@@ -43,7 +43,7 @@ final class SearchViewController: UIViewController, UISearchResultsUpdating, Con
     private let pageLimit: UInt64 = 20
     private let searchOperation = OperationManagerImpl.instance.searchOperation
     private let minimumQueryLength = 3
-    private let dataSource = DataSource.instance
+    private var dataSource = DataSource.instance
 
     private var searchString: String?
     private var results: SearchResponse?
@@ -93,7 +93,7 @@ final class SearchViewController: UIViewController, UISearchResultsUpdating, Con
                 return
             }
             await self.logger.info("Getting results for \(searchString)")
-            self.dataSource.searchResults = nil
+            await self.dataSource.searchResults = nil
             let results = await self.fetchVideos(fetchAfter: 0, limit: self.collectionManager.pageLimit)
             if let results = results {
                 await self.logger.info("Results for \(searchString) got \(results.count) results")
